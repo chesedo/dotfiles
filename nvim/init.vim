@@ -36,6 +36,7 @@ endfunc
 nnoremap <leader>r :call NumberToggle()<cr>
 
 " Indent settings
+set expandtab       " Use space for tabs
 set shiftwidth=2    " Indents for << and >>
 set softtabstop=2   " Space indent uses 2 spaces
 set tabstop=2       " Tabs use 2 spaces
