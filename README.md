@@ -1,0 +1,4 @@
+# For
+- [ ] zsh
+- [ ] neovim
+- [ ] tmux
