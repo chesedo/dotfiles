@@ -7,7 +7,8 @@ set textwidth=0     " Hard-wrap long lines
 set scrolloff=3     " Show next 3 lines when scrolling
 set sidescrolloff=5 " Show next 5 column when side scrolling
 set backupcopy=yes  " Prevent race condition with karma -> http://stackoverflow.com/a/25267106/2727983
-set mouse=n					" Enable mouse in normal mode
+set mouse=n         " Enable mouse in normal mode
+set updatetime=100  " Update more frequently for gutter and doc plugins
 
 " Change split positions
 set splitbelow
@@ -52,8 +53,9 @@ map <leader>j <c-w><c-j>
 map <leader>k <c-w><c-k>
 map <leader>l <c-w><c-l>
 noremap <leader>q :bdelete<cr>      " Close buffer
-noremap <leader>Q :.,$-bdelete<cr>  " Close all buffers
-map <leader>p :b#<cr>               " Switch to previous buffer
+noremap <leader>Q :%bdelete<cr>     " Close all buffers
+map <leader>p :bprevious<cr>        " Switch to previous buffer
+map <leader>n :bnext<cr>            " Switch to next buffer
 
 " Custom terminal mappings
 tnoremap <Esc> <C-\><C-n>
@@ -72,9 +74,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mattn/emmet-vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'benmills/vimux'
 Plug 'benmills/vimux-golang'
 Plug 'mxw/vim-jsx'
@@ -82,12 +86,21 @@ Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim'
 Plug 'morhetz/gruvbox'
+Plug 'yggdroot/indentline'
+Plug 'elzr/vim-json'
+Plug 'majutsushi/tagbar'
+Plug 'ap/vim-buftabline'
 call plug#end()
 
 source ~/.config/nvim/plugs/lightline.vim
 source ~/.config/nvim/plugs/nerdtree.vim
 source ~/.config/nvim/plugs/vim-fugitive.vim
+source ~/.config/nvim/plugs/deoplete.vim
 source ~/.config/nvim/plugs/emmet-vim.vim
 source ~/.config/nvim/plugs/MatchTagAlways.vim
+source ~/.config/nvim/plugs/vim-go.vim
 source ~/.config/nvim/plugs/vimux.vim
 source ~/.config/nvim/plugs/gruvbox.vim
+source ~/.config/nvim/plugs/indentLine.vim
+source ~/.config/nvim/plugs/vim-json.vim
+source ~/.config/nvim/plugs/tagbar.vim
