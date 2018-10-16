@@ -9,6 +9,7 @@ set sidescrolloff=5 " Show next 5 column when side scrolling
 set backupcopy=yes  " Prevent race condition with karma -> http://stackoverflow.com/a/25267106/2727983
 set mouse=n         " Enable mouse in normal mode
 set updatetime=100  " Update more frequently for gutter and doc plugins
+set hidden
 
 " Change split positions
 set splitbelow
@@ -75,6 +76,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+\ 'branch': 'next',
+\ 'do': 'bash install.sh',
+\ }
 Plug 'mattn/emmet-vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'fatih/vim-go'
@@ -90,12 +95,16 @@ Plug 'yggdroot/indentline'
 Plug 'elzr/vim-json'
 Plug 'majutsushi/tagbar'
 Plug 'ap/vim-buftabline'
+Plug 'Shougo/echodoc.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
 source ~/.config/nvim/plugs/lightline.vim
 source ~/.config/nvim/plugs/nerdtree.vim
 source ~/.config/nvim/plugs/vim-fugitive.vim
 source ~/.config/nvim/plugs/deoplete.vim
+source ~/.config/nvim/plugs/LanguageClient-neovim.vim
 source ~/.config/nvim/plugs/emmet-vim.vim
 source ~/.config/nvim/plugs/MatchTagAlways.vim
 source ~/.config/nvim/plugs/vim-go.vim
