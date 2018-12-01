@@ -70,46 +70,92 @@ au FileType asm source ~/.config/nvim/filetypes/asm.vim
 
 " VIM-Plug Data
 call plug#begin('~/.local/share/nvim/plugged')
+" GUI extras
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
+source ~/.config/nvim/plugs/lightline.vim
+
+Plug 'yggdroot/indentline'
+source ~/.config/nvim/plugs/indentLine.vim
+
+Plug 'ap/vim-buftabline'
+Plug 'morhetz/gruvbox'
+
+" File & folder browsers
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+source ~/.config/nvim/plugs/nerdtree.vim
+
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'majutsushi/tagbar'
+source ~/.config/nvim/plugs/tagbar.vim
+
+" Git
 Plug 'tpope/vim-fugitive'
+source ~/.config/nvim/plugs/vim-fugitive.vim
+
+Plug 'airblade/vim-gitgutter'
+
+" Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+source ~/.config/nvim/plugs/deoplete.vim
+
 Plug 'autozimu/LanguageClient-neovim', {
 \ 'branch': 'next',
 \ 'do': 'bash install.sh',
 \ }
-Plug 'mattn/emmet-vim'
-Plug 'valloric/MatchTagAlways'
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'benmills/vimux'
-Plug 'benmills/vimux-golang'
-Plug 'mxw/vim-jsx'
-Plug 'easymotion/vim-easymotion'
+source ~/.config/nvim/plugs/LanguageClient-neovim.vim
+
+Plug 'zchee/deoplete-go', {
+\ 'do': 'make',
+\ 'for': 'go',
+\ }
+
+" Linting
 Plug 'scrooloose/syntastic'
-Plug 'rust-lang/rust.vim'
-Plug 'morhetz/gruvbox'
-Plug 'yggdroot/indentline'
-Plug 'elzr/vim-json'
-Plug 'majutsushi/tagbar'
-Plug 'ap/vim-buftabline'
+
+" Web dev
+Plug 'mattn/emmet-vim', {
+\ 'for': ['html', 'css', 'gohtmltmpl', 'jsx', 'javascript.jsx']
+\ }
+source ~/.config/nvim/plugs/emmet-vim.vim
+
+Plug 'valloric/MatchTagAlways', {
+\ 'for': ['html', 'xml', 'xhml', 'jinja', 'gohtmltmpl']
+\ }
+source ~/.config/nvim/plugs/MatchTagAlways.vim
+
+" Go
+Plug 'fatih/vim-go', { 'for': 'go' }
+source ~/.config/nvim/plugs/vim-go.vim
+
+" Jsx
+Plug 'mxw/vim-jsx', { 'for': ['jsx', 'javascript.jsx'] }
+
+" Rust
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+" Typescript
+Plug 'herringtondarkholme/yats.vim', { 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', {
+\ 'do': './install.sh',
+\ 'for': 'typescript',
+\ }
+
+" JSON
+Plug 'elzr/vim-json', { 'for': 'json' }
+source ~/.config/nvim/plugs/vim-json.vim
+
+" Glsl
+Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
+
+" Tmux
+Plug 'benmills/vimux'
+source ~/.config/nvim/plugs/vimux.vim
+
+Plug 'benmills/vimux-golang', { 'for': 'go' }
+
+" Testing
+Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/echodoc.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
-source ~/.config/nvim/plugs/lightline.vim
-source ~/.config/nvim/plugs/nerdtree.vim
-source ~/.config/nvim/plugs/vim-fugitive.vim
-source ~/.config/nvim/plugs/deoplete.vim
-source ~/.config/nvim/plugs/LanguageClient-neovim.vim
-source ~/.config/nvim/plugs/emmet-vim.vim
-source ~/.config/nvim/plugs/MatchTagAlways.vim
-source ~/.config/nvim/plugs/vim-go.vim
-source ~/.config/nvim/plugs/vimux.vim
 source ~/.config/nvim/plugs/gruvbox.vim
-source ~/.config/nvim/plugs/indentLine.vim
-source ~/.config/nvim/plugs/vim-json.vim
-source ~/.config/nvim/plugs/tagbar.vim

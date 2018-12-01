@@ -1,2 +1,2 @@
 " tagbar configuration
-nmap <F4> :TagbarToggle<cr>
+nmap <F8> :TagbarToggle<cr>
