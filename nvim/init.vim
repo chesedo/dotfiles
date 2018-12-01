@@ -111,6 +111,11 @@ Plug 'zchee/deoplete-go', {
 
 " Linting
 Plug 'scrooloose/syntastic'
+Plug 'prettier/vim-prettier', {
+\ 'do': 'npm install',
+\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'],
+\ }
+source ~/.config/nvim/plugs/prettier.vim
 
 " Web dev
 Plug 'mattn/emmet-vim', {
