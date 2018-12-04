@@ -78,6 +78,7 @@ Plug 'yggdroot/indentline'
 source ~/.config/nvim/plugs/indentLine.vim
 
 Plug 'ap/vim-buftabline'
+Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
 
 " File & folder browsers
