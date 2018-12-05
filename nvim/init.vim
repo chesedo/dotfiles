@@ -110,6 +110,8 @@ Plug 'zchee/deoplete-go', {
 \ 'for': 'go',
 \ }
 
+Plug 'townk/vim-autoclose'
+
 " Linting
 Plug 'scrooloose/syntastic'
 Plug 'prettier/vim-prettier', {
