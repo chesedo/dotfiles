@@ -132,7 +132,9 @@ Plug 'valloric/MatchTagAlways', {
 source ~/.config/nvim/plugs/MatchTagAlways.vim
 
 " Go
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go', {
+\ 'for': ['go', 'gohtmltmpl']
+\ }
 source ~/.config/nvim/plugs/vim-go.vim
 
 " Jsx
