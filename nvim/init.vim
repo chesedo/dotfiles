@@ -26,17 +26,6 @@ match OverLength /\%120v.\+/
 
 let mapleader="\<SPACE>"
 
-" Relative line numbering
-function! NumberToggle()
-  if (&relativenumber == 1)
-    set nornu
-  else
-    set rnu
-  endif
-endfunc
-
-nnoremap <leader>r :call NumberToggle()<cr>
-
 " Indent settings
 set expandtab       " Use space for tabs
 set shiftwidth=2    " Indents for << and >>
@@ -55,11 +44,6 @@ map <leader>k <c-w><c-k>
 map <leader>l <c-w><c-l>
 noremap <leader>q :bdelete<cr>      " Close buffer
 noremap <leader>Q :%bdelete<cr>     " Close all buffers
-map <leader>p :bprevious<cr>        " Switch to previous buffer
-map <leader>n :bnext<cr>            " Switch to next buffer
-
-" Custom terminal mappings
-tnoremap <Esc> <C-\><C-n>
 
 " Extra sources for filetypes
 au FileType javascript source ~/.config/nvim/filetypes/javascript.vim
@@ -166,6 +150,9 @@ Plug 'benmills/vimux-golang', { 'for': 'go' }
 " Testing
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/echodoc.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'wellle/targets.vim'
 call plug#end()
 
 source ~/.config/nvim/plugs/gruvbox.vim
