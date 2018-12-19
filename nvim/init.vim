@@ -153,6 +153,8 @@ Plug 'Shougo/echodoc.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+source ~/.config/nvim/plugs/fzf.vim
 call plug#end()
 
 source ~/.config/nvim/plugs/gruvbox.vim
