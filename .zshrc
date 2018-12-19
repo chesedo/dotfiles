@@ -55,7 +55,6 @@ plugins=(
   git
   docker
   zsh-autosuggestions
-  bower
   zsh-syntax-highlighting
 )
 
@@ -92,11 +91,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-                                                                                                                         
 # Docker compose command completion
+
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
-                                                                                
+
 # Go env variables                                                                                                      
 export GOROOT="$HOME/go"                                                                                                
 export GOPATH="$HOME/go-code"                                                                                           
