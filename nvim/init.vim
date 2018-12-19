@@ -62,6 +62,8 @@ Plug 'yggdroot/indentline'
 source ~/.config/nvim/plugs/indentLine.vim
 
 Plug 'ap/vim-buftabline'
+source ~/.config/nvim/plugs/buftabline.vim
+
 Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
 
