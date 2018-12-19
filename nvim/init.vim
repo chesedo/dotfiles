@@ -128,6 +128,7 @@ Plug 'mxw/vim-jsx', { 'for': ['jsx', 'javascript.jsx'] }
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+source ~/.config/nvim/plugs/rust.vim
 
 " Typescript
 Plug 'herringtondarkholme/yats.vim', { 'for': 'typescript' }
