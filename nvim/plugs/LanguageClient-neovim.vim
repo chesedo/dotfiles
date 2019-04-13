@@ -2,6 +2,7 @@
 let g:LanguageClient_serverCommands = {
 \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
 \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+\ 'cpp': ['clangd'],
 \ }
 
 noremap <F5> :call LanguageClient_contextMenu()<cr>
