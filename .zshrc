@@ -53,6 +53,7 @@ HYPHEN_INSENSITIVE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  git-auto-fetch
   docker
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -115,6 +116,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Quick goto _Libraries. Will try to move up 3 times and try again whenever it fails
+alias cl='cd _Libraries || .. && cd _Libraries || .. && cd _Libraries || .. && cd _Libraries'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
