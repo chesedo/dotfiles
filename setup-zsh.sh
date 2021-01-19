@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install
-sudo apt install -y zsh
+sudo apt install -y zsh fonts-powerline
 chsh -s $(which zsh)
 ln -sf $PWD/.zshrc ~/.zshrc
 rm -rf ~/.oh-my-zsh
