@@ -52,15 +52,13 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  z
   git
   git-auto-fetch
   docker
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
-
-# Include frecent                                                                                                       
-. ~/z.sh
 
 source $ZSH/oh-my-zsh.sh
 

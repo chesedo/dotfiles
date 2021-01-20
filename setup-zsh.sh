@@ -15,5 +15,3 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 ln -sf $PWD/.p10k.zsh ~/.p10k.zsh
 
-# Z install (update)
-wget -O ~/z.sh https://raw.githubusercontent.com/rupa/z/master/z.sh
