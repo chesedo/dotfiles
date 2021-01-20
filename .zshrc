@@ -55,6 +55,7 @@ plugins=(
   z
   git
   git-auto-fetch
+  alias-finder
   docker
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -120,3 +121,6 @@ alias cl='cd _Libraries || .. && cd _Libraries || .. && cd _Libraries || .. && c
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# alias-finder options
+ZSH_ALIAS_FINDER_AUTOMATIC=true
