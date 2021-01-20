@@ -57,6 +57,8 @@ plugins=(
   git-auto-fetch
   alias-finder
   docker
+  docker-compose
+  gcloud
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -96,9 +98,9 @@ source $ZSH/oh-my-zsh.sh
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
-# Go env variables                                                                                                      
-export GOROOT="$HOME/go"                                                                                                
-export GOPATH="$HOME/go-code"                                                                                           
+# Go env variables
+export GOROOT="$HOME/go"
+export GOPATH="$HOME/go-code"
 export PATH="$GOROOT/bin:$PATH:$GOPATH/bin"
 
 # Rust variables
