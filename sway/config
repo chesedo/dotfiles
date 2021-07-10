@@ -42,6 +42,7 @@ include /etc/sway/modes/*
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg ~/.config/sway/background.jpg fill
+
 #
 # Example configuration:
 #
