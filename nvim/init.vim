@@ -54,6 +54,8 @@ au FileType asm source ~/.config/nvim/filetypes/asm.vim
 
 " VIM-Plug Data
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'tpope/vim-surround'
+
 " GUI extras
 Plug 'itchyny/lightline.vim'
 source ~/.config/nvim/plugs/lightline.vim
