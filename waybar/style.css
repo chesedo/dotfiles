@@ -74,7 +74,8 @@ window#waybar.hidden {
 }
 
 /* Remove margin from last element */
-#clock {
+.modules-right > widget:last-child > #clock,
+.modules-right > widget:last-child > #tray {
     margin-right: 0;
 }
 
