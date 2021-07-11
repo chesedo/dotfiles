@@ -73,7 +73,7 @@ bar {
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 60 'swaylock -f -c 000000' \
+         timeout 60 'swaylock -f --grace 5 -c 000000cc --fade-in 1 --indicator --clock --screenshots --effect-blur 3x5' \
          timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
 #
