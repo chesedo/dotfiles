@@ -1,4 +1,8 @@
 config.d/*
 help.man
 !00-user.conf
+!50-systemd-user.conf
+!90-enable-gtk-theme.conf
+!91-enable-kvantum-theme.conf
+!98-application-defaults.conf
 !99-autostart-applications.conf
