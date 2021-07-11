@@ -8,3 +8,5 @@ ln -sf $PWD/nvim ~/.config/nvim
 
 # Install plugins
 nvim --headless +PlugInstall +qa
+pip3 install pynvim
+sudo npm install -g neovim
