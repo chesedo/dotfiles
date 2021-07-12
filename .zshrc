@@ -130,5 +130,8 @@ alias cl='cd _Libraries || .. && cd _Libraries || .. && cd _Libraries || .. && c
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
+# My custom aliases for using containers
+source ~/.containerized-aliases.zsh
+
 # alias-finder options
 ZSH_ALIAS_FINDER_AUTOMATIC=true

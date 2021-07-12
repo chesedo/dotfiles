@@ -28,6 +28,7 @@ else
 fi
 
 ln -sf $PWD/.p10k.zsh ~/.p10k.zsh
+ln -sf $PWD/.containerized-aliases.zsh ~/.containerized-aliases.zsh
 
 # # Instal fzf
 # git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
