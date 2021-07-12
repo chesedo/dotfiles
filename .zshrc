@@ -118,6 +118,12 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Change fzf C^T to C^P
+# https://github.com/junegunn/fzf/issues/952#issuecomment-310253560
+bindkey -r '^T'
+bindkey '^P' fzf-file-widget
+
+
 # Quick goto _Libraries. Will try to move up 3 times and try again whenever it fails
 alias cl='cd _Libraries || .. && cd _Libraries || .. && cd _Libraries || .. && cd _Libraries'
 
