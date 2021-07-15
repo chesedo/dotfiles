@@ -58,7 +58,6 @@ plugins=(
   alias-finder
   docker
   docker-compose
-  gcloud
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
