@@ -1,6 +1,6 @@
 " LanguageClient-neovim configurations
 let g:LanguageClient_serverCommands = {
-\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+\ 'rust': ['rls'],
 \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
 \ 'cpp': ['clangd'],
 \ }
