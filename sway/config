@@ -85,3 +85,14 @@ exec udiskie --tray
 
 # user config
 include $HOME/.config/sway/config.d/*
+
+default_border pixel 3
+smart_gaps on
+gaps inner 20
+gaps outer -1
+
+client.focused #cccccc99 #cccccc99 #ffffff #bbbbffee #ffffff88
+client.focused_inactive #cccccc99 #cccccc99 #ffffff #00000022 #00000022
+client.unfocused #cccccc99 #cccccc99 #ffffff #00000022 #00000022
+
+font Fira Code
