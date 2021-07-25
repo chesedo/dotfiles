@@ -1,5 +1,5 @@
 -- Map leader to space
-vim.g.mapleader = ' '
+vim.global.mapleader = ' '
 
 -- My defaults
 vim.opt.number = true          -- Show numbers in left column
@@ -18,3 +18,4 @@ require('bootstrap')
 -- Load plugins and auto reload on changes
 require('plugins')
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+
