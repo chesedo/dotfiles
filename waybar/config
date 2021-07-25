@@ -14,7 +14,7 @@
         "format": "{icon} {name}",
         "format-icons": {
             "terminal": "",
-            "web": "︁",
+            "web": "",
             "code": "",
             "music": "",
             "upwork": "⏳︁",
@@ -114,7 +114,7 @@
     "network": {
         "interval": 5,
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname} ︁",
+        "format-ethernet": "{ifname} ",
         "format-linked": "{ifname} (No IP) ︁",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{bandwidthDownBits} ︁  {bandwidthUpBits} ︁ ({ipaddr}/{cidr})"
@@ -129,8 +129,8 @@
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "﫛",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",

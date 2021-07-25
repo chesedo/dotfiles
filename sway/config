@@ -95,4 +95,4 @@ client.focused #cccccc99 #cccccc99 #ffffff #bbbbffee #ffffff88
 client.focused_inactive #cccccc99 #cccccc99 #ffffff #00000022 #00000022
 client.unfocused #cccccc99 #cccccc99 #ffffff #00000022 #00000022
 
-font Fira Code
+font FiraCode Nerd Font

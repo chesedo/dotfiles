@@ -1,8 +1,11 @@
 #!/bin/sh
 
 # For Sway/theme
-sudo pacman -S ttf-fira-code ttf-font-awesome alacritty fd swayidle
-
+sudo pacman -S alacritty fd swayidle
 sudo pacman -S docker docker-compose
 
-sudo pasman -S ripgrep
+# For nvim telescope
+sudo pacman -S ripgrep
+
+# For sway & nvim
+pamac install nerd-fonts-fira-code

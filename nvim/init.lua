@@ -1,5 +1,5 @@
 -- Map leader to space
-vim.global.mapleader = ' '
+vim.g.mapleader = ' '
 
 -- My defaults
 vim.opt.number = true          -- Show numbers in left column

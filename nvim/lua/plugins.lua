@@ -6,6 +6,8 @@ return require('packer').startup(function()
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
 
-  -- LSP config
+  -- LSP related
   use 'neovim/nvim-lspconfig'
+  use 'glepnir/lspsaga.nvim'
+  use 'kyazdani42/nvim-web-devicons'
 end)
