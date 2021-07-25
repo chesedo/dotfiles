@@ -89,6 +89,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/lush.nvim"
   },
+  ["neoscroll.nvim"] = {
+    config = { "\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14neoscroll\frequire\0" },
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
+  },
   nordbuddy = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nordbuddy"
@@ -140,6 +145,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: neoscroll.nvim
+time([[Config for neoscroll.nvim]], true)
+try_loadstring("\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
+time([[Config for neoscroll.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
