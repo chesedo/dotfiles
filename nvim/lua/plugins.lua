@@ -17,4 +17,9 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+
+  -- Theme
+  use 'folke/tokyonight.nvim'
+  use {'npxbr/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
+  use 'maaslalani/nordbuddy'
 end)
