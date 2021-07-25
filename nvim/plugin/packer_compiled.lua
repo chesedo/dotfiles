@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
+  },
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
