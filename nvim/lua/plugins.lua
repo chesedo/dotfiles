@@ -24,4 +24,10 @@ return require('packer').startup(function()
   use 'maaslalani/nordbuddy'
 
   use 'lewis6991/spellsitter.nvim'
+
+  -- GUI basics
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
 end)
