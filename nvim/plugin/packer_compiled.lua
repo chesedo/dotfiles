@@ -93,6 +93,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
+  ["nvim-cursorword"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-cursorword"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
