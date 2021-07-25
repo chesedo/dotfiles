@@ -22,4 +22,6 @@ return require('packer').startup(function()
   use 'folke/tokyonight.nvim'
   use {'npxbr/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
   use 'maaslalani/nordbuddy'
+
+  use 'lewis6991/spellsitter.nvim'
 end)
