@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
+  ["nvim-compe"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-compe"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
