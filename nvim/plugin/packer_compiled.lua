@@ -132,6 +132,10 @@ _G.packer_plugins = {
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
+  },
+  ["train.nvim"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/train.nvim"
   }
 }
 

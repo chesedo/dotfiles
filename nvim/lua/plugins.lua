@@ -32,4 +32,7 @@ return require('packer').startup(function()
   }
   use 'xiyaowong/nvim-cursorword'
   use "lukas-reineke/indent-blankline.nvim"
+
+  -- Tmp
+  use 'tjdevries/train.nvim'
 end)
