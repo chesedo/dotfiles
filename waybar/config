@@ -117,7 +117,7 @@
         "format-ethernet": "{ifname} ",
         "format-linked": "{ifname} (No IP) ︁",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{bandwidthDownBits} ︁  {bandwidthUpBits} ︁ ({ipaddr}/{cidr})"
+        "format-alt": "{bandwidthDownBits}   {bandwidthUpBits}  ({ipaddr}/{cidr})"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
