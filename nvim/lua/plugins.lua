@@ -1,5 +1,8 @@
 -- Setup packer
 return require('packer').startup(function()
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
+
   -- Load telescope for all files
   use {
     'nvim-telescope/telescope.nvim',

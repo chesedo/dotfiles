@@ -118,6 +118,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
+  ["packer.nvim"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/plenary.nvim"
