@@ -34,4 +34,4 @@ set $text-color #ECEFF4
 #color1
 set $selection-color #3B4252
 #color12
-set $accent-color #D08770
+set $accent-color #5E81AC

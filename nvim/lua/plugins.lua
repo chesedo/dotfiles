@@ -41,6 +41,12 @@ return require('packer').startup(function()
       require('neoscroll').setup()
     end,
   }
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function ()
+      require'colorizer'.setup()
+    end,
+  }
 
   -- Tmp
   use 'tjdevries/train.nvim'

@@ -1,7 +1,7 @@
-@define-color border_bg alpha(#0f253b, 0.6);
-@define-color border_bg_active alpha(#1a3f63, 0.4);
-@define-color fg #fff;
-@define-color shade #ddd;
+@define-color border_bg alpha(#4C566A, 0.6);
+@define-color border_bg_active alpha(#3B4252, 0.4);
+@define-color fg #ECEFF4;
+@define-color shade #81A1C1;
 
 * {
     border: none;
@@ -66,7 +66,7 @@ window#waybar.hidden {
     padding: 0 0.6rem;
     margin: 0 0.4rem;
 
-    color: #ffffff;
+    color: @fg;
     background-color: alpha(@bg_color, 0.3);
 
     transition-property: background, color, width;
