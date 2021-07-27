@@ -5,6 +5,7 @@
 # Read `man 5 sway` for a complete reference.
 
 # global variables
+include $HOME/.config/sway/definitions
 include /etc/sway/definitions
 
 include /etc/sway/inputs/*
@@ -35,11 +36,6 @@ set $ws7 7
 set $ws8 8:work
 set $ws9 9:chat
 set $ws10 10:leisure
-
-# Set theme stuff
-set $gtk-theme Nordic
-set $icon-theme Papirus-Dark
-set $cursor-theme Breeze_Snow
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -77,14 +73,6 @@ bar {
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-### Idle configuration
-#
-# Example configuration:
-#
-exec swayidle -w \
-         timeout 120 'swaylock -f --grace 5 -c 000000cc --fade-in 1 --indicator --clock --screenshots --effect-blur 3x5' \
-         timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 60 seconds of inactivity, then turn off
 # your displays after another 240 seconds, and turn your screens back on when
@@ -100,9 +88,9 @@ smart_gaps on
 gaps inner 20
 gaps outer -1
 
-client.focused #cccccc99 #cccccc99 #ffffff #bbbbffee #ffffff88
-client.focused_inactive #cccccc99 #cccccc99 #ffffff #00000022 #00000022
-client.unfocused #cccccc99 #cccccc99 #ffffff #00000022 #00000022
+## client.focused #cccccc99 #cccccc99 #ffffff #bbbbffee #ffffff88
+## client.focused_inactive #cccccc99 #cccccc99 #ffffff #00000022 #00000022
+## client.unfocused #cccccc99 #cccccc99 #ffffff #00000022 #00000022
 
 font FiraCode Nerd Font
 
