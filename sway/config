@@ -14,11 +14,13 @@ include /etc/sway/outputs/*
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term alacritty
 
@@ -30,18 +32,24 @@ set $ws4 4
 set $ws5 5
 set $ws6 6
 set $ws7 7
-set $ws8 8:upwork
+set $ws8 8:work
 set $ws9 9:chat
-set $ws10 10
+set $ws10 10:leisure
+
+# Set theme stuff
+set $gtk-theme Nordic
+set $icon-theme Papirus-Dark
+set $cursor-theme Breeze_Snow
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-input * {
-  xkb_variant "colemak"
+input type:keyboard {
   xkb_options caps:swapescape
+  xkb_layout us
+  xkb_variant colemak
 }
 
 # enable modes
@@ -53,7 +61,8 @@ include $HOME/.config/sway/modes/*
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/.config/sway/background.jpg fill
+output HDMI-A-1 bg ~/.config/sway/background_left.jpg fit
+output DP-1 bg ~/.config/sway/background_right.jpg fit
 
 bar {
   id default
@@ -96,3 +105,9 @@ client.focused_inactive #cccccc99 #cccccc99 #ffffff #00000022 #00000022
 client.unfocused #cccccc99 #cccccc99 #ffffff #00000022 #00000022
 
 font FiraCode Nerd Font
+
+output HDMI-A-1 pos 0 0 res 1920x1080
+output DP-1 pos 1920 0 res 1920x1080
+
+bindsym $mod+Control+Shift+$right move workspace to output right
+bindsym $mod+Control+Shift+$left move workspace to output left

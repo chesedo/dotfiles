@@ -8,4 +8,4 @@ sudo pacman -S docker docker-compose
 sudo pacman -S ripgrep
 
 # For sway & nvim
-pamac install nerd-fonts-fira-code
+pamac install nerd-fonts-fira-code nordic-theme
