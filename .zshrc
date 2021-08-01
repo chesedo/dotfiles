@@ -58,6 +58,7 @@ plugins=(
   alias-finder
   docker
   docker-compose
+  terraform
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
