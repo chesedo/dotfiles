@@ -99,3 +99,5 @@ output DP-1 pos 1920 0 res 1920x1080
 
 bindsym $mod+Control+Shift+$right move workspace to output right
 bindsym $mod+Control+Shift+$left move workspace to output left
+
+exec ~/git/upwork-wayland/screenshot_adapter.py

@@ -9,3 +9,6 @@ sudo pacman -S ripgrep
 
 # For sway & nvim
 pamac install nerd-fonts-fira-code nordic-theme
+
+# To fix upwork screenshots
+git clone git@github.com:MarSoft/upwork-wayland.git ~/git/upwork-wayland
