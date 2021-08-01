@@ -48,6 +48,15 @@ return require('packer').startup(function()
     end,
   }
 
+  -- Misc
+  use {
+    'blackCauldron7/surround.nvim',
+    config = function()
+      require 'surround'.setup {}
+    end
+  }
+
+
   -- Tmp
   use 'tjdevries/train.nvim'
 end)
