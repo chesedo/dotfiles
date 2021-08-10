@@ -44,7 +44,7 @@ return require('packer').startup(function()
   use {
     'norcalli/nvim-colorizer.lua',
     config = function ()
-      require'colorizer'.setup()
+      require 'colorizer'.setup()
     end,
   }
 
@@ -58,7 +58,7 @@ return require('packer').startup(function()
   use {
     'blackCauldron7/surround.nvim',
     config = function()
-      require 'surround'.setup()
+      require 'surround'.setup{}
     end
   }
   use {
