@@ -1,3 +1,5 @@
 [user]
 	email = pieter@chesedo.me
 	name = chesedo
+[init]
+	defaultBranch = main
