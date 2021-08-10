@@ -67,6 +67,12 @@ return require('packer').startup(function()
       require 'nvim_comment'.setup()
     end
   }
+  use {
+    "rcarriga/vim-ultest",
+    requires = {"vim-test/vim-test"},
+    run = ":UpdateRemotePlugins"
+  }
+
 
 
   -- Tmp

@@ -149,7 +149,7 @@ _G.packer_plugins = {
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/spellsitter.nvim"
   },
   ["surround.nvim"] = {
-    config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rsurround\frequire\0" },
+    config = { "\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0" },
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/surround.nvim"
   },
@@ -164,13 +164,21 @@ _G.packer_plugins = {
   ["train.nvim"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/train.nvim"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/vim-test"
+  },
+  ["vim-ultest"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/vim-ultest"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
-try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
 -- Config for: nvim-comment
 time([[Config for nvim-comment]], true)
