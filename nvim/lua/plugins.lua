@@ -58,7 +58,13 @@ return require('packer').startup(function()
   use {
     'blackCauldron7/surround.nvim',
     config = function()
-      require 'surround'.setup {}
+      require 'surround'.setup()
+    end
+  }
+  use {
+    'terrortylor/nvim-comment',
+    config = function()
+      require 'nvim_comment'.setup()
     end
   }
 
