@@ -72,6 +72,10 @@ return require('packer').startup(function()
     requires = {"vim-test/vim-test"},
     run = ":UpdateRemotePlugins"
   }
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = {"mfussenegger/nvim-dap"}
+  }
 
 
 
