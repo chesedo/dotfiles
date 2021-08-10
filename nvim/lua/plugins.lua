@@ -48,6 +48,12 @@ return require('packer').startup(function()
     end,
   }
 
+  -- REST requests
+  use {
+    'NTBBloodbath/rest.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
   -- Misc
   use {
     'blackCauldron7/surround.nvim',
