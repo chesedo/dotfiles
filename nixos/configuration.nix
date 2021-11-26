@@ -48,11 +48,12 @@
     fd
     ripgrep
 
-    firefox
     alacritty
+    feh
     dmenu
     eww
-    git
+
+    firefox
     htop
     home-manager
 
