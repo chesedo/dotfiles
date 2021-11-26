@@ -6,7 +6,7 @@ local compe = require('compe')
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local cmd = vim.api.nvim_command
 
   -- Init LSP saga
   saga.init_lsp_saga()
@@ -79,17 +79,26 @@ local on_attach = function(client, bufnr)
 
   -- Format on save
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
+    cmd [[augroup Format]]
+    cmd [[autocmd! * <buffer>]]
+    cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    cmd [[augroup END]]
   end
 
+  -- Codelens if possible
+  if client.resolved_capabilities.code_lens then
+    cmd [[augroup LspCodelensAutoGroup]]
+    cmd [[au!]]
+    cmd [[au BufEnter <buffer> lua vim.lsp.codelens.refresh()]]
+    cmd [[au CursorHold <buffer> lua vim.lsp.codelens.refresh()]]
+    cmd [[au InsertLeave <buffer> lua vim.lsp.codelens.refresh()]]
+    cmd [[augroup end]]
+  end
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "gopls",  "rls","terraformls" }
+local servers = { "gopls", "pyright", "rls", "rnix", "terraformls", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,

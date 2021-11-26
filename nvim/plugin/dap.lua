@@ -1,6 +1,8 @@
 local dap = require('dap')
 
-vim.api.nvim_set_keymap('n', '<leader>dc', [[<cmd>lua require('dap').continue()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F5>', [[<cmd>lua require('dap').continue()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F10>', [[<cmd>lua require('dap').step_over()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F11>', [[<cmd>lua require('dap').step_into()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>db', [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], { noremap = true, silent = true })
 
 -- Go setup
@@ -43,7 +45,8 @@ dap.configurations.go = {
     type = "go",
     name = "Debug",
     request = "launch",
-    program = "${file}"
+    -- program = "./cmd/main.go"
+    program = "./main.go"
   },
   {
     type = "go",

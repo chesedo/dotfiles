@@ -1,0 +1,2 @@
+WARN  2021-09-16T09:39:54.033 17    log_path_init:95: Failed to create directory /home/developer for writing logs: Unknown system error 1
+WARN  2021-09-16T09:39:55.179 18    log_path_init:95: Failed to create directory /home/developer for writing logs: Unknown system error 1

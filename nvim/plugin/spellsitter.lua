@@ -1,4 +1,4 @@
- require('spellsitter').setup()
+ -- require('spellsitter').setup()
 
 -- Hack to turn spelling issues on
-vim.opt.spell = true
+-- vim.opt.spell = true

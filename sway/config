@@ -43,10 +43,11 @@ set $ws10 10:leisure
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 input type:keyboard {
-  xkb_options caps:swapescape
+  xkb_options caps:swapescape,grp:toggle
   xkb_layout us
   xkb_variant colemak
 }
+# exec --no-startup-id fcitx5 -d
 
 # enable modes
 include $HOME/.config/sway/modes/*

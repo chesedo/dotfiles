@@ -69,9 +69,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["gruvbox.nvim"] = {
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
-    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -85,10 +86,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  ["lush.nvim"] = {
-    loaded = true,
-    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/lush.nvim"
-  },
   ["neoscroll.nvim"] = {
     config = { "\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14neoscroll\frequire\0" },
     loaded = true,
@@ -97,6 +94,10 @@ _G.packer_plugins = {
   nordbuddy = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nordbuddy"
+  },
+  ["nvim-bufferline.lua"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
   },
   ["nvim-colorizer.lua"] = {
     config = { "\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\0" },
@@ -127,6 +128,18 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-lsputils"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-lsputils"
+  },
+  ["nvim-markdown-preview"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-markdown-preview"
+  },
+  ["nvim-remote-containers"] = {
+    loaded = true,
+    path = "/home/chesedo/.local/share/nvim/site/pack/packer/start/nvim-remote-containers"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -192,14 +205,18 @@ time([[Config for surround.nvim]], false)
 time([[Config for nvim-comment]], true)
 try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\17nvim_comment\frequire\0", "config", "nvim-comment")
 time([[Config for nvim-comment]], false)
--- Config for: neoscroll.nvim
-time([[Config for neoscroll.nvim]], true)
-try_loadstring("\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
-time([[Config for neoscroll.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: nvim-colorizer.lua
 time([[Config for nvim-colorizer.lua]], true)
 try_loadstring("\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
 time([[Config for nvim-colorizer.lua]], false)
+-- Config for: neoscroll.nvim
+time([[Config for neoscroll.nvim]], true)
+try_loadstring("\27LJ\1\0027\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
+time([[Config for neoscroll.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

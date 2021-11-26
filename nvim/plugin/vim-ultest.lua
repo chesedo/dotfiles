@@ -1,8 +1,8 @@
 -- Test on every safe
-vim.api.nvim_command [[ augroup UltestRunner ]]
-vim.api.nvim_command [[ au! ]]
-vim.api.nvim_command [[ au BufWritePost * UltestNearest ]]
-vim.api.nvim_command [[ augroup end ]]
+-- vim.api.nvim_command [[ augroup UltestRunner ]]
+-- vim.api.nvim_command [[ au! ]]
+-- vim.api.nvim_command [[ au BufWritePost * UltestNearest ]]
+-- vim.api.nvim_command [[ augroup end ]]
 
 -- Setup builders
 local builders = {

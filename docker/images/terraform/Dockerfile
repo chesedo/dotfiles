@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG version=1.0.3
+ARG version=1.0.5
 
 RUN wget https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip
 RUN unzip terraform_${version}_linux_amd64.zip && rm terraform_${version}_linux_amd64.zip

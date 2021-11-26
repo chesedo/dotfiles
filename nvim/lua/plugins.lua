@@ -23,12 +23,13 @@ return require('packer').startup(function()
 
   -- Theme
   use 'folke/tokyonight.nvim'
-  use {'npxbr/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
+  -- use {'npxbr/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
   use 'maaslalani/nordbuddy'
 
   use 'lewis6991/spellsitter.nvim'
 
   -- GUI basics
+  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
@@ -46,6 +47,15 @@ return require('packer').startup(function()
     config = function ()
       require 'colorizer'.setup()
     end,
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('gitsigns').setup()
+    end
   }
 
   -- REST requests
@@ -77,7 +87,12 @@ return require('packer').startup(function()
     requires = {"mfussenegger/nvim-dap"}
   }
 
-
+  -- Testing
+  use {
+    'jamestthompson3/nvim-remote-containers',
+    requires = {'RishabhRD/nvim-lsputils'},
+  }
+  use 'davidgranstrom/nvim-markdown-preview'
 
   -- Tmp
   use 'tjdevries/train.nvim'

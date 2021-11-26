@@ -61,6 +61,8 @@ plugins=(
   terraform
   zsh-autosuggestions
   zsh-syntax-highlighting
+  nix-zsh-completions
+  nix-shell
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,14 +100,6 @@ source $ZSH/oh-my-zsh.sh
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
-# Go env variables
-export GOROOT="$HOME/go"
-export GOPATH="$HOME/go-code"
-export PATH="$GOROOT/bin:$PATH:$GOPATH/bin"
-
-# Rust variables
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Set editor to nvim
 export EDITOR=nvim
 
@@ -135,3 +129,5 @@ source ~/.containerized-aliases.zsh
 
 # alias-finder options
 ZSH_ALIAS_FINDER_AUTOMATIC=true
+
+prompt_nix_shell_setup
