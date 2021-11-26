@@ -85,17 +85,12 @@
     enable = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    interactiveShellInit = ''
-      source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-    '';
-    promptInit = ""; # otherwise it'll override the grml prompt
     ohMyZsh = {
       enable = true;
       plugins = [
         "z"
         "git"
         "git-auto-fetch"
-        "alias-finder"
       ];
     };
   };
