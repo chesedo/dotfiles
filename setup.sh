@@ -1,18 +1,9 @@
 #!/bin/sh
 
-sudo apt update
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
 
-# Install
-
-# # Install fzf
-# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-# ~/.fzf/install
-
-# Install zsh
-sudo apt install -y zsh fonts-powerline
-chsh -s $(which zsh)
-./setup-zsh.sh
+nix-shell '<home-manager>' -A install
 
 # Install and setup nvim
-sudo apt install -y neovim
-./setup-nvim.sh
+./setup-nixos.sh
