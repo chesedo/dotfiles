@@ -45,6 +45,9 @@
 
   environment.systemPackages = with pkgs; [
     neovim
+    fd
+    ripgrep
+
     firefox
     alacritty
     dmenu
@@ -52,6 +55,8 @@
     git
     htop
     home-manager
+
+    gcc
   ];
 
   fonts.fonts = with pkgs; [
