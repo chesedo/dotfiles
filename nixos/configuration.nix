@@ -29,9 +29,15 @@
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
-  boot.loader.raspberryPi.firmwareConfig = "dtparam=sd_poll_once=on";
+  boot.loader.raspberryPi.firmwareConfig = ''
+    dtparam=audio=on
+    dtparam=sd_poll_once=on
+  '';
 
   hardware.raspberry-pi."4".fkms-3d.enable = true;
+
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Required for the Wireless firmware
   hardware.enableRedistributableFirmware = true;

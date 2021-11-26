@@ -1,68 +1,92 @@
-* {
-  all: unset; //Unsets everything so you can style everything from scratch
-}
+$nord0: #2e3440;
+$nord1: #3b4252;
+$nord2: #434c5e;
+$nord3: #4c566a;
+$nord4: #d8dee9;
+$nord5: #e5e9f0;
+$nord6: #eceff4;
+$nord7: #8fbcbb;
+$nord8: #88c0d0;
+$nord9: #81a1c1;
+$nord10: #5e81ac;
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
 
 //Global Styles
 .bar0 {
-  background-color: #3a3a3a;
-  color: #b0b4bc;
-  padding: 10px;
+  background-color: $nord0;
+  color: $nord4;
 }
 
 // Styles on classes (see eww.yuck for more information)
-
-.sidestuff slider {
+.metric {
+  background-color: $nord1;
+  margin: 0 5px;
+  padding: 0 10px;
+}
+.metric button {
   all: unset;
-  color: #ffd5cd;
+  padding: 0;
+  margin: 0;
+}
+.metric button > box {
+  all: unset;
+}
+.metric .label {
+  all: unset;
+  margin-right: 5px;
+  font-size: 24px;
 }
 
-.metric scale trough highlight {
+.metric scale {
   all: unset;
-  background-color: #D35D6E;
-  color: #000000;
-  border-radius: 10px;
+  margin: 5px 0;
 }
 .metric scale trough {
   all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
+  background-color: $nord3;
+  border-radius: 10px;
+  min-width: 5px;
 }
 .metric scale trough highlight {
   all: unset;
-  background-color: #D35D6E;
-  color: #000000;
+  background-color: $nord8;
   border-radius: 10px;
 }
-.metric scale trough {
+.metric scale trough slider {
   all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
+  background-color: $nord10;
+  border-radius: 10px;
+  transition: margin 165ms ease;
 }
-.label-ram {
-  font-size: large;
+.metric scale:hover trough slider {
+  margin: -5px;
+}
+
+.workspaces button {
+  all: unset;
+  min-height: 32px;
+  min-width: 32px;
+  padding: 0 5px;
+  background-color: $nord1;
 }
 .workspaces button:hover {
-  color: #D35D6E;
+  color: $nord8;
 }
-.ws-button-mine {
-  color: #4e4e4e;
-  background-color: #ffd5ca;
+.workspaces button.ws-button-mine {
+  color: $nord4;
+  background-color: $nord2;
 }
-.ws-button-visible {
-  color: #D35D6E;
-  background-color: #4e4e4e;
+.workspaces button.ws-button-visible {
+  color: $nord5;
+  background-color: $nord11;
 }
-.ws-button-busy {
-  color: #D35D6E;
+.workspaces button.ws-button-busy {
+  color: $nord6;
 }
-.ws-button {
-  color: #b0b4bc;
+.workspaces button.ws-button {
+  color: $nord4;
 }
