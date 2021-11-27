@@ -1,6 +1,27 @@
 { config, pkgs, lib, ... }:
 
-{
+# Patch until the following PR is merged
+# https://github.com/VixenUtils/Myxer/pull/20
+let newMyxer = pkgs.myxer.overrideAttrs (old: {
+  src = pkgs.fetchFromGitHub {
+    owner = "ErinvanderVeen";
+    repo = "Myxer";
+    rev = "gio-version";
+    sha256 = "w1MX8igx/ptrG9eW+EfZreB+6Cj8EpZgED199FrGg+c=";
+  };
+  version = "1.2.1-gio-version-patch";
+  cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
+    src = pkgs.fetchFromGitHub {
+      owner = "ErinvanderVeen";
+      repo = "Myxer";
+      rev = "gio-version";
+      sha256 = "w1MX8igx/ptrG9eW+EfZreB+6Cj8EpZgED199FrGg+c=";
+    };
+    outputHash = "jftu5aiZzxjhrsSrhWDaqF1CwHyeZxXhFbGnTv9qTy4=";
+  });
+});
+
+in {
  # This configuration worked on 09-03-2021 nixos-unstable @ commit 102eb68ceec
  # The image used https://hydra.nixos.org/build/134720986
 
@@ -53,17 +74,19 @@
     neovim
     fd
     ripgrep
+    gcc
 
     alacritty
     feh
     dmenu
     eww
+    libnotify
 
     firefox
     htop
     home-manager
 
-    gcc
+    newMyxer
   ];
 
   fonts.fonts = with pkgs; [
