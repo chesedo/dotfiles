@@ -80,7 +80,9 @@ in {
     feh
     dmenu
     eww
+
     libnotify
+    dunst
 
     firefox
     htop

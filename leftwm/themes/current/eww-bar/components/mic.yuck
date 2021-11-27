@@ -18,7 +18,7 @@
                  :onchange "amixer sset Capture {}%"
           )
         )
-        (box :class "icon" mic-volume-icon)
+        (button :class "icon" :onclick "myxer" mic-volume-icon)
       )
     )
   )

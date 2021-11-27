@@ -42,7 +42,7 @@
   (box :orientation "h"
        :class "metric"
        :space-evenly false
-    (button :onclick "alacritty --command ${onclick}"
+    (button :onclick "LIBGL_ALWAYS_SOFTWARE=1 alacritty --command '${onclick}'"
       (box
           :space-evenly false
         (box :class "label" label)
