@@ -1,3 +1,5 @@
+(include "components/clock.yuck")
+
 (defwidget bar []
   (centerbox :orientation "h"
     (workspaces)
@@ -20,7 +22,7 @@
     (metric :label ""
             :value volume
             :onchange "amixer sset Master {}%")
-    (box :class "metric" :tooltip date time)
+    (clock)
   )
 )
 
@@ -73,11 +75,6 @@
 
 (defpoll volume :interval "1s"
   "amixer sget Master | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-
-(defpoll time :interval "10s"
-  "TZ=Africa/Johannesburg date '+%H:%M'")
-(defpoll date :interval "3600s"
-  "TZ=Africa/Johannesburg date '+%A, %d %b %Y'")
 
 (deflisten wm-tags
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")

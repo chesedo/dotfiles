@@ -1,0 +1,17 @@
+(defwidget hover-switch [var varname]
+  (eventbox :onhover "eww update ${varname}=true"
+            :onhoverlost "eww update ${varname}=false"
+    (box :space-evenly false
+      (revealer :reveal {!var}
+                :duration "165ms"
+                :transition "slideleft"
+        (children :nth 0)
+      )
+      (revealer :reveal {var}
+                :duration "165ms"
+                :transition "slideleft"
+        (children :nth 1)
+      )
+    )
+  )
+)

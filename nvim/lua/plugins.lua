@@ -77,7 +77,8 @@ return require('packer').startup(function()
     requires = {"mfussenegger/nvim-dap"}
   }
 
-
+  -- For yuck syntax highlighting
+  use "elkowar/yuck.vim"
 
   -- Tmp
   use 'tjdevries/train.nvim'
