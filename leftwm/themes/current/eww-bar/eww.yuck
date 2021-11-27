@@ -1,5 +1,6 @@
 (include "components/clock.yuck")
 (include "components/speaker.yuck")
+(include "components/mic.yuck")
 
 (defwidget bar []
   (centerbox :orientation "h"
@@ -20,6 +21,7 @@
     (metric2 :label ""
             :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} Gb"
     )
+    (mic)
     (speaker)
     (clock)
   )
