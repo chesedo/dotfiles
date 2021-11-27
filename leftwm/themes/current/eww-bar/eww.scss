@@ -40,30 +40,37 @@ $nord15: #b48ead;
   margin-right: 5px;
   font-size: 24px;
 }
-
-.metric scale {
+.sidestuff .icon {
   all: unset;
-  margin: 5px 0;
+  font-size: 24px;
 }
-.metric scale trough {
+
+revealer scale {
+  all: unset;
+  margin: 0 10px 0 5px;
+}
+revealer scale trough {
+  min-width: 65px;
+  min-height: 8px;
+}
+scale trough {
   all: unset;
   background-color: $nord3;
   border-radius: 10px;
-  min-width: 5px;
 }
-.metric scale trough highlight {
+scale trough highlight {
   all: unset;
   background-color: $nord8;
   border-radius: 10px;
 }
-.metric scale trough slider {
+scale trough slider {
   all: unset;
   background-color: $nord10;
   border-radius: 10px;
   transition: margin 165ms ease;
 }
-.metric scale:hover trough slider {
-  margin: -5px;
+scale:hover trough slider {
+  margin: -8px;
 }
 
 .workspaces button {

@@ -1,4 +1,5 @@
 (include "components/clock.yuck")
+(include "components/speaker.yuck")
 
 (defwidget bar []
   (centerbox :orientation "h"
@@ -19,9 +20,7 @@
     (metric2 :label ""
             :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} Gb"
     )
-    (metric :label ""
-            :value volume
-            :onchange "amixer sset Master {}%")
+    (speaker)
     (clock)
   )
 )
@@ -36,23 +35,6 @@
        :space-evenly false
        :halign "center"
     {music != "" ? "🎵${music}" : ""}))
-
-
-(defwidget metric [label value onchange]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-       :tooltip value
-    (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :orientation "v"
-           :flipped true
-           :value value
-           :onchange onchange
-    )
-  )
-)
 
 (defwidget metric2 [label value ?onclick]
   (box :orientation "h"
@@ -72,9 +54,6 @@
 
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
-
-(defpoll volume :interval "1s"
-  "amixer sget Master | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 
 (deflisten wm-tags
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")
