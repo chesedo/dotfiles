@@ -42,7 +42,9 @@ $nord15: #b48ead;
 }
 .sidestuff .icon {
   all: unset;
-  font-size: 24px;
+  font-size: 18px;
+  min-width: 18px;
+  min-height: 18px;
 }
 
 revealer scale {

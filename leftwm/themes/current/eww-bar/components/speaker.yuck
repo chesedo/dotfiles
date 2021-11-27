@@ -1,4 +1,5 @@
 (defpoll volume :interval "1s" "amixer sget Master | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll volume-icon :interval "1s" "scripts/get_volume_icon.sh")
 
 (defvar reveal-speaker-slider false)
 
@@ -17,7 +18,7 @@
                  :onchange "amixer sset Master {}%"
           )
         )
-        (box :class "icon" "")
+        (box :class "icon" volume-icon)
       )
     )
   )
