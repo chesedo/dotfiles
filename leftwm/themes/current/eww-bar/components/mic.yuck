@@ -1,4 +1,5 @@
 (defpoll mic-volume :interval "1s" "amixer sget Capture | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll mic-volume-icon :interval "1s" "scripts/get_mic_icon.sh")
 
 (defvar reveal-mic-slider false)
 
@@ -17,7 +18,7 @@
                  :onchange "amixer sset Capture {}%"
           )
         )
-        (box :class "icon" "")
+        (box :class "icon" mic-volume-icon)
       )
     )
   )
