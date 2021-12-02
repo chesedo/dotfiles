@@ -24,10 +24,42 @@ let newMyxer = pkgs.myxer.overrideAttrs (old: {
 in {
   boot.loader.grub.enable = true;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  environment = {
+    systemPackages = with pkgs; [
+      neovim
+      fd
+      ripgrep
+      gcc
 
-  hardware.bluetooth.enable = true;
+      alacritty
+      feh
+      dmenu
+      eww
+
+      libnotify
+      dunst
+
+      firefox
+      htop
+      home-manager
+
+      newMyxer
+    ];
+
+    variables = {
+      EDITOR = "nvim";
+    };
+  };
+
+  fonts.fonts = with pkgs; [
+    powerline
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
+
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
+  };
 
   networking = {
     hostName = "nixos";
@@ -36,44 +68,22 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    neovim
-    fd
-    ripgrep
-    gcc
-
-    alacritty
-    feh
-    dmenu
-    eww
-
-    libnotify
-    dunst
-
-    firefox
-    htop
-    home-manager
-
-    newMyxer
-  ];
-
-  fonts.fonts = with pkgs; [
-    powerline
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-    mutableUsers = false;
-    users.chesedo = {
-      isNormalUser = true;
-      password = "apassword";
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  nix = {
+    autoOptimiseStore = true;
+    # Free up to 1GiB whenever there is less than 100MiB left.
+    extraOptions = ''
+      min-free = ${toString (100 * 1024 * 1024)}
+      max-free = ${toString (1024 * 1024 * 1024)}
+    '';
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
     };
   };
 
-  environment.variables = {
-    EDITOR = "nvim";
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 
   programs.zsh = {
@@ -90,29 +100,8 @@ in {
     };
   };
 
-  nix = {
-    autoOptimiseStore = true;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-    # Free up to 1GiB whenever there is less than 100MiB left.
-    extraOptions = ''
-      min-free = ${toString (100 * 1024 * 1024)}
-      max-free = ${toString (1024 * 1024 * 1024)}
-    '';
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "colemak";
-    xkbOptions = "caps:swapescape";
     displayManager.lightdm.greeters.mini = {
       enable = true;
       user = "chesedo";
@@ -148,8 +137,23 @@ in {
         password-border-width = 0
       '';
     };
+    layout = "us";
+    xkbVariant = "colemak";
+    xkbOptions = "caps:swapescape";
     windowManager.leftwm.enable = true;
   };
+
+  sound.enable = true;
   
   system.stateVersion = "21.05";
+
+  users = {
+    defaultUserShell = pkgs.zsh;
+    mutableUsers = false;
+    users.chesedo = {
+      isNormalUser = true;
+      password = "apassword";
+      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    };
+  };
 }
