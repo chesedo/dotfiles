@@ -22,49 +22,15 @@ let newMyxer = pkgs.myxer.overrideAttrs (old: {
 });
 
 in {
- # This configuration worked on 09-03-2021 nixos-unstable @ commit 102eb68ceec
- # The image used https://hydra.nixos.org/build/134720986
-
-  imports = [
-    <nixos-hardware/raspberry-pi/4>
-  ];
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages_rpi4;
-    tmpOnTmpfs = true;
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
-    # ttyAMA0 is the serial console broken out to the GPIO
-    kernelParams = [
-        "8250.nr_uarts=1"
-        "console=ttyAMA0,115200"
-        "console=tty1"
-        # Some gui programs need this
-        "cma=128M"
-    ];
-  };
-
-  boot.loader.raspberryPi = {
-    enable = true;
-    version = 4;
-  };
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  boot.loader.raspberryPi.firmwareConfig = ''
-    dtparam=audio=on
-    dtparam=sd_poll_once=on
-  '';
-
-  hardware.raspberry-pi."4".fkms-3d.enable = true;
+  boot.loader.grub.enable = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Required for the Wireless firmware
-  hardware.enableRedistributableFirmware = true;
+  hardware.bluetooth.enable = true;
 
   networking = {
-    hostName = "nixos-raspi-4"; # Define your hostname.
+    hostName = "nixos";
     networkmanager = {
       enable = true;
     };
@@ -99,9 +65,6 @@ in {
   users = {
     defaultUserShell = pkgs.zsh;
     mutableUsers = false;
-    users.root = {
-      password = "apassword";
-    };
     users.chesedo = {
       isNormalUser = true;
       password = "apassword";
@@ -139,15 +102,6 @@ in {
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
-  };
-
-  # Assuming this is installed on top of the disk image.
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
   };
 
   nixpkgs.config = {
@@ -197,7 +151,5 @@ in {
     windowManager.leftwm.enable = true;
   };
   
-  powerManagement.cpuFreqGovernor = "ondemand";
   system.stateVersion = "21.05";
-  #swapDevices = [ { device = "/swapfile"; size = 3072; } ];
 }
