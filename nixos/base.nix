@@ -22,7 +22,7 @@ let newMyxer = pkgs.myxer.overrideAttrs (old: {
 });
 
 in {
-  boot.loader.grub.enable = true;
+  boot.loader.grub.enable = false;
 
   environment = {
     systemPackages = with pkgs; [
@@ -144,8 +144,9 @@ in {
   };
 
   sound.enable = true;
-  
-  system.stateVersion = "21.05";
+
+  # Set your time zone.
+  time.timeZone = "Africa/Johannesburg";
 
   users = {
     defaultUserShell = pkgs.zsh;
