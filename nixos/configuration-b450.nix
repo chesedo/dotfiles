@@ -11,9 +11,16 @@
     loader = {
       # Use the systemd-boot EFI boot loader.
       efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot";
       grub = {
          enable = pkgs.lib.mkForce true;
          efiSupport = true;
+         extraEntries = ''
+          menuentry "Manjaro" {
+            search --set=manjaro --fs-uuid fc1993a4-3fda-405f-948d-473071664b3c
+            configfile "($manjaro)/boot/grub/grub.cfg"
+          }
+        '';
          device = "nodev";
       };
       systemd-boot.enable = false;
