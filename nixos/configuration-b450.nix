@@ -11,6 +11,11 @@
     loader = {
       # Use the systemd-boot EFI boot loader.
       efi.canTouchEfiVariables = true;
+      grub = {
+         enable = pkgs.lib.mkForce true;
+         efiSupport = true;
+         device = "nodev";
+      };
       systemd-boot.enable = false;
     };
   };
