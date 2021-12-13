@@ -83,19 +83,18 @@ scale:hover trough slider {
   background-color: $nord1;
 }
 .workspaces button:hover {
-  color: $nord8;
-}
-.workspaces button.ws-button-mine {
-  color: $nord4;
-  background-color: $nord2;
-}
-.workspaces button.ws-button-visible {
-  color: $nord5;
-  background-color: $nord11;
-}
-.workspaces button.ws-button-busy {
   color: $nord6;
 }
-.workspaces button.ws-button {
+.workspaces button.ws-button-mine {
+  color: $nord6;
+  background-color: $nord3;
+}
+.workspaces button.ws-button-visible {
   color: $nord4;
+}
+.workspaces button.ws-button-busy {
+  color: $nord8;
+}
+.workspaces button.ws-button {
+  color: $nord10;
 }

@@ -4,14 +4,14 @@
 
 (defwidget bar-left []
   (centerbox :orientation "h"
-    (workspaces)
+    (workspaces :tags wm-tags-0)
     (music)
     (box)
   )
 )
 (defwidget bar-right []
   (centerbox :orientation "h"
-    (workspaces)
+    (workspaces :tags wm-tags-1)
     (box)
     (sidestuff)
   )
@@ -36,8 +36,8 @@
   )
 )
 
-(defwidget workspaces []
-  (literal :content {wm-tags})
+(defwidget workspaces [tags]
+  (literal :content {tags})
 )
 
 (defwidget music []
@@ -66,8 +66,10 @@
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(deflisten wm-tags
+(deflisten wm-tags-0
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")
+(deflisten wm-tags-1
+  "leftwm-state -w 1 -t ~/.config/leftwm/themes/current/template.liquid")
 
 (defwindow bar0
   :monitor 0
