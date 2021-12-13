@@ -9,10 +9,16 @@
   home.packages = with pkgs; [
     hicolor-icon-theme
 
+    steam
+
+    upwork
+
     xfce.thunar
     # Optionals
     xfce.xfconf # Needed to save the preferences
     xfce.exo # Used by default for `open terminal here`, but can be changed
+
+    zoom-us
   ];
 
   # This value determines the Home Manager release that your
@@ -36,6 +42,8 @@
       name = "Nordic";
     };
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     # Let Home Manager install and manage itself.
