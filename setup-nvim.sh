@@ -1,13 +1,11 @@
 #!/bin/sh
 
 # Setup plugins and config
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+	 ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 mkdir -p ~/.config
 ln -sf $PWD/nvim ~/.config/nvim
 
 # Install plugins
-nvim --headless +PlugInstall +qa
-pip3 install pynvim
-npm install -g neovim
+nvim --headless +PackerInstall +qa
