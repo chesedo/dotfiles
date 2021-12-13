@@ -86,17 +86,20 @@ in {
     allowUnfree = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    ohMyZsh = {
+  programs = {
+    dconf.enable = true;
+    zsh = {
       enable = true;
-      plugins = [
-        "z"
-        "git"
-        "git-auto-fetch"
-      ];
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = [
+          "z"
+          "git"
+          "git-auto-fetch"
+        ];
+      };
     };
   };
 
