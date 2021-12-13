@@ -1,5 +1,4 @@
-vim.cmd[[colorscheme tokyonight]] -- Hack to get nordbuddy to load
-require('nordbuddy').colorscheme {
+require('nordic').colorscheme {
   -- Underline style used for spelling
   -- Options: 'none', 'underline', 'undercurl'
   underline_option = 'undercurl',

@@ -5,6 +5,7 @@ vim.g.mapleader = ' '
 vim.opt.number = true          -- Show numbers in left column
 vim.opt.relativenumber = true  -- Make numbers relative
 vim.opt.mouse = 'n'            -- Enable mouse in normal mode
+vim.opt.termguicolors = true
 
 -- Idents
 vim.opt.expandtab = true                -- Use space for tabs

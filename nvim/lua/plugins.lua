@@ -22,9 +22,7 @@ return require('packer').startup(function()
   }
 
   -- Theme
-  use 'folke/tokyonight.nvim'
-  use {'npxbr/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
-  use 'maaslalani/nordbuddy'
+  use 'andersevenrud/nordic.nvim'
 
   use 'lewis6991/spellsitter.nvim'
 
