@@ -257,3 +257,8 @@ command = "DecreaseMainWidth"
 value = "5"
 modifier = ["modkey"]
 key = "minus"
+
+[[keybind]]
+command = "ToggleFullScreen"
+modifier = ["modkey"]
+key = "f"
