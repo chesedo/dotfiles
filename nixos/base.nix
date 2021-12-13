@@ -100,47 +100,51 @@ in {
     };
   };
 
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.greeters.mini = {
+  services = {
+    gvfs.enable = true; # Mount, trash, and other functionalities
+    tumbler.enable = true; # Thumbnail support for images
+    xserver = {
       enable = true;
-      user = "chesedo";
-      extraConfig = ''
-        [greeter]
-        show-password-label = false
-        invalid-password-text = Invalid Password
-        show-input-cursor = true
-        password-alignment = center
+      displayManager.lightdm.greeters.mini = {
+        enable = true;
+        user = "chesedo";
+        extraConfig = ''
+          [greeter]
+          show-password-label = false
+          invalid-password-text = Invalid Password
+          show-input-cursor = true
+          password-alignment = center
 
-        [greeter-hotkeys]
-        mod-key = meta
-        shutdown-key = s
-        restart-key = r
-        hibernate-key = h
-        suspend-key = u
+          [greeter-hotkeys]
+          mod-key = meta
+          shutdown-key = s
+          restart-key = r
+          hibernate-key = h
+          suspend-key = u
 
-        [greeter-theme]
-        font = Sans
-        font-size = 1em
-        font-weight = bold
-        font-style = normal
-        text-color = "#88c0d0"
-        error-color = "#bf616a"
-        background-color = "#2e3440"
-        window-color = "#88c0d0"
-        border-color = "#d8dee9"
-        border-width = 0
-        layout-space = 1
-        password-color = "#88c0d0"
-        password-background-color = "#434c5e"
-        password-border-color = "#d8dee9"
-        password-border-width = 0
-      '';
+          [greeter-theme]
+          font = Sans
+          font-size = 1em
+          font-weight = bold
+          font-style = normal
+          text-color = "#88c0d0"
+          error-color = "#bf616a"
+          background-color = "#2e3440"
+          window-color = "#88c0d0"
+          border-color = "#d8dee9"
+          border-width = 0
+          layout-space = 1
+          password-color = "#88c0d0"
+          password-background-color = "#434c5e"
+          password-border-color = "#d8dee9"
+          password-border-width = 0
+        '';
+      };
+      layout = "us";
+      xkbVariant = "colemak";
+      xkbOptions = "caps:swapescape";
+      windowManager.leftwm.enable = true;
     };
-    layout = "us";
-    xkbVariant = "colemak";
-    xkbOptions = "caps:swapescape";
-    windowManager.leftwm.enable = true;
   };
 
   sound.enable = true;
