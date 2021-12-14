@@ -5,14 +5,14 @@
 (defwidget bar-left []
   (centerbox :orientation "h"
     (workspaces :tags wm-tags-0)
+    (label :text active-window)
     (music)
-    (box)
   )
 )
 (defwidget bar-right []
   (centerbox :orientation "h"
     (workspaces :tags wm-tags-1)
-    (box)
+    (label :text active-window)
     (sidestuff)
   )
 )
@@ -70,6 +70,8 @@
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")
 (deflisten wm-tags-1
   "leftwm-state -w 1 -t ~/.config/leftwm/themes/current/template.liquid")
+(deflisten active-window
+  "leftwm-state -s '{{window_title}}'")
 
 (defwindow bar0
   :monitor 0
