@@ -80,4 +80,22 @@ return require('packer').startup(function()
 
   -- Tmp
   use 'tjdevries/train.nvim'
+  use {
+    'saecki/crates.nvim',
+    tag = 'v0.1.0',
+    requires = { 'nvim-lua/plenary.nvim' },
+    event = { "BufRead Cargo.toml" },
+    config = function()
+        require('crates').setup()
+
+        vim.api.nvim_set_keymap('n', 'K', [[<cmd>lua require('crates').show_popup()<CR>]], { noremap=true, silent=true })
+    end,
+  }
+  use {
+    'simrat39/rust-tools.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+        require('rust-tools').setup()
+    end,
+  }
 end)

@@ -18,7 +18,7 @@
                  :onchange "amixer sset Master {}%"
           )
         )
-        (button :class "icon" :onclick "myxer" volume-icon)
+        (button :class "icon" :onclick "myxer &" volume-icon)
       )
     )
   )
