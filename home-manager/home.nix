@@ -70,6 +70,13 @@
     };
   };
 
+  services.picom = {
+    enable = true;
+    fade = true;
+    noDockShadow = false;
+    shadow = true;
+  };
+
   xsession.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata_Ice";
