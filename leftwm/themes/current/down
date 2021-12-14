@@ -9,8 +9,8 @@ fi
 
 echo "UnloadTheme" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 
-pkill compton
 pkill picom
+pkill trayer
 if [ -x "$(command -v eww)" ]; then
   eww kill
 fi

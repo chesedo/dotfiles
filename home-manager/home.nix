@@ -16,6 +16,8 @@
 
     steam
 
+    trayer
+
     upwork
 
     xfce.thunar
