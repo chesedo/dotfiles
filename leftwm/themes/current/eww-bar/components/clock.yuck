@@ -1,5 +1,5 @@
-(defpoll time :interval "10s" "TZ=Africa/Johannesburg date '+%H:%M'")
-(defpoll date :interval "3600s" "TZ=Africa/Johannesburg date '+%A, %d %b %Y'")
+(defpoll time :interval "10s" "date '+%H:%M'")
+(defpoll date :interval "3600s" "date '+%A, %d %b %Y'")
 
 (defvar reveal-date false)
 
