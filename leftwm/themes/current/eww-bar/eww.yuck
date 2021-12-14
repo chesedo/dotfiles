@@ -44,8 +44,10 @@
   (box :class "music"
        :orientation "h"
        :space-evenly false
-       :halign "center"
-    {music != "" ? "🎵${music}" : ""}))
+       :halign "end"
+    {music != "" ? "🎵 ${music}" : ""}
+  )
+)
 
 (defwidget metric2 [label value ?onclick]
   (box :orientation "h"

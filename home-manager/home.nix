@@ -14,6 +14,8 @@
     krita
     inkscape
 
+    playerctl
+
     steam
 
     trayer
