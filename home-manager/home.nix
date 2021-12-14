@@ -7,7 +7,12 @@
   home.homeDirectory = "/home/chesedo";
 
   home.packages = with pkgs; [
+    gimp-with-plugins
+
     hicolor-icon-theme
+
+    krita
+    inkscape
 
     steam
 
