@@ -45,6 +45,13 @@ return require('packer').startup(function()
       require 'colorizer'.setup()
     end,
   }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('gitsigns').setup()
+    end,
+  }
 
   -- REST requests
   use {
