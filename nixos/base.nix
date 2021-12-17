@@ -171,4 +171,9 @@ in {
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     };
   };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 }
