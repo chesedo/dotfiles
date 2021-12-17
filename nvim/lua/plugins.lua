@@ -11,7 +11,7 @@ return require('packer').startup(function()
 
   -- LSP related
   use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
+  use 'tami5/lspsaga.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'hrsh7th/nvim-compe'
 
