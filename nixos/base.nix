@@ -52,6 +52,7 @@ in {
   };
 
   fonts.fonts = with pkgs; [
+    arphic-uming # For Chinese
     powerline
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
@@ -59,6 +60,11 @@ in {
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
+  };
+
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ libpinyin uniemoji ];
   };
 
   networking = {
