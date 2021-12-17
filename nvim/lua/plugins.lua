@@ -95,7 +95,11 @@ return require('packer').startup(function()
     'simrat39/rust-tools.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-        require('rust-tools').setup()
+        require('rust-tools').setup({
+          server = {
+            on_attach = require('lsp_on_attach')
+          }
+        })
     end,
   }
 end)
