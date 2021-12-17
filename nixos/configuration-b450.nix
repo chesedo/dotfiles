@@ -36,6 +36,8 @@
     interfaces.enp34s0.useDHCP = true;
   };
 
+  programs.steam.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

@@ -16,8 +16,6 @@
 
     playerctl
 
-    steam
-
     trayer
 
     upwork
