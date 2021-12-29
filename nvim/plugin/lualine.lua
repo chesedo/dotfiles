@@ -77,10 +77,8 @@ local highlight_groups = {
 -- Helper function to format each line
 local function diagnostic_renderer(result, key, count)
     if count > 0 then
-        -- print("test")
         table.insert(result, string.format("%s%s%s", modules.highlight.component_format_highlight(highlight_groups[key]), icons[key], count))
     end
-    print(vim.inspect(result))
 end
 
 -- Get diagnostic for all files
@@ -116,10 +114,31 @@ require('lualine').setup{
   },
   tabline = {
     lualine_a = {},
-    lualine_b = {global_diagnostics},
+    lualine_b = {{global_diagnostics, icon = 'Global' }},
     lualine_c = {'buffers'},
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = {
+      {
+        -- Lsp server name .
+        function()
+          local msg = 'No Active Lsp'
+          local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+          local clients = vim.lsp.get_active_clients()
+          if next(clients) == nil then
+            return msg
+          end
+          for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+              return client.name
+            end
+          end
+          return msg
+        end,
+        icon = ' LSP:',
+        color = { fg = '#ffffff', gui = 'bold' },
+      }
+    },
     lualine_z = {'branch'}
   }
 }
