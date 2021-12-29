@@ -104,4 +104,11 @@ return require('packer').startup(function()
         })
     end,
   }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end
+  }
 end)
