@@ -69,11 +69,20 @@
       initExtraFirst = ''
         source ~/.p10k.zsh
       '';
+      localVariables = {
+        # Put you-should-use in hardcore mode
+        YSU_HARDCORE = 1;
+      };
       plugins = [
         {
           name = "powerlevel10k";
           src = pkgs.zsh-powerlevel10k;
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+        {
+          name = "you-should-use";
+          src = pkgs.zsh-you-should-use;
+          file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
         }
       ];
     };
