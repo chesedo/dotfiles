@@ -44,6 +44,48 @@ modifier = ["modkey", "Control"]
 key = "l"
 
 [[keybind]]
+command = "Execute"
+value = "amixer sset Master 5%-"
+modifier = []
+key = "XF86XK_AudioLowerVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer sset Master 5%+"
+modifier = []
+key = "XF86XK_AudioRaiseVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer sset Master toggle"
+modifier = []
+key = "XF86XK_AudioMute"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl play-pause"
+modifier = []
+key = "XF86XK_AudioPlay"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl stop"
+modifier = []
+key = "XF86XK_AudioStop"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl previous"
+modifier = []
+key = "XF86XK_AudioPrev"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl next"
+modifier = []
+key = "XF86XK_AudioNext"
+
+[[keybind]]
 command = "MoveToLastWorkspace"
 modifier = ["modkey", "Shift"]
 key = "w"
