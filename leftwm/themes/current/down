@@ -11,6 +11,7 @@ echo "UnloadTheme" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 
 pkill picom
 pkill trayer
+pkill blugon
 if [ -x "$(command -v eww)" ]; then
   eww kill
 fi

@@ -7,6 +7,8 @@
   home.homeDirectory = "/home/chesedo";
 
   home.packages = with pkgs; [
+    blugon
+
     gimp-with-plugins
 
     hicolor-icon-theme
@@ -82,6 +84,10 @@
     fade = true;
     noDockShadow = false;
     shadow = true;
+  };
+
+  xdg.configFile = {
+    "blugon/config".source = ./blugon/config;
   };
 
   xsession.pointerCursor = {
