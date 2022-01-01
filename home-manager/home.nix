@@ -16,6 +16,8 @@
     krita
     inkscape
 
+    podman-compose
+
     playerctl
 
     trayer
