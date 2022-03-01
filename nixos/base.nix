@@ -77,7 +77,7 @@ in {
   };
 
   nix = {
-    autoOptimiseStore = true;
+    auto-optimise-store = true;
     # Free up to 1GiB whenever there is less than 100MiB left.
     extraOptions = ''
       min-free = ${toString (100 * 1024 * 1024)}
