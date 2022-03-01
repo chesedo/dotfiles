@@ -15,6 +15,40 @@ end
 
 -- Manually setups for servers with custom config
 
+-- LaTex
+nvim_lsp.texlab.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    texlab = {
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
+      build = {
+        args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" },
+        executable = "tectonic",
+        forwardSearchAfter = true,
+        onSave = true
+      },
+      chktex = {
+        onEdit = false,
+        onOpenAndSave = false
+      },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
+      forwardSearch = {
+        executable = "zathura",
+        args = { "--synctex-forward", "%l:0:%f", "%p" }
+      },
+      latexFormatter = "latexindent", -- texlab not implemented yet
+      latexindent = {
+        modifyLineBreaks = false
+      }
+    }
+  }
+}
+
 -- Tailwindcss
 nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
