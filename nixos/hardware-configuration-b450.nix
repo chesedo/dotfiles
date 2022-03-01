@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/media/home" =
+    { device = "/dev/disk/by-label/home";
+      fsType = "ext4";
+    };
+
   swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";

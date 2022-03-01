@@ -48,4 +48,18 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
+
+  system.userActivationScripts.linktosharedfolders.text = ''
+  if [[ ! -h "$HOME/git" ]]; then
+    ln -s "/media/home/git" "$HOME/git"
+  fi
+
+  if [[ ! -h "$HOME/Documents" ]]; then
+    ln -s "/media/home/Documents" "$HOME/Documents"
+  fi
+
+  if [[ ! -h "$HOME/Downloads" ]]; then
+    ln -s "/media/home/Downloads" "$HOME/Downloads"
+  fi
+  '';
 }
