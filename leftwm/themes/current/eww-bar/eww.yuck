@@ -12,23 +12,30 @@
 (defwidget bar-right []
   (centerbox :orientation "h"
     (workspaces :tags wm-tags-1)
-    (label :text active-window)
+    (box)
+    ; (label :text active-window)
     (sidestuff)
   )
 )
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric2 :label ""
+            :value "${round(EWW_NET.enp34s0.NET_DOWN / 1024, 0)} KB"
+    )
+    (metric2 :label ""
+            :value "${round(EWW_NET.enp34s0.NET_UP / 1024, 0)} KB"
+    )
     (metric2 :label "︁"
             :value "${round(EWW_CPU.avg, 1)}%"
             :onclick "htop"
     )
     (metric2 :label ""
-            :value "${round(EWW_RAM.used_mem / 1024 / 1024, 2)} Gb"
+            :value "${round(EWW_RAM.used_mem / 1024 / 1024, 2)} GB"
             :onclick "htop"
     )
     (metric2 :label ""
-            :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} Gb"
+            :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} GB"
     )
     (mic)
     (speaker)
