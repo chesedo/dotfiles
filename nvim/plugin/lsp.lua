@@ -15,6 +15,15 @@ end
 
 -- Manually setups for servers with custom config
 
+-- Tailwindcss
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  cmd = { "yarn", "run", "tailwindcss-language-server", "--stdio" };
+}
+
 -- Lua
 
 local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
