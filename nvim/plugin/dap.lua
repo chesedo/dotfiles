@@ -2,6 +2,8 @@ local dap = require('dap')
 
 vim.api.nvim_set_keymap('n', '<leader>dc', [[<cmd>lua require('dap').continue()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>db', [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>do', [[<cmd>lua require('dap').step_over()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>di', [[<cmd>lua require('dap').step_into()<CR>]], { noremap = true, silent = true })
 
 -- Go setup
 dap.adapters.go = function(callback, config)
@@ -62,3 +64,24 @@ dap.configurations.go = {
   }
 }
 
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/nix/store/5zjg5jw821grfvfnkyika9lxqy8ndcqy-lldb-13.0.0/bin/lldb-vscode', -- adjust as needed
+  -- command = '/usr/bin/env lldb-vscode', -- adjust as needed
+  name = "lldb"
+}
+dap.configurations.rust = {
+    {
+        type = 'lldb',
+        name = 'Debug',
+        request = "launch",
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/' .. '')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+        initCommand = {},
+        runInTerminal = false
+    }
+}

@@ -95,7 +95,7 @@ return require('packer').startup(function()
   }
   use {
     'simrat39/rust-tools.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
     config = function()
         require('rust-tools').setup({
           server = {
