@@ -45,6 +45,12 @@ key = "l"
 
 [[keybind]]
 command = "Execute"
+value = "eww open --toggle clipboard"
+modifier = ["modkey", "Control"]
+key = "c"
+
+[[keybind]]
+command = "Execute"
 value = "amixer sset Master 5%-"
 modifier = []
 key = "XF86XK_AudioLowerVolume"

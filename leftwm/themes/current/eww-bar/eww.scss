@@ -98,3 +98,12 @@ scale:hover trough slider {
 .workspaces button.ws-button {
   color: $nord10;
 }
+
+.clipboard-entry {
+  all: unset;
+  background: $nord1;
+  padding: 10px;
+}
+.clipboard-entry:hover {
+  background: $nord3;
+}

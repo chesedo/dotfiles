@@ -30,6 +30,7 @@ in {
       fd
       ripgrep
       gcc
+      xclip
 
       alacritty
       feh
@@ -113,6 +114,7 @@ in {
     blueman.enable = true;
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
+    clipcat.enable = true; # Clipboard manager
     xserver = {
       enable = true;
       displayManager.lightdm.greeters.mini = {

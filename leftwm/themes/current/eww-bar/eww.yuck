@@ -95,3 +95,40 @@
                       :anchor "top left")
   :reserve (struts :side "top" :distance "5%")
   (bar-right))
+
+(defpoll clipboard-entries
+  :interval "1s"
+  `echo '(box :orientation "vertical"'; clipcatctl list | jq -Rsn '[inputs | split("\\n")[] | split(": ") | .[0] as $id | .[1:] | join(": ") | @html as $text | {"id": $id, "text": $text}]' | jq -r '.[:15][] | "(clipboard-entry :id \\"\\(.id)\\" :text \\"\\(.text)\\")"'; echo ")"`
+)
+
+(defwidget clipboard []
+  (literal :content clipboard-entries)
+)
+
+(defwidget clipboard-entry [id text]
+  (button
+    :class "clipboard-entry"
+    :onclick "clipcatctl promote ${id}; eww close clipboard"
+    :halign "start"
+    (label
+      :text text
+      :show-truncated true
+      :width 450
+      :limit-width 60
+      :halign "start"
+    )
+  )
+)
+
+(defwindow clipboard
+  :monitor 1
+  :geometry (geometry
+             :x "0"
+             :y "5%"
+             :width "20%"
+             :height "32px"
+             :anchor "top center"
+   )
+  :stacking "fg"
+  (clipboard)
+)
