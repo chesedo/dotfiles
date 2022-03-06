@@ -116,6 +116,7 @@ in {
     clipcat.enable = true; # Clipboard manager
     xserver = {
       enable = true;
+      displayManager.defaultSession = "none+leftwm";
       displayManager.lightdm.greeters.mini = {
         enable = true;
         user = "chesedo";
