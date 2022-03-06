@@ -60,6 +60,11 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    eww = {
+      enable = true;
+      configDir = ../leftwm/themes/current/eww-bar;
+    };
+
     git = {
       enable = true;
       userName  = "chesedo";
@@ -102,7 +107,13 @@
   };
 
   xdg.configFile = {
+    "alacritty/alacritty.yml".source = ../alacritty.yml;
     "blugon/config".source = ./blugon/config;
+    "leftwm".source = ../leftwm;
+  };
+
+  home.file = {
+    ".p10k.zsh".source = ../.p10k.zsh;
   };
 
   xsession.pointerCursor = {
