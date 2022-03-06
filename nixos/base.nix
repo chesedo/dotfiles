@@ -44,6 +44,8 @@ in {
       htop
       home-manager
 
+      spideroak
+
       newMyxer
     ];
 
