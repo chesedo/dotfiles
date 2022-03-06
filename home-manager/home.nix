@@ -71,6 +71,11 @@
       userEmail = "pieter@chesedo.me";
     };
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     zsh = {
       enable =true;
       initExtraFirst = ''
