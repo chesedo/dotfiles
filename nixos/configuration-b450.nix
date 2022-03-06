@@ -43,10 +43,12 @@
   fi
 
   if [[ ! -h "$HOME/Documents" ]]; then
+    rm -R "$HOME/Documents"
     ln -s "/media/home/Documents" "$HOME/Documents"
   fi
 
   if [[ ! -h "$HOME/Downloads" ]]; then
+    rm -R "$HOME/Downloads"
     ln -s "/media/home/Downloads" "$HOME/Downloads"
   fi
   '';
