@@ -60,6 +60,11 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     eww = {
       enable = true;
       configDir = ../leftwm/themes/current/eww-bar;
@@ -71,9 +76,15 @@
       userEmail = "pieter@chesedo.me";
     };
 
-    direnv = {
+    ssh = {
       enable = true;
-      nix-direnv.enable = true;
+      matchBlocks = {
+        "runner.shuttle" = {
+          hostname = "runner.shuttle.rs";
+          user = "ubuntu";
+          forwardAgent = true;
+        };
+      };
     };
 
     zsh = {

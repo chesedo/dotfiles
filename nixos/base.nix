@@ -97,6 +97,7 @@ in {
 
   programs = {
     dconf.enable = true;
+    ssh.startAgent = true;
     zsh = {
       enable = true;
       autosuggestions.enable = true;
