@@ -1,0 +1,25 @@
+(defpoll mic-volume :interval "1s" "amixer sget Capture | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll mic-volume-icon :interval "1s" "scripts/get_mic_icon.sh")
+
+(defvar reveal-mic-slider false)
+
+(defwidget mic []
+  (box
+    (eventbox :onhover "eww update reveal-mic-slider=true"
+              :onhoverlost "eww update reveal-mic-slider=false"
+      (box :space-evenly false
+        (revealer :reveal {reveal-mic-slider}
+                  :duration "165ms"
+                  :transition "slideleft"
+          (scale :min 0
+                 :max 101
+                 :orientation "h"
+                 :value mic-volume
+                 :onchange "amixer sset Capture {}%"
+          )
+        )
+        (button :class "icon" :onclick "myxer &" mic-volume-icon)
+      )
+    )
+  )
+)

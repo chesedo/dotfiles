@@ -1,0 +1,25 @@
+(defpoll volume :interval "1s" "amixer sget Master | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll volume-icon :interval "1s" "scripts/get_volume_icon.sh")
+
+(defvar reveal-speaker-slider false)
+
+(defwidget speaker []
+  (box
+    (eventbox :onhover "eww update reveal-speaker-slider=true"
+              :onhoverlost "eww update reveal-speaker-slider=false"
+      (box :space-evenly false
+        (revealer :reveal {reveal-speaker-slider}
+                  :duration "165ms"
+                  :transition "slideleft"
+          (scale :min 0
+                 :max 101
+                 :orientation "h"
+                 :value volume
+                 :onchange "amixer sset Master {}%"
+          )
+        )
+        (button :class "icon" :onclick "myxer &" volume-icon)
+      )
+    )
+  )
+)

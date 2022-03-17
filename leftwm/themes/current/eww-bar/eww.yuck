@@ -1,0 +1,141 @@
+(include "components/clock.yuck")
+(include "components/speaker.yuck")
+(include "components/mic.yuck")
+
+(defwidget bar-left []
+  (centerbox :orientation "h"
+    (workspaces :tags wm-tags-0)
+    (label :text active-window)
+    (music)
+  )
+)
+(defwidget bar-right []
+  (centerbox :orientation "h"
+    (workspaces :tags wm-tags-1)
+    (box)
+    ; (label :text active-window)
+    (sidestuff)
+  )
+)
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric2 :label ""
+            :value "${round(EWW_NET.enp34s0.NET_DOWN / 1024, 0)} KB"
+    )
+    (metric2 :label ""
+            :value "${round(EWW_NET.enp34s0.NET_UP / 1024, 0)} KB"
+    )
+    (metric2 :label "︁"
+            :value "${round(EWW_CPU.avg, 1)}%"
+            :onclick "htop"
+    )
+    (metric2 :label ""
+            :value "${round(EWW_RAM.used_mem / 1024 / 1024, 2)} GB"
+            :onclick "htop"
+    )
+    (metric2 :label ""
+            :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} GB"
+    )
+    (mic)
+    (speaker)
+    (clock)
+  )
+)
+
+(defwidget workspaces [tags]
+  (literal :content {tags})
+)
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "end"
+    {music != "" ? "🎵 ${music}" : ""}
+  )
+)
+
+(defwidget metric2 [label value ?onclick]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (button :onclick "alacritty --command '${onclick}' &"
+      (box
+          :space-evenly false
+        (box :class "label" label)
+        (box :class "value" value)
+      )
+    )
+  )
+)
+
+
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(deflisten wm-tags-0
+  "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")
+(deflisten wm-tags-1
+  "leftwm-state -w 1 -t ~/.config/leftwm/themes/current/template.liquid")
+(deflisten active-window
+  "leftwm-state -s '{{window_title}}'")
+
+(defwindow bar0
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0"
+                      :y "10px"
+                      :width "1900px"
+                      :height "24px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "39px")
+  (bar-left))
+(defwindow bar1
+  :monitor 1
+  :windowtype "dock"
+  :geometry (geometry :x "10px"
+                      :y "10px"
+                      :width "1690px"
+                      :height "24px"
+                      :anchor "top left")
+  :reserve (struts :side "top" :distance "39px")
+  (bar-right))
+
+(defpoll clipboard-entries
+  :interval "1s"
+  `echo '(box :orientation "vertical"'; clipcatctl list | jq -Rsn '[inputs | split("\\n")[] | split(": ") | .[0] as $id | .[1:] | join(": ") | @html as $text | {"id": $id, "text": $text}]' | jq -r '.[:15][] | "(clipboard-entry :id \\"\\(.id)\\" :text \\"\\(.text)\\")"'; echo ")"`
+)
+
+(defwidget clipboard []
+  (literal :content clipboard-entries)
+)
+
+(defwidget clipboard-entry [id text]
+  (button
+    :class "clipboard-entry"
+    :onclick "clipcatctl promote ${id}; eww close clipboard"
+    :halign "start"
+    (label
+      :text text
+      :show-truncated true
+      :width 450
+      :limit-width 60
+      :halign "start"
+    )
+  )
+)
+
+(defwindow clipboard
+  :monitor 1
+  :geometry (geometry
+             :x "0"
+             :y "5%"
+             :width "20%"
+             :height "32px"
+             :anchor "top center"
+   )
+  :stacking "fg"
+  (clipboard)
+)

@@ -1,0 +1,110 @@
+$nord0: #2e3440;
+$nord1: #3b4252;
+$nord2: #434c5e;
+$nord3: #4c566a;
+$nord4: #d8dee9;
+$nord5: #e5e9f0;
+$nord6: #eceff4;
+$nord7: #8fbcbb;
+$nord8: #88c0d0;
+$nord9: #81a1c1;
+$nord10: #5e81ac;
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
+
+//Global Styles
+window {
+  background-color: $nord0;
+  color: $nord4;
+  font-size: 12px;
+}
+
+// Styles on classes (see eww.yuck for more information)
+.sidestuff > *, .music {
+  background-color: $nord1;
+  margin: 0 5px;
+  padding: 0 10px;
+}
+.metric button {
+  all: unset;
+  padding: 0;
+  margin: 0;
+}
+.metric button > box {
+  all: unset;
+}
+.metric .label {
+  all: unset;
+  margin-right: 4px;
+  font-size: 15px;
+}
+.sidestuff .icon {
+  all: unset;
+  font-size: 15px;
+  min-width: 14px;
+  min-height: 15px;
+}
+
+revealer scale {
+  all: unset;
+  margin: 0 8px 0 4px;
+}
+revealer scale trough {
+  min-width: 65px;
+  min-height: 3px;
+}
+scale trough {
+  all: unset;
+  background-color: $nord3;
+  border-radius: 10px;
+}
+scale trough highlight {
+  all: unset;
+  background-color: $nord8;
+  border-radius: 10px;
+}
+scale trough slider {
+  all: unset;
+  background-color: $nord10;
+  border-radius: 10px;
+  transition: margin 165ms ease;
+}
+scale:hover trough slider {
+  margin: -5px;
+}
+
+.workspaces button {
+  all: unset;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 0 5px;
+  background-color: $nord1;
+}
+.workspaces button:hover {
+  color: $nord6;
+}
+.workspaces button.ws-button-mine {
+  color: $nord6;
+  background-color: $nord3;
+}
+.workspaces button.ws-button-visible {
+  color: $nord4;
+}
+.workspaces button.ws-button-busy {
+  color: $nord8;
+}
+.workspaces button.ws-button {
+  color: $nord10;
+}
+
+.clipboard-entry {
+  all: unset;
+  background: $nord1;
+  padding: 10px;
+}
+.clipboard-entry:hover {
+  background: $nord3;
+}

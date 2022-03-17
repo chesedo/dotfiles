@@ -1,0 +1,24 @@
+(defpoll time :interval "10s" "date '+%H:%M'")
+(defpoll date :interval "3600s" "date '+%A, %d %b %Y'")
+
+(defvar reveal-date false)
+
+(defwidget clock []
+  (box
+    (eventbox :onhover "eww update reveal-date=true"
+              :onhoverlost "eww update reveal-date=false"
+      (box :space-evenly false
+        (revealer :reveal {!reveal-date}
+                  :duration "165ms"
+                  :transition "slideleft"
+          time
+        )
+        (revealer :reveal {reveal-date}
+                  :duration "165ms"
+                  :transition "slideleft"
+          date
+        )
+      )
+    )
+  )
+)
