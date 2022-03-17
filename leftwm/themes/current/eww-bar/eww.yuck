@@ -85,22 +85,22 @@
 (defwindow bar0
   :monitor 0
   :windowtype "dock"
-  :geometry (geometry :x "0%"
-                      :y "1%"
-                      :width "99%"
-                      :height "32px"
+  :geometry (geometry :x "0"
+                      :y "10px"
+                      :width "1900px"
+                      :height "24px"
                       :anchor "top center")
-  :reserve (struts :side "top" :distance "5%")
+  :reserve (struts :side "top" :distance "39px")
   (bar-left))
 (defwindow bar1
   :monitor 1
   :windowtype "dock"
   :geometry (geometry :x "10px"
-                      :y "1%"
-                      :width "90%"
-                      :height "32px"
+                      :y "10px"
+                      :width "1690px"
+                      :height "24px"
                       :anchor "top left")
-  :reserve (struts :side "top" :distance "5%")
+  :reserve (struts :side "top" :distance "39px")
   (bar-right))
 
 (defpoll clipboard-entries
