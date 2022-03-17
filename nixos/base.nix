@@ -43,6 +43,7 @@ in {
       firefox
       htop
       home-manager
+      nodePackages.node2nix
 
       spideroak
 

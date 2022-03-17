@@ -124,3 +124,15 @@
 )
 
 (setq org-agenda-files '("~/org" "~/org/roam/journal"))
+
+(add-hook! text-mode
+  (require 'lsp-grammarly)
+  (lsp)
+  )
+
+(setq lsp-ui-sideline-show-code-actions t)
+
+(after! lsp-grammarly
+  (map! :leader :desc "Apply grammarly code actions" :n "c a" #'lsp-ui-sideline-apply-code-actions)
+  (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
+  )
