@@ -1,10 +1,3 @@
-# For
-- [x] zsh
-- [x] neovim
-- [ ] tmux
+These are my dotfiles for nix, home-manager, leftwm and doom emacs
 
-# Make Neovim ready
-```
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
+Currently it seem the home-manager channel is still missing for nix to have everything work automatically...

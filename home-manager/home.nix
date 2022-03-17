@@ -130,6 +130,10 @@
 
   home.file = {
     ".p10k.zsh".source = ../.p10k.zsh;
+    ".doom.d" = {
+      source = ../.doom.d;
+      onChange = "~/.emacs.d/bin/doom sync";
+    };
   };
 
   xsession.pointerCursor = {

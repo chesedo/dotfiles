@@ -26,11 +26,11 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
-      neovim
       fd
       ripgrep
       gcc
       xclip
+      emacs
 
       alacritty
       feh
@@ -50,7 +50,7 @@ in {
     ];
 
     variables = {
-      EDITOR = "nvim";
+      EDITOR = "emacs";
     };
   };
 
