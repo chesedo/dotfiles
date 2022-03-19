@@ -1,27 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, options, ... }:
 
-# Patch until the following PR is merged
-# https://github.com/VixenUtils/Myxer/pull/20
-let newMyxer = pkgs.myxer.overrideAttrs (old: {
-  src = pkgs.fetchFromGitHub {
-    owner = "ErinvanderVeen";
-    repo = "Myxer";
-    rev = "gio-version";
-    sha256 = "w1MX8igx/ptrG9eW+EfZreB+6Cj8EpZgED199FrGg+c=";
-  };
-  version = "1.2.1-gio-version-patch";
-  cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
-    src = pkgs.fetchFromGitHub {
-      owner = "ErinvanderVeen";
-      repo = "Myxer";
-      rev = "gio-version";
-      sha256 = "w1MX8igx/ptrG9eW+EfZreB+6Cj8EpZgED199FrGg+c=";
-    };
-    outputHash = "jftu5aiZzxjhrsSrhWDaqF1CwHyeZxXhFbGnTv9qTy4=";
-  });
-});
-
-in {
+{
   boot.loader.grub.enable = false;
 
   environment = {
@@ -47,7 +26,7 @@ in {
 
       spideroak
 
-      newMyxer
+      myxer
     ];
 
     variables = {
@@ -92,8 +71,11 @@ in {
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+    overlays = [ (import overlays/myxer-overlay.nix) ];
   };
 
   programs = {
