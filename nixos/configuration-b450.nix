@@ -13,6 +13,8 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
+    # To build pi images
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking = {
