@@ -75,7 +75,10 @@
     config = {
       allowUnfree = true;
     };
-    overlays = [ (import overlays/myxer-overlay.nix) ];
+    overlays = [
+      (import overlays/myxer-overlay.nix)
+      (import overlays/leftwm-overlay.nix)
+    ];
   };
 
   programs = {
