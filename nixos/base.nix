@@ -87,6 +87,7 @@
   programs = {
     dconf.enable = true;
     ssh.startAgent = true;
+    udevil.enable = true; # Mount drives without sudo
     zsh = {
       enable = true;
       autosuggestions.enable = true;
@@ -106,6 +107,7 @@
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
     clipcat.enable = true; # Clipboard manager
+    devmon.enable = true; # Auto mount external drives
     xserver = {
       enable = true;
       displayManager.defaultSession = "none+leftwm";
