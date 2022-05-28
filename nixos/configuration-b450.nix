@@ -27,9 +27,17 @@
   };
 
   programs.steam.enable = true;
+  programs.system-config-printer.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    avahi.enable = true;
+
+    printing = {
+      enable = true;
+      drivers = [ pkgs.canon-cups-ufr2 pkgs.carps-cups ];
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
