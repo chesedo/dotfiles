@@ -108,6 +108,7 @@
     tumbler.enable = true; # Thumbnail support for images
     clipcat.enable = true; # Clipboard manager
     devmon.enable = true; # Auto mount external drives
+    openssh.enable = true;
     xserver = {
       enable = true;
       displayManager.defaultSession = "none+leftwm";
