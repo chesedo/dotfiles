@@ -89,6 +89,9 @@ in
       enable = true;
       userName  = "chesedo";
       userEmail = "pieter@chesedo.me";
+      extraConfig = {
+        core.askPass = "";
+      };
     };
 
     ssh = {
