@@ -149,7 +149,7 @@
       };
       layout = "us";
       xkbVariant = "colemak";
-      xkbOptions = "caps:swapescape";
+      xkbOptions = "caps:escape";
       windowManager.leftwm.enable = true;
     };
   };
