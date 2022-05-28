@@ -69,6 +69,9 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+    nixPath = options.nix.nixPath.default ++
+    # Append our nixpkgs-overlays.
+    [ "nixpkgs-overlays=/etc/nixos/overlays" ];
   };
 
   nixpkgs = {
