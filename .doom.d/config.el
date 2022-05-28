@@ -120,8 +120,19 @@
   )
 
 (after! org-roam
-  (setq org-roam-extract-new-file-path "%<%Y-%m-%d %a %H%M>-${slug}.org")
-)
+  (setq org-roam-capture-templates '(
+                                    ("d" "default" plain "%?"
+                                     :target (file+head "%<%Y-%m-%d %a %H%M>-${slug}.org" "#+title: ${title}\n")
+                                     :unnarrowed t)
+                                    ("c" "masters chapter" plain "%?"
+                                     :target (file+head "masters/%<%Y-%m-%d %a %H%M>-${slug}.org" "#+title: ${title}\n")
+                                     :unnarrowed t)
+                                    ("a" "masters article" plain "* Synopsis\n%?"
+                                     :target (file+head "masters/articles/${slug}.org" ":PROPERTIES:\n:BIB_TITLE:   %^{Title}\n:BIB_AUTHOR:  %^{Author}\n:BIB_YEAR:    %^{Year}\n:Publication: %^{Publication}\n:END:\n#+title: ${title}\n#+FILETAGS: :article:")
+                                     :unnarrowed t)
+                                    )
+        )
+  )
 
 (setq org-agenda-files '("~/org" "~/org/roam/journal"))
 
