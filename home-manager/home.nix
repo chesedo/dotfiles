@@ -16,9 +16,13 @@ in
   home.packages = with pkgs; [
     blugon
 
+    discord
+
     gimp-with-plugins
 
     hicolor-icon-theme
+
+    jq
 
     krita
     inkscape
