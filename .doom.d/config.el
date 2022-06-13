@@ -147,3 +147,12 @@
   (map! :leader :desc "Apply grammarly code actions" :n "c a" #'lsp-ui-sideline-apply-code-actions)
   (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
   )
+
+(after! lsp-latex
+       (setq lsp-latex-build-executable "tectonic")
+       (setq lsp-latex-build-args '("-X" "compile" "%f" "--synctex" "--keep-logs" "--keep-intermediates"))
+       (setq lsp-latex-build-on-save t)
+       (setq lsp-latex-forward-search-executable "zathura")
+       (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))
+       (setq lsp-latex-forward-search-after t)
+)

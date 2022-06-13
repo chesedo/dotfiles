@@ -52,3 +52,5 @@
 (when (package! keytar)
   (package! lsp-grammarly)
   )
+
+(package! lsp-latex)
