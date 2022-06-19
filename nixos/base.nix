@@ -36,7 +36,9 @@
 
   fonts.fonts = with pkgs; [
     arphic-uming # For Chinese
+    montserrat
     powerline
+    source-sans-pro
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
