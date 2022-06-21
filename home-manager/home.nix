@@ -144,7 +144,7 @@ in
     "alacritty/alacritty.yml".source = ../alacritty.yml;
     "blugon/config".source = ./blugon/config;
     "leftwm".source = ../leftwm;
-    "inkscape/palletes".source = ./inkscape/palletes;
+    "inkscape/palettes".source = ./inkscape/palettes;
   };
 
   home.file = {
