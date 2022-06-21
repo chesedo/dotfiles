@@ -54,3 +54,5 @@
   )
 
 (package! lsp-latex)
+
+(package! lsp-ltex)

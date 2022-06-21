@@ -151,8 +151,44 @@
 (after! lsp-latex
        (setq lsp-latex-build-executable "tectonic")
        (setq lsp-latex-build-args '("-X" "compile" "%f" "--synctex" "--keep-logs" "--keep-intermediates"))
-       (setq lsp-latex-build-on-save t)
        (setq lsp-latex-forward-search-executable "zathura")
        (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))
-       (setq lsp-latex-forward-search-after t)
 )
+
+(setq lsp-ltex-enabled t)
+(setq lsp-ltex-version "15.2.0")
+(setq lsp-ltex-language "en-ZA")
+(setq lsp-ltex-additional-rules-enable-picky-rules t)
+
+(defun chesedo/synctex-pos ()
+    (concat
+        (number-to-string (line-number-at-pos))
+        ":"
+        (number-to-string (current-column))
+        ":"
+        (buffer-file-name)
+    )
+)
+
+(defcustom synctex-forward-pdf-file nil
+  "PDF file to open and sync"
+  :type 'string)
+
+(defun chesedo/synctex-forward (program)
+  (let
+      (
+        (cmd (concat program " --synctex-forward " (chesedo/synctex-pos) " " synctex-forward-pdf-file))
+        (async-shell-command-buffer nil)
+      )
+    (save-window-excursion
+      (async-shell-command cmd)
+    )
+   )
+)
+(defun chesedo/synctex-forward-zathura ()
+  "Open and/or sync latex postision in zathura"
+  (interactive)
+  (chesedo/synctex-forward "zathura")
+)
+
+(map! :localleader :map latex-mode-map :desc "Sync zathura with cursor location" :n "l" #'chesedo/synctex-forward-zathura)
