@@ -101,10 +101,9 @@
 
 (after! org-journal
   (setq org-journal-dir "~/org/roam/journal/"
-        org-journal-date-format "%a, %Y-%m-%d"
-        org-journal-date-prefix "#+title: "
-        org-journal-time-prefix "* "
-        org-journal-file-format "%Y-%m-%d.org"
+        org-journal-date-format "%a, %Y-%b-%d"
+        org-journal-file-format "%Y-%V.org"
+        org-journal-file-type 'weekly
         org-journal-after-entry-create-hook
         (lambda ()
           (save-excursion
