@@ -56,3 +56,6 @@
 (package! lsp-latex)
 
 (package! lsp-ltex)
+
+(package! yuck-mode
+  :recipe (:host github :repo "mmcjimsey26/yuck-mode" :files ("yuck-mode.el")))
