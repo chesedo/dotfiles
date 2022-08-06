@@ -23,10 +23,10 @@
       htop
       home-manager
       nodePackages.node2nix
+      pavucontrol
 
       spideroak
 
-      myxer
     ];
 
     variables = {
@@ -81,7 +81,6 @@
       allowUnfree = true;
     };
     overlays = [
-      (import overlays/myxer-overlay.nix)
       (import overlays/leftwm-overlay.nix)
     ];
   };
