@@ -1,13 +1,39 @@
 modkey = "Mod4"
 mousekey = "Mod4"
-workspaces = []
-tags = ["Cons", "Web", "Code", "4", "M", "Gen", "Synth", "Work", "9"]
+tags = ["ﲵ", "", "", "", "龎", "", "異", "", "ﭮ"]
 layouts = ["MainAndVertStack", "MainAndHorizontalStack", "MainAndDeck", "GridHorizontal", "EvenHorizontal", "EvenVertical", "Fibonacci", "CenterMain", "CenterMainBalanced", "Monocle", "RightWiderLeftStack", "LeftWiderRightStack"]
-layout_mode = "Workspace"
-scratchpad = []
+layout_mode = "Tag"
 disable_current_tag_swap = false
 focus_behaviour = "Sloppy"
 focus_new_windows = true
+
+[[workspaces]]
+y = 0
+x = 0
+height = 1080
+width = 1920
+id = 0
+
+[[workspaces]]
+y = 0
+x = 1920
+height = 1080
+width = 1920
+id = 1
+
+[[scratchpad]]
+name = "Alactritty"
+value = "alacritty"
+x = 0.25
+y = 0.25
+height = 0.5
+width = 0.5
+
+[[keybind]]
+command = "ToggleScratchPad"
+value = "Alactritty"
+modifier = ["modkey", "Shift"]
+key = "a"
 
 [[keybind]]
 command = "Execute"
