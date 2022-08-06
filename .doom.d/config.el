@@ -101,8 +101,8 @@
 
 (after! org-journal
   (setq org-journal-dir "~/org/roam/journal/"
-        org-journal-date-format "%a, %Y-%b-%d"
-        org-journal-file-format "%Y-%V.org"
+        org-journal-date-format "%a, %d-%b-%Y"
+        org-journal-file-format "%Y-%V-%m.org"
         org-journal-file-type 'weekly
         org-journal-after-entry-create-hook
         (lambda ()
