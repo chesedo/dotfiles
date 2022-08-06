@@ -42,9 +42,7 @@ in
 
     zoom-us
 
-    nodejs
-    nodePackages.npm
-    customNodePackages.lsp-grammarly
+    jdk11
   ];
 
   # This value determines the Home Manager release that your

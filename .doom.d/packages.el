@@ -49,9 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(when (package! keytar)
-  (package! lsp-grammarly)
-  )
 
 (package! lsp-latex)
 
