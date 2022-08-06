@@ -26,3 +26,5 @@ sleep 1
 
 eww open bar0
 eww open bar1
+
+picom --config ~/.config/leftwm/themes/current/picom.conf --experimental-backends

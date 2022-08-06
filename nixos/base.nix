@@ -14,6 +14,7 @@
       alacritty
       feh
       dmenu
+      picom
 
       libnotify
       dunst

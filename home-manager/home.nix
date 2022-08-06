@@ -133,13 +133,6 @@ in
     };
   };
 
-  services.picom = {
-    enable = true;
-    fade = true;
-    noDockShadow = false;
-    shadow = true;
-  };
-
   xdg.configFile = {
     "alacritty/alacritty.yml".source = ../alacritty.yml;
     "blugon/config".source = ./blugon/config;
