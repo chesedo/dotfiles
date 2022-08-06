@@ -21,10 +21,10 @@
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     (metric2 :label ""
-            :value "${round(EWW_NET.enp34s0.NET_DOWN / 1024, 0)} KB"
+            :value "${round(EWW_NET.enp4s0.NET_DOWN / 1024, 0)} KB"
     )
     (metric2 :label ""
-            :value "${round(EWW_NET.enp34s0.NET_UP / 1024, 0)} KB"
+            :value "${round(EWW_NET.enp4s0.NET_UP / 1024, 0)} KB"
     )
     (metric2 :label "︁"
             :value "${round(EWW_CPU.avg, 1)}%"
@@ -86,21 +86,21 @@
   :monitor 0
   :windowtype "dock"
   :geometry (geometry :x "0"
-                      :y "10px"
-                      :width "1900px"
-                      :height "24px"
+                      :y "0"
+                      :width "100%"
+                      :height "28px"
                       :anchor "top center")
-  :reserve (struts :side "top" :distance "39px")
+  :reserve (struts :side "top" :distance "32px")
   (bar-left))
 (defwindow bar1
   :monitor 1
   :windowtype "dock"
-  :geometry (geometry :x "10px"
-                      :y "10px"
-                      :width "1690px"
-                      :height "24px"
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "1728px"
+                      :height "28px"
                       :anchor "top left")
-  :reserve (struts :side "top" :distance "39px")
+  :reserve (struts :side "top" :distance "32px")
   (bar-right))
 
 (defpoll clipboard-entries
@@ -116,26 +116,18 @@
   (button
     :class "clipboard-entry"
     :onclick "clipcatctl promote ${id}; eww close clipboard"
-    :halign "start"
+    :halign "fill"
     (label
       :text text
       :show-truncated true
-      :width 450
-      :limit-width 60
-      :halign "start"
     )
   )
 )
 
 (defwindow clipboard
   :monitor 1
-  :geometry (geometry
-             :x "0"
-             :y "5%"
-             :width "20%"
-             :height "32px"
-             :anchor "top center"
-   )
   :stacking "fg"
+  :windowtype "dialog"
+  :focusable true
   (clipboard)
 )
