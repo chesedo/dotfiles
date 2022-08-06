@@ -17,7 +17,7 @@ key = "p"
 
 [[keybind]]
 command = "Execute"
-value = "LIBGL_ALWAYS_SOFTWARE=1 alacritty"
+value = "alacritty"
 modifier = ["modkey", "Shift"]
 key = "Return"
 
