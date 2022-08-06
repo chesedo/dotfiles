@@ -3,22 +3,17 @@ self: super: {
   # https://github.com/leftwm/leftwm/pull/623
   # This is only needed for the pi400 build
   leftwm = super.leftwm.overrideAttrs (oldAttrs: rec {
-    version = "0.3rc";
+    version = "0.3.0";
 
     src = super.fetchFromGitHub {
       owner = "leftwm";
       repo = "leftwm";
-      rev = "master";
-      sha256 = "0nalji8xdf74vlgzdjqh23qdg0lxhxvkb541zb7whcp61lsix7br";
+      rev = "0.3.0";
+      sha256 = "sha256-AfE36u5xSfivkg+hmJ6ASh6zXmTnLOv5RFigkGzySng=";
     };
     cargoDeps = oldAttrs.cargoDeps.overrideAttrs (super.lib.const {
-      src = super.fetchFromGitHub {
-        owner = "leftwm";
-        repo = "leftwm";
-        rev = "master";
-        sha256 = "0nalji8xdf74vlgzdjqh23qdg0lxhxvkb541zb7whcp61lsix7br";
-      };
-      outputHash = "1kka0kd0jwsl2ld7g3cykjy8z2l5a1866zhma0295sj7jsh21lph";
+      inherit src;
+      outputHash = "sha256-atfMMAnPcsbi8FgztGchUXMpPfGzsfRemlA2CZynDg8=";
     });
   });
 }
