@@ -80,15 +80,15 @@ scale:hover trough slider {
 
 .workspaces button {
   all: unset;
+  font-size: 18px;
   min-height: 25px;
   min-width: 27px;
   padding: 0 5px;
   background-color: $nord1;
-  border-top: 3px solid transparent;
+  border-top: 3px solid $nord1;
 }
 .workspaces button:hover {
   color: $nord6;
-  opacity: 1;
 }
 .workspaces button.ws-button-mine {
   border-color: $nord10;
@@ -101,7 +101,6 @@ scale:hover trough slider {
 }
 .workspaces button.ws-button {
   color: $nord10;
-  opacity: 0.4;
 }
 
 .clipboard-entry {
