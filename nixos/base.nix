@@ -28,6 +28,8 @@
 
       spideroak
 
+      pinentry-qt
+      kleopatra
     ];
 
     variables = {
@@ -88,7 +90,11 @@
 
   programs = {
     dconf.enable = true;
-    ssh.startAgent = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "qt";
+      enableSSHSupport = true;
+    };
     udevil.enable = true; # Mount drives without sudo
     zsh = {
       enable = true;
