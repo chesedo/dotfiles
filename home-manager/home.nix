@@ -27,8 +27,6 @@ in
     krita
     inkscape
 
-    podman-compose
-
     playerctl
 
     trayer
@@ -126,7 +124,6 @@ in
       ];
       shellAliases = {
         p = "podman";
-        pc = "podman-compose";
       };
     };
   };
