@@ -42,7 +42,7 @@ in
 
     zoom-us
 
-    jdk11
+    wordnet
   ];
 
   # This value determines the Home Manager release that your
