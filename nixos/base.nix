@@ -179,7 +179,7 @@
     mutableUsers = false;
     users.chesedo = {
       isNormalUser = true;
-      password = "apassword";
+      initialPassword = "apassword";
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     };
   };

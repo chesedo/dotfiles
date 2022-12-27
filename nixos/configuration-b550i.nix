@@ -3,7 +3,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration-b450.nix
+    ./hardware-configuration-b550.nix
     ./base.nix
   ];
 
@@ -18,7 +18,7 @@
   };
 
   networking = {
-    hostName = pkgs.lib.mkForce "nixos-b450";
+    hostName = pkgs.lib.mkForce "nixos-b550";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
