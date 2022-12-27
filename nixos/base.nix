@@ -30,6 +30,11 @@
 
       pinentry-qt
       kleopatra
+
+      proselint
+      (python3.withPackages (p: with p; [
+        grip
+      ]))
     ];
 
     variables = {
