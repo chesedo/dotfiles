@@ -31,8 +31,6 @@ in
 
     trayer
 
-    upwork
-
     xfce.thunar
     # Optionals
     xfce.xfconf # Needed to save the preferences
