@@ -79,21 +79,16 @@
   (setq lsp-rust-analyzer-server-display-inlay-hints t
         lsp-rust-analyzer-display-chaining-hints t
         lsp-rust-analyzer-display-parameter-hints t)
-  (require 'dap-gdb-lldb))
-
-(after! dap-cpptools
-  (dap-register-debug-template "Rust::CppTools Run Configuration"
-                                 (list :type "cppdbg"
-                                       :request "launch"
-                                       :name "Rust::Run"
-                                       :MIMode "gdb"
-                                       :miDebuggerPath "rust-gdb"
-                                       :environment []
-                                       :program "${workspaceFolder}/target/debug/api"
-                                       :cwd "${workspaceFolder}"
-                                       :console "external"
-                                       :dap-compilation "cargo build"
-                                       :dap-compilation-dir "${workspaceFolder}")))
+  (require 'dap-gdb-lldb)
+  (dap-register-debug-template "Rust::GDB Run Configuration"
+                               (list :type "gdb"
+                                     :request "launch"
+                                     :name "GDB::Run"
+                                     :gdbpath "rust-gdb"
+                                     :target nil
+                                     :cwd nil)
+                               )
+)
 
 (after! dap-mode
   (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
