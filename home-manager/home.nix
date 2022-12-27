@@ -100,6 +100,7 @@ in
     };
 
     zsh = {
+      defaultKeymap = "viins";
       enable =true;
       initExtraFirst = ''
         source ~/.p10k.zsh
