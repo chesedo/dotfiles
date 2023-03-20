@@ -182,3 +182,7 @@
 )
 
 (map! :localleader :map latex-mode-map :desc "Sync zathura with cursor location" :n "l" #'chesedo/synctex-forward-zathura)
+
+;; Don't open buffers of all org files on clocking in
+;; https://github.com/doomemacs/doomemacs/issues/5317#issuecomment-1404664245
+(setq org-clock-auto-clock-resolution nil)
