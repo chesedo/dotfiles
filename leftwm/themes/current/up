@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
+#if path to liblinkt is not not exported do so:
+if [ -z "$LD_LIBRARY_PATH" ]; then
+  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+fi
+
 # Down the last running theme
 if [ -f "/tmp/leftwm-theme-down" ]; then
     /tmp/leftwm-theme-down
@@ -8,21 +13,23 @@ if [ -f "/tmp/leftwm-theme-down" ]; then
 fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
+# start eww daemon
+eww daemon &
+
+# start other services
+picom --config $SCRIPTPATH/picom.conf --experimental-backends &
+blugon &
+
 #set background
 if [ -x "$(command -v feh)" ]; then
   feh --bg-scale --no-xinerama $SCRIPTPATH/background.jpg
 fi
 
 # Set the theme.toml config
-leftwm command "LoadTheme $SCRIPTPATH/theme.toml"
-
-# start eww daemon
-eww daemon &
-blugon &
-picom --config $SCRIPTPATH/picom.conf --experimental-backends &
-
-trayer --edge top --expand false --width 10 --height 28 --align right --monitor 1 --iconspacing 10 --transparent true --tint 0xff2e3444 --alpha 0
+leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
 eww state
 eww open bar0
 eww open bar1
+
+trayer --edge top --expand false --width 10 --height 28 --align right --monitor 1 --iconspacing 10 --transparent true --tint 0xff2e3444 --alpha 0 &
