@@ -94,6 +94,11 @@
   (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
   (dap-auto-configure-mode t))
 
+;; Auto save org buffers when the background save happens
+(after! org
+  (add-hook! 'auto-save-hook 'org-save-all-org-buffers)
+)
+
 (after! org-journal
   (setq org-journal-dir "~/org/roam/journal/"
         org-journal-date-format "%a, %d-%b-%Y"
