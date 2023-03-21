@@ -111,3 +111,43 @@ scale:hover trough slider {
 .clipboard-entry:hover {
   background: $nord3;
 }
+
+window.calendar, calendar {
+  background: rgba(0, 0, 0, 0);
+}
+
+.calendar-box {
+  padding: 40px;
+  font-size: 15px;
+}
+
+calendar.header {
+  background: $nord3;
+  font-size: 16px;
+}
+
+calendar.button {
+  background: $nord2;
+  padding: 10px;
+}
+
+calendar.highlight {
+  color: $nord7;
+  font-size: 16px;
+}
+
+calendar:indeterminate {
+  color: $nord10;
+}
+
+calendar:selected {
+  color: $nord7;
+  background: $nord2;
+}
+
+calendar > * {
+  padding: 3px;
+  border: 2px solid rgba(76, 86, 106, 0.95);
+  border-radius: 7px;
+  background: rgba(46, 53, 64, 0.85);
+}
