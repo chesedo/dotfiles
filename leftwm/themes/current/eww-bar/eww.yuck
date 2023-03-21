@@ -31,11 +31,8 @@
             :onclick "htop"
     )
     (metric2 :label ""
-            :value "${round(EWW_RAM.used_mem / 1024 / 1024, 2)} GB"
+            :value "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} GB"
             :onclick "htop"
-    )
-    (metric2 :label ""
-            :value "${round(EWW_DISK["/"].used / 1024 / 1024 / 1024, 1)} GB"
     )
     (mic)
     (speaker)
