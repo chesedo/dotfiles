@@ -24,21 +24,21 @@
       htop
       home-manager
       pavucontrol
+      evince
 
       spideroak
 
       pinentry-qt
       kleopatra
 
-      proselint
-      (python3.withPackages (p: with p; [
-        grip
-      ]))
+      proselint # For emacs linting
+      (python3.withPackages
+        (p: with p; [ grip ])) # To preview markdown and org files
+
+      pass
     ];
 
-    variables = {
-      EDITOR = "emacs";
-    };
+    variables = { EDITOR = "emacs"; };
   };
 
   fonts.fonts = with pkgs; [
@@ -47,6 +47,7 @@
     powerline
     source-sans-pro
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    symbola # To fix emacs ligatures
   ];
 
   hardware = {
@@ -61,9 +62,7 @@
 
   networking = {
     hostName = "nixos";
-    networkmanager = {
-      enable = true;
-    };
+    networkmanager = { enable = true; };
   };
 
   nix = {
@@ -79,17 +78,13 @@
       options = "--delete-older-than 30d";
     };
     nixPath = options.nix.nixPath.default ++
-    # Append our nixpkgs-overlays.
-    [ "nixpkgs-overlays=/etc/nixos/overlays" ];
+      # Append our nixpkgs-overlays.
+      [ "nixpkgs-overlays=/etc/nixos/overlays" ];
   };
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-    overlays = [
-      (import overlays/leftwm-overlay.nix)
-    ];
+    config = { allowUnfree = true; };
+    overlays = [ (import overlays/leftwm-overlay.nix) ];
   };
 
   programs = {
@@ -106,11 +101,7 @@
       syntaxHighlighting.enable = true;
       ohMyZsh = {
         enable = true;
-        plugins = [
-          "z"
-          "git"
-          "git-auto-fetch"
-        ];
+        plugins = [ "z" "git" "git-auto-fetch" ];
       };
     };
   };
@@ -169,10 +160,10 @@
   sound.enable = true;
 
   system.userActivationScripts.linkhomemanager.text = ''
-  if [[ ! -d "$HOME/.config/nixpkgs" ]]; then
-    mkdir -p "$HOME/.config/nixpkgs"
-    ln -s "$HOME/git/dotfiles/home-manager/home.nix" "$HOME/.config/nixpkgs"
-  fi
+    if [[ ! -d "$HOME/.config/nixpkgs" ]]; then
+      mkdir -p "$HOME/.config/nixpkgs"
+      ln -s "$HOME/git/dotfiles/home-manager/home.nix" "$HOME/.config/nixpkgs"
+    fi
   '';
 
   # Set your time zone.
