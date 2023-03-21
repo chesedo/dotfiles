@@ -39,6 +39,10 @@ in
     zoom-us
 
     wordnet
+    ltex-ls # For text files
+    sqlite
+    marksman # For markdown files
+    languagetool
   ];
 
   # This value determines the Home Manager release that your

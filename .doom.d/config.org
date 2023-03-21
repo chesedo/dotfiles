@@ -1,3 +1,6 @@
+Some set of default configs from Doom emacs to help me remember how to set things later.
+
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -23,6 +26,7 @@
 ;;
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13 :weight 'medium)
      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 13))
+(setq doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 13 :weight 'medium))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -74,7 +78,15 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+#+end_src
 
+* Code Config
+Show possible code actions to the right.
+#+begin_src emacs-lisp
+(setq lsp-ui-sideline-show-code-actions t)
+#+end_src
+** Rust
+#+begin_src emacs-lisp
 (after! lsp-rust
   (setq lsp-rust-analyzer-server-display-inlay-hints t
         lsp-rust-analyzer-display-chaining-hints t
@@ -93,12 +105,18 @@
 (after! dap-mode
   (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
   (dap-auto-configure-mode t))
+#+end_src
 
-;; Auto save org buffers when the background save happens
+* Org mode
+I've often lost my pomodoro timers just because I forget to save my org files. So this causes them to be saved automatically about every 30 seconds.
+#+begin_src emacs-lisp
 (after! org
   (add-hook! 'auto-save-hook 'org-save-all-org-buffers)
 )
+#+end_src
 
+I want to use weekly buffers since daily just causes too many files. But I also want the files names to be sortable and make sense. This has created the unfortunate case where I still need to go into all old files to combine them into one.
+#+begin_src emacs-lisp
 (after! org-journal
   (setq org-journal-dir "~/org/roam/journal/"
         org-journal-date-format "%a, %d-%b-%Y"
@@ -117,7 +135,26 @@
           )
         )
   )
+#+end_src
 
+Also add my roam journal to my agenda files
+#+begin_src emacs-lisp
+(setq org-agenda-files '("~/org" "~/org/roam/journal"))
+#+end_src
+
+One reason daily orgs did not work for me is because `clock-in` would open all my orgs files in the background. I found this [[https://github.com/doomemacs/doomemacs/issues/5317#issuecomment-1404664245][comment on GitHub]] that allows it to be turned off at the expense of any open clocks not being automatically clocked out.
+#+begin_src emacs-lisp
+(after! org
+    (setq org-clock-auto-clock-resolution nil)
+)
+#+end_src
+
+Setup a custom templates for the following:
+- The default to sort according to date
+- A new chapter for my master's article
+- An article reference for my master's article
+
+#+begin_src emacs-lisp
 (after! org-roam
   (setq org-roam-capture-templates '(
                                     ("d" "default" plain "%?"
@@ -132,29 +169,50 @@
                                     )
         )
   )
+#+end_src
 
-(setq org-agenda-files '("~/org" "~/org/roam/journal"))
+Websocket is required for roam-ui to work
+#+begin_src emacs-lisp
+;; (use-package! websocket
+;;     :after org-roam)
+#+end_src
 
-(add-hook! text-mode
-  (require 'lsp-ltex)
-  (lsp)
-)
+Activate roam-ui
+#+begin_src emacs-lisp
+;; (use-package! org-roam-ui
+;;     :after org-roam ;; or :after org
+;; ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;; ;;         a hookable mode anymore, you're advised to pick something yourself
+;; ;;         if you don't care about startup time, use
+;; ;;  :hook (after-init . org-roam-ui-mode)
+;;     :config
+;;     (setq org-roam-ui-sync-theme t
+;;           org-roam-ui-follow t
+;;           org-roam-ui-update-on-save t
+;;           org-roam-ui-open-on-start f))
+#+end_src
 
-(setq lsp-ui-sideline-show-code-actions t)
-
-
+* LaTeX config
+Make sure `tectonic` is used to build LaTeX files
+#+begin_src emacs-lisp
 (after! lsp-latex
        (setq lsp-latex-build-executable "tectonic")
        (setq lsp-latex-build-args '("-X" "compile" "%f" "--synctex" "--keep-logs" "--keep-intermediates"))
        (setq lsp-latex-forward-search-executable "zathura")
        (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))
 )
+#+end_src
 
-(setq lsp-ltex-enabled t)
-(setq lsp-ltex-version "15.2.0")
-(setq lsp-ltex-language "en-ZA")
-(setq lsp-ltex-additional-rules-enable-picky-rules t)
+Setup ltex for LaTeX files
+#+begin_src emacs-lisp
+;; (setq lsp-ltex-enabled t)
+;; (setq lsp-ltex-version "15.2.0")
+;; (setq lsp-ltex-language "en-ZA")
+;; (setq lsp-ltex-additional-rules-enable-picky-rules t)
+#+end_src
 
+Setup a custom sync between PDF viewer (zathura) and LaTeX files since the default is not working
+#+begin_src emacs-lisp
 (defun chesedo/synctex-pos ()
     (concat
         (number-to-string (line-number-at-pos))
@@ -170,12 +228,14 @@
   :type 'string)
 
 (defun chesedo/synctex-forward (program)
-  (let
+  (let*
       (
-        (cmd (concat program " --synctex-forward " (chesedo/synctex-pos) " " synctex-forward-pdf-file))
+        (synctex-pos (chesedo/synctex-pos))
+        (cmd (concat program " --synctex-forward " synctex-pos " " synctex-forward-pdf-file))
         (async-shell-command-buffer nil)
       )
     (save-window-excursion
+      (setenv "SYNCTEX_POS" synctex-pos)
       (async-shell-command cmd)
     )
    )
@@ -187,7 +247,4 @@
 )
 
 (map! :localleader :map latex-mode-map :desc "Sync zathura with cursor location" :n "l" #'chesedo/synctex-forward-zathura)
-
-;; Don't open buffers of all org files on clocking in
-;; https://github.com/doomemacs/doomemacs/issues/5317#issuecomment-1404664245
-(setq org-clock-auto-clock-resolution nil)
+#+end_src

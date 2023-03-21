@@ -49,11 +49,15 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+;; (unpin! org-roam)
+;; (package! org-roam-ui)
+
+
 (package! protobuf-mode)
 
 (package! lsp-latex)
 
-(package! lsp-ltex)
+;; (package! lsp-ltex)
 
 (package! yuck-mode
   :recipe (:host github :repo "mmcjimsey26/yuck-mode" :files ("yuck-mode.el")))
