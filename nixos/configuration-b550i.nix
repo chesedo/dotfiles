@@ -35,21 +35,21 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 
   system.userActivationScripts.linktosharedfolders.text = ''
-  if [[ ! -h "$HOME/git" ]]; then
-    ln -s "/media/home/git" "$HOME/git"
-  fi
+    if [[ ! -h "$HOME/git" ]]; then
+      ln -s "/media/home/git" "$HOME/git"
+    fi
 
-  if [[ ! -h "$HOME/Documents" ]]; then
-    rm -R "$HOME/Documents"
-    ln -s "/media/home/Documents" "$HOME/Documents"
-  fi
+    if [[ ! -h "$HOME/Documents" ]]; then
+      rm -R "$HOME/Documents"
+      ln -s "/media/home/Documents" "$HOME/Documents"
+    fi
 
-  if [[ ! -h "$HOME/Downloads" ]]; then
-    rm -R "$HOME/Downloads"
-    ln -s "/media/home/Downloads" "$HOME/Downloads"
-  fi
+    if [[ ! -h "$HOME/Downloads" ]]; then
+      rm -R "$HOME/Downloads"
+      ln -s "/media/home/Downloads" "$HOME/Downloads"
+    fi
   '';
 }

@@ -23,7 +23,6 @@
       firefox
       htop
       home-manager
-      nodePackages.node2nix
       pavucontrol
 
       spideroak
@@ -191,7 +190,6 @@
 
   virtualisation.podman = {
     enable = true;
-    dockerCompat = true;
     defaultNetwork.dnsname.enable = true;
   };
 }

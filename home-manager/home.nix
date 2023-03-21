@@ -46,7 +46,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   gtk = {
     enable = true;
@@ -78,11 +78,9 @@
 
     git = {
       enable = true;
-      userName  = "chesedo";
+      userName = "chesedo";
       userEmail = "pieter@chesedo.me";
-      extraConfig = {
-        core.askPass = "";
-      };
+      extraConfig = { core.askPass = ""; };
     };
 
     ssh = {
@@ -98,7 +96,7 @@
 
     zsh = {
       defaultKeymap = "viins";
-      enable =true;
+      enable = true;
       initExtraFirst = ''
         source ~/.p10k.zsh
       '';
@@ -118,9 +116,7 @@
           file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
         }
       ];
-      shellAliases = {
-        p = "podman";
-      };
+      shellAliases = { p = "podman"; };
     };
   };
 
