@@ -1,12 +1,5 @@
 { config, pkgs, ... }:
-let
-  # My custom node packages.
-  # Run `node2nix -i ./node-packages.json -o node-packages.nix` in the folder to update
-  # Then manually update any special character packages in node-packages.nix
-  # https://kcode.co.za/install-npm-packages-on-nixos-with-node2nix/
-  # https://code-notes.jhuizy.com/add-custom-npm-to-home-manager/
-  customNodePackages = pkgs.callPackage ./customNodePackages {};
-in
+
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
