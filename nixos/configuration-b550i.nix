@@ -38,10 +38,6 @@
   system.stateVersion = "22.11"; # Did you read the comment?
 
   system.userActivationScripts.linktosharedfolders.text = ''
-    if [[ ! -h "$HOME/git" ]]; then
-      ln -s "/media/home/git" "$HOME/git"
-    fi
-
     if [[ ! -h "$HOME/Documents" ]]; then
       rm -R "$HOME/Documents"
       ln -s "/media/home/Documents" "$HOME/Documents"
