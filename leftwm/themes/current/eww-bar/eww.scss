@@ -14,6 +14,7 @@ $nord12: #d08770;
 $nord13: #ebcb8b;
 $nord14: #a3be8c;
 $nord15: #b48ead;
+$shadow: #0E1A33;
 
 //Global Styles
 window {
@@ -25,29 +26,49 @@ window {
 
 // Styles on classes (see eww.yuck for more information)
 .sidestuff > *, .music {
+  all: unset;
   background-color: $nord1;
-  margin-left: 7px;
   padding: 0 10px;
-  border-top: 3px solid $nord7;
 }
-.metric button {
+.sidestuff button {
   all: unset;
-  padding: 0;
-  margin: 0;
-}
-.metric button > box {
-  all: unset;
-}
-.metric .label {
-  all: unset;
-  margin-right: 10px;
-  font-size: 15px;
 }
 .sidestuff .icon {
   all: unset;
   font-size: 14px;
   min-width: 14px;
   min-height: 23px;
+}
+
+.donut {
+  color: $nord8;
+}
+.donut.high {
+  color: $nord11;
+}
+.donut > * {
+  font-size: 8px;
+  font-weight: bold;
+  min-width: 10px;
+  min-height: 10px;
+  margin: 7px;
+}
+
+.series {
+  color: $nord15;
+  background: $nord1;
+}
+
+.series.high {
+  color: $nord11;
+}
+
+.core {
+  margin-bottom: 12px;
+}
+
+.core:last-child {
+  margin-top: 0;
 }
 
 scale trough {
@@ -66,7 +87,7 @@ scale trough slider {
   background-color: $nord10;
   border-radius: 4px;
   margin: -4px -12px;
-  box-shadow: 1px 2px 2px $nord1;
+  box-shadow: 1px 2px 2px $shadow;
 }
 
 .workspaces {
@@ -107,7 +128,7 @@ scale trough slider {
   background: $nord3;
 }
 
-window.mixer, window.calendar {
+window.mixer, window.calendar, window.cpus {
   background: rgba(0, 0, 0, 0);
 }
 
@@ -117,9 +138,11 @@ window.mixer, window.calendar {
 }
 
 .popout > box {
-  background: rgba(46, 53, 64, 0.85);
+  background: rgba(67, 76, 94, 0.85);
   padding: 20px;
   border-radius: 7px;
+  border: 2px solid rgba(76, 86, 106, 0.95);
+  box-shadow: 1px 2px 2px $shadow;
 }
 
 calendar.header {
@@ -150,7 +173,7 @@ calendar > * {
   padding: 3px;
   border: 2px solid rgba(76, 86, 106, 0.95);
   border-radius: 7px;
-  background: rgba(46, 53, 64, 0.85);
+  background: rgba(67, 76, 94, 0.85);
 }
 
 .popout scale {

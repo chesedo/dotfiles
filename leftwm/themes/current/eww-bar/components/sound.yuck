@@ -23,6 +23,7 @@
       (box :space-evenly true
         (box :space-evenly false
              :orientation "v"
+             :tooltip "Mic Volume: ${mic-volume}"
             (scale :min 0
                     :max 101
                     :orientation "v"
@@ -36,6 +37,7 @@
         )
         (box :space-evenly false
              :orientation "v"
+             :tooltip "Speaker Volume: ${volume}"
             (scale :min 0
                     :max 101
                     :orientation "v"

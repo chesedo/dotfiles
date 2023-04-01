@@ -1,4 +1,5 @@
 (include "components/clock.yuck")
+(include "components/cpu.yuck")
 (include "components/sound.yuck")
 
 (defwidget bar-left []
@@ -25,14 +26,11 @@
     (metric2 :label ""
             :value "${round(EWW_NET.enp4s0.NET_UP / 1024, 0)} KB"
     )
-    (metric2 :label "︁"
-            :value "${round(EWW_CPU.avg, 1)}%"
-            :onclick "htop"
-    )
     (metric2 :label ""
             :value "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} GB"
             :onclick "htop"
     )
+    (cpu)
     (sound)
     (clock)
   )
