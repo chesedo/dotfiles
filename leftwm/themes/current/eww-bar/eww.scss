@@ -69,29 +69,33 @@ scale trough slider {
   box-shadow: 1px 2px 2px $nord1;
 }
 
+.workspaces {
+  background: $nord1;
+}
+
 .workspaces button {
   all: unset;
-  font-size: 18px;
-  min-height: 25px;
-  min-width: 27px;
-  padding: 0 5px;
-  background-color: $nord1;
-  border-top: 3px solid $nord1;
-}
-.workspaces button:hover {
-  color: $nord6;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  min-height: 14px;
+  padding: 2px 5px 0px;
+  margin: 4px;
+  border-radius: 12px;
+  border: 2px solid $nord1;
 }
 .workspaces button.ws-button-mine {
-  border-color: $nord10;
+  border-color: $nord9;
+  color: white;
 }
 .workspaces button.ws-button-visible {
-  border-color: $nord8;
+  border-color: $nord9;
 }
 .workspaces button.ws-button-busy {
   border-color: $nord15;
 }
-.workspaces button.ws-button {
-  color: $nord10;
+.workspaces button:hover {
+  border-color: $nord4;
 }
 
 .clipboard-entry {
