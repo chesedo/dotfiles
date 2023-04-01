@@ -13,13 +13,12 @@
 
 (defwindow calendar
   :monitor 1
-  :style "background: black"
-  :geometry (geometry :x "-180px"
+  :geometry (geometry :x "-100px"
                       :y "22px"
                       :anchor "top right")
   (eventbox :onhover "eww open calendar"
             :onhoverlost "eww close calendar"
-    (box :class "calendar-box"
+    (box :class "popout"
       (calendar)
     )
   )

@@ -1,6 +1,5 @@
 (include "components/clock.yuck")
-(include "components/speaker.yuck")
-(include "components/mic.yuck")
+(include "components/sound.yuck")
 
 (defwidget bar-left []
   (centerbox :orientation "h"
@@ -34,8 +33,7 @@
             :value "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} GB"
             :onclick "htop"
     )
-    (mic)
-    (speaker)
+    (sound)
     (clock)
   )
 )

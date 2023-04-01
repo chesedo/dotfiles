@@ -1,0 +1,53 @@
+(defpoll volume :interval "1s" "amixer get Master | rg -o 'Left:.*\\[(\\d+)%\\]' -r '$1'")
+(defpoll volume-icon :interval "1s" "scripts/get_volume_icon.sh")
+
+(defpoll mic-volume :interval "1s" "amixer get Capture | rg -o 'Left:.*\\[(\\d+)%\\]' -r '$1'")
+
+(defwidget sound []
+  (box
+    (eventbox :onhover "eww open mixer"
+              :onhoverlost "eww close mixer"
+        (button :class "icon" :onclick "pavucontrol &" volume-icon)
+    )
+  )
+)
+
+(defwindow mixer
+  :monitor 1
+  :geometry (geometry :x "-160px"
+                      :y "22px"
+                      :anchor "top right")
+  (eventbox :onhover "eww open mixer"
+            :onhoverlost "eww close mixer"
+    (box :class "popout"
+      (box :space-evenly true
+        (box :space-evenly false
+             :orientation "v"
+            (scale :min 0
+                    :max 101
+                    :orientation "v"
+                    :flipped true
+                    :marks "0,25,50,75,100"
+                    :value mic-volume
+                    :onchange "amixer sset Capture {}%"
+            )
+            (box mic-volume)
+            (box :class "icon" "")
+        )
+        (box :space-evenly false
+             :orientation "v"
+            (scale :min 0
+                    :max 101
+                    :orientation "v"
+                    :flipped true
+                    :marks "0,25,50,75,100"
+                    :value volume
+                    :onchange "amixer sset Master {}%"
+            )
+            (box volume)
+            (box :class "icon" volume-icon)
+        )
+      )
+    )
+  )
+)

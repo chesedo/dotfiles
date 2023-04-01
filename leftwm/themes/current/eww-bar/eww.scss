@@ -50,18 +50,11 @@ window {
   min-height: 23px;
 }
 
-revealer scale {
-  all: unset;
-  margin: 0 8px 0 4px;
-}
-revealer scale trough {
-  min-width: 65px;
-  min-height: 3px;
-}
 scale trough {
   all: unset;
   background-color: $nord3;
   border-radius: 10px;
+  min-width: 5px;
 }
 scale trough highlight {
   all: unset;
@@ -71,11 +64,9 @@ scale trough highlight {
 scale trough slider {
   all: unset;
   background-color: $nord10;
-  border-radius: 10px;
-  transition: margin 165ms ease;
-}
-scale:hover trough slider {
-  margin: -5px;
+  border-radius: 4px;
+  margin: -4px -12px;
+  box-shadow: 1px 2px 2px $nord1;
 }
 
 .workspaces button {
@@ -112,13 +103,19 @@ scale:hover trough slider {
   background: $nord3;
 }
 
-window.calendar, calendar {
+window.mixer, window.calendar {
   background: rgba(0, 0, 0, 0);
 }
 
-.calendar-box {
+.popout {
   padding: 40px;
   font-size: 15px;
+}
+
+.popout > box {
+  background: rgba(46, 53, 64, 0.85);
+  padding: 20px;
+  border-radius: 7px;
 }
 
 calendar.header {
@@ -150,4 +147,16 @@ calendar > * {
   border: 2px solid rgba(76, 86, 106, 0.95);
   border-radius: 7px;
   background: rgba(46, 53, 64, 0.85);
+}
+
+.popout scale {
+  min-height: 100px;
+}
+
+.popout box.horizontal > box {
+  margin-right: 20px;
+}
+
+.popout box.horizontal > box:last-child {
+  margin-right: 0;
 }

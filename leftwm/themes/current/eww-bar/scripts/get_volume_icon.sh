@@ -1,6 +1,6 @@
 #1/bin/sh
 
-volume=`amixer sget Master | rg 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'`
+volume=`amixer get Master | rg -o 'Left:.*\\[(\\d+)%\\]' -r '$1'`
 
 if [ $volume -eq 0 ]
 then
