@@ -20,11 +20,12 @@
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric2 :label ""
-            :value "${round(EWW_NET.enp4s0.NET_DOWN / 1024, 0)} KB"
-    )
-    (metric2 :label ""
-            :value "${round(EWW_NET.enp4s0.NET_UP / 1024, 0)} KB"
+    (box :class "network"
+      (box :orientation "v" :halign "end" :width 20
+        "${round(EWW_NET.enp4s0.NET_UP / 1024 / 1024 / 2, 0)}"
+        "${round(EWW_NET.enp4s0.NET_DOWN / 1024 / 1024 / 2, 0)}"
+      )
+      "Mb"
     )
     (button :onclick "alacritty --command htop &"
       (circular-progress :value "${EWW_RAM.used_mem_perc}"
@@ -53,22 +54,6 @@
     {music != "" ? "🎵 ${music}" : ""}
   )
 )
-
-(defwidget metric2 [label value ?onclick]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (button :onclick "alacritty --command '${onclick}' &"
-      (box
-          :space-evenly false
-        (box :class "label" label)
-        (box :class "value" value)
-      )
-    )
-  )
-)
-
-
 
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
