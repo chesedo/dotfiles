@@ -1,7 +1,7 @@
 (defwidget cpu []
   (eventbox :onhover "eww open cpus"
             :onhoverlost "eww close cpus"
-    (button
+    (button :onclick "alacritty --command htop &"
       (circular-progress :value "${EWW_CPU.avg}"
                          :thickness 3
                          :start-at 75

@@ -26,9 +26,14 @@
     (metric2 :label ""
             :value "${round(EWW_NET.enp4s0.NET_UP / 1024, 0)} KB"
     )
-    (metric2 :label ""
-            :value "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} GB"
-            :onclick "htop"
+    (button :onclick "alacritty --command htop &"
+      (circular-progress :value "${EWW_RAM.used_mem_perc}"
+                         :thickness 3
+                         :start-at 75
+                         :class {"${EWW_RAM.used_mem_perc}" > 70 ? "donut high" : "donut"}
+                         :tooltip "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 3)} Gb"
+        "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 0)}"
+      )
     )
     (cpu)
     (sound)
