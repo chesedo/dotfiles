@@ -1,5 +1,4 @@
 (defpoll time :interval "10s" "date '+%H:%M'")
-(defpoll date :interval "3600s" "date '+%A, %d %b %Y'")
 
 (defvar reveal-date false)
 
