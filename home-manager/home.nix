@@ -81,6 +81,10 @@
       userName = "chesedo";
       userEmail = "pieter@chesedo.me";
       extraConfig = { core.askPass = ""; };
+      signing = {
+        key = "5E90934750BE7A42";
+        signByDefault = true;
+      };
     };
 
     ssh = {

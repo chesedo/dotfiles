@@ -36,6 +36,7 @@
         (p: with p; [ grip ])) # To preview markdown and org files
 
       pass
+      yubikey-manager-qt
     ];
 
     variables = { EDITOR = "emacs"; };
@@ -53,6 +54,7 @@
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
+    gpgSmartcards.enable = true;
   };
 
   i18n.inputMethod = {
