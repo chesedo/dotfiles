@@ -1,11 +1,18 @@
 (include "components/clock.yuck")
 (include "components/cpu.yuck")
+(include "components/music.yuck")
 (include "components/sound.yuck")
 
 (defwidget bar-left []
   (centerbox :orientation "h"
     (workspaces :tags wm-tags-0)
-    (label :text active-window)
+    (label :limit-width 100 :text "${
+        replace(
+          replace(active-window, music-metadata.artist + ' - ', ''),
+          music-metadata.title + ' - ',
+          ''
+        )
+      }")
     (music)
   )
 )
@@ -13,7 +20,6 @@
   (centerbox :orientation "h"
     (workspaces :tags wm-tags-1)
     (box)
-    ; (label :text active-window)
     (sidestuff)
   )
 )
@@ -45,18 +51,6 @@
 (defwidget workspaces [tags]
   (literal :content {tags})
 )
-
-(defwidget music []
-  (box :class "music"
-       :orientation "h"
-       :space-evenly false
-       :halign "end"
-    {music != "" ? "🎵 ${music}" : ""}
-  )
-)
-
-(deflisten music :initial ""
-  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
 (deflisten wm-tags-0
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")

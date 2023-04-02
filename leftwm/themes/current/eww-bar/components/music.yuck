@@ -1,0 +1,14 @@
+(deflisten music-metadata :initial "{\"visible\": false}"
+  "playerctl --follow metadata --format '{\"artist\": \"{{ artist }}\", \"title\": \"{{ title }}\", \"visible\": true}' || '{\"visible\": false}'")
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :visible "${music-metadata.visible}"
+       :halign "end"
+    (label
+      :limit-width 100
+      :text "${music-metadata.title} - ${music-metadata.artist}"
+    )
+  )
+)
