@@ -102,7 +102,6 @@
 )
 
 (defwindow clipboard
-  :monitor 1
   :stacking "fg"
   :windowtype "dialog"
   :focusable true
