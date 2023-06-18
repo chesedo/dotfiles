@@ -1,21 +1,18 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    <nixos-hardware/raspberry-pi/4>
-    ./base.nix
-  ];
+  imports = [ <nixos-hardware/raspberry-pi/4> ./base.nix ];
 
   boot = {
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     kernelPackages = pkgs.linuxPackages_rpi4;
     # ttyAMA0 is the serial console broken out to the GPIO
     kernelParams = [
-        "8250.nr_uarts=1"
-        "console=ttyAMA0,115200"
-        "console=tty1"
-        # Some gui programs need this
-        "cma=128M"
+      "8250.nr_uarts=1"
+      "console=ttyAMA0,115200"
+      "console=tty1"
+      # Some gui programs need this
+      "cma=128M"
     ];
     loader = {
       raspberryPi = {
@@ -57,5 +54,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05";
+  system.stateVersion = "22.11";
 }

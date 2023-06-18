@@ -68,7 +68,6 @@
   };
 
   nix = {
-    autoOptimiseStore = true;
     # Free up to 1GiB whenever there is less than 100MiB left.
     extraOptions = ''
       min-free = ${toString (100 * 1024 * 1024)}
@@ -82,6 +81,11 @@
     nixPath = options.nix.nixPath.default ++
       # Append our nixpkgs-overlays.
       [ "nixpkgs-overlays=/etc/nixos/overlays" ];
+
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
   };
 
   nixpkgs = {
