@@ -36,6 +36,8 @@
     sqlite
     marksman # For markdown files
     languagetool
+
+    podman-compose
   ];
 
   # This value determines the Home Manager release that your
