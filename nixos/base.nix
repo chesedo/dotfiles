@@ -90,7 +90,7 @@
 
   nixpkgs = {
     config = { allowUnfree = true; };
-    overlays = [ (import overlays/leftwm-overlay.nix) ];
+    overlays = [ ];
   };
 
   programs = {
