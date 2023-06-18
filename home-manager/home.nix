@@ -134,7 +134,15 @@
           file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
         }
       ];
-      shellAliases = { p = "podman"; };
+      shellAliases = {
+        c = "cargo";
+        cc = "cargo clippy";
+        cw = "cargo watch -q -c";
+        d = "docker";
+        dc = "docker compose";
+        p = "podman";
+        pc = "podman-compose";
+      };
     };
   };
 
