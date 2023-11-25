@@ -1,0 +1,27 @@
+(defwindow information
+           :monitor 1
+           :geometry (geometry :x "-32px"
+                               :y "32px"
+                               :width "570px"
+                               :height "782px"
+                               :anchor "top right")
+           :stacking "fg"
+           :reserve (struts :distance "40px" :side "right")
+           :windowtype "dock"
+           :wm-ignore false
+  (time))
+
+(deflisten minutes `scripts/minutes.sh`)
+(deflisten hours `scripts/hours.sh`)
+
+(defwidget time []
+  (item :class "time"
+    (label :text hours :class "hours")
+    (label :text minutes :class "minutes")))
+
+(defwidget item []
+  (box :orientation "horizontal"
+       :halign "center"
+       :valign "center"
+       :class "item"
+    (children)))
