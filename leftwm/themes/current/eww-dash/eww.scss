@@ -19,25 +19,36 @@ $shadow: #0E1A33;
 //Global Styles
 window {
   background: transparent;
-  color: $nord4;
-  font-size: 13px;
+  color: $nord0;
+  font-size: 16px;
   font-family: "FiraCode Nerd Font";
 }
 
 .item {
-    background-color: rgba($nord9, 0.8);
-    border-radius: 1rem;
-    padding: 1rem;
+    background-color: rgba($nord3, 0.2);
+    border-radius: 0.4em;
+    padding: 1em;
+    margin: 2em;
 }
 
-.time {
-    font-size: 3rem;
-}
 .hours {
-    font-size: 2rem;
-    padding-bottom: 1rem;
+    font-size: 2em;
 }
 .minutes {
-    font-size: 1.5rem;
-    padding-top: 1rem;
+    font-size: 1.5em;
+    padding-top: 0.7em;
+}
+
+graph {
+  background: $nord3;
+  color: $nord2;
+  outline: 1px solid black;
+}
+
+.resource-graph {
+  margin-top: 8px;
+}
+
+.resource-graph label {
+  margin-right: 8px;
 }
