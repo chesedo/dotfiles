@@ -33,7 +33,7 @@
                     :onchange "amixer sset Capture {}%"
             )
             (box mic-volume)
-            (box :class "icon" "")
+            (box :class "icon" "")
         )
         (box :space-evenly false
              :orientation "v"

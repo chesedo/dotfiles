@@ -4,14 +4,14 @@ volume=`amixer get Master | rg -o 'Left:.*\\[(\\d+)%\\]' -r '$1'`
 
 if [ $volume -eq 0 ]
 then
-  echo "ﱝ"
+  echo "󰖁"
 elif [ $volume -lt 30 ]
 then
-  echo "奄"
+  echo "󰕿"
 elif [ $volume -lt 70 ]
 then
-  echo "奔"
+  echo "󰖀"
 else
-  echo "墳"
+  echo "󰕾"
 fi
 
