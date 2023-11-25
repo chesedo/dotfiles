@@ -23,13 +23,16 @@
     (sidestuff)
   )
 )
+(defwidget bar-center []
+  (workspaces :tags wm-tags-2)
+)
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     (box :class "network"
       (box :orientation "v" :halign "end" :width 20
-        "${round(EWW_NET.enp4s0.NET_UP / 1024 / 1024 / 2, 0)}"
-        "${round(EWW_NET.enp4s0.NET_DOWN / 1024 / 1024 / 2, 0)}"
+        "${round(EWW_NET.wlp1s0.NET_UP / 1024 / 1024 / 2, 0)}"
+        "${round(EWW_NET.wlp1s0.NET_DOWN / 1024 / 1024 / 2, 0)}"
       )
       "Mb"
     )
@@ -43,6 +46,14 @@
       )
     )
     (cpu)
+    (button :onclick "alacritty --command htop &"
+        (circular-progress :value "${EWW_BATTERY.BAT1.capacity}"
+                            :thickness 3
+                            :class {"${EWW_BATTERY.BAT1.capacity}" < 30 ? "donut high" : "donut"}
+                            :tooltip "${EWW_BATTERY.BAT1.status}"
+        "${EWW_BATTERY.BAT1.capacity}"
+        )
+    )
     (sound)
     (clock)
   )
@@ -56,6 +67,8 @@
   "leftwm-state -w 0 -t ~/.config/leftwm/themes/current/template.liquid")
 (deflisten wm-tags-1
   "leftwm-state -w 1 -t ~/.config/leftwm/themes/current/template.liquid")
+(deflisten wm-tags-2
+  "leftwm-state -w 2 -t ~/.config/leftwm/themes/current/template.liquid")
 (deflisten active-window
   "leftwm-state -s '{{window_title}}'")
 
@@ -70,7 +83,7 @@
   :reserve (struts :side "top" :distance "32px")
   (bar-left))
 (defwindow bar1
-  :monitor 1
+  :monitor 2
   :windowtype "dock"
   :geometry (geometry :x "0"
                       :y "0"
@@ -79,6 +92,16 @@
                       :anchor "top left")
   :reserve (struts :side "top" :distance "32px")
   (bar-right))
+(defwindow bar2
+  :monitor 1
+  :windowtype "dock"
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "100%"
+                      :height "28px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "32px")
+  (bar-center))
 
 (defpoll clipboard-entries
   :interval "1s"

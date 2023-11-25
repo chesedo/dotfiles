@@ -157,6 +157,11 @@
         '';
       };
       layout = "us";
+      libinput.touchpad = {
+        accelSpeed = "0.5";
+        naturalScrolling = true;
+        sendEventsMode = "disabled-on-external-mouse";
+      };
       xkbVariant = "colemak";
       xkbOptions = "caps:escape";
       windowManager.leftwm.enable = true;
@@ -168,25 +173,23 @@
   system.userActivationScripts.linkhomemanager.text = ''
     if [[ ! -d "$HOME/.config/nixpkgs" ]]; then
       mkdir -p "$HOME/.config/nixpkgs"
-      ln -s "$HOME/git/dotfiles/home-manager/home.nix" "$HOME/.config/nixpkgs"
+      ln -s "$HOME/dotfiles/home-manager/home.nix" "$HOME/.config/nixpkgs"
     fi
   '';
 
   # Set your time zone.
-  time.timeZone = "Africa/Johannesburg";
+  time.timeZone = "Europe/London";
 
   users = {
     defaultUserShell = pkgs.zsh;
     mutableUsers = false;
     users.chesedo = {
       isNormalUser = true;
+      description = "Pieter";
       initialPassword = "apassword";
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "networkmanager" "wheel" ];
     };
   };
 
-  virtualisation.podman = {
-    enable = true;
-    defaultNetwork.dnsname.enable = true;
-  };
+  virtualisation.podman = { enable = true; };
 }

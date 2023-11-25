@@ -31,5 +31,6 @@ leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 eww state
 eww open bar0
 eww open bar1
+eww open bar2
 
 trayer --edge top --expand false --width 10 --height 28 --align right --monitor 1 --iconspacing 10 --transparent true --tint 0xff3b4252 --alpha 0 &
