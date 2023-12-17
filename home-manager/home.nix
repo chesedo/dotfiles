@@ -16,6 +16,7 @@
     hicolor-icon-theme
 
     jq
+    jc
 
     krita
     inkscape

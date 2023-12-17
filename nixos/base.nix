@@ -118,6 +118,7 @@
     clipcat.enable = true; # Clipboard manager
     devmon.enable = true; # Auto mount external drives
     openssh.enable = true;
+    upower.enable = true; # See power information about devices
     xserver = {
       enable = true;
       displayManager.defaultSession = "none+leftwm";
