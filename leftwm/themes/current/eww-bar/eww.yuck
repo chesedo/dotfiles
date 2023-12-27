@@ -1,5 +1,4 @@
 (include "components/clock.yuck")
-(include "components/cpu.yuck")
 (include "components/music.yuck")
 (include "components/sound.yuck")
 
@@ -29,31 +28,6 @@
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (box :class "network"
-      (box :orientation "v" :halign "end" :width 20
-        "${round(EWW_NET.wlp1s0.NET_UP / 1024 / 1024 / 2, 0)}"
-        "${round(EWW_NET.wlp1s0.NET_DOWN / 1024 / 1024 / 2, 0)}"
-      )
-      "Mb"
-    )
-    (button :onclick "alacritty --command htop &"
-      (circular-progress :value "${EWW_RAM.used_mem_perc}"
-                         :thickness 3
-                         :start-at 75
-                         :class {"${EWW_RAM.used_mem_perc}" > 70 ? "donut high" : "donut"}
-                         :tooltip "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 3)} Gb"
-        "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 0)}"
-      )
-    )
-    (cpu)
-    (button :onclick "alacritty --command htop &"
-        (circular-progress :value "${EWW_BATTERY.BAT1.capacity}"
-                            :thickness 3
-                            :class {"${EWW_BATTERY.BAT1.capacity}" < 30 ? "donut high" : "donut"}
-                            :tooltip "${EWW_BATTERY.BAT1.status}"
-        "${EWW_BATTERY.BAT1.capacity}"
-        )
-    )
     (sound)
     (clock)
   )
