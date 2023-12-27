@@ -1,24 +1,25 @@
 (defwindow information
-           :monitor 1
-           :geometry (geometry :x "-32px"
-                               :y "32px"
+           :monitor 0
+           :geometry (geometry
                                :width "570px"
-                               :height "782px"
+                               :height "814px"
                                :anchor "top right")
-           :stacking "fg"
-           :reserve (struts :distance "40px" :side "right")
            :windowtype "desktop"
-           :wm-ignore false
-  (box :orientation "vertical"
+           :wm-ignore true
+  (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
     (box :halign "center" :valign "end" (time))
-    (box :halign "start" :valign "start" (resources))
-    (box :halign "center" :valign "start" (power))
+    (box :halign "end" :valign "start" (power))
+    (box :orientation "horizontal" :space-evenly false
+        (box :halign "start" :valign "start" (resources))
+        (box :halign "end" :valign "end" (music))
     )
+  )
 )
 
 (deflisten minutes `scripts/minutes.sh`)
 (deflisten hours `scripts/hours.sh`)
 (deflisten batteries `scripts/batteries.sh`)
+(deflisten song `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}"}'`)
 
 (defwidget time []
   (item
@@ -32,6 +33,19 @@
         (list-item :icon "${battery.type_icon}" :text "${battery.model}" :percent "${battery.percentage}" :state "${battery.state}" :tooltip "${battery.updated} | ${battery.time_to_empty}h"))
     )
    )
+)
+
+(defwidget music []
+  (box :style "margin-top: 5em"
+    (item
+        (box :orientation "vertical" :space-evenly false :spacing 12
+        (label :text "${song.artist}" :limit-width 20)
+        (label :text "---------")
+        (label :text "${song.title}" :limit-width 20)
+        (image :path "${replace(song.artUrl, 'file://', '')}" :image-width 240)
+        )
+    )
+  )
 )
 
 (defwidget item []
