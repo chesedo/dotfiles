@@ -24,12 +24,21 @@ window {
   font-family: "FiraCode Nerd Font";
 }
 
+.overview {
+    background-color: rgba($nord9, 0.6);
+}
+
 .item {
     background-color: rgba($nord3, 0.2);
     border-radius: 0.4em;
     padding: 1em;
     margin-bottom: 2em;
     margin-right: 2em;
+}
+
+.overview .item:first-child {
+    margin-top: 2em;
+    margin-left: 2em;
 }
 
 .hours {

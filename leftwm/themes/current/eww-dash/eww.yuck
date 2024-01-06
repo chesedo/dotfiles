@@ -5,42 +5,40 @@
 (include "components/time.yuck")
 
 (defwindow information
-           :monitor 0
-           :geometry (geometry
-                               :width "570px"
-                               :height "814px"
-                               :anchor "bottom right")
-           :windowtype "desktop"
-           :wm-ignore true
+  :monitor 0
+  :geometry (geometry
+             :width "570px"
+             :height "814px"
+             :anchor "bottom right")
+  :windowtype "desktop"
+  :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
-    (box :halign "center" :valign "end" (time))
-    (box :halign "end" :valign "start" (batteries))
-    (box :orientation "horizontal" :space-evenly false
-        (box :halign "start" :valign "start" (resources))
-        (box :halign "end" :valign "end" (music))
-    )
+       (box :halign "center" :valign "end" (time))
+       (box :halign "end" :valign "start" (batteries))
+       (box :orientation "horizontal" :space-evenly false
+            (box :halign "start" :valign "start" (resources))
+            (box :halign "end" :valign "end" (music))
+            )
+       )
   )
-)
 
 (defwindow overview
-           :geometry (geometry
-                               :width "570px"
-                               :height "814px"
-                               :anchor "bottom right")
-           :windowtype "normal"
-           :wm-ignore false
-  (box :orientation "vertical" :space-evenly false :valign "start" :halign "start"
-    (box :orientation "horizontal" :space-evenly false
-        (box :halign "start" :valign "start" (time))
-        (box :halign "start" :valign "start" (events))
-    )
-    (box :halign "end" :valign "start" (batteries))
-    (box :orientation "horizontal" :space-evenly false
-        (box :halign "start" :valign "start" (resources))
-        (box :halign "end" :valign "end" (music))
-    )
+  :geometry (geometry :y "-32px"
+                      :anchor "center center")
+  :windowtype "normal"
+  :wm-ignore true
+  (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :css "overview"
+       (box :orientation "horizontal" :space-evenly false
+            (box :halign "start" :valign "start" (time))
+            (box :halign "start" :valign "start" (events))
+            )
+       (box :halign "end" :valign "start" (batteries))
+       (box :orientation "horizontal" :space-evenly false
+            (box :halign "start" :valign "start" (resources))
+            (box :halign "end" :valign "end" (music))
+            )
+       )
   )
-)
 
 (defwidget item []
   (box :orientation "horizontal"
@@ -48,7 +46,7 @@
        :valign "center"
        :class "item"
        :space-evenly false
-    (children)))
+       (children)))
 
 (defwidget list-item [icon text percent state tooltip]
   (box :orientation "horizontal"
@@ -57,8 +55,8 @@
        :spacing 12
        :class "list-item"
        :tooltip tooltip
-    (label :text icon :class "icon")
-    (label :text text :hexpand true :halign "start")
-    (label :text {state == "charging" ? "󰂄" : ""})
-    (label :text "${percent}%")
-))
+       (label :text icon :class "icon")
+       (label :text text :hexpand true :halign "start")
+       (label :text {state == "charging" ? "󰂄" : ""})
+       (label :text "${percent}%")
+       ))
