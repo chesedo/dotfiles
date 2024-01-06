@@ -1,0 +1,23 @@
+(defwidget resources []
+  (item
+   (box :orientation "vertical"
+        (resource-graph :title "CPU" :current "${round(EWW_CPU.avg, 1)}%" :value "${EWW_CPU.avg}" :min 0 :max 100)
+        (resource-graph :title "RAM" :current "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024, 2)} Gb" :value "${EWW_RAM.used_mem_perc}" :min 0 :max 100)
+        (resource-graph :title "DOWN" :current "${round(EWW_NET.wlp1s0.NET_DOWN / 1024 / 1024 / 2, 1)} Mb" :value "${EWW_NET.wlp1s0.NET_DOWN}" :min 0 :max 1048576)
+        (resource-graph :title "UP" :current "${round(EWW_NET.wlp1s0.NET_UP / 1024 / 1024 / 2, 1)} Mb" :value "${EWW_NET.wlp1s0.NET_UP}" :min 0 :max 1048576))))
+
+(defwidget resource-graph [title current value min max]
+  (box :space-evenly false
+       :halign "end"
+       :class "resource-graph"
+       :spacing 12
+       (box :orientation "vertical" :valign "center" :space-evenly false
+            (label :text title :xalign 1)
+            (label :text current))
+       (graph :value value
+              :min min
+              :max max
+              :width 150
+              :height 50
+              :time-range "60s"
+              :dynamic false)))

@@ -1,0 +1,7 @@
+(deflisten hours `scripts/hours.sh`)
+(deflisten minutes `scripts/minutes.sh`)
+
+(defwidget time []
+  (item
+   (label :text hours :class "hours" :valign "start")
+   (label :text minutes :class "minutes" :valign "end")))

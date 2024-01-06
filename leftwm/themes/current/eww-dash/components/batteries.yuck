@@ -1,0 +1,10 @@
+(deflisten batteries `scripts/batteries.sh`)
+
+(defwidget batteries []
+  (item
+   (box :orientation "vertical"
+    (for battery in batteries
+        (list-item :icon "${battery.type_icon}" :text "${battery.model}" :percent "${battery.percentage}" :state "${battery.state}" :tooltip "${battery.updated} | ${battery.time_to_empty}h"))
+    )
+   )
+)
