@@ -3,7 +3,7 @@
            :geometry (geometry
                                :width "570px"
                                :height "814px"
-                               :anchor "top right")
+                               :anchor "bottom right")
            :windowtype "desktop"
            :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
@@ -16,8 +16,28 @@
   )
 )
 
+(defwindow overview
+           :geometry (geometry
+                               :width "570px"
+                               :height "814px"
+                               :anchor "bottom right")
+           :windowtype "normal"
+           :wm-ignore false
+  (box :orientation "vertical" :space-evenly false :valign "start" :halign "start"
+    (box :orientation "horizontal" :space-evenly false
+        (box :halign "start" :valign "start" (time))
+        (box :halign "start" :valign "start" (events))
+    )
+    (box :halign "end" :valign "start" (power))
+    (box :orientation "horizontal" :space-evenly false
+        (box :halign "start" :valign "start" (resources))
+    )
+  )
+)
+
 (deflisten minutes `scripts/minutes.sh`)
 (deflisten hours `scripts/hours.sh`)
+(defpoll events :interval "1m" `scripts/events.py`)
 (deflisten batteries `scripts/batteries.sh`)
 (deflisten song `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}"}'`)
 
@@ -25,6 +45,19 @@
   (item
     (label :text hours :class "hours" :valign "start")
     (label :text minutes :class "minutes" :valign "end")))
+
+(defwidget events []
+  (item
+    (box :orientation "vertical" :space-evenly false
+      (for event in events
+        (box :space-evenly false :spacing 12 :tooltip "${event.description}"
+          (label :text "${event.start} - ${event.end}")
+          (label :text "${event.summary}")
+        )
+      )
+    )
+  )
+)
 
 (defwidget power []
   (item
