@@ -10,14 +10,15 @@
   (box :space-evenly false
        :halign "end"
        :class "resource-graph"
-       :spacing 12
-       (box :orientation "vertical" :valign "center" :space-evenly false
-            (label :text title :xalign 1)
-            (label :text current))
-       (graph :value value
-              :min min
-              :max max
-              :width 150
-              :height 50
-              :time-range "60s"
-              :dynamic false)))
+       (overlay
+        (graph :value value
+               :min min
+               :max max
+               :width 150
+               :height 50
+               :time-range "60s"
+               :dynamic false)
+        (box :orientation "vertical" :valign "center" :halign "end" :space-evenly false
+             (label :text title :xalign 1)
+             (label :text current))
+        )))

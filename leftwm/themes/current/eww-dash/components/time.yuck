@@ -15,7 +15,4 @@
                                   (label :text minutes :class "minutes" :valign "center")
                                   )
                              )
-                   )
-                  )
-        )
-  )
+                   ))))

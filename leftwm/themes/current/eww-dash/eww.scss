@@ -93,11 +93,14 @@ calendar:selected {
 }
 
 graph {
-  background: $nord3;
-  color: $nord2;
-  outline: 1px solid black;
+  background: $nord5;
+  color: $nord8;
 }
 
 .resource-graph {
   margin-top: 8px;
+}
+
+.resource-graph box {
+  margin-right: 2em;
 }
