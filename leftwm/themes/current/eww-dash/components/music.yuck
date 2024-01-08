@@ -7,5 +7,5 @@
              (label :text "${song.artist}" :limit-width 20)
              (label :text "---------")
              (label :text "${song.title}" :limit-width 20)
-             (image :path "${replace(song.artUrl, 'file://', '')}" :image-width 240)
+             (image :path "${replace(song.artUrl, 'file://', '')}" :image-width 240 :image-height 240)
              ))))
