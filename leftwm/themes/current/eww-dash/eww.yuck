@@ -50,16 +50,3 @@
        :class "item"
        :space-evenly false
        (children)))
-
-(defwidget list-item [icon text percent state tooltip]
-  (box :orientation "horizontal"
-       :halign "fill"
-       :space-evenly false
-       :spacing 12
-       :class "list-item"
-       :tooltip tooltip
-       (label :text icon :class "icon")
-       (label :text text :hexpand true :halign "start")
-       (label :text {state == "charging" ? "󰂄" : ""})
-       (label :text "${percent}%")
-       ))

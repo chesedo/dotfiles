@@ -1,10 +1,38 @@
 (deflisten batteries `scripts/batteries.sh`)
+(defvar show-battery-extra false)
 
 (defwidget batteries []
   (item
-   (box :orientation "vertical"
-    (for battery in batteries
-        (list-item :icon "${battery.type_icon}" :text "${battery.model}" :percent "${battery.percentage}" :state "${battery.state}" :tooltip "${battery.updated} | ${battery.time_to_empty}h"))
-    )
+   (eventbox  :onhover "${EWW_CMD} update show-battery-extra=true"
+              :onhoverlost "${EWW_CMD} update show-battery-extra=false"
+              (box :orientation "vertical" :hexpand true :halign "fill"
+                   (for battery in batteries
+                        (battery-item :icon "${battery.type_icon}"
+                                      :text "${battery.model}"
+                                      :percent "${battery.percentage}"
+                                      :state "${battery.state}"
+                                      :last-updated "${battery.last_updated} ago"
+                                      :time-to-empty {battery.time_to_empty != "null" ? "| ${battery.time_to_empty} ${battery.time_to_empty_unit} left" : (battery.time_to_full != "null" ? "${battery.time_to_full} ${battery.time_to_full_unit}" : "")}
+                                      :halign "fill" :hexpand true))
+                   )
+              )
    )
-)
+  )
+
+(defwidget battery-item [icon text percent state last-updated time-to-empty]
+  (box :orientation "horizontal"
+       :space-evenly false
+       :spacing 12
+       :hexpand true
+       (label :text icon :class "icon" :justify "center" :width 15)
+       (overlay :hexpand true
+                (revealer :reveal {!show-battery-extra} :transition "crossfade"
+                          (box :space-evenly false :spacing 12
+                               (label :text text :hexpand true :halign "start")
+                               (label :text {state == "charging" ? "󰂄" : ""})
+                               (label :text "${percent}%")))
+                (revealer :reveal {show-battery-extra} :transition "crossfade"
+                          (box :space-evenly false :spacing 12
+                               (label :text last-updated)
+                               (label :text time-to-empty)))
+       )))
