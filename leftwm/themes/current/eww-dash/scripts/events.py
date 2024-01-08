@@ -51,7 +51,7 @@ def main():
             calendarId="primary",
             timeMin=now.isoformat() + "Z",  # 'Z' indicates UTC time
             timeMax=tomorrow.isoformat() + "Z",  # 'Z' indicates UTC time
-            maxResults=10,
+            maxResults=5,
             singleEvents=True,
             orderBy="startTime",
         )
