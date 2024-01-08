@@ -13,7 +13,10 @@
   :windowtype "desktop"
   :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
-       (box :halign "center" :valign "end" (time))
+       (box :orientation "horizontal" :space-evenly false :class "b bb"
+            (box :halign "start" :valign "center" (time))
+            (box :halign "start" :valign "center" (events))
+            )
        (box :halign "end" :valign "start" (batteries))
        (box :orientation "horizontal" :space-evenly false
             (box :halign "start" :valign "start" (resources))
@@ -28,9 +31,9 @@
   :windowtype "normal"
   :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :css "overview"
-       (box :orientation "horizontal" :space-evenly false
-            (box :halign "start" :valign "start" (time))
-            (box :halign "start" :valign "start" (events))
+       (box :orientation "horizontal" :space-evenly false :class "b bb"
+            (box :halign "start" :valign "center" (time))
+            (box :halign "start" :valign "center" (events))
             )
        (box :halign "end" :valign "start" (batteries))
        (box :orientation "horizontal" :space-evenly false

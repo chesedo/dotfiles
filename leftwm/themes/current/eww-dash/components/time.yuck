@@ -1,7 +1,21 @@
 (deflisten hours `scripts/hours.sh`)
 (deflisten minutes `scripts/minutes.sh`)
 
+(defvar show-calendar false)
+
 (defwidget time []
-  (item
-   (label :text hours :class "hours" :valign "start")
-   (label :text minutes :class "minutes" :valign "end")))
+  (item :class "transparent"
+        (eventbox :onhover "${EWW_CMD} update show-calendar=true"
+                  :onhoverlost "${EWW_CMD} update show-calendar=false"
+                  (overlay
+                   (revealer :reveal show-calendar (calendar :class "transparent"))
+                   (revealer :reveal {!show-calendar}
+                             (box :space-evenly false :halign "center"
+                                  (label :text hours :class "hours" :valign "center")
+                                  (label :text minutes :class "minutes" :valign "center")
+                                  )
+                             )
+                   )
+                  )
+        )
+  )

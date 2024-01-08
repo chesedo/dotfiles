@@ -20,7 +20,7 @@ $shadow: #0E1A33;
 window {
   background: transparent;
   color: $nord0;
-  font-size: 16px;
+  // font-size: 14px;
   font-family: "FiraCode Nerd Font";
 }
 
@@ -29,24 +29,67 @@ window {
 }
 
 .item {
-    background-color: rgba($nord3, 0.2);
+    // background-color: rgba($nord8, 0.8);
     border-radius: 0.4em;
     padding: 1em;
     margin-bottom: 2em;
     margin-right: 2em;
 }
 
-.overview .item:first-child {
+.b {
+  border: 0px solid $nord8;
+}
+
+.bb {
+  border-bottom-width: 1px;
+}
+
+.transparent {
+  background-color: transparent;
+  border: 0;
+}
+
+.item:first-child {
     margin-top: 2em;
     margin-left: 2em;
 }
 
 .hours {
-    font-size: 2em;
+    font-size: 3em;
 }
 .minutes {
-    font-size: 1.5em;
+    font-size: 2em;
     padding-top: 0.7em;
+}
+
+calendar {
+  color: $nord0;
+  padding: 0 2px;
+  font-size: 11px;
+}
+
+calendar.header {
+  color: $nord2;
+}
+
+calendar.button {
+  color: $nord10;
+  padding: 10px;
+}
+
+calendar.highlight {
+  color: $nord3;
+  padding: 2em;
+}
+
+calendar:indeterminate {
+  color: rgba($nord3, 0.8);
+}
+
+calendar:selected {
+  color: $nord6;
+  background: $nord10;
+  border-radius: 10px;
 }
 
 graph {
