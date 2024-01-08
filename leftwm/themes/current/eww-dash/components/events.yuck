@@ -6,7 +6,7 @@
         (for event in events
              (box :space-evenly false :spacing 12 :tooltip "${event.description}"
                   (label :text "${event.start} - ${event.end}")
-                  (label :text "${event.summary}")
+                  (label :text "${event.summary}" :limit-width 24)
                   )
              )
         )
