@@ -1,0 +1,9 @@
+(deflisten tags `scripts/tags.py`)
+
+(defwidget tags []
+  (item :class "transparent m-0"
+        (box :class "tags"
+             (for tag in tags
+                  (label :text {tag.workspace_index != "" ? tag.workspace_index : tag.name} :class {tag.workspace_index != "" ? "active" : (tag.busy ? "busy" : "")})
+                  )
+             )))

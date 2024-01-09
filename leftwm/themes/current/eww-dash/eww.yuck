@@ -2,6 +2,7 @@
 (include "components/events.yuck")
 (include "components/music.yuck")
 (include "components/resources.yuck")
+(include "components/tags.yuck")
 (include "components/time.yuck")
 
 (defwindow information
@@ -13,6 +14,7 @@
   :windowtype "desktop"
   :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
+       (tags)
        (box :orientation "horizontal" :space-evenly false :class "b bb"
             (box :halign "start" :valign "center" (time))
             (box :halign "start" :valign "center" (events))
@@ -31,6 +33,7 @@
   :windowtype "normal"
   :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :css "overview"
+       (tags)
        (box :orientation "horizontal" :space-evenly false :class "b bb"
             (box :halign "start" :valign "center" (time))
             (box :halign "start" :valign "center" (events))
