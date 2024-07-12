@@ -42,7 +42,7 @@
     variables = { EDITOR = "emacs"; };
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     arphic-uming # For Chinese
     montserrat
     powerline
@@ -97,7 +97,7 @@
     dconf.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "qt";
+      pinentryPackage = pkgs.pinentry-qt;
       enableSSHSupport = true;
     };
     udevil.enable = true; # Mount drives without sudo
@@ -119,9 +119,14 @@
     devmon.enable = true; # Auto mount external drives
     openssh.enable = true;
     upower.enable = true; # See power information about devices
+    displayManager.defaultSession = "none+leftwm";
+    libinput.touchpad = {
+      accelSpeed = "0.5";
+      naturalScrolling = true;
+      sendEventsMode = "disabled-on-external-mouse";
+    };
     xserver = {
       enable = true;
-      displayManager.defaultSession = "none+leftwm";
       displayManager.lightdm.greeters.mini = {
         enable = true;
         user = "chesedo";
@@ -157,14 +162,11 @@
           password-border-width = 0
         '';
       };
-      layout = "us";
-      libinput.touchpad = {
-        accelSpeed = "0.5";
-        naturalScrolling = true;
-        sendEventsMode = "disabled-on-external-mouse";
+      xkb = {
+        layout = "us";
+        options = "caps:escape";
+        variant = "colemak";
       };
-      xkbVariant = "colemak";
-      xkbOptions = "caps:escape";
       windowManager.leftwm.enable = true;
     };
   };
