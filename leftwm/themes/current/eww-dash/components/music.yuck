@@ -1,7 +1,7 @@
 (deflisten song `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}"}'`)
 
 (defwidget music []
-  (box :style "margin-top: 5em" :visible {song == "" ? false : true}
+  (box :visible {song == "" ? false : true}
        (item
         (box :orientation "vertical" :space-evenly false :spacing 12
              (label :text "${song.artist}" :limit-width 20)
