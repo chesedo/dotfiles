@@ -124,3 +124,11 @@ graph {
 .resource-graph box {
   margin-right: 2em;
 }
+
+.notification-box {
+  margin: 0.2em 0.5em;
+}
+
+.notification:hover {
+  background-color: rgba($nord1, 0.1);
+}

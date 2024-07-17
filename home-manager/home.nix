@@ -194,6 +194,52 @@
     };
   };
 
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          font = "FiraCode Nerd Font 10";
+          frame_width = 2;
+          frame_color = "#81a1c1";
+
+          separator_color = "frame";
+          separator_height = 2;
+
+          padding = 8;
+          horizontal_padding = 8;
+          text_icon_padding = 0;
+
+          corner_radius = 10;
+
+          background = "#2e3440";
+          foreground = "#d8dee9";
+        };
+
+        urgency_low = {
+          background = "#3b4252";
+          foreground = "#e5e9f0";
+          frame_color = "#4c566a";
+          timeout = 10;
+        };
+
+        urgency_normal = {
+          background = "#3b4252";
+          foreground = "#e5e9f0";
+          frame_color = "#81a1c1";
+          timeout = 10;
+        };
+
+        urgency_critical = {
+          background = "#2e3440";
+          foreground = "#eceff4";
+          frame_color = "#bf616a";
+          timeout = 0;
+        };
+      };
+    };
+  };
+
   xdg.configFile = {
     "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;

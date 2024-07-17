@@ -1,9 +1,16 @@
-(defpoll notifications-history :interval "2s" :initial "[]" `dunstctl history`)
+(defpoll notifications :interval "1s" :initial '{"data": [[]]}' `dunstctl history`)
 
 (defwidget notifications []
-       (item
-        (box :orientation "vertical" :space-evenly false :spacing 12
-          (for notification in "${notifications-history.data[0]}"
-            (label :text "${notification.body.data}" :limit-width 35)
-            )
-             )))
+  (item
+    (box :orientation "vertical" :space-evenly false
+      (for notification in "${notifications?.data?.[0]}"
+        (eventbox :class "notification" :onclick "dunstctl history-pop ${notification.id.data}"
+                  :onrightclick "dunstctl history-rm ${notification.id.data}"
+          (box :class "notification-box"
+              (label :text "${notification.appname.data}: ${notification.summary.data}" :limit-width 50 :wrap true)
+          )
+        )
+      )
+    )
+  )
+)

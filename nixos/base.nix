@@ -17,7 +17,6 @@
       picom
 
       libnotify
-      dunst
 
       blueberry
       firefox
