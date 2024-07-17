@@ -1,4 +1,4 @@
-(deflisten batteries `scripts/batteries.sh`)
+(deflisten batteries :initial "[]" `scripts/batteries.sh`)
 (defvar show-battery-extra false)
 
 (defwidget batteries []

@@ -1,4 +1,4 @@
-(deflisten tags `scripts/tags.py`)
+(deflisten tags :initial "[]" `scripts/tags.py`)
 
 (defwidget tags []
   (item :class "transparent m-0"
