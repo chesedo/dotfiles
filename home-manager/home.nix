@@ -155,24 +155,7 @@
 
     ssh = {
       enable = true;
-      matchBlocks = {
-        "3.11.51.209" = { user = "ec2-user"; };
-        "*.shuttle.internal" = {
-          user = "ec2-user";
-          proxyJump = "3.11.51.209";
-          forwardAgent = true;
-        };
-        "18.132.154.166" = { user = "ec2-user"; };
-        "*.shuttle.prod.internal" = {
-          user = "ec2-user";
-          proxyJump = "18.132.154.166";
-        };
-        "metrics.shuttle" = {
-          hostname = "13.40.57.159";
-          user = "ec2-user";
-          forwardAgent = true;
-        };
-      };
+      matchBlocks = { };
     };
 
     zsh = {
