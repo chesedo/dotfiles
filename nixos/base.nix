@@ -181,7 +181,7 @@
   '';
 
   # Set your time zone.
-  time.timeZone = "Europe/London";
+  time.timeZone = "Africa/Johannesburg";
 
   users = {
     defaultUserShell = pkgs.zsh;
