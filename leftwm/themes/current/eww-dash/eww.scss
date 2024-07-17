@@ -30,18 +30,16 @@ window {
 
 .item {
     // background-color: rgba($nord8, 0.8);
-    border-radius: 0.4em;
-    padding: 0.5em;
     margin-bottom: 2em;
     margin-right: 2em;
 }
 
 .b {
-  border: 0px solid $nord8;
+  border: 0px dotted $nord8;
 }
 
 .bb {
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
 }
 
 .m-0 {

@@ -1,12 +1,13 @@
 (include "components/batteries.yuck")
 (include "components/events.yuck")
+(include "components/notifications.yuck")
 (include "components/music.yuck")
 (include "components/resources.yuck")
 (include "components/tags.yuck")
 (include "components/time.yuck")
 
 (defwindow information
-  :monitor 0
+  :monitor 1
   :geometry (geometry
              :width "570px"
              :height "814px"
@@ -19,10 +20,13 @@
             (box :halign "start" :valign "center" (time))
             (box :halign "start" :valign "center" (events))
             )
-       (box :halign "end" :valign "start" (batteries))
+       (box :orientation "horizontal" :space-evenly false :class "b bb"
+            (box :halign "start" :valign "center" (resources))
+            (box :halign "end" :valign "center" (batteries))
+       )
        (box :orientation "horizontal" :space-evenly false
-            (box :halign "start" :valign "start" (resources))
-            (box :halign "end" :valign "end" (music))
+            (box :halign "start" :valign "end" (music))
+            (box :halign "start" :valign "end" (notifications))
             )
        )
   )

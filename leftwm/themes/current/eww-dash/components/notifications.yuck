@@ -1,0 +1,9 @@
+(defpoll notifications-history :interval "2s" :initial "[]" `dunstctl history`)
+
+(defwidget notifications []
+       (item
+        (box :orientation "vertical" :space-evenly false :spacing 12
+          (for notification in "${notifications-history.data[0]}"
+            (label :text "${notification.body.data}" :limit-width 35)
+            )
+             )))
