@@ -61,3 +61,6 @@
 
 (package! yuck-mode
   :recipe (:host github :repo "mmcjimsey26/yuck-mode" :files ("yuck-mode.el")))
+
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))

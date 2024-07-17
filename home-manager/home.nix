@@ -38,6 +38,8 @@
     marksman # For markdown files
     languagetool
 
+    nodejs_20 # Needed for copilot emacs plugin
+
     podman-compose
   ];
 

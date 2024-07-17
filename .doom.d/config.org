@@ -107,6 +107,20 @@ Show possible code actions to the right.
   (dap-auto-configure-mode t))
 #+end_src
 
+* Copilot
+Default copilot setup
+
+Accept completion from copilot and fallback to company
+#+begin_src emacs-lisp
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+#+end_src
+
 * Org mode
 I've often lost my pomodoro timers just because I forget to save my org files. So this causes them to be saved automatically about every 30 seconds.
 #+begin_src emacs-lisp
