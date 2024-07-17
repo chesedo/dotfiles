@@ -195,7 +195,7 @@
   };
 
   xdg.configFile = {
-    "alacritty/alacritty.yml".source = ../alacritty.yml;
+    "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
     "leftwm".source = ../leftwm;
     "inkscape/palettes".source = ./inkscape/palettes;
@@ -205,13 +205,14 @@
     ".p10k.zsh".source = ../.p10k.zsh;
     ".doom.d" = {
       source = ../.doom.d;
-      onChange = "~/.emacs.d/bin/doom sync";
+      onChange = "~/.config/emacs/bin/doom sync";
     };
   };
 
-  xsession.pointerCursor = {
+  home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata_Ice";
     size = 24;
+    x11.enable = true;
   };
 }
