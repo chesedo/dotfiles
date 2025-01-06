@@ -91,21 +91,10 @@ Show possible code actions to the right.
 (after! lsp-rust
   (setq lsp-rust-analyzer-server-display-inlay-hints t
         lsp-rust-analyzer-display-chaining-hints t
-        lsp-rust-analyzer-display-parameter-hints t)
-  (require 'dap-gdb-lldb)
-  (dap-register-debug-template "Rust::GDB Run Configuration"
-                               (list :type "gdb"
-                                     :request "launch"
-                                     :name "GDB::Run"
-                                     :gdbpath "rust-gdb"
-                                     :target nil
-                                     :cwd nil)
-                               )
+        lsp-rust-analyzer-display-parameter-hints t
+        format-with-lsp-mode nil
+        rustic-format-on-save t)
 )
-
-(after! dap-mode
-  (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
-  (dap-auto-configure-mode t))
 #+end_src
 
 * Copilot
@@ -210,12 +199,12 @@ Activate roam-ui
 * LaTeX config
 Make sure `tectonic` is used to build LaTeX files
 #+begin_src emacs-lisp
-(after! lsp-latex
-       (setq lsp-latex-build-executable "tectonic")
-       (setq lsp-latex-build-args '("-X" "compile" "%f" "--synctex" "--keep-logs" "--keep-intermediates"))
-       (setq lsp-latex-forward-search-executable "zathura")
-       (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))
-)
+;; (after! lsp-latex
+;;        (setq lsp-latex-build-executable "tectonic")
+;;        (setq lsp-latex-build-args '("-X" "compile" "%f" "--synctex" "--keep-logs" "--keep-intermediates"))
+;;        (setq lsp-latex-forward-search-executable "zathura")
+;;        (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))
+;; )
 #+end_src
 
 Setup ltex for LaTeX files
@@ -228,38 +217,39 @@ Setup ltex for LaTeX files
 
 Setup a custom sync between PDF viewer (zathura) and LaTeX files since the default is not working
 #+begin_src emacs-lisp
-(defun chesedo/synctex-pos ()
-    (concat
-        (number-to-string (line-number-at-pos))
-        ":"
-        (number-to-string (current-column))
-        ":"
-        (buffer-file-name)
-    )
-)
+;; (defun chesedo/synctex-pos ()
+;;     (concat
+;;         (number-to-string (line-number-at-pos))
+;;         ":"
+;;         (number-to-string (current-column))
+;;         ":"
 
-(defcustom synctex-forward-pdf-file nil
-  "PDF file to open and sync"
-  :type 'string)
+;;         (buffer-file-name)
+;;     )
+;; )
 
-(defun chesedo/synctex-forward (program)
-  (let*
-      (
-        (synctex-pos (chesedo/synctex-pos))
-        (cmd (concat program " --synctex-forward " synctex-pos " " synctex-forward-pdf-file))
-        (async-shell-command-buffer nil)
-      )
-    (save-window-excursion
-      (setenv "SYNCTEX_POS" synctex-pos)
-      (async-shell-command cmd)
-    )
-   )
-)
-(defun chesedo/synctex-forward-zathura ()
-  "Open and/or sync latex postision in zathura"
-  (interactive)
-  (chesedo/synctex-forward "zathura")
-)
+;; (defcustom synctex-forward-pdf-file nil
+;;   "PDF file to open and sync"
+;;   :type 'string)
 
-(map! :localleader :map latex-mode-map :desc "Sync zathura with cursor location" :n "l" #'chesedo/synctex-forward-zathura)
+;; (defun chesedo/synctex-forward (program)
+;;   (let*
+;;       (
+;;         (synctex-pos (chesedo/synctex-pos))
+;;         (cmd (concat program " --synctex-forward " synctex-pos " " synctex-forward-pdf-file))
+;;         (async-shell-command-buffer nil)
+;;       )
+;;     (save-window-excursion
+;;       (setenv "SYNCTEX_POS" synctex-pos)
+;;       (async-shell-command cmd)
+;;     )
+;;    )
+;; )
+;; (defun chesedo/synctex-forward-zathura ()
+;;   "Open and/or sync latex postision in zathura"
+;;   (interactive)
+;;   (chesedo/synctex-forward "zathura")
+;; )
+
+;; (map! :localleader :map latex-mode-map :desc "Sync zathura with cursor location" :n "l" #'chesedo/synctex-forward-zathura)
 #+end_src
