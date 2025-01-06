@@ -11,19 +11,14 @@
 
     discord
 
-    gimp-with-plugins
-
-    hicolor-icon-theme
-
     jq
     jc
-
-    krita
-    inkscape
 
     playerctl
 
     trayer
+
+    upwork
 
     xfce.thunar
     # Optionals
@@ -32,8 +27,6 @@
 
     zoom-us
 
-    wordnet
-    ltex-ls # For text files
     sqlite
     marksman # For markdown files
     languagetool
@@ -184,10 +177,7 @@
       ];
       shellAliases = {
         c = "cargo";
-        cc = "cargo clippy";
         cw = "cargo watch -q -c";
-        d = "docker";
-        dc = "docker compose";
         p = "podman";
         pc = "podman-compose";
       };
