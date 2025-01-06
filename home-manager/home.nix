@@ -234,7 +234,6 @@
     "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
     "leftwm".source = ../leftwm;
-    "inkscape/palettes".source = ./inkscape/palettes;
   };
 
   home.file = {
