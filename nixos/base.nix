@@ -28,7 +28,6 @@
       spideroak
 
       pinentry-qt
-      kleopatra
 
       proselint # For emacs linting
       (python3.withPackages

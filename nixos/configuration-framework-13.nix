@@ -27,12 +27,13 @@
   programs.steam.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
+
+  services.fwupd.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = lib.mkForce false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
