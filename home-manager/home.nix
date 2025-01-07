@@ -63,6 +63,30 @@
   programs = {
     autorandr = {
       enable = true;
+      hooks = {
+        postswitch = {
+          "notify-and-reload" = ''
+            # On first login the default profile is loaded.
+            # However, my monitors might be connected. This will mean the wrong profile is loaded.
+            # So detect that and load the correct one if needed.
+            detected=$(${pkgs.autorandr}/bin/autorandr --match-edid --detected)
+            if [[ $detected != $AUTORANDR_CURRENT_PROFILE ]]; then
+              ${pkgs.libnotify}/bin/notify-send "Incorrectly loaded $AUTORANDR_CURRENT_PROFILE display"
+              ${pkgs.autorandr}/bin/autorandr --match-edid --load $detected &
+
+              exit 0
+            fi
+
+            ${pkgs.libnotify}/bin/notify-send "Loaded $AUTORANDR_CURRENT_PROFILE display"
+
+            # Leftvm might have loaded the wrong config or just seems to not have some keybindings after autorandr ran.
+            # So reload it to make sure everything is correct.
+            ${pkgs.leftwm}/bin/leftwm-command SoftReload
+            ${pkgs.libnotify}/bin/notify-send "Reloaded leftwm"
+
+          '';
+        };
+      };
       profiles = {
         "home" = {
           fingerprint = {
@@ -103,13 +127,13 @@
           };
           hooks.postswitch = "${builtins.readFile ./setup-home-display.sh}";
         };
-        "laptop-only" = {
+        "default" = {
           fingerprint = {
-            screen =
+            eDP-1 =
               "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
           };
           config = {
-            screen = {
+            eDP-1 = {
               enable = true;
               primary = true;
               position = "0x0";

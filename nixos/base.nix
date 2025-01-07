@@ -123,10 +123,6 @@
       naturalScrolling = true;
       sendEventsMode = "disabled-on-external-mouse";
     };
-    # Change the screen layout when the monitor is plugged in or removed.
-    udev.extraRules = ''
-      ACTION="change", SUBSYSTEM=="drm" RUN+="${pkgs.autorandr}/bin/autorandr --match-edid --change --skip-options gamma"
-    '';
     xserver = {
       enable = true;
       displayManager.lightdm.greeters.mini = {
