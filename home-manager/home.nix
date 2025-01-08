@@ -177,28 +177,139 @@
       matchBlocks = { };
     };
 
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = true;
+
+        character = {
+          success_symbol = "❯";
+          error_symbol = "❯";
+          vimcmd_symbol = "❮";
+        };
+
+        directory = {
+          truncation_length = 3;
+          truncate_to_repo = true;
+          read_only = " 󰌾";
+        };
+
+        rust = {
+          format = "via [$symbol($version )]($style)";
+          symbol = "󱘗 ";
+        };
+
+        cmd_duration = { min_time = 2000; };
+
+        time = {
+          disabled = false;
+          format = "[$time]($style) ";
+          time_format = "%H:%M";
+        };
+
+        # Copied from the nerd-font presents
+        # https://starship.rs/presets/nerd-font
+        aws.symbol = "  ";
+        buf.symbol = " ";
+        c.symbol = " ";
+        conda.symbol = " ";
+        crystal.symbol = " ";
+        dart.symbol = " ";
+        docker_context.symbol = " ";
+        elixir.symbol = " ";
+        elm.symbol = " ";
+        fennel.symbol = " ";
+        fossil_branch.symbol = " ";
+        git_branch.symbol = " ";
+        git_commit.tag_symbol = "  ";
+        golang.symbol = " ";
+        guix_shell.symbol = " ";
+        haskell.symbol = " ";
+        haxe.symbol = " ";
+        hg_branch.symbol = " ";
+        hostname.ssh_symbol = " ";
+        java.symbol = " ";
+        julia.symbol = " ";
+        kotlin.symbol = " ";
+        lua.symbol = " ";
+        memory_usage.symbol = "󰍛 ";
+        meson.symbol = "󰔷 ";
+        nim.symbol = "󰆥 ";
+        nix_shell.symbol = " ";
+        nodejs.symbol = " ";
+        ocaml.symbol = " ";
+        package.symbol = "󰏗 ";
+        perl.symbol = " ";
+        php.symbol = " ";
+        pijul_channel.symbol = " ";
+        python.symbol = " ";
+        rlang.symbol = "󰟔 ";
+        ruby.symbol = " ";
+        scala.symbol = " ";
+        swift.symbol = " ";
+        zig.symbol = " ";
+        gradle.symbol = " ";
+
+        os.symbols = {
+          Alpaquita = " ";
+          Alpine = " ";
+          AlmaLinux = " ";
+          Amazon = " ";
+          Android = " ";
+          Arch = " ";
+          Artix = " ";
+          CentOS = " ";
+          Debian = " ";
+          DragonFly = " ";
+          Emscripten = " ";
+          EndeavourOS = " ";
+          Fedora = " ";
+          FreeBSD = " ";
+          Garuda = "󰛓 ";
+          Gentoo = " ";
+          HardenedBSD = "󰞌 ";
+          Illumos = "󰈸 ";
+          Kali = " ";
+          Linux = " ";
+          Mabox = " ";
+          Macos = " ";
+          Manjaro = " ";
+          Mariner = " ";
+          MidnightBSD = " ";
+          Mint = " ";
+          NetBSD = " ";
+          NixOS = " ";
+          OpenBSD = "󰈺 ";
+          openSUSE = " ";
+          OracleLinux = "󰌷 ";
+          Pop = " ";
+          Raspbian = " ";
+          Redhat = " ";
+          RedHatEnterprise = " ";
+          RockyLinux = " ";
+          Redox = "󰀘 ";
+          Solus = "󰠳 ";
+          SUSE = " ";
+          Ubuntu = " ";
+          Unknown = " ";
+          Void = " ";
+          Windows = "󰍲 ";
+        };
+      };
+    };
+
     zsh = {
       defaultKeymap = "viins";
       enable = true;
-      initExtraFirst = ''
-        source ~/.p10k.zsh
-      '';
       localVariables = {
         # Put you-should-use in hardcore mode
         YSU_HARDCORE = 1;
       };
-      plugins = [
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
-        {
-          name = "you-should-use";
-          src = pkgs.zsh-you-should-use;
-          file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
-        }
-      ];
+      plugins = [{
+        name = "you-should-use";
+        src = pkgs.zsh-you-should-use;
+        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }];
       shellAliases = {
         c = "cargo";
         cw = "cargo watch -q -c";
@@ -261,7 +372,6 @@
   };
 
   home.file = {
-    ".p10k.zsh".source = ../.p10k.zsh;
     ".doom.d" = {
       source = ../.doom.d;
       onChange = "~/.config/emacs/bin/doom sync";
