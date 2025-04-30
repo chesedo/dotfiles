@@ -2,9 +2,6 @@
 
 {
   imports = [
-    "${
-      builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }
-    }/framework/13-inch/7040-amd"
     # Include the results of the hardware scan.
     ./hardware-configuration-framework-13.nix
     # Include my configuration shared with all systems
@@ -32,7 +29,6 @@
   services.fwupd.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = lib.mkForce false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

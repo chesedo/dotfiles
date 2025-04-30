@@ -34,7 +34,7 @@
         (p: with p; [ grip ])) # To preview markdown and org files
 
       pass
-      yubikey-manager-qt
+      yubioath-flutter
     ];
 
     variables = { EDITOR = "emacs"; };
@@ -45,13 +45,12 @@
     montserrat
     powerline
     source-sans-pro
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
     symbola # To fix emacs ligatures
   ];
 
   hardware = {
     bluetooth.enable = true;
-    pulseaudio.enable = true;
     gpgSmartcards.enable = true;
   };
 
