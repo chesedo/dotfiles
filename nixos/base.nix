@@ -23,9 +23,6 @@
       htop
       home-manager
       pavucontrol
-      evince
-
-      spideroak
 
       pinentry-qt
 
@@ -33,7 +30,6 @@
       (python3.withPackages
         (p: with p; [ grip ])) # To preview markdown and org files
 
-      pass
       yubioath-flutter
     ];
 
@@ -41,10 +37,7 @@
   };
 
   fonts.packages = with pkgs; [
-    arphic-uming # For Chinese
-    montserrat
     powerline
-    source-sans-pro
     nerd-fonts.fira-code
     symbola # To fix emacs ligatures
   ];
@@ -56,7 +49,7 @@
 
   networking = {
     hostName = "nixos";
-    networkmanager = { enable = true; };
+    networkmanager.enable = true;
   };
 
   nix = {
@@ -70,9 +63,6 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    nixPath = options.nix.nixPath.default ++
-      # Append our nixpkgs-overlays.
-      [ "nixpkgs-overlays=/etc/nixos/overlays" ];
 
     settings = {
       auto-optimise-store = true;
@@ -80,10 +70,7 @@
     };
   };
 
-  nixpkgs = {
-    config = { allowUnfree = true; };
-    overlays = [ ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     dconf.enable = true;
@@ -183,5 +170,5 @@
     };
   };
 
-  virtualisation.podman = { enable = true; };
+  virtualisation.podman.enable = true;
 }
