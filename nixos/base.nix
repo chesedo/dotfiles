@@ -116,7 +116,6 @@
     libinput.touchpad = {
       accelSpeed = "0.5";
       naturalScrolling = true;
-      sendEventsMode = "disabled-on-external-mouse";
     };
     xserver = {
       enable = true;
