@@ -169,8 +169,6 @@
     };
   };
 
-  sound.enable = true;
-
   system.userActivationScripts.linkhomemanager.text = ''
     if [[ ! -d "$HOME/.config/nixpkgs" ]]; then
       mkdir -p "$HOME/.config/nixpkgs"
