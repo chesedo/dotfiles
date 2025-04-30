@@ -21,8 +21,6 @@
     useDHCP = lib.mkDefault true;
   };
 
-  programs.steam.enable = true;
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
