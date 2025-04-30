@@ -14,7 +14,7 @@ fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 # start eww daemon
-eww --config ~/dotfiles/leftwm/themes/current/eww-bar daemon
+eww --config ~/dotfiles/leftwm/themes/current/eww-dash daemon
 
 # start other services
 picom --config $SCRIPTPATH/picom.conf &
@@ -28,9 +28,6 @@ fi
 # Set the theme.toml config
 leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
-eww --config ~/dotfiles/leftwm/themes/current/eww-bar state
-eww --config ~/dotfiles/leftwm/themes/current/eww-bar open bar0
-eww --config ~/dotfiles/leftwm/themes/current/eww-bar open bar1
-eww --config ~/dotfiles/leftwm/themes/current/eww-bar open bar2
+eww --config ~/dotfiles/leftwm/themes/current/eww-dash open information
 
-trayer --edge top --expand false --width 10 --height 28 --align right --monitor 2 --iconspacing 10 --transparent true --tint 0xff3b4252 --alpha 100 &
+trayer --edge right --expand false --align top --monitor 2 --iconspacing 10 --tint 0xff2C3241 --alpha 100 &
