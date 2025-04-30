@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let sunset-theme = pkgs.callPackage ./theme { };
+
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "chesedo";
@@ -53,8 +55,8 @@
       name = "Tela-blue";
     };
     theme = {
-      package = pkgs.nordic;
-      name = "Nordic";
+      package = sunset-theme;
+      name = "sunset-cave";
     };
   };
 
@@ -326,7 +328,7 @@
         global = {
           font = "FiraCode Nerd Font 10";
           frame_width = 2;
-          frame_color = "#81a1c1";
+          frame_color = "#E8846C";
 
           separator_color = "frame";
           separator_height = 2;
@@ -337,28 +339,28 @@
 
           corner_radius = 10;
 
-          background = "#2e3440";
-          foreground = "#d8dee9";
+          background = "#1A1A1D";
+          foreground = "#E6DDD1";
         };
 
         urgency_low = {
-          background = "#3b4252";
-          foreground = "#e5e9f0";
-          frame_color = "#4c566a";
+          background = "#2C3241";
+          foreground = "#E6DDD1";
+          frame_color = "#465366";
           timeout = 10;
         };
 
         urgency_normal = {
-          background = "#3b4252";
-          foreground = "#e5e9f0";
-          frame_color = "#81a1c1";
+          background = "#2C3241";
+          foreground = "#E6DDD1";
+          frame_color = "#E8846C";
           timeout = 10;
         };
 
         urgency_critical = {
-          background = "#2e3440";
-          foreground = "#eceff4";
-          frame_color = "#bf616a";
+          background = "#1A1A1D";
+          foreground = "#E6DDD1";
+          frame_color = "#E8846C";
           timeout = 0;
         };
       };

@@ -1,41 +1,31 @@
-$nord0: #2e3440;
-$nord1: #3b4252;
-$nord2: #434c5e;
-$nord3: #4c566a;
-$nord4: #d8dee9;
-$nord5: #e5e9f0;
-$nord6: #eceff4;
-$nord7: #8fbcbb;
-$nord8: #88c0d0;
-$nord9: #81a1c1;
-$nord10: #5e81ac;
-$nord11: #bf616a;
-$nord12: #d08770;
-$nord13: #ebcb8b;
-$nord14: #a3be8c;
-$nord15: #b48ead;
-$shadow: #0E1A33;
+// Base colors
+$theme-bg: #1A1A1D;
+$theme-bg-alt: #2C3241;
+$theme-fg: #E6DDD1;
+$theme-accent: #E8846C;
+$theme-muted: #A7B1C1;
+$theme-highlight: #FFB4A2;
+$theme-border: #465366;
+$shadow: #1A1A1D;
 
 //Global Styles
 window {
   background: transparent;
-  color: $nord0;
-  // font-size: 14px;
+  color: $theme-fg;
   font-family: "FiraCode Nerd Font";
 }
 
 .overview {
-    background-color: rgba($nord9, 0.6);
+    background-color: rgba($theme-accent, 0.6);
 }
 
 .item {
-    // background-color: rgba($nord8, 0.8);
     margin-bottom: 2em;
     margin-right: 2em;
 }
 
 .b {
-  border: 0px dotted $nord8;
+  border: 0px dotted $theme-border;
 }
 
 .bb {
@@ -59,62 +49,63 @@ window {
 .tags > * {
   padding: 0 0.4em;
   margin: 0 0.2em;
-  color: rgba($nord3, 0.4);
+  color: rgba($theme-muted, 0.4);
   font-size: 0.7em;
 }
 
 .tags .active {
-  color: $nord10;
-  border: 1px solid $nord10;
+  color: $theme-accent;
+  border: 1px solid $theme-accent;
   font-size: 1em;
   border-radius: 3px;
 }
 
 .tags .busy {
-  color: $nord1;
+  color: $theme-bg-alt;
 }
 
 .hours {
     font-size: 3em;
 }
+
 .minutes {
     font-size: 2em;
     padding-top: 0.7em;
 }
 
 calendar {
-  color: $nord0;
+  color: $theme-fg;
   padding: 0 2px;
   font-size: 0.8em;
 }
 
 calendar.header {
-  color: $nord2;
+  color: $theme-muted;
 }
 
 calendar.button {
-  color: $nord10;
+  color: $theme-accent;
   padding: 10px;
 }
 
 calendar.highlight {
-  color: $nord3;
+  color: $theme-muted;
   padding: 2em;
 }
 
 calendar:indeterminate {
-  color: rgba($nord3, 0.8);
+  color: rgba($theme-muted, 0.8);
 }
 
 calendar:selected {
-  color: $nord6;
-  background: $nord10;
+  color: $theme-fg;
+  background: $theme-accent;
   border-radius: 10px;
 }
 
 graph {
-  background: $nord5;
-  color: $nord8;
+  background: $theme-bg-alt;
+  color: $theme-highlight;
 }
 
 .resource-graph {
@@ -130,5 +121,5 @@ graph {
 }
 
 .notification:hover {
-  background-color: rgba($nord1, 0.1);
+  background-color: rgba($theme-bg-alt, 0.1);
 }
