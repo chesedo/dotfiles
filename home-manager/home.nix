@@ -159,7 +159,7 @@ in {
 
     eww = {
       enable = true;
-      configDir = ../leftwm/themes/current/eww-bar;
+      configDir = ../leftwm/themes/current/eww-dash;
     };
 
     git = {
