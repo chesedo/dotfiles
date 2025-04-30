@@ -307,6 +307,10 @@ in {
         # Put you-should-use in hardcore mode
         YSU_HARDCORE = 1;
       };
+      initExtra = ''
+        # Prevent any direnv output
+        export DIRENV_LOG_FORMAT=""
+      '';
       plugins = [{
         name = "you-should-use";
         src = pkgs.zsh-you-should-use;
