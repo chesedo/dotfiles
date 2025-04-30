@@ -16,4 +16,4 @@ xrandr --fb 1269x846 \
 xrandr --fb 4356x2584 \
     --output "$LEFT_OUTPUT" --mode 1920x1080 --pos 0x0 --primary --rate 60.00 --reflect normal --rotate normal \
     --output "$RIGHT_OUTPUT" --mode 1920x1080 --pos 1920x0 --rate 60.00 --reflect normal --rotate normal \
-    --output "$LAPTOP_OUTPUT" --mode 2256x1504 --pos 2100x1080 --rate 60.00 --reflect normal --rotate normal --scale 0.562500x0.562500
+    --output "$LAPTOP_OUTPUT" --mode 2256x1504 --pos 2471x1080 --rate 60.00 --reflect normal --rotate normal --scale 0.562500x0.562500

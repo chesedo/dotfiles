@@ -15,7 +15,7 @@
     workspaces: [
         (output: "", x: 0, y: 0, height: 1080, width: 1920, id: 0),
         (output: "", x: 1920, y: 0, height: 1080, width: 1920, id: 1),
-        (output: "", x: 2100, y: 1080, height: 846, width: 640, id: 2),
+        (output: "", x: 2471, y: 1080, height: 846, width: 640, id: 2),
     ],
     tags: [
         "1",
