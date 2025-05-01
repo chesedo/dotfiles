@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixmox = {
+      url = "github:Sorixelle/nixmox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -16,6 +20,7 @@
       nixpkgs,
       nixos-hardware,
       home-manager,
+      nixmox,
     }:
     let
       system = "x86_64-linux";
@@ -32,6 +37,7 @@
       nixosConfigurations = {
         nixos-framework-13 = lib.nixosSystem {
           inherit system;
+
           specialArgs = { inherit nixos-hardware; };
           modules = [
             ./nixos/configuration-framework-13.nix
@@ -42,6 +48,9 @@
         chesedo = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
+          extraSpecialArgs = {
+            nixmox = nixmox.packages.${system};
+          };
           modules = [
             ./home-manager/home.nix
           ];

@@ -1,7 +1,16 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  nixmox,
+  ...
+}:
 
 let
-  sunset-theme = pkgs.callPackage ./theme { };
+  sunset-theme = nixmox.oomoxPlugins.theme-oomox.generate {
+    name = "sunset-cave";
+    src = ./theme/theme-file;
+    gtkVariant = "all";
+  };
 
 in
 {
