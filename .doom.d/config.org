@@ -97,6 +97,13 @@ Show possible code actions to the right.
 )
 #+end_src
 
+** Nix
+Set the code formatter when using the `nil` LSP with nix files.
+#+begin_src emacs-lisp
+(after! (nix-mode lsp-mode)
+  (setq lsp-nix-nil-formatter ["nixfmt"]))
+#+end_src
+
 * Copilot
 Default copilot setup
 

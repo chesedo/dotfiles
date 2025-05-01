@@ -1,4 +1,10 @@
-{ config, pkgs, lib, options, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  options,
+  ...
+}:
 
 {
   boot.loader.grub.enable = false;
@@ -27,13 +33,14 @@
       pinentry-qt
 
       proselint # For emacs linting
-      (python3.withPackages
-        (p: with p; [ grip ])) # To preview markdown and org files
+      (python3.withPackages (p: with p; [ grip ])) # To preview markdown and org files
 
       yubioath-flutter
     ];
 
-    variables = { EDITOR = "emacs"; };
+    variables = {
+      EDITOR = "emacs";
+    };
   };
 
   fonts.packages = with pkgs; [
@@ -66,7 +73,10 @@
 
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -86,7 +96,11 @@
       syntaxHighlighting.enable = true;
       ohMyZsh = {
         enable = true;
-        plugins = [ "z" "git" "git-auto-fetch" ];
+        plugins = [
+          "z"
+          "git"
+          "git-auto-fetch"
+        ];
       };
     };
   };
@@ -166,7 +180,10 @@
       isNormalUser = true;
       description = "Pieter";
       initialPassword = "apassword";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
     };
   };
 
