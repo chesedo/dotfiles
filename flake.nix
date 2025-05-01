@@ -27,8 +27,8 @@
       nixosConfigurations = {
         nixos-framework-13 = lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit nixos-hardware; };
           modules = [
-            nixos-hardware.nixosModules.framework-13-7040-amd
             ./nixos/configuration-framework-13.nix
           ];
         };

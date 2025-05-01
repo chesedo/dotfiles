@@ -2,11 +2,13 @@
   config,
   pkgs,
   lib,
+  nixos-hardware,
   ...
 }:
 
 {
   imports = [
+    nixos-hardware.nixosModules.framework-13-7040-amd
     # Include the results of the hardware scan.
     ./hardware-configuration-framework-13.nix
     # Include my configuration shared with all systems
