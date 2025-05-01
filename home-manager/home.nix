@@ -309,7 +309,7 @@ in
         # Put you-should-use in hardcore mode
         YSU_HARDCORE = 1;
       };
-      initExtra = ''
+      initContent = ''
         # Prevent any direnv output
         export DIRENV_LOG_FORMAT=""
       '';

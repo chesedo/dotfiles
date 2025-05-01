@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -11,6 +15,7 @@
       self,
       nixpkgs,
       nixos-hardware,
+      home-manager,
     }:
     let
       system = "x86_64-linux";
@@ -30,6 +35,15 @@
           specialArgs = { inherit nixos-hardware; };
           modules = [
             ./nixos/configuration-framework-13.nix
+          ];
+        };
+      };
+      homeConfigurations = {
+        chesedo = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          modules = [
+            ./home-manager/home.nix
           ];
         };
       };
