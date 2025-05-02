@@ -387,12 +387,12 @@ in
   xdg.configFile = {
     "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
-    "leftwm".source = ../leftwm;
+    "leftwm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
   };
 
   home.file = {
     ".doom.d" = {
-      source = ../.doom.d;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.doom.d";
       onChange = "EMACS=${pkgs.emacs}/bin/emacs ~/.config/emacs/bin/doom sync";
     };
   };
