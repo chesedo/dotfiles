@@ -13,6 +13,9 @@ if [ -f "/tmp/leftwm-theme-down" ]; then
 fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
+# Fix the cursor being incorrect
+xsetroot -cursor_name left_ptr
+
 # start eww daemon
 eww --config ~/dotfiles/leftwm/themes/current/eww-dash daemon
 
