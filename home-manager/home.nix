@@ -393,7 +393,7 @@ in
   home.file = {
     ".doom.d" = {
       source = ../.doom.d;
-      onChange = "~/.config/emacs/bin/doom sync";
+      onChange = "EMACS=${pkgs.emacs}/bin/emacs ~/.config/emacs/bin/doom sync";
     };
   };
 
