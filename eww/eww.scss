@@ -123,3 +123,36 @@ graph {
 .notification:hover {
   background-color: rgba($theme-bg-alt, 0.1);
 }
+
+.screenshot-preview {
+  border: 2px solid $theme-accent;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.screenshot-button {
+  background-color: $theme-bg-alt;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: 1px solid $theme-border;
+  color: $theme-fg;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $theme-accent;
+    color: $theme-bg;
+  }
+
+  &.copy:hover {
+    background-color: $theme-accent;
+  }
+
+  &.save:hover {
+    background-color: $theme-highlight;
+  }
+
+  &.cancel:hover {
+    background-color: $theme-border;
+  }
+}

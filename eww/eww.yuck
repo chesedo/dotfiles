@@ -55,3 +55,39 @@
        :class "item"
        :space-evenly false
        (children)))
+
+(defvar screenshot-file "")
+
+(defwindow screenshot-actions
+  :monitor 0
+  :geometry (geometry
+             :width "100%"
+             :height "100%"
+             :anchor "center center")
+  :windowtype "dialog"
+  :wm-ignore true
+  (box :orientation "vertical"
+             :halign "center"
+             :valign "center"
+       :space-evenly false
+
+    ; Screenshot preview
+    (image :class "screenshot-preview"
+         :path "${screenshot-file}")
+
+    ; Action buttons
+    (box :orientation "horizontal"
+         :space-evenly false
+         :halign "center"
+      (button :class "screenshot-button copy"
+              :onclick "xclip -selection clipboard -t image/png -i ${screenshot-file} && ${EWW_CMD} close screenshot-actions && notify-send 'Screenshot copied to clipboard'"
+              (label :text "󰅍 Copy"))
+      (button :class "screenshot-button save"
+              :onclick "cp ${screenshot-file} ~/Pictures/$(date +%Y%m%d_%H%M%S).png && ${EWW_CMD} close screenshot-actions && notify-send 'Screenshot saved to Pictures'"
+              (label :text "󰆓 Save"))
+      (button :class "screenshot-button cancel"
+              :onclick "rm ${screenshot-file} && ${EWW_CMD} close screenshot-actions"
+              (label :text "󰅙 Cancel"))
+    )
+  )
+)

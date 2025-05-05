@@ -118,5 +118,6 @@
         (command: Execute, value: "playerctl stop", modifier: [], key: "XF86XK_AudioStop"),
         (command: Execute, value: "playerctl previous", modifier: [], key: "XF86XK_AudioPrev"),
         (command: Execute, value: "playerctl next", modifier: [], key: "XF86XK_AudioNext"),
+        (command: Execute, value: "screenshot", modifier: [], key: "Print"),
     ],
 )

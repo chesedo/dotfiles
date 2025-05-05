@@ -47,6 +47,11 @@ in
     nodejs_20 # Needed for copilot emacs plugin
 
     podman-compose
+
+    # To take screenshots
+    slop
+    shotgun
+    (writeShellScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.sh))
   ];
 
   # This value determines the Home Manager release that your
