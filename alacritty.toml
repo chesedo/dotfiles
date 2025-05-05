@@ -11,23 +11,23 @@ duration = 300
 
 [colors.bright]
 black = "#2C3241"
-red = "#E8846C"
-green = "#A7B1C1"
-yellow = "#FFB4A2"
-blue = "#465366"
-magenta = "#E8846C"
-cyan = "#A7B1C1"
+red = "#D27D76"        # Muted red
+green = "#7BA7B5"      # Faded blue-green
+yellow = "#D9B99B"     # Muted gold
+blue = "#566A87"       # Subdued blue
+magenta = "#A07E96"    # Muted purple
+cyan = "#7A9BA7"       # Faded cyan
 white = "#E6DDD1"
 
 [colors.normal]
 black = "#2C3241"
-red = "#E8846C"
-green = "#A7B1C1"
-yellow = "#FFB4A2"
-blue = "#465366"
-magenta = "#E8846C"
-cyan = "#A7B1C1"
-white = "#E6DDD1"
+red = "#C77C6C"        # Muted sunset orange
+green = "#6FA193"      # Faded sage green
+yellow = "#D9A594"     # Muted coral
+blue = "#465366"       # Your original dark blue
+magenta = "#B47F6B"    # Muted orange-brown
+cyan = "#8B95A4"       # Faded blue-grey
+white = "#D9D2C7"      # Slightly dimmed white
 
 [colors.primary]
 background = "#1A1A1D"
