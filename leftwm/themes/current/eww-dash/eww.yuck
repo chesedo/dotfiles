@@ -39,7 +39,6 @@
        (tags)
        (box :orientation "horizontal" :space-evenly false :class "b bb"
             (box :halign "start" :valign "center" (time))
-            (box :halign "start" :valign "center" (events))
             )
        (box :halign "end" :valign "start" (batteries))
        (box :orientation "horizontal" :space-evenly false

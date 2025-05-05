@@ -166,7 +166,7 @@ in
 
     eww = {
       enable = true;
-      configDir = ../leftwm/themes/current/eww-dash;
+      configDir = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm/themes/current/eww-dash";
     };
 
     git = {

@@ -16,9 +16,6 @@ ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 # Fix the cursor being incorrect
 xsetroot -cursor_name left_ptr
 
-# start eww daemon
-eww --config ~/dotfiles/leftwm/themes/current/eww-dash daemon
-
 # start other services
 picom --config $SCRIPTPATH/picom.conf &
 blugon &
@@ -31,6 +28,6 @@ fi
 # Set the theme.toml config
 leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
-eww --config ~/dotfiles/leftwm/themes/current/eww-dash open information
+eww open information
 
 trayer --edge right --expand false --align top --monitor 2 --iconspacing 10 --tint 0xff2C3241 --alpha 100 &
