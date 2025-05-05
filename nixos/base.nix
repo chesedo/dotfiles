@@ -3,6 +3,7 @@
   pkgs,
   lib,
   options,
+  zen-browser,
   ...
 }:
 
@@ -25,10 +26,12 @@
       libnotify
 
       blueberry
-      firefox
       htop
       home-manager
       pavucontrol
+
+      firefox
+      zen-browser
 
       pinentry-qt
 

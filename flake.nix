@@ -12,6 +12,11 @@
       url = "github:Sorixelle/nixmox";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -21,6 +26,7 @@
       nixos-hardware,
       home-manager,
       nixmox,
+      zen-browser,
     }:
     let
       system = "x86_64-linux";
@@ -38,7 +44,11 @@
         nixos-framework-13 = lib.nixosSystem {
           inherit system;
 
-          specialArgs = { inherit nixos-hardware; };
+          specialArgs = {
+            inherit nixos-hardware;
+
+            zen-browser = zen-browser.packages.${system}.default;
+          };
           modules = [
             ./nixos/configuration-framework-13.nix
           ];

@@ -3,6 +3,7 @@
   pkgs,
   lib,
   nixos-hardware,
+  zen-browser,
   ...
 }:
 
