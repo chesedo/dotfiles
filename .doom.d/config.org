@@ -80,6 +80,12 @@ Some set of default configs from Doom emacs to help me remember how to set thing
 ;; they are implemented.
 #+end_src
 
+* Visual
+Small visual edits like adding a small border so that picom does not have to.
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(internal-border-width . 10))
+#+end_src
+
 * Code Config
 Show possible code actions to the right.
 #+begin_src emacs-lisp

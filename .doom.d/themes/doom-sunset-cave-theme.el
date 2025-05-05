@@ -135,6 +135,9 @@ Can be an integer to determine the exact padding."
                  ((font-lock-type-face &override)     :slant 'italic)
                  ((font-lock-builtin-face &override)  :slant 'italic)
 
+                ;; Add internal border face here
+                (internal-border :background bg-alt)
+
                  ((line-number &override) :foreground base4)
                  ((line-number-current-line &override) :foreground fg)
                  (mode-line
