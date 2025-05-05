@@ -1,3 +1,9 @@
+[window]
+padding = { x = 10, y = 10 }
+dynamic_padding = true
+opacity = 0.97
+blur = true
+
 [bell]
 animation = "EaseOutExpo"
 color = "#ffffff"
