@@ -139,21 +139,19 @@
           suspend-key = u
 
           [greeter-theme]
-          font = Sans
+          font = "FiraCode Nerd Font"
           font-size = 1em
           font-weight = bold
           font-style = normal
-          text-color = "#88c0d0"
-          error-color = "#bf616a"
-          background-color = "#2e3440"
-          window-color = "#88c0d0"
-          border-color = "#d8dee9"
-          border-width = 0
-          layout-space = 1
-          password-color = "#88c0d0"
-          password-background-color = "#434c5e"
-          password-border-color = "#d8dee9"
-          password-border-width = 0
+          text-color = "#E6DDD1"
+          error-color = "#E8846C"
+          background-color = "#1A1A1D"
+          background-image = ""
+          layout-space = 0
+          password-color = "#E6DDD1"
+          password-background-color = "#2C3241"
+          password-border-color = "#E8846C"
+          password-border-width = 1
         '';
       };
       xkb = {
