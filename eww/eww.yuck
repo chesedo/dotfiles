@@ -9,7 +9,7 @@
 (include "windows/screenshot.yuck")
 
 (defwindow information
-  :monitor 0
+  :monitor 1
   :geometry (geometry
              :width "570px"
              :height "814px"
