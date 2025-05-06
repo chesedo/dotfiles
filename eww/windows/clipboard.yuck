@@ -1,0 +1,45 @@
+;; Define a global variable to store clipboard items
+(defvar clipboard_items "[]")
+
+(defwidget clipboard-viewer []
+  (box :orientation "vertical"
+       :space-evenly false
+       :class "clipboard-container"
+    (box :orientation "horizontal"
+         :space-evenly false
+         :class "clipboard-header"
+      (label :text "Clipboard History" :class "clipboard-title" :hexpand true)
+      (button :onclick "clipcatctl clear && eww update clipboard_items='[]' && eww close clipboard"
+              "Clear All")
+    )
+    (scroll :vexpand true
+            :vscroll true
+            :class "clipboard-scroll"
+      (box :orientation "vertical"
+           :space-evenly false
+           :class "clipboard-items"
+        (for item in clipboard_items
+          (eventbox :onclick "clipcatctl promote ${item.id} && eww close clipboard"
+                    :onrightclick "clipcatctl remove ${item.id} && clipboard"
+                    :class "clipboard-item-container"
+                    :halign "fill"
+            (label :wrap true
+                   :text "${item.content}"
+                   :halign "start"
+                   :class "clipboard-text")
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwindow clipboard
+  :monitor 0
+  :geometry (geometry
+             :width "500px"
+             :height "500px"
+             :anchor "center")
+  :windowtype "dialog"
+  :wm-ignore true
+  (clipboard-viewer))

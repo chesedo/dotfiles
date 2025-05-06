@@ -5,6 +5,8 @@
 (include "components/tags.yuck")
 (include "components/time.yuck")
 
+(include "windows/clipboard.yuck")
+
 (defwindow information
   :monitor 0
   :geometry (geometry
@@ -91,3 +93,4 @@
     )
   )
 )
+

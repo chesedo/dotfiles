@@ -52,6 +52,9 @@ in
     slop
     shotgun
     (writeShellScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.sh))
+
+    # To manage the clipboard
+    (writeShellScriptBin "clipboard" (builtins.readFile ../scripts/clipboard.sh))
   ];
 
   # This value determines the Home Manager release that your

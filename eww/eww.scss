@@ -15,6 +15,20 @@ window {
   font-family: "FiraCode Nerd Font";
 }
 
+button {
+  background-color: $theme-bg-alt;
+  border-radius: 8px;
+  padding: 8px 16px;
+  border: 1px solid $theme-border;
+  color: $theme-fg;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $theme-accent;
+    color: $theme-bg;
+  }
+}
+
 .overview {
     background-color: rgba($theme-accent, 0.6);
 }
@@ -131,22 +145,7 @@ graph {
 }
 
 .screenshot-button {
-  background-color: $theme-bg-alt;
-  border-radius: 8px;
-  padding: 8px 16px;
   margin: 0 4px;
-  border: 1px solid $theme-border;
-  color: $theme-fg;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: $theme-accent;
-    color: $theme-bg;
-  }
-
-  &.copy:hover {
-    background-color: $theme-accent;
-  }
 
   &.save:hover {
     background-color: $theme-highlight;
@@ -155,4 +154,38 @@ graph {
   &.cancel:hover {
     background-color: $theme-border;
   }
+}
+
+.clipboard-container {
+  background-color: $theme-bg;
+  color: $theme-fg;
+  border: 2px solid $theme-accent;
+  border-radius: 12px;
+}
+
+.clipboard-header {
+  border-bottom: 1px solid $theme-border;
+  padding: 12px;
+}
+
+.clipboard-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.clipboard-scroll {
+  padding: 8px;
+}
+
+.clipboard-item-container {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba($theme-bg-alt, 0.6);
+  }
+}
+
+.clipboard-text {
+  font-size: 0.9em;
+  padding: 4px;
 }
