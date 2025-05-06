@@ -1,4 +1,4 @@
-(defvar network_max 1250000)
+(defvar network_max 20971520)
 
 (defwidget resources []
   (item
