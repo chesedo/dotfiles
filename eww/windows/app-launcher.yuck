@@ -1,0 +1,35 @@
+;;; Variables for the launcher
+(defvar launcher_results "[]")
+
+;;; Main launcher widget
+(defwidget app-launcher []
+  (box :orientation "vertical"
+       :space-evenly false
+       :halign "center"
+
+    ;; Search input
+    (box :class "search-box"
+      (input :class "search-input"
+             :width 300
+             :onchange "filter-executables '{}'"
+             :onaccept "${EWW_CMD} close app-launcher & {}"))
+
+    ;; Results list
+    (box :orientation "vertical"
+        :space-evenly false
+    (for result in launcher_results
+        (button :class "app-item" :onclick "${EWW_CMD} close app-launcher & ${result}"
+        (label :text result
+                :limit-width 50
+                :halign "start"
+                :wrap false)))))
+)
+
+;;; Launcher window definition
+(defwindow app-launcher
+  :monitor 0
+  :geometry (geometry :width "100%"
+                      :height "100%"
+                     :anchor "center")
+  :windowtype "dialog"
+  (app-launcher))

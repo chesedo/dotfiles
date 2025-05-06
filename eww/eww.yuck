@@ -5,6 +5,7 @@
 (include "components/tags.yuck")
 (include "components/time.yuck")
 
+(include "windows/app-launcher.yuck")
 (include "windows/clipboard.yuck")
 (include "windows/screenshot.yuck")
 

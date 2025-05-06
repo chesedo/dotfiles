@@ -16,7 +16,7 @@ window {
 }
 
 button {
-  background-color: $theme-bg-alt;
+  background-color: transparent;
   border-radius: 8px;
   padding: 8px 16px;
   border: 1px solid $theme-border;
@@ -188,4 +188,25 @@ graph {
 .clipboard-text {
   font-size: 0.9em;
   padding: 4px;
+}
+
+// Search box
+.search-box {
+  margin: 16px 0;
+}
+
+// Search input
+.search-input {
+  background-color: $theme-bg-alt;
+  border: 1px solid $theme-border;
+  padding: 12px 16px;
+
+  &:focus {
+    border-color: $theme-accent;
+  }
+}
+
+// App items in the results list
+.app-item {
+  margin: 2px 0;
 }

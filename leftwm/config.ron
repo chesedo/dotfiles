@@ -74,7 +74,7 @@
     sloppy_mouse_follows_focus: true,
     keybind: [
         (command: ToggleScratchPad, value: "Alacritty", modifier: ["modkey", "Shift"], key: "a"),
-        (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
+        (command: Execute, value: "eww open --toggle app-launcher", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "alacritty", modifier: ["modkey", "Shift"], key: "Return"),
         (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),

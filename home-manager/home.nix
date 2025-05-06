@@ -55,6 +55,9 @@ in
 
     # To manage the clipboard
     (writeShellScriptBin "clipboard" (builtins.readFile ../scripts/clipboard.sh))
+
+    # Used by the eww app launcher
+    (writeShellScriptBin "filter-executables" (builtins.readFile ../scripts/filter-executables.sh))
   ];
 
   # This value determines the Home Manager release that your

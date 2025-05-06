@@ -20,7 +20,6 @@
 
       alacritty
       feh
-      dmenu
       picom
 
       libnotify
