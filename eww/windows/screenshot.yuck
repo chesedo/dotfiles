@@ -1,13 +1,11 @@
 (defvar screenshot-file "")
 
 (defwindow screenshot-actions
-  :monitor 0
   :geometry (geometry
              :width "100%"
              :height "100%"
              :anchor "center center")
   :windowtype "dialog"
-  :wm-ignore true
   (box :orientation "vertical"
              :halign "center"
              :valign "center"
