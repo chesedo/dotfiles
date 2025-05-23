@@ -23,6 +23,7 @@ in
     blugon
 
     discord
+    slack
 
     jq
     jc
