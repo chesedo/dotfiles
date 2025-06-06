@@ -191,6 +191,8 @@ in
       };
       ignores = [
         ".direnv/"
+        ".ccls-cache/"
+        "compile_commands.json"
       ];
       signing = {
         # key = "54D3C507CD48CF48!"; # *661
