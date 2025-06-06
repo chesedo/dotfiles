@@ -189,6 +189,9 @@ in
         core.askPass = "";
         rerere.enabled = true;
       };
+      ignores = [
+        ".direnv/"
+      ];
       signing = {
         # key = "54D3C507CD48CF48!"; # *661
         key = "E09D145B50F15F0A!"; # *663
