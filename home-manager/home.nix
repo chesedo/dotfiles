@@ -187,6 +187,7 @@ in
       userEmail = "pieter@chesedo.me";
       extraConfig = {
         core.askPass = "";
+        rerere.enabled = true;
       };
       signing = {
         # key = "54D3C507CD48CF48!"; # *661
