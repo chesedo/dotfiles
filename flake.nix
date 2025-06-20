@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixmox = {
-      url = "github:Sorixelle/nixmox";
+      url = "git+https://git.isincredibly.gay/srxl/nixmox";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
