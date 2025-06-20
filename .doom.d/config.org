@@ -110,6 +110,16 @@ Set the code formatter when using the `nil` LSP with nix files.
   (setq lsp-nix-nil-formatter ["nixfmt"]))
 #+end_src
 
+** Debugging
+Remapping the DAP keys to the F row.
+#+begin_src emacs-lisp
+(map! :map dape-breakpoint-global-mode-map
+      :desc "Continue debugger" "<f5>" #'dape-continue
+      :desc "Step to next line" "<f10>" #'dape-next
+      :desc "Step into function" "<f11>" #'dape-step-in
+      :desc "Step out of function" "<f12>" #'dape-step-out)
+#+end_src
+
 * Copilot
 Default copilot setup
 
