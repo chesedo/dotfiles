@@ -2,6 +2,7 @@
   config,
   pkgs,
   nixmox,
+  piperVoiceModels,
   ...
 }:
 
@@ -11,6 +12,16 @@ let
     src = ./theme/theme-file;
     gtkVariant = "all";
   };
+  piper =
+    # Custom piper without espeak-ng
+    (
+      pkgs.piper-tts.overrideAttrs (oldAttrs: {
+        buildInputs = with pkgs; [
+          onnxruntime
+          spdlog
+        ];
+      })
+    );
 
 in
 {
@@ -59,6 +70,9 @@ in
 
     # Used by the eww app launcher
     (writeShellScriptBin "filter-executables" (builtins.readFile ../scripts/filter-executables.sh))
+
+    # For TTS
+    piper
   ];
 
   # This value determines the Home Manager release that your
@@ -406,7 +420,17 @@ in
   xdg.configFile = {
     "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
-    "leftwm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
+    "leftwm".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
+    "speech-dispatcher/speechd.conf".text = ''
+      AddModule "piper-tts-generic" "sd_generic" "piper-tts-generic.conf"
+      DefaultModule   piper-tts-generic
+    '';
+    "speech-dispatcher/modules/piper-tts-generic.conf".text = ''
+      GenericExecuteSynth "echo \"$DATA\" | ${piper}/bin/piper --model ${piperVoiceModels.en-us-ryan-high}/share/piper/voices/en_US/ryan/high/en_US-ryan-high.onnx --output_raw --quiet | ${pkgs.pipewire}/bin/pw-play --rate 22050 --channel-map LE --raw -"
+
+      AddVoice "en-US" "male1" "en_US-ryan-high"
+    '';
   };
 
   home.file = {

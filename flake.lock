@@ -105,6 +105,30 @@
         "type": "github"
       }
     },
+    "piper-voice-ryan-json": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-tZnkD94hOVFBIZv6JYgJCoC8qE8/2zrDhKu6dhCvS6E=",
+        "type": "file",
+        "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/high/en_US-ryan-high.onnx.json"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/high/en_US-ryan-high.onnx.json"
+      }
+    },
+    "piper-voice-ryan-onnx": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-AR3PkY7WbES7DDhizKsHswdgg2jwN048emKomHFccRU=",
+        "type": "file",
+        "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/high/en_US-ryan-high.onnx"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/high/en_US-ryan-high.onnx"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": [
@@ -136,6 +160,8 @@
         "nixmox": "nixmox",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "piper-voice-ryan-json": "piper-voice-ryan-json",
+        "piper-voice-ryan-onnx": "piper-voice-ryan-onnx",
         "zen-browser": "zen-browser"
       }
     },
