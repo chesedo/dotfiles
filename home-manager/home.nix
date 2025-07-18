@@ -191,6 +191,7 @@ in
       };
       ignores = [
         ".direnv/"
+        ".envrc"
         ".ccls-cache/"
         "compile_commands.json"
       ];
