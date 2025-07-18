@@ -1,16 +1,36 @@
-This is a very basic README, merely containing a bunch of heads-up notes for using `eww` with `leftwm`
+# 🌅 Sunset Cave - LeftWM Theme
 
-Important:
-Copy the `eww-bar` folder to `~/.config/eww/` otherwise every `eww` command needs to pass the path to the folder where the `eww.yuck` and `eww.scss` files are located.
-It is also possible to symlink instead of copy, though `eww` isn't to happy about this and will log some errors, even though working just fine.
-The previously used xml config is still included in this example in the `legacy_eww_xml_config` folder for reference.
+> Modern LeftWM theme with EWW widgets and sunset-inspired colors
 
-Previously (legacy xml configured) `eww` and `leftwm` failed to properly negotiate the `reserved` space for the `bar` windows, this fixed now though. To prevent windows from overlapping your bar please use the `gutter` setting in `theme.toml` to force this reserved space.
-Here is a snippet of how such gutter configuration might look like, if your bar is 24px in height:
-```toml
-[[gutter]]
-side = "Top"
-value = 24
-```
+## 🎨 Theme
 
-Since `eww` is still rapidly changing, if stuff breaks please check their [github](https://github.com/elkowar/eww) for documentation on changes and existing issues.
+**Color Palette:**
+- Background: `#1A1A1D` | Foreground: `#E6DDD1` 
+- Accent: `#E8846C` | Highlight: `#FFB4A2`
+
+**Window Management:**
+- No borders (border_width: 0)
+- 32px margins for clean spacing
+- Picom compositor with blur and rounded corners
+
+## 🔧 Components
+
+**EWW Widgets:** Information panel on monitor 1 with system stats, battery, time, music, and notifications
+
+**Interactive Tools:**
+- `Mod+P`: App launcher with executable search
+- `Mod+Ctrl+C`: Clipboard history manager  
+- `Print`: Screenshot tool with preview
+
+**Services:** Picom, Blugon, Trayer (monitor 2), EWW widgets, Emacs daemon
+
+## 📁 Files
+
+- `up/down`: Theme start/stop scripts
+- `theme.ron`: LeftWM window configuration  
+- `picom.conf`: Compositor settings
+- EWW config symlinked from `~/dotfiles/eww/`
+
+## 💡 Setup
+
+Designed for NixOS with 3-monitor Framework 13 setup. EWW widgets provide system monitoring and productivity tools with unified theming across all components.
