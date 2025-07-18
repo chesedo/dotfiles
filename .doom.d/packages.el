@@ -52,7 +52,6 @@
 ;; (unpin! org-roam)
 ;; (package! org-roam-ui)
 
-
 ;; (package! protobuf-mode)
 
 ;; (package! lsp-latex)
