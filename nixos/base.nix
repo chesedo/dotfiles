@@ -11,6 +11,13 @@
   boot.loader.grub.enable = false;
 
   environment = {
+    # Prevent readies from trying to modify /etc/profile by adding profile.d comment
+    etc."profile".text = lib.mkAfter ''
+
+      # This comment contains 'profile.d' to prevent readies/getpy3 from modifying /etc/profile
+      # Since we're using Nix, we don't need the profile.d system modifications
+    '';
+
     systemPackages = with pkgs; [
       fd
       ripgrep
