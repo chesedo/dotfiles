@@ -130,14 +130,6 @@ graph {
   margin-right: 2em;
 }
 
-.notification-box {
-  margin: 0.2em 0.5em;
-}
-
-.notification:hover {
-  background-color: rgba($theme-bg-alt, 0.1);
-}
-
 .screenshot-preview {
   border: 2px solid $theme-accent;
   border-radius: 8px;
@@ -188,6 +180,90 @@ graph {
 .clipboard-text {
   font-size: 0.9em;
   padding: 4px;
+}
+
+.notification-container {
+  background-color: $theme-bg;
+  color: $theme-fg;
+  border-left: 2px solid $theme-accent;
+}
+
+.notification-header {
+  border-bottom: 1px solid $theme-border;
+  padding: 12px;
+}
+
+.notification-header button, .notification-group-header button {
+  margin-left: 8px;
+}
+
+.notification-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.notification-scroll {
+}
+
+.notification-group {
+  background-color: rgba(white, 0.05);
+  margin: 16px 0;
+}
+
+.notification-group-header {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $theme-accent;
+  margin-bottom: 8px;
+  padding-left: 12px;
+
+  button {
+    border: 0;
+    border-radius: 0;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.notification-item {
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($theme-bg-alt, 0.8);
+  }
+
+  button {
+    border: 0;
+    border-radius: 0;
+
+    &:hover {
+      background-color: rgba($theme-accent, 0.5);
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.notification-content {
+}
+
+.notification-summary {
+  color: $theme-muted;
+  padding: 12px 12px 4px;
+}
+
+.notification-time {
+  font-size: 0.8em;
+  color: $theme-muted;
+  padding: 0 12px;
+}
+
+.notification-body {
+  font-size: 0.9em;
+  color: $theme-fg;
+  padding: 4px 12px 12px;
 }
 
 // Search box

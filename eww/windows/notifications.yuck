@@ -1,0 +1,108 @@
+;; Simplified widgets using existing styling classes
+(defpoll notification_groups :interval "1s" :initial "[]" `dunst-update-eww`)
+
+(defwidget notification-panel []
+  (box :orientation "vertical"
+       :space-evenly false
+       :class "notification-container"
+
+    ;; Header
+    (box :orientation "horizontal"
+         :space-evenly false
+         :class "notification-header"
+      (label :text "Notifications" :class "notification-title" :hexpand true)
+      (button :onclick "dunstctl history-clear && eww update notification_groups='[]'"
+              "Clear All")
+      (button :onclick "eww close notification-panel" "Close")
+    )
+
+    ;; Grouped notifications
+    (scroll :vexpand true :vscroll true :class "notification-scroll"
+      (box :orientation "vertical" :space-evenly false
+        (for group in notification_groups
+          (notification-group :group group)
+        )
+      )
+    )
+  )
+)
+
+(defwidget notification-group [group]
+  (box :orientation "vertical"
+       :space-evenly false
+       :class "notification-group"
+
+    ;; Group header
+    (box :orientation "horizontal"
+         :space-evenly false
+         :class "notification-group-header"
+      (label :text "${group.appname}"
+             :hexpand true
+             :halign "start")
+      (label :text "(${group.count})")
+      (button :onclick "clear-app-notifications '${group.appname}'"
+              :halign "end"
+              "×")
+    )
+
+    ;; Group notifications
+    (box :orientation "vertical"
+         :space-evenly false
+      (for notification in "${group.notifications}"
+        (notification-item :notification notification)
+      )
+    )
+  )
+)
+
+(defwidget notification-item [notification]
+  (eventbox :class "notification-item"
+    (box :orientation "horizontal"
+         :space-evenly false
+         :class "notification-content"
+
+      ;; Summary line
+      (box :orientation "vertical"
+           :space-evenly false
+           :hexpand true
+        (box :orientation "horizontal"
+             :space-evenly false
+             (label :text "${notification.summary}"
+                    :class "notification-summary"
+                    :halign "start"
+                    :hexpand true
+                    :limit-width 40
+                    :wrap false)
+
+             ;; Add timestamp
+             (label :text "${notification.timestamp_formatted}"
+                    :class "notification-time"
+                    :halign "end")
+        )
+
+        ;; Body (if present)
+        (label :text "${notification.body}"
+                :class "notification-body"
+                :halign "start"
+                :wrap true
+                :limit-width 50
+                :visible "${notification.body != ''}")
+      )
+
+      (button :onclick "dunstctl history-rm ${notification.id} && dunst-update-eww"
+              :halign "end"
+              "×")
+    )
+  )
+)
+
+;; Window definition
+(defwindow notification-panel
+  :monitor 1
+  :geometry (geometry
+             :width "500px"
+             :height "100%"
+             :anchor "center right")
+  :windowtype "dialog"
+  :wm-ignore true
+  (notification-panel))

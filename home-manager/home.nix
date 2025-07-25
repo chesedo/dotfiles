@@ -71,6 +71,13 @@ in
     # Used by the eww app launcher
     (writeShellScriptBin "filter-executables" (builtins.readFile ../scripts/filter-executables.sh))
 
+    # Notification scripts
+
+    (pkgs.writeShellScriptBin "dunst-update-eww" (builtins.readFile ../scripts/dunst-update-eww.sh))
+    (writeShellScriptBin "clear-app-notifications" (
+      builtins.readFile ../scripts/clear-app-notifications.sh
+    ))
+
     # For TTS
     piper
   ];

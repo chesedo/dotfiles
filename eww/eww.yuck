@@ -1,5 +1,4 @@
 (include "components/batteries.yuck")
-(include "components/notifications.yuck")
 (include "components/music.yuck")
 (include "components/resources.yuck")
 (include "components/tags.yuck")
@@ -8,6 +7,7 @@
 (include "windows/app-launcher.yuck")
 (include "windows/clipboard.yuck")
 (include "windows/screenshot.yuck")
+(include "windows/notifications.yuck")
 
 (defwindow information
   :monitor 1
@@ -18,21 +18,15 @@
              :anchor "bottom right")
   :windowtype "desktop"
   :wm-ignore true
-  (box :orientation "vertical" :space-evenly false :valign "end" :halign "end"
+  (box :orientation "vertical" :space-evenly false :valign "center" :halign "end"
        (tags)
-       (box :orientation "horizontal" :space-evenly false :class "b bb"
-            (box :halign "start" :valign "center" (time))
-            )
-       (box :orientation "horizontal" :space-evenly false :class "b bb"
-            (box :halign "start" :valign "center" (resources))
-            (box :halign "end" :valign "center" (batteries))
-       )
-       (box :orientation "horizontal" :space-evenly false
-            (box :halign "start" :valign "end" (music))
-            (box :halign "start" :valign "end" (notifications))
-            )
-       )
+       (time)
+       (systray :icon-size 32)
+       (batteries)
+       (resources)
+       (music)
   )
+)
 
 (defwindow overview
   :geometry (geometry :y "-32px"
@@ -41,16 +35,12 @@
   :wm-ignore true
   (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :css "overview"
        (tags)
-       (box :orientation "horizontal" :space-evenly false :class "b bb"
-            (box :halign "start" :valign "center" (time))
-            )
-       (box :halign "end" :valign "start" (batteries))
-       (box :orientation "horizontal" :space-evenly false
-            (box :halign "start" :valign "start" (resources))
-            (box :halign "end" :valign "end" (music))
-            )
-       )
+       (time)
+       (batteries)
+       (resources)
+       (music)
   )
+)
 
 (defwidget item []
   (box :orientation "horizontal"

@@ -15,7 +15,7 @@
     workspaces: [
         (output: "", x: 0, y: 0, height: 1080, width: 1920, id: 0),
         (output: "", x: 1920, y: 0, height: 1080, width: 1920, id: 1),
-        (output: "", x: 2471, y: 1080, height: 846, width: 640, id: 2),
+        (output: "", x: 2471, y: 1080, height: 846, width: 925, id: 2),
     ],
     tags: [
         "1",
@@ -111,6 +111,7 @@
         (command: DecreaseMainSize, value: "5", modifier: ["modkey"], key: "minus"),
         (command: ToggleFullScreen, value: "", modifier: ["modkey"], key: "f"),
         (command: Execute, value: "clipboard --toggle", modifier: ["modkey", "Control"], key: "c"),
+        (command: Execute, value: "eww open --toggle notification-panel", modifier: ["modkey"], key: "n"),
         (command: Execute, value: "amixer set Master 5%-", modifier: [], key: "XF86XK_AudioLowerVolume"),
         (command: Execute, value: "amixer set Master 5%+", modifier: [], key: "XF86XK_AudioRaiseVolume"),
         (command: Execute, value: "amixer set Master toggle", modifier: [], key: "XF86XK_AudioMute"),
