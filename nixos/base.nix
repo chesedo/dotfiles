@@ -36,7 +36,6 @@
       home-manager
       pavucontrol
 
-      firefox
       zen-browser
 
       pinentry-qt
