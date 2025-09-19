@@ -34,7 +34,7 @@
       blueberry
       htop
       home-manager
-      pavucontrol
+      pwvucontrol
 
       zen-browser
 
