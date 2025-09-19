@@ -12,17 +12,6 @@ let
     src = ./theme/theme-file;
     gtkVariant = "all";
   };
-  piper =
-    # Custom piper without espeak-ng
-    (
-      pkgs.piper-tts.overrideAttrs (oldAttrs: {
-        buildInputs = with pkgs; [
-          onnxruntime
-          spdlog
-        ];
-      })
-    );
-
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -72,14 +61,13 @@ in
     (writeShellScriptBin "filter-executables" (builtins.readFile ../scripts/filter-executables.sh))
 
     # Notification scripts
-
     (pkgs.writeShellScriptBin "dunst-update-eww" (builtins.readFile ../scripts/dunst-update-eww.sh))
     (writeShellScriptBin "clear-app-notifications" (
       builtins.readFile ../scripts/clear-app-notifications.sh
     ))
 
     # For TTS
-    piper
+    piper-tts
   ];
 
   # This value determines the Home Manager release that your
@@ -434,7 +422,7 @@ in
       DefaultModule   piper-tts-generic
     '';
     "speech-dispatcher/modules/piper-tts-generic.conf".text = ''
-      GenericExecuteSynth "echo \"$DATA\" | ${piper}/bin/piper --model ${piperVoiceModels.en-us-ryan-high}/share/piper/voices/en_US/ryan/high/en_US-ryan-high.onnx --output_raw --quiet | ${pkgs.pipewire}/bin/pw-play --rate 22050 --channel-map LE --raw -"
+      GenericExecuteSynth "echo \"$DATA\" | ${pkgs.piper-tts}/bin/piper --model ${piperVoiceModels.en-us-ryan-high}/share/piper/voices/en_US/ryan/high/en_US-ryan-high.onnx --output_raw --quiet | ${pkgs.pipewire}/bin/pw-play --rate 22050 --channel-map LE --raw -"
 
       AddVoice "en-US" "male1" "en_US-ryan-high"
     '';
