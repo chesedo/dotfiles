@@ -113,7 +113,7 @@ Set the code formatter when using the `nil` LSP with nix files.
 ** Debugging
 Remapping the DAP keys to the F row.
 #+begin_src emacs-lisp
-(map! :map dape-breakpoint-global-mode-map
+(map! :map dape-breakpoint-mode-map
       :desc "Continue debugger" "<f5>" #'dape-continue
       :desc "Step to next line" "<f10>" #'dape-next
       :desc "Step into function" "<f11>" #'dape-step-in
