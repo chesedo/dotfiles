@@ -120,6 +120,26 @@ Remapping the DAP keys to the F row.
       :desc "Step out of function" "<f12>" #'dape-step-out)
 #+end_src
 
+*** Rust codelldb Configuration
+
+Configure =codelldb= path for Rust debugging with proper pretty-printers.
+
+**** Why this is needed
+On NixOS, packages are installed in the nix store (e.g., =/nix/store/...=), not in traditional locations. Dape's default configuration assumes =codelldb= is manually installed in =~/.config/doom/debug-adapters/=, which doesn't work with our declarative nix setup.
+
+**** What it does
+1. Searches system PATH for the =codelldb= binary (installed via =vscode-extensions.vadimcn.vscode-lldb.adapter=)
+2. Updates the =codelldb-rust= configuration in =dape-configs= to use the system path
+3. This allows Rust debugging with proper vector pretty-printing support
+
+#+begin_src emacs-lisp
+(after! dape
+  (when-let ((codelldb-path (executable-find "codelldb")))
+    (setf (alist-get 'codelldb-rust dape-configs)
+          (plist-put (alist-get 'codelldb-rust dape-configs)
+                     'command codelldb-path))))
+#+end_src
+
 * LLM
 ** Copilot
 Default copilot setup
