@@ -192,28 +192,25 @@ in
 
     git = {
       enable = true;
-      userName = "chesedo";
-      userEmail = "pieter@chesedo.me";
-      extraConfig = {
-        core.askPass = "";
-        rerere.enabled = true;
-      };
       ignores = [
         ".direnv/"
         ".envrc"
         ".ccls-cache/"
         "compile_commands.json"
       ];
+      settings = {
+        core.askPass = "";
+        rerere.enabled = true;
+        user = {
+          email = "pieter@chesedo.me";
+          name = "chesedo";
+        };
+      };
       signing = {
         # key = "54D3C507CD48CF48!"; # *661
         key = "E09D145B50F15F0A!"; # *663
         signByDefault = true;
       };
-    };
-
-    ssh = {
-      enable = true;
-      matchBlocks = { };
     };
 
     starship = {
