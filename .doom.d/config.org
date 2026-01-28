@@ -98,6 +98,7 @@ Show possible code actions to the right.
   (setq lsp-rust-analyzer-server-display-inlay-hints t
         lsp-rust-analyzer-display-chaining-hints t
         lsp-rust-analyzer-display-parameter-hints t
+        lsp-rust-analyzer-cargo-target-dir t ;; Use a different target directory to prevent locks with cargo
         format-with-lsp-mode nil
         rustic-format-on-save t)
 )
