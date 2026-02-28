@@ -34,10 +34,10 @@ in
 
     upwork
 
-    xfce.thunar
+    thunar
     # Optionals
-    xfce.xfconf # Needed to save the preferences
-    xfce.exo # Used by default for `open terminal here`, but can be changed
+    xfconf # Needed to save the preferences
+    xfce4-exo # Used by default for `open terminal here`, but can be changed
 
     zoom-us
 
