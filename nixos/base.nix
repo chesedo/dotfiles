@@ -31,7 +31,7 @@
 
       libnotify
 
-      blueberry
+      blueman
       htop
       home-manager
       pwvucontrol
