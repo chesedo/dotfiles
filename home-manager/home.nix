@@ -45,7 +45,7 @@ in
     marksman # For markdown files
     languagetool
 
-    nodejs_20 # Needed for copilot emacs plugin
+    nodejs_24 # Needed for copilot emacs plugin
 
     podman-compose
 
@@ -87,6 +87,10 @@ in
       name = "Tela-blue";
     };
     theme = {
+      package = sunset-theme;
+      name = "sunset-cave";
+    };
+    gtk4.theme = {
       package = sunset-theme;
       name = "sunset-cave";
     };
@@ -185,10 +189,7 @@ in
       nix-direnv.enable = true;
     };
 
-    eww = {
-      enable = true;
-      configDir = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/eww";
-    };
+    eww.enable = true;
 
     git = {
       enable = true;
@@ -414,6 +415,7 @@ in
     "blugon/config".source = ./blugon/config;
     "leftwm".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
+    "eww".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/eww";
     "speech-dispatcher/speechd.conf".text = ''
       AddModule "piper-tts-generic" "sd_generic" "piper-tts-generic.conf"
       DefaultModule   piper-tts-generic
