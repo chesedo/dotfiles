@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    voxtype = {
+      url = "github:peteonrails/voxtype";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     piper-voice-ryan-onnx = {
       url = "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/high/en_US-ryan-high.onnx";
@@ -36,6 +40,7 @@
       home-manager,
       nixmox,
       zen-browser,
+      voxtype,
       piper-voice-ryan-onnx,
       piper-voice-ryan-json,
     }:
@@ -95,9 +100,11 @@
             inherit piperVoiceModels;
 
             nixmox = nixmox.packages.${system};
+            voxtype = voxtype.packages.${system};
           };
           modules = [
             ./home-manager/home.nix
+            voxtype.homeManagerModules.default
           ];
         };
       };

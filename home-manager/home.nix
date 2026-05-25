@@ -3,6 +3,7 @@
   pkgs,
   nixmox,
   piperVoiceModels,
+  voxtype,
   ...
 }:
 
@@ -333,6 +334,26 @@ in
           Unknown = " ";
           Void = " ";
           Windows = "󰍲 ";
+        };
+      };
+    };
+
+    voxtype = {
+      enable = true;
+      package = voxtype.default;
+      service.enable = true;
+      settings = {
+        output.mode = "clipboard";
+        hotkey = {
+          enabled = true;
+          key = "RIGHTCTRL";
+        };
+        whisper = {
+          mode = "remote";
+          remote_endpoint = "http://192.168.10.70:8080";
+        };
+        status = {
+          icon_theme = "nerd-font";
         };
       };
     };

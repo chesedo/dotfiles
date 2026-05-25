@@ -286,3 +286,10 @@ graph {
 .app-item {
   margin: 2px 0;
 }
+
+.voxtype-status {
+  font-size: 1.4em;
+  &.idle         { color: $theme-muted; }
+  &.recording    { color: $theme-accent; }
+  &.transcribing { color: $theme-highlight; }
+}

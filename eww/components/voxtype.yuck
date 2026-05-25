@@ -1,0 +1,7 @@
+(deflisten voxtype-status :initial '{"text":"🎙️","alt":"idle","class":"idle","tooltip":""}' `voxtype status --follow --format json`)
+
+(defwidget voxtype []
+  (item
+    (label :class "voxtype-status ${voxtype-status.class}"
+           :text {voxtype-status.text}
+           :tooltip {voxtype-status.tooltip})))

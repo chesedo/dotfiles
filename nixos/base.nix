@@ -189,6 +189,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "input" # Required for voxtype evdev hotkey grabbing
       ];
     };
   };
