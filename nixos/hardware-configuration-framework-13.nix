@@ -1,18 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ ... }:
 
 {
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "usb_storage"
-    "thunderbolt"
-    "sd_mod"
-  ];
   boot.kernelModules = [ "kvm-amd" ];
   # Fix for Fn keys on keychron
   boot.extraModprobeConfig = ''
@@ -35,6 +23,4 @@
   };
 
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
