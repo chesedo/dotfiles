@@ -1,6 +1,12 @@
-{ ... }:
+{
+  modulesPath,
+  ...
+}:
 
 {
+
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+
   boot.kernelModules = [ "kvm-amd" ];
   # Fix for Fn keys on keychron
   boot.extraModprobeConfig = ''
