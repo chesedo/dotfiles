@@ -156,6 +156,99 @@ Accept completion from copilot and fallback to company
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 #+end_src
 
+* Project Notes
+A capture-buffer workflow for per-file notes in =NOTES.md= at the project root.
+Sections are kept sorted by file path. =C-c C-c= to commit, =C-c C-k= to abort.
+
+#+begin_src emacs-lisp
+(define-minor-mode chesedo-capture-mode
+  "Active in project-note capture buffers."
+  :keymap (make-sparse-keymap))
+
+(map! :map chesedo-capture-mode-map
+      :nvi "C-c C-c" #'chesedo--finalize-project-note
+      :nvi "C-c C-k" #'chesedo--abort-project-note)
+
+(defun chesedo--insert-sorted-section (header content)
+  "Insert HEADER and CONTENT before the first ## heading that sorts after it."
+  (goto-char (point-min))
+  (let (inserted)
+    (while (and (not inserted) (re-search-forward "^## " nil t))
+      (let ((line-start (match-beginning 0))
+            (line-text (buffer-substring-no-properties
+                        (match-beginning 0) (line-end-position))))
+        (when (string< header line-text)
+          (goto-char line-start)
+          (insert header "\n\n" content "\n\n")
+          (setq inserted t))))
+    (unless inserted
+      (goto-char (point-max))
+      (unless (bolp) (insert "\n"))
+      (insert "\n" header "\n\n" content "\n"))))
+
+(defun chesedo--finalize-project-note ()
+  "Append the capture buffer content to NOTES.md and restore window layout."
+  (interactive)
+  (let ((content (string-trim (buffer-string)))
+        (notes-file chesedo--capture-notes-file)
+        (header chesedo--capture-header)
+        (window-config chesedo--capture-window-config))
+    (when (string-empty-p content)
+      (user-error "Nothing to capture — use C-c C-k to abort"))
+    (with-current-buffer (find-file-noselect notes-file)
+      (goto-char (point-min))
+      (if (and header (search-forward header nil t))
+          (let ((end (save-excursion
+                       (if (re-search-forward "^## " nil t)
+                           (progn (beginning-of-line) (point))
+                         (point-max)))))
+            (goto-char end)
+            (skip-chars-backward "\n")
+            (insert "\n" content "\n"))
+        (chesedo--insert-sorted-section (or header "") content))
+      (save-buffer))
+    (kill-buffer)
+    (set-window-configuration window-config)
+    (message "Note captured to NOTES.md")))
+
+(defun chesedo--abort-project-note ()
+  "Discard the project note capture and restore window layout."
+  (interactive)
+  (let ((window-config chesedo--capture-window-config))
+    (kill-buffer)
+    (set-window-configuration window-config)
+    (message "Capture aborted")))
+
+(defun chesedo/capture-project-note ()
+  "Open a capture buffer for a note about the current file in NOTES.md."
+  (interactive)
+  (unless (projectile-project-p)
+    (user-error "Not in a project"))
+  (when (get-buffer "*Project Note*")
+    (user-error "Capture already in progress — finish it first (C-c C-c / C-c C-k)"))
+  (let* ((project-root (projectile-project-root))
+         (notes-file (expand-file-name "NOTES.md" project-root))
+         (current-file (buffer-file-name))
+         (relative-path (when current-file
+                          (file-relative-name current-file project-root)))
+         (header (when relative-path
+                   (format "## [%s](%s)" relative-path relative-path)))
+         (window-config (current-window-configuration))
+         (capture-buffer (get-buffer-create "*Project Note*")))
+    (with-current-buffer capture-buffer
+      (erase-buffer)
+      (markdown-mode)
+      (chesedo-capture-mode 1)
+      (setq-local chesedo--capture-notes-file notes-file)
+      (setq-local chesedo--capture-header header)
+      (setq-local chesedo--capture-window-config window-config))
+    (select-window (split-window-below -15))
+    (switch-to-buffer capture-buffer)
+    (evil-insert-state)))
+
+(map! :leader :desc "Capture project note" "n p" #'chesedo/capture-project-note)
+#+end_src
+
 * Org mode
 I've often lost my pomodoro timers just because I forget to save my org files. So this causes them to be saved automatically about every 30 seconds.
 #+begin_src emacs-lisp
