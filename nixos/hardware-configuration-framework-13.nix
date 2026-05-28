@@ -16,9 +16,7 @@
     "thunderbolt"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
   # Fix for Fn keys on keychron
   boot.extraModprobeConfig = ''
     options hid_apple fnmode=0
