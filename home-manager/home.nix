@@ -8,11 +8,14 @@
 }:
 
 let
+  secrets = import (builtins.toPath (builtins.getEnv "HOME" + "/dotfiles/home-manager/secrets.nix"));
+
   sunset-theme = nixmox.oomoxPlugins.theme-oomox.generate {
     name = "sunset-cave";
     src = ./theme/theme-file;
     gtkVariant = "all";
   };
+
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -69,6 +72,14 @@ in
 
     # For TTS
     piper-tts
+
+    # jiratui patched for textual 8.x compat (Select.BLANK no longer valid; use .clear())
+    (pkgs.jiratui.overrideAttrs (oldAttrs: {
+      postPatch = (oldAttrs.postPatch or "") + ''
+        sed -i 's/\(self\.[a-z_]*selector\)\.value = Select\.BLANK/\1.clear()/g' \
+          src/jiratui/widgets/work_item_details/details.py
+      '';
+    }))
   ];
 
   # This value determines the Home Manager release that your
@@ -385,6 +396,7 @@ in
         cw = "cargo watch -q -c";
         p = "podman";
         pc = "podman-compose";
+        jt = "jiratui ui -p MOD -u 712020:3cb3242f-6941-4a62-8d26-93ddb13e489f --search-on-startup";
       };
     };
   };
@@ -449,6 +461,11 @@ in
       GenericExecuteSynth "echo \"$DATA\" | ${pkgs.piper-tts}/bin/piper --model ${piperVoiceModels.en-us-ryan-high}/share/piper/voices/en_US/ryan/high/en_US-ryan-high.onnx --output_raw --quiet | ${pkgs.pipewire}/bin/pw-play --rate 22050 --channel-map LE --raw -"
 
       AddVoice "en-US" "male1" "en_US-ryan-high"
+    '';
+    "jiratui/config.yaml".text = ''
+      jira_api_username: 'pieter.engelbrecht@redis.com'
+      jira_api_token: '${secrets.jiraApiToken}'
+      jira_api_base_url: 'https://redislabs.atlassian.net'
     '';
   };
 
