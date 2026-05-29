@@ -351,6 +351,7 @@ in
           enabled = true;
           key = "RIGHTCTRL";
         };
+        audio.device = "alsa_input.pci-0000_c1_00.6.analog-stereo";
         whisper = {
           mode = "remote";
           remote_endpoint = "http://192.168.10.70:8080";
