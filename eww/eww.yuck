@@ -11,7 +11,7 @@
 (include "windows/notifications.yuck")
 
 (defwindow information
-  :monitor 1
+  :monitor 0
   :geometry (geometry
              :width "570px"
              :height "814px"

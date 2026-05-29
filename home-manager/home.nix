@@ -115,25 +115,8 @@ in
       enable = true;
       hooks = {
         postswitch = {
-          "notify-and-reload" = ''
-            # On first login the default profile is loaded.
-            # However, my monitors might be connected. This will mean the wrong profile is loaded.
-            # So detect that and load the correct one if needed.
-            detected=$(${pkgs.autorandr}/bin/autorandr --match-edid --detected)
-            if [[ $detected != $AUTORANDR_CURRENT_PROFILE ]]; then
-              ${pkgs.libnotify}/bin/notify-send "Incorrectly loaded $AUTORANDR_CURRENT_PROFILE display"
-              ${pkgs.autorandr}/bin/autorandr --match-edid --load $detected &
-
-              exit 0
-            fi
-
-            ${pkgs.libnotify}/bin/notify-send "Loaded $AUTORANDR_CURRENT_PROFILE display"
-
-            # Leftvm might have loaded the wrong config or just seems to not have some keybindings after autorandr ran.
-            # So reload it to make sure everything is correct.
-            ${pkgs.leftwm}/bin/leftwm-command SoftReload
-            ${pkgs.libnotify}/bin/notify-send "Reloaded leftwm"
-
+          "log-profile" = ''
+            logger -t autorandr-hook "postswitch fired: profile=$AUTORANDR_CURRENT_PROFILE"
           '';
         };
       };
@@ -141,38 +124,50 @@ in
         "home" = {
           fingerprint = {
             small = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
-            left = "00ffffffffffff0010acf4414c5133412221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff003339424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020013b020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
-            right = "00ffffffffffff0010acf4414c3938392221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff004330424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020014f020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
+            left = "00ffffffffffff0010acf4414c3938392221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff004330424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020014f020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
+            middle = "00ffffffffffff0010ac394257323242221f0104a53c22783b2176a9534494231c4d5aa54b00d100d1c0b300a94081808100714f0101565e00a0a0a029503020350055502100001a000000ff00445738485a38330a2020202020000000fc0044454c4c20533237323244474d000000fd0030a5fafa41010a2020202020200150020325f14a3f101f0413121103020123090707830100006d1a0000020130a5000000000000f4fb0050a0a028500820680055502100001aa7e5007ea0a050500820680055502100001a6fc200a0a0a055503020350055502100001a000000000000000000000000000000000000000000000000000000000000000000000000f4";
+            right = "00ffffffffffff0010acf4414c5133412221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff003339424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020013b020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
           };
           config = {
             small = {
               enable = true;
               primary = true;
-              position = "2471x1080";
+              position = "4160x1080";
               mode = "2256x1504";
               rate = "60.00";
               rotate = "normal";
               scale = {
-                x = 0.5625;
-                y = 0.5625;
+                x = 0.5;
+                y = 0.5;
               };
             };
             left = {
               enable = true;
               position = "0x0";
               mode = "1920x1080";
-              rate = "60.00";
+              rate = "74.97";
               rotate = "normal";
+            };
+            middle = {
+              enable = true;
+              position = "1920x0";
+              mode = "2560x1440";
+              rate = "165.08";
+              rotate = "normal";
+              filter = "nearest";
+              scale = {
+                x = 0.875;
+                y = 0.875;
+              };
             };
             right = {
               enable = true;
-              position = "1920x0";
+              position = "4160x0";
               mode = "1920x1080";
-              rate = "60.00";
+              rate = "74.97";
               rotate = "normal";
             };
           };
-          hooks.postswitch = "${builtins.readFile ./setup-home-display.sh}";
         };
         "default" = {
           fingerprint = {
@@ -187,8 +182,8 @@ in
               rate = "60.00";
               rotate = "normal";
               scale = {
-                x = 0.5625;
-                y = 0.5625;
+                x = 0.5;
+                y = 0.5;
               };
             };
           };
@@ -462,6 +457,19 @@ in
   };
 
   xdg.configFile = {
+    # leftwm has built-in XDG autostart support (leftwm::utils::autostart in the
+    # binary) and runs .desktop Exec= commands directly at login, bypassing
+    # systemd. The system autorandr entry uses `-c --default default` which lacks
+    # --match-edid and loads the wrong profile. This override fixes the command.
+    # If leftwm ever drops this feature, verify with:
+    #   strings $(which leftwm) | grep autostart
+    "autostart/autorandr.desktop".text = ''
+      [Desktop Entry]
+      Name=Autorandr
+      Exec=${pkgs.autorandr}/bin/autorandr --change --match-edid --skip-options gamma
+      Type=Application
+    '';
+
     "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
     "leftwm".source =
