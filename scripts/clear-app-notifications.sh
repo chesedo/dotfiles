@@ -21,4 +21,4 @@ dunstctl history | jq -r "
 done
 
 # Trigger notification update
-dunst-update-eww
+echo 1 > /tmp/dunst-eww-trigger

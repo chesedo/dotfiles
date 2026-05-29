@@ -227,6 +227,16 @@ graph {
   }
 }
 
+.notification-subgroup {
+  margin-bottom: 4px;
+}
+
+.notification-subgroup-header {
+  font-size: 0.95em;
+  font-weight: bold;
+  padding: 4px 12px 2px 24px;
+}
+
 .notification-item {
   transition: background-color 0.2s ease;
 
@@ -257,13 +267,20 @@ graph {
 .notification-time {
   font-size: 0.8em;
   color: $theme-muted;
-  padding: 0 12px;
+  padding: 0 8px;
 }
 
 .notification-body {
   font-size: 0.9em;
   color: $theme-fg;
-  padding: 4px 12px 12px;
+  padding: 8px 12px 8px 24px;
+}
+
+.notification-no-body {
+  font-size: 0.85em;
+  color: $theme-muted;
+  font-style: italic;
+  padding: 8px 12px 8px 24px;
 }
 
 // Search box

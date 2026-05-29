@@ -1,5 +1,5 @@
 ;; Simplified widgets using existing styling classes
-(defpoll notification_groups :interval "1s" :initial "[]" `dunst-update-eww`)
+(deflisten notification_groups :initial "[]" `dunst-update-eww`)
 
 (defwidget notification-panel []
   (box :orientation "vertical"
@@ -11,7 +11,7 @@
          :space-evenly false
          :class "notification-header"
       (label :text "Notifications" :class "notification-title" :hexpand true)
-      (button :onclick "dunstctl history-clear && eww update notification_groups='[]'"
+      (button :onclick "dunstctl history-clear && echo 1 > /tmp/dunst-eww-trigger"
               "Clear All")
       (button :onclick "eww close notification-panel" "Close")
     )
@@ -45,10 +45,37 @@
               "×")
     )
 
-    ;; Group notifications
+    ;; Subgroups
     (box :orientation "vertical"
          :space-evenly false
-      (for notification in "${group.notifications}"
+      (for subgroup in "${group.subgroups}"
+        (notification-subgroup :subgroup subgroup)
+      )
+    )
+  )
+)
+
+(defwidget notification-subgroup [subgroup]
+  (box :orientation "vertical"
+       :space-evenly false
+       :class "notification-subgroup"
+
+    ;; Subgroup header (summary + count)
+    (box :orientation "horizontal"
+         :space-evenly false
+         :class "notification-subgroup-header"
+      (label :text "${subgroup.summary}"
+             :hexpand true
+             :halign "start"
+             :limit-width 40
+             :wrap false)
+      (label :text "(${subgroup.count})"
+             :visible "${subgroup.count > 1}")
+    )
+
+    (box :orientation "vertical"
+         :space-evenly false
+      (for notification in "${subgroup.notifications}"
         (notification-item :notification notification)
       )
     )
@@ -61,36 +88,30 @@
          :space-evenly false
          :class "notification-content"
 
-      ;; Summary line
       (box :orientation "vertical"
            :space-evenly false
            :hexpand true
-        (box :orientation "horizontal"
-             :space-evenly false
-             (label :text "${notification.summary}"
-                    :class "notification-summary"
-                    :halign "start"
-                    :hexpand true
-                    :limit-width 40
-                    :wrap false)
-
-             ;; Add timestamp
-             (label :text "${notification.timestamp_formatted}"
-                    :class "notification-time"
-                    :halign "end")
-        )
-
-        ;; Body (if present)
+           :valign "center"
         (label :text "${notification.body}"
-                :class "notification-body"
-                :halign "start"
-                :wrap true
-                :limit-width 50
-                :visible "${notification.body != ''}")
+               :class "notification-body"
+               :halign "start"
+               :wrap true
+               :limit-width 50
+               :visible "${notification.body != ''}")
+        (label :text "no message"
+               :class "notification-no-body"
+               :halign "start"
+               :visible "${notification.body == ''}")
       )
 
-      (button :onclick "dunstctl history-rm ${notification.id} && dunst-update-eww"
+      (label :text "${notification.timestamp_formatted}"
+             :class "notification-time"
+             :halign "end"
+             :valign "center")
+
+      (button :onclick "dunstctl history-rm ${notification.id} && echo 1 > /tmp/dunst-eww-trigger"
               :halign "end"
+              :valign "center"
               "×")
     )
   )
