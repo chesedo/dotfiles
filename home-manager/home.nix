@@ -229,6 +229,20 @@ in
       };
     };
 
+    ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+
+      settings = {
+        "WSL" = {
+          hostname = "192.168.10.70";
+          user = "pieter";
+          port = 2222;
+          forwardAgent = true;
+        };
+      };
+    };
+
     starship = {
       enable = true;
       settings = {
