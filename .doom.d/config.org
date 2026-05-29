@@ -156,6 +156,32 @@ Accept completion from copilot and fallback to company
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 #+end_src
 
+** Agentic
+Testing config for the LLM integration
+
+#+begin_src emacs-lisp
+(after! gptel-magit
+  (setq gptel-magit-commit-prompt
+        "You are an expert at writing Git commits. Your job is to write a short clear commit message that summarizes the changes.\n\nThe commit message should be structured as follows:\n\n    <description>\n\n    [optional body]\n\n- The description is a short summary of the code changes, e.g., Fix array parsing issue when multiple spaces were contained in string\n- Try to limit the whole subject line to 60 characters\n- Capitalize the subject line\n- Do not end the subject line with any punctuation\n- A longer commit body MAY be provided after the short description, providing additional contextual information about the code changes. The body MUST begin one blank line after the description.\n- Use the imperative mood in the subject line\n- Keep the body short and concise (omit it entirely if not useful)"))
+
+(after! gptel
+  (setq
+   gptel-model "docker.io/ai/qwen3-coder:64k"
+   gptel-backend (gptel-make-openai "Docker Model Runner"
+                   :host "wsl:12434"
+                   :protocol "http"
+                   :stream t
+                   :key "ignored"
+                   :models '("docker.io/ai/qwen3-coder:32k"
+                             "docker.io/ai/qwen3-coder:48k"
+                             "docker.io/ai/qwen3-coder:64k"
+                             "docker.io/ai/qwen3-coder:30B-A3B-UD-Q4_K_XL"
+                             "docker.io/ai/qwen2.5:3B-Q4_K_M"))
+   gptel-default-mode 'org-mode
+   gptel-prompt-prefix-alist '((org-mode . "* "))
+   gptel-response-prefix-alist '((org-mode . "**Qwen:**\n\n"))))
+#+end_src
+
 * Project Notes
 A capture-buffer workflow for per-file notes in =NOTES.md= at the project root.
 Sections are kept sorted by file path. =C-c C-c= to commit, =C-c C-k= to abort.
