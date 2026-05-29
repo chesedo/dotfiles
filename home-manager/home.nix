@@ -235,7 +235,7 @@ in
 
       settings = {
         "WSL" = {
-          hostname = "192.168.10.70";
+          hostname = "wsl";
           user = "pieter";
           port = 2222;
           forwardAgent = true;
@@ -379,7 +379,7 @@ in
         audio.device = "alsa_input.pci-0000_c1_00.6.analog-stereo";
         whisper = {
           mode = "remote";
-          remote_endpoint = "http://192.168.10.70:8080";
+          remote_endpoint = "http://wsl:8080";
         };
         status = {
           icon_theme = "nerd-font";

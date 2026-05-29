@@ -65,6 +65,9 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
+    hosts = {
+      "192.168.10.70" = [ "wsl" ];
+    };
   };
 
   nix = {
