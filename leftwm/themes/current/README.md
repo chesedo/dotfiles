@@ -1,12 +1,12 @@
-# 🌅 Sunset Cave - LeftWM Theme
+# 🏔️ Alpine Dusk - LeftWM Theme
 
-> Modern LeftWM theme with EWW widgets and sunset-inspired colors
+> Modern LeftWM theme with EWW widgets and alpine sunset-inspired colors
 
 ## 🎨 Theme
 
 **Color Palette:**
-- Background: `#1A1A1D` | Foreground: `#E6DDD1` 
-- Accent: `#E8846C` | Highlight: `#FFB4A2`
+- Background: `#1A1830` | Foreground: `#DDE2EC`
+- Accent: `#8858C8` | Highlight: `#4A70AA`
 
 **Window Management:**
 - No borders (border_width: 0)

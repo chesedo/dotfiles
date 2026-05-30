@@ -7,7 +7,7 @@
 - **NixOS** with flakes for reproducible system configuration
 - **LeftWM** tiling window manager with custom theming
 - **EWW** widgets for system monitoring and app launching
-- **Doom Emacs** with custom sunset-cave theme and LSP setup
+- **Doom Emacs** with custom alpine-dusk theme and LSP setup
 - **Unified theming** across all applications
 - **Framework 13 AMD** optimized configuration
 
@@ -27,11 +27,11 @@ home-manager switch --flake .
 
 ## 🎨 Theme
 
-The **Sunset Cave** color palette creates a warm, productive environment:
-- **Background**: `#1A1A1D` (dark cave)
-- **Foreground**: `#E6DDD1` (warm cream) 
-- **Accent**: `#E8846C` (sunset orange)
-- **Highlight**: `#FFB4A2` (coral)
+The **Alpine Dusk** color palette creates a deep, focused environment inspired by an alpine sunset:
+- **Background**: `#1A1830` (deep night-sky indigo)
+- **Foreground**: `#DDE2EC` (cool silver-white snow)
+- **Accent**: `#8858C8` (vivid purple)
+- **Highlight**: `#4A70AA` (steel blue cliff shadows)
 
 ## 🔧 Key Components
 

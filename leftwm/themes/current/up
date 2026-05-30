@@ -30,4 +30,4 @@ leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
 eww open information
 
-trayer --edge right --expand false --align top --monitor 2 --iconspacing 10 --tint 0xff2C3241 --alpha 100 &
+trayer --edge right --expand false --align top --monitor 2 --iconspacing 10 --tint 0xff282348 --alpha 100 &

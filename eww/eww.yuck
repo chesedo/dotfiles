@@ -14,12 +14,12 @@
   :monitor 0
   :geometry (geometry
              :width "570px"
-             :height "814px"
+             :height "752px"
              :x "-28px"
              :anchor "bottom right")
   :windowtype "desktop"
   :wm-ignore true
-  (box :orientation "vertical" :space-evenly false :valign "center" :halign "end"
+  (box :orientation "vertical" :space-evenly false :valign "center" :halign "end" :class "info-panel"
        (tags)
        (voxtype)
        (time)

@@ -9,28 +9,28 @@ color = "#ffffff"
 duration = 300
 
 [colors.bright]
-black = "#2C3241"
-red = "#D27D76"        # Muted red
-green = "#7BA7B5"      # Faded blue-green
-yellow = "#D9B99B"     # Muted gold
-blue = "#566A87"       # Subdued blue
-magenta = "#A07E96"    # Muted purple
-cyan = "#7A9BA7"       # Faded cyan
-white = "#E6DDD1"
+black = "#38305A"
+red = "#C04848"        # Bright red (errors, diffs)
+green = "#6878A0"      # Blue-grey stone
+yellow = "#8858C8"     # Purple accent (no yellow)
+blue = "#4A70AA"       # Steel blue cliffs
+magenta = "#8858C8"    # Purple accent
+cyan = "#7898C0"       # Pale glacier blue
+white = "#DDE2EC"
 
 [colors.normal]
-black = "#2C3241"
-red = "#C77C6C"        # Muted sunset orange
-green = "#6FA193"      # Faded sage green
-yellow = "#D9A594"     # Muted coral
-blue = "#465366"       # Your original dark blue
-magenta = "#B47F6B"    # Muted orange-brown
-cyan = "#8B95A4"       # Faded blue-grey
-white = "#D9D2C7"      # Slightly dimmed white
+black = "#282348"
+red = "#A03838"        # Muted red (errors, diffs)
+green = "#506080"      # Deep slate blue
+yellow = "#6A40A8"     # Dark purple (no yellow)
+blue = "#38305A"       # Dark indigo
+magenta = "#6A40A8"    # Dark purple
+cyan = "#6878A0"       # Blue-grey muted
+white = "#A8B0C8"      # Dimmed silver
 
 [colors.primary]
-background = "#1A1A1D"
-foreground = "#E6DDD1"
+background = "#1A1830"
+foreground = "#DDE2EC"
 
 [font]
 size = 10.0

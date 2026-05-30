@@ -152,14 +152,14 @@
           font-size = 1em
           font-weight = bold
           font-style = normal
-          text-color = "#E6DDD1"
-          error-color = "#E8846C"
-          background-color = "#1A1A1D"
+          text-color = "#DDE2EC"
+          error-color = "#4A70AA"
+          background-color = "#1A1830"
           background-image = ""
           layout-space = 0
-          password-color = "#E6DDD1"
-          password-background-color = "#2C3241"
-          password-border-color = "#E8846C"
+          password-color = "#DDE2EC"
+          password-background-color = "#282348"
+          password-border-color = "#8858C8"
           password-border-width = 1
         '';
       };
