@@ -1,7 +1,7 @@
 {
   config,
+  lib,
   pkgs,
-  nixmox,
   piperVoiceModels,
   voxtype,
   ...
@@ -9,13 +9,6 @@
 
 let
   secrets = import (builtins.toPath (builtins.getEnv "HOME" + "/dotfiles/home-manager/secrets.nix"));
-
-  alpine-dusk-theme = nixmox.oomoxPlugins.theme-oomox.generate {
-    name = "alpine-dusk";
-    src = ./theme/theme-file;
-    gtkVariant = "all";
-  };
-
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -94,23 +87,77 @@ in
 
   gtk = {
     enable = true;
-    iconTheme = {
+    gtk4.theme = null;
+  };
+
+  stylix = {
+    enable = true;
+    base16Scheme = import ./theme/alpine-dusk.nix;
+    image = ../leftwm/themes/current/background.jpg;
+    polarity = "dark";
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 20;
+    };
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Propo";
+      };
+      serif = {
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Propo";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+      sizes = {
+        applications = 12;
+        desktop = 10;
+        terminal = 12;
+        popups = 10;
+      };
+    };
+
+    icons = {
+      enable = true;
       package = pkgs.tela-icon-theme;
-      name = "Tela-blue";
+      light = "Tela-blue";
+      dark = "Tela-blue";
     };
-    theme = {
-      package = alpine-dusk-theme;
-      name = "alpine-dusk";
-    };
-    gtk4.theme = {
-      package = alpine-dusk-theme;
-      name = "alpine-dusk";
-    };
+
+    opacity.terminal = 0.95;
   };
 
   nixpkgs.config.allowUnfree = true;
 
   programs = {
+    alacritty = {
+      enable = true;
+      settings = {
+        window = {
+          padding = {
+            x = 10;
+            y = 10;
+          };
+          dynamic_padding = true;
+        };
+        bell = {
+          animation = "EaseOutExpo";
+          color = "#ffffff";
+          duration = 300;
+        };
+      };
+    };
+
     autorandr = {
       enable = true;
       hooks = {
@@ -415,11 +462,9 @@ in
       enable = true;
       settings = {
         global = {
-          font = "FiraCode Nerd Font 10";
           frame_width = 2;
-          frame_color = "#8858C8";
+          # colors injected by Stylix
 
-          separator_color = "frame";
           separator_height = 2;
 
           padding = 8;
@@ -427,31 +472,11 @@ in
           text_icon_padding = 0;
 
           corner_radius = 10;
-
-          background = "#1A1830";
-          foreground = "#DDE2EC";
         };
 
-        urgency_low = {
-          background = "#282348";
-          foreground = "#DDE2EC";
-          frame_color = "#38305A";
-          timeout = 10;
-        };
-
-        urgency_normal = {
-          background = "#282348";
-          foreground = "#DDE2EC";
-          frame_color = "#8858C8";
-          timeout = 10;
-        };
-
-        urgency_critical = {
-          background = "#1A1830";
-          foreground = "#DDE2EC";
-          frame_color = "#4A70AA";
-          timeout = 0;
-        };
+        urgency_low.timeout = 10;
+        urgency_normal.timeout = 10;
+        urgency_critical.timeout = 0;
       };
     };
   };
@@ -470,7 +495,6 @@ in
       Type=Application
     '';
 
-    "alacritty/alacritty.toml".source = ../alacritty.toml;
     "blugon/config".source = ./blugon/config;
     "leftwm".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
@@ -501,11 +525,21 @@ in
     };
   };
 
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Amber";
-    size = 20;
-    gtk.enable = true;
-    x11.enable = true;
-  };
+  home.activation.generateEwwColors =
+    let
+      c = config.lib.stylix.colors;
+    in
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      cat > ${config.home.homeDirectory}/dotfiles/eww/colors.scss << 'EOF'
+      // Generated from home-manager/theme/alpine-dusk.yaml — do not edit manually
+      $theme-bg:        #${c.base00};
+      $theme-bg-alt:    #${c.base01};
+      $theme-fg:        #${c.base05};
+      $theme-accent:    #${c.base0E};
+      $theme-muted:     #${c.base04};
+      $theme-highlight: #${c.base0D};
+      $theme-border:    #${c.base02};
+      $shadow:          #${c.base00};
+      EOF
+    '';
 }

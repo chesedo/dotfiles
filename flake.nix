@@ -8,8 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixmox = {
-      url = "git+https://git.isincredibly.gay/srxl/nixmox";
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -38,7 +38,7 @@
       nixpkgs,
       nixos-hardware,
       home-manager,
-      nixmox,
+      stylix,
       zen-browser,
       voxtype,
       piper-voice-ryan-onnx,
@@ -99,10 +99,10 @@
           extraSpecialArgs = {
             inherit piperVoiceModels;
 
-            nixmox = nixmox.packages.${system};
             voxtype = voxtype.packages.${system};
           };
           modules = [
+            stylix.homeModules.stylix
             ./home-manager/home.nix
             voxtype.homeManagerModules.default
           ];

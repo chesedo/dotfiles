@@ -7,6 +7,9 @@
   ...
 }:
 
+let
+  theme = import ../home-manager/theme/alpine-dusk.nix;
+in
 {
   boot.loader.grub.enable = false;
 
@@ -152,14 +155,14 @@
           font-size = 1em
           font-weight = bold
           font-style = normal
-          text-color = "#DDE2EC"
-          error-color = "#4A70AA"
-          background-color = "#1A1830"
+          text-color = "#${theme.base05}"
+          error-color = "#${theme.base08}"
+          background-color = "#${theme.base00}"
           background-image = ""
           layout-space = 0
-          password-color = "#DDE2EC"
-          password-background-color = "#282348"
-          password-border-color = "#8858C8"
+          password-color = "#${theme.base05}"
+          password-background-color = "#${theme.base01}"
+          password-border-color = "#${theme.base0E}"
           password-border-width = 1
         '';
       };
