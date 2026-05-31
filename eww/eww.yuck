@@ -33,7 +33,7 @@
             (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
                  (time-panel))
             (box :orientation "vertical" :space-evenly false :spacing 20
-                 (box :orientation "vertical" :space-evenly false :class "info-panel"
+                 (box :orientation "vertical" :space-evenly false :class "info-panel weather-panel"
                       (weather))
                  (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
                       (resources)))

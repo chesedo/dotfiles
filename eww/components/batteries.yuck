@@ -8,7 +8,7 @@
                            :model "${battery.model}"
                            :percent {round(battery.percentage, 0)}
                            :state "${battery.state}"
-                           :time-remaining {battery.time_to_empty != "null" ? "· ${battery.time_to_empty} ${battery.time_to_empty_unit} left" : (battery.time_to_full != "null" ? "· ${battery.time_to_full} ${battery.time_to_full_unit} to full" : "")}
+                           :time-remaining {battery.time_label != "" ? "· ${battery.time_label}" : ""}
                            :halign "fill" :hexpand true))))
 
 (defwidget battery-item [type-icon level-icon model percent state time-remaining]

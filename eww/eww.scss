@@ -72,6 +72,7 @@ button {
 
 .hours {
   font-size: 3em;
+  font-weight: 300;
 }
 
 .minutes {
@@ -122,6 +123,14 @@ calendar:selected {
 graph {
   background: rgba($theme-bg, 0.08);
   color: $theme-highlight;
+}
+
+.net-graph graph {
+  color: $theme-accent;
+}
+
+.weather-panel {
+  padding: 12px 24px;
 }
 
 .resource-title {
@@ -353,6 +362,7 @@ scale.music-progress {
 
 .weather-icon {
   font-size: 1.4em;
+  margin-bottom: 2px;
 }
 
 .weather-temp {
