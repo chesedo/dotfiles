@@ -1,37 +1,21 @@
 (deflisten batteries :initial "[]" `scripts/batteries.sh`)
-(defvar show-battery-extra false)
 
 (defwidget batteries []
-   (eventbox  :onhover "${EWW_CMD} update show-battery-extra=true"
-              :onhoverlost "${EWW_CMD} update show-battery-extra=false"
-              (box :orientation "vertical" :hexpand true :halign "fill"
-                   (for battery in batteries
-                        (battery-item :icon "${battery.type_icon}"
-                                      :text "${battery.model}"
-                                      :percent {battery.percentage}
-                                      :state "${battery.state}"
-                                      :last-updated "${battery.last_updated} ago"
-                                      :time-to-empty {battery.time_to_empty != "null" ? "| ${battery.time_to_empty} ${battery.time_to_empty_unit} left" : (battery.time_to_full != "null" ? "${battery.time_to_full} ${battery.time_to_full_unit}" : "")}
-                                      :halign "fill" :hexpand true))
-                   )
-              )
-  )
+   (box :orientation "vertical" :hexpand true :halign "fill" :spacing 8
+        (for battery in batteries
+             (battery-item :type-icon "${battery.type_icon}"
+                           :level-icon "${battery.level_icon}"
+                           :model "${battery.model}"
+                           :percent {round(battery.percentage, 0)}
+                           :state "${battery.state}"
+                           :time-remaining {battery.time_to_empty != "null" ? "· ${battery.time_to_empty} ${battery.time_to_empty_unit} left" : (battery.time_to_full != "null" ? "· ${battery.time_to_full} ${battery.time_to_full_unit} to full" : "")}
+                           :halign "fill" :hexpand true))))
 
-(defwidget battery-item [icon text percent state last-updated time-to-empty]
-  (box :orientation "horizontal"
-       :space-evenly false
-       :spacing 12
-       :hexpand true
-       (label :text icon :class "icon" :justify "center" :width 15)
-       (overlay :hexpand true
-                (revealer :reveal {!show-battery-extra} :transition "crossfade"
-                          (box :space-evenly false :spacing 12
-                               (label :text text :hexpand true :halign "start")
-                               (label :text {state == "charging" ? "󰂄" : ""})
-                               (label :text "${percent}%"
-                                      :class {state != "charging" && percent <= 20 ? "battery-low" : ""})))
-                (revealer :reveal {show-battery-extra} :transition "crossfade"
-                          (box :space-evenly false :spacing 12
-                               (label :text last-updated)
-                               (label :text time-to-empty)))
-       )))
+(defwidget battery-item [type-icon level-icon model percent state time-remaining]
+  (box :orientation "horizontal" :space-evenly false :spacing 10 :hexpand true
+       (label :text type-icon :justify "center" :width 15)
+       (label :text model :class "battery-model" :hexpand true :halign "start")
+       (label :text level-icon
+              :class {state != "charging" && percent <= 20 ? "battery-low" : "battery-charging"})
+       (label :text "${percent}%" :class "battery-percent")
+       (label :text time-remaining :class "battery-detail")))

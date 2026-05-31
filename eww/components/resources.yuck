@@ -1,26 +1,22 @@
 (defvar network_max 20971520)
-(deflisten net :initial '{"down":0,"up":0}' `scripts/net.sh`)
+(deflisten net :initial '{"down":0,"up":0,"iface":""}' `scripts/net.sh`)
 
 (defwidget resources []
    (box :orientation "vertical" :spacing 16
-        (resource-graph :title "CPU"  :current "${round(EWW_CPU.avg, 1)}%"                   :value "${EWW_CPU.avg}"          :min 0 :max 100)
-        (resource-graph :title "RAM"  :current "${round(EWW_RAM.used_mem / 1073741824, 2)} Gb" :value "${EWW_RAM.used_mem_perc}" :min 0 :max 100)
-        (resource-graph :title "DOWN" :current "${round(net.down / 1048576, 1)} Mb"            :value "${net.down}"             :min 0 :max {network_max})
-        (resource-graph :title "UP"   :current "${round(net.up / 1048576, 1)} Mb"              :value "${net.up}"               :min 0 :max {network_max})))
+        (resource-graph :title "CPU" :current "${round(EWW_CPU.avg, 1)}%"                    :value "${EWW_CPU.avg}"          :min 0 :max 100)
+        (resource-graph :title "RAM" :current "${round(EWW_RAM.used_mem / 1073741824, 2)} Gb" :value "${EWW_RAM.used_mem_perc}" :min 0 :max 100)
+        (resource-graph :title "↓ ${net.iface}" :current "${round(net.down / 1048576, 1)} Mb" :value "${net.down}" :min 0 :max {network_max})
+        (resource-graph :title "↑ ${net.iface}" :current "${round(net.up / 1048576, 1)} Mb"  :value "${net.up}"   :min 0 :max {network_max})))
 
 (defwidget resource-graph [title current value min max]
-  (box :space-evenly false
-       :halign "end"
-       :class "resource-graph"
-       (overlay
-        (graph :value value
-               :min min
-               :max max
-               :width 240
-               :height 50
-               :time-range "60s"
-               :dynamic false)
-        (box :orientation "vertical" :valign "center" :halign "end" :space-evenly false
-             (label :text title :xalign 1)
-             (label :text current))
-        )))
+  (box :orientation "vertical" :space-evenly false :spacing 4 :class "resource-graph"
+       (box :orientation "horizontal" :space-evenly false
+            (label :text title :class "resource-title" :halign "start" :hexpand true)
+            (label :text current :class "resource-value"))
+       (graph :value value
+              :min min
+              :max max
+              :width 240
+              :height 36
+              :time-range "60s"
+              :dynamic false)))

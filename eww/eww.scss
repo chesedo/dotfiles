@@ -121,8 +121,14 @@ graph {
   color: $theme-highlight;
 }
 
-.resource-graph {
-  margin-top: 4px;
+.resource-title {
+  font-size: 0.8em;
+  color: $theme-muted;
+}
+
+.resource-value {
+  font-size: 0.85em;
+  font-weight: bold;
 }
 
 .screenshot-preview {
@@ -361,9 +367,30 @@ scale.music-progress {
   color: $theme-muted;
 }
 
-.battery-low {
-  color: $theme-warn;
+.battery-model {
+  font-size: 0.85em;
+  color: $theme-muted;
+}
+
+.battery-percent {
+  font-size: 0.85em;
   font-weight: bold;
+}
+
+.battery-charging {
+  font-size: 0.85em;
+  color: $theme-highlight;
+}
+
+.battery-low {
+  font-size: 0.85em;
+  font-weight: bold;
+  color: $theme-warn;
+}
+
+.battery-detail {
+  font-size: 0.75em;
+  color: $theme-muted;
 }
 
 .voxtype-status {

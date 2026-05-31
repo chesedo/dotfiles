@@ -10,7 +10,7 @@ while true; do
     | awk 'NR==1{ for(i=1;i<=NF;i++) if($i=="dev") { print $(i+1); exit } }')
 
   if [[ -z "$iface" ]]; then
-    echo '{"down":0,"up":0}'
+    echo '{"down":0,"up":0,"iface":""}'
     sleep 2
     continue
   fi
@@ -23,7 +23,7 @@ while true; do
     up=$(( tx - prev_tx ))
     [[ $down -lt 0 ]] && down=0
     [[ $up -lt 0 ]] && up=0
-    printf '{"down":%d,"up":%d}\n' "$down" "$up"
+    printf '{"down":%d,"up":%d,"iface":"%s"}\n' "$down" "$up" "$iface"
   fi
 
   prev_rx=$rx
