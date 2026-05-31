@@ -299,6 +299,11 @@ graph {
   margin: 2px 0;
 }
 
+.battery-low {
+  color: $theme-warn;
+  font-weight: bold;
+}
+
 .voxtype-status {
   font-size: 1.4em;
   &.idle         { color: $theme-muted; }

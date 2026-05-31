@@ -539,6 +539,7 @@ in
       $theme-muted:     #${c.base04};
       $theme-highlight: #${c.base0D};
       $theme-border:    #${c.base02};
+      $theme-warn:      #${c.base0A};
       $shadow:          #${c.base00};
       EOF
     '';

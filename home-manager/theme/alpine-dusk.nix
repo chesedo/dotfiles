@@ -11,7 +11,7 @@
   base07 = "F0F4FA"; # lightest
   base08 = "A03838"; # red — errors / diffs
   base09 = "C04848"; # orange — bright red
-  base0A = "6878A0"; # yellow slot — blue-grey (no yellow)
+  base0A = "C89840"; # yellow — amber gold (sunset over peaks)
   base0B = "506080"; # green slot — deep slate blue
   base0C = "7898C0"; # cyan — glacier blue
   base0D = "4A70AA"; # blue — steel blue highlight

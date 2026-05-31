@@ -8,7 +8,7 @@
                    (for battery in batteries
                         (battery-item :icon "${battery.type_icon}"
                                       :text "${battery.model}"
-                                      :percent "${battery.percentage}"
+                                      :percent {battery.percentage}
                                       :state "${battery.state}"
                                       :last-updated "${battery.last_updated} ago"
                                       :time-to-empty {battery.time_to_empty != "null" ? "| ${battery.time_to_empty} ${battery.time_to_empty_unit} left" : (battery.time_to_full != "null" ? "${battery.time_to_full} ${battery.time_to_full_unit}" : "")}
@@ -28,7 +28,8 @@
                           (box :space-evenly false :spacing 12
                                (label :text text :hexpand true :halign "start")
                                (label :text {state == "charging" ? "󰂄" : ""})
-                               (label :text "${percent}%")))
+                               (label :text "${percent}%"
+                                      :class {state != "charging" && percent <= 20 ? "battery-low" : ""})))
                 (revealer :reveal {show-battery-extra} :transition "crossfade"
                           (box :space-evenly false :spacing 12
                                (label :text last-updated)
