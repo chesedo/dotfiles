@@ -14,16 +14,15 @@
                    (revealer :reveal {!show-calendar}
                              (box :space-evenly false :halign "center"
                                   (label :text hours :class "hours" :valign "center")
-                                  (label :text minutes :class "minutes" :valign "center")
-                                  )
+                                  (label :text minutes :class "minutes" :valign "start"))
                              )
                    ))))
 
 ; Always-visible version with date — used in left-panel
 (defwidget time-panel []
     (box :orientation "vertical" :space-evenly false :halign "center" :spacing 8
-            (box :space-evenly false :halign "center"
+            (box :space-evenly false :halign "center" :valign "center"
                 (label :text hours :class "hours" :valign "center")
-                (label :text minutes :class "minutes" :valign "center"))
+                (label :text minutes :class "minutes" :valign "start"))
             (label :text date :class "date" :halign "center")
             (calendar :class "transparent")))
