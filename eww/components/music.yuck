@@ -1,13 +1,8 @@
 (deflisten song :initial "null" `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}"}'`)
 
 (defwidget music []
-  (box :visible {song == "null" ? false : true}
-       (item
-        (box :orientation "vertical" :space-evenly false :spacing 12
-             (label :text "${song?.artist}" :limit-width 20)
-             (label :text "---------")
-             (label :text "${song?.title}" :limit-width 20)
-             (image :path "${replace(song?.artUrl, 'file://', '')}" :image-width 240 :image-height 240)
-             )
-        )
-       ))
+  (box :orientation "vertical" :space-evenly false :spacing 12
+       (label :text "${song?.artist}" :limit-width 20)
+       (label :text "---------")
+       (label :text "${song?.title}" :limit-width 20)
+       (image :path "${replace(song?.artUrl, 'file://', '')}" :image-width 240 :image-height 240)))

@@ -2,7 +2,6 @@
 (defvar show-battery-extra false)
 
 (defwidget batteries []
-  (item
    (eventbox  :onhover "${EWW_CMD} update show-battery-extra=true"
               :onhoverlost "${EWW_CMD} update show-battery-extra=false"
               (box :orientation "vertical" :hexpand true :halign "fill"
@@ -16,7 +15,6 @@
                                       :halign "fill" :hexpand true))
                    )
               )
-   )
   )
 
 (defwidget battery-item [icon text percent state last-updated time-to-empty]

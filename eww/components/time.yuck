@@ -1,8 +1,10 @@
 (deflisten hours `scripts/hours.sh`)
 (deflisten minutes `scripts/minutes.sh`)
+(defpoll date :interval "60s" `date +"%a %d %b"`)
 
 (defvar show-calendar false)
 
+; Hover-based compact version — used in overview
 (defwidget time []
   (item :class "transparent"
         (eventbox :onhover "${EWW_CMD} update show-calendar=true"
@@ -16,3 +18,12 @@
                                   )
                              )
                    ))))
+
+; Always-visible version with date — used in left-panel
+(defwidget time-panel []
+    (box :orientation "vertical" :space-evenly false :halign "center" :spacing 8
+            (box :space-evenly false :halign "center"
+                (label :text hours :class "hours" :valign "center")
+                (label :text minutes :class "minutes" :valign "center"))
+            (label :text date :class "date" :halign "center")
+            (calendar :class "transparent")))

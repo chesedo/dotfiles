@@ -13,41 +13,43 @@
 (defwindow information
   :monitor 0
   :geometry (geometry
-             :width "570px"
-             :height "752px"
-             :x "-28px"
-             :anchor "bottom right")
+             :width "100%"
+             :height "100%"
+             :x "0px"
+             :y "0px"
+             :anchor "top left")
   :windowtype "desktop"
   :wm-ignore true
-  (box :orientation "vertical" :space-evenly false :valign "center" :halign "end" :class "info-panel"
-       (tags)
-       (voxtype)
-       (time)
-       (systray :icon-size 32)
-       (batteries)
-       (resources)
-       (music)
-  )
-)
+  (box :orientation "vertical" :space-evenly false :spacing 20
+       :halign "center" :valign "center"
+       (box :orientation "horizontal" :space-evenly false :halign "center" :spacing 20
+            (box :orientation "horizontal" :space-evenly false :class "info-panel"
+                 (tags))
+            (box :orientation "horizontal" :space-evenly false :class "info-panel" :spacing 16
+                 (voxtype)
+                 (systray :icon-size 24)))
+       (box :orientation "horizontal" :space-evenly false :spacing 20 :valign "start"
+            (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
+                 (time-panel))
+            (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
+                 (resources))
+            (box :orientation "vertical" :space-evenly false :spacing 20
+                 (box :orientation "vertical" :space-evenly false :class "info-panel"
+                      (batteries))
+                 (box :visible {song != "null"} :orientation "vertical" :space-evenly false :class "info-panel"
+                      (music))))))
 
 (defwindow overview
+  :monitor 0
   :geometry (geometry :y "-32px"
                       :anchor "center center")
   :windowtype "normal"
   :wm-ignore true
-  (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :css "overview"
+  (box :orientation "vertical" :space-evenly false :valign "start" :halign "start" :class "overview"
        (tags)
        (time)
        (batteries)
        (resources)
-       (music)
+       (box :visible {song != "null"} (music))
   )
 )
-
-(defwidget item []
-  (box :orientation "horizontal"
-       :halign "center"
-       :valign "center"
-       :class "item"
-       :space-evenly false
-       (children)))

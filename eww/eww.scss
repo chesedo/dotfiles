@@ -12,7 +12,7 @@ window {
   background: rgba($theme-fg, 0.82);
   border-radius: 12px;
   border: 1px solid rgba($theme-muted, 0.3);
-  padding: 12px 16px;
+  padding: 20px 24px;
 }
 
 button {
@@ -33,11 +33,6 @@ button {
     background-color: rgba($theme-highlight, 0.6);
 }
 
-.item {
-    margin-bottom: 2em;
-    margin-right: 2em;
-}
-
 .b {
   border: 0px dotted $theme-border;
 }
@@ -53,11 +48,6 @@ button {
 .transparent {
   background-color: transparent;
   border: 0;
-}
-
-.item:first-child {
-    margin-top: 2em;
-    margin-left: 2em;
 }
 
 .tags > * {
@@ -88,6 +78,12 @@ button {
 .minutes {
     font-size: 2em;
     padding-top: 0.7em;
+}
+
+.date {
+  font-size: 0.9em;
+  color: $theme-muted;
+  letter-spacing: 0.04em;
 }
 
 calendar {
@@ -126,11 +122,7 @@ graph {
 }
 
 .resource-graph {
-  margin-top: 8px;
-}
-
-.resource-graph box {
-  margin-right: 2em;
+  margin-top: 4px;
 }
 
 .screenshot-preview {
