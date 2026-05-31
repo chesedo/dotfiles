@@ -1,0 +1,13 @@
+(defpoll weather :interval "15m"
+  :initial '{"temp":"…","condition":"Loading","high":"…","low":"…","icon":"🌡️"}'
+  `scripts/weather.sh`)
+
+(defwidget weather []
+  (box :orientation "vertical" :space-evenly false :spacing 8 :halign "center"
+       (box :orientation "horizontal" :space-evenly false :spacing 12 :halign "center"
+            (label :text {weather.icon} :class "weather-icon")
+            (label :text "${weather.temp}°C" :class "weather-temp"))
+       (label :text {weather.condition} :class "weather-condition" :halign "center")
+       (box :orientation "horizontal" :space-evenly false :spacing 20 :halign "center"
+            (label :text "↑ ${weather.high}°" :class "weather-range")
+            (label :text "↓ ${weather.low}°" :class "weather-range"))))

@@ -1,4 +1,5 @@
 (include "components/batteries.yuck")
+(include "components/weather.yuck")
 (include "components/music.yuck")
 (include "components/voxtype.yuck")
 (include "components/resources.yuck")
@@ -31,8 +32,11 @@
        (box :orientation "horizontal" :space-evenly false :spacing 20 :valign "start"
             (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
                  (time-panel))
-            (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
-                 (resources))
+            (box :orientation "vertical" :space-evenly false :spacing 20
+                 (box :orientation "vertical" :space-evenly false :class "info-panel"
+                      (weather))
+                 (box :orientation "vertical" :space-evenly false :class "info-panel" :valign "start"
+                      (resources)))
             (box :orientation "vertical" :space-evenly false :spacing 20
                  (box :orientation "vertical" :space-evenly false :class "info-panel"
                       (batteries))

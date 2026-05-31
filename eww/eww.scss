@@ -342,6 +342,25 @@ scale.music-progress {
   }
 }
 
+.weather-icon {
+  font-size: 1.4em;
+}
+
+.weather-temp {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.weather-condition {
+  font-size: 0.9em;
+  color: $theme-muted;
+}
+
+.weather-range {
+  font-size: 0.85em;
+  color: $theme-muted;
+}
+
 .battery-low {
   color: $theme-warn;
   font-weight: bold;
