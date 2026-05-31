@@ -11,7 +11,7 @@
                    :min 0
                    :max {song != "null" && song.length > 0 ? song.length / 1000000 : 1}
                    :value {music-position.value}
-                   :onchange "playerctl position {}")
+                   :onchange "scripts/music-seek.sh {}")
             (box :orientation "horizontal" :space-evenly false
                  (label :text {music-position.fmt} :class "music-time")
                  (box :hexpand true)
