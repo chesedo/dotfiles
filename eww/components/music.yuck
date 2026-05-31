@@ -1,8 +1,23 @@
-(deflisten song :initial "null" `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}"}'`)
+(deflisten song :initial "null" `playerctl --follow metadata --format '{"artist":"{{artist}}","title":"{{title}}","artUrl":"{{mpris:artUrl}}","length":{{mpris:length}},"status":"{{status}}"}'`)
+(deflisten music-position :initial '{"value":0,"fmt":"0:00"}' `scripts/music-position.sh`)
 
 (defwidget music []
   (box :orientation "vertical" :space-evenly false :spacing 12
-       (label :text "${song?.artist}" :limit-width 20)
-       (label :text "---------")
-       (label :text "${song?.title}" :limit-width 20)
-       (image :path "${replace(song?.artUrl, 'file://', '')}" :image-width 240 :image-height 240)))
+       (image :path "${replace(song?.artUrl, 'file://', '')}" :image-width 240 :image-height 240)
+       (label :text "${song?.title}" :class "music-title" :limit-width 24)
+       (label :text "${song?.artist}" :class "music-artist" :limit-width 24)
+       (box :orientation "vertical" :space-evenly false :spacing 4
+            (scale :class "music-progress"
+                   :min 0
+                   :max {song != "null" && song.length > 0 ? song.length / 1000000 : 1}
+                   :value {music-position.value}
+                   :onchange "playerctl position {}")
+            (box :orientation "horizontal" :space-evenly false
+                 (label :text {music-position.fmt} :class "music-time")
+                 (box :hexpand true)
+                 (label :text {song != "null" ? (song.status == "Playing" ? "▶" : "⏸") : ""}
+                        :class "music-status")
+                 (box :hexpand true)
+                 (label :text {song != "null" && song.length > 0 ?
+                               "${floor(song.length / 60000000)}:${floor(song.length / 1000000 % 60) < 10 ? "0" : ""}${floor(song.length / 1000000 % 60)}" : ""}
+                        :class "music-time")))))

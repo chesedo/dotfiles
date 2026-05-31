@@ -299,6 +299,49 @@ graph {
   margin: 2px 0;
 }
 
+.music-title {
+  font-size: 1.05em;
+  font-weight: bold;
+}
+
+.music-artist {
+  font-size: 0.85em;
+  color: $theme-muted;
+}
+
+.music-status {
+  font-size: 0.8em;
+  color: $theme-muted;
+  margin-right: 6px;
+}
+
+.music-time {
+  font-size: 0.8em;
+  color: $theme-muted;
+}
+
+scale.music-progress {
+  trough {
+    background: rgba($theme-bg, 0.15);
+    border-radius: 4px;
+    min-height: 4px;
+  }
+
+  trough highlight {
+    background: $theme-highlight;
+    border-radius: 4px;
+  }
+
+  slider {
+    background: $theme-highlight;
+    border-radius: 50%;
+    border: none;
+    min-width: 10px;
+    min-height: 10px;
+    margin: -3px 0;
+  }
+}
+
 .battery-low {
   color: $theme-warn;
   font-weight: bold;
