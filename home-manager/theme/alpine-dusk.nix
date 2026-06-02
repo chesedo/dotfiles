@@ -5,7 +5,7 @@
   base01 = "282348"; # bg-alt — rich dark indigo
   base02 = "38305A"; # border / selection bg
   base03 = "504870"; # comments / inactive
-  base04 = "6878A0"; # muted — blue-grey stone
+  base04 = "A0B0D0"; # muted — blue-grey stone (lighter for dark panels)
   base05 = "DDE2EC"; # fg — cool silver-white
   base06 = "E8EDF5"; # lighter fg
   base07 = "F0F4FA"; # lightest

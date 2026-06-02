@@ -4,15 +4,16 @@
 //Global Styles
 window {
   background: transparent;
-  color: $theme-bg;
+  color: $theme-fg;
   font-family: "FiraCode Nerd Font";
 }
 
 .info-panel {
-  background: rgba($theme-fg, 0.82);
-  border-radius: 12px;
-  border: 1px solid rgba($theme-muted, 0.3);
+  background: rgba($theme-bg-alt, 0.88);
+  border-radius: 8px;
+  border: 1px solid $theme-border;
   padding: 20px 24px;
+  color: $theme-fg;
 }
 
 button {
@@ -25,12 +26,14 @@ button {
 
   &:hover {
     background-color: $theme-highlight;
-    color: $theme-bg;
+    color: $theme-fg;
   }
 }
 
 .overview {
-    background-color: rgba($theme-highlight, 0.6);
+  background-color: rgba($theme-bg-alt, 0.92);
+  border: 1px solid $theme-border;
+  border-radius: 8px;
 }
 
 .b {
@@ -87,7 +90,7 @@ button {
 }
 
 calendar {
-  color: $theme-bg;
+  color: $theme-fg;
   padding: 0 2px;
   font-size: 0.85em;
 }
@@ -111,7 +114,7 @@ calendar.highlight {
 }
 
 calendar:indeterminate {
-  color: rgba($theme-bg, 0.3);
+  color: rgba($theme-fg, 0.25);
 }
 
 calendar:selected {
@@ -121,7 +124,7 @@ calendar:selected {
 }
 
 graph {
-  background: rgba($theme-bg, 0.08);
+  background: rgba($theme-fg, 0.06);
   color: $theme-highlight;
 }
 
@@ -340,7 +343,7 @@ graph {
 
 scale.music-progress {
   trough {
-    background: rgba($theme-bg, 0.15);
+    background: rgba($theme-fg, 0.12);
     border-radius: 4px;
     min-height: 4px;
   }
@@ -408,7 +411,7 @@ scale.music-progress {
 
 .voxtype-status {
   font-size: 1.2em;
-  &.idle         { color: rgba($theme-bg, 0.5); }
+  &.idle         { color: $theme-muted; }
   &.recording    { color: $theme-highlight; }
   &.transcribing { color: $theme-accent; }
 }

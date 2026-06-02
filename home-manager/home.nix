@@ -418,7 +418,7 @@ in
           enabled = true;
           key = "RIGHTCTRL";
         };
-        audio.device = "alsa_input.pci-0000_c1_00.6.analog-stereo";
+        audio.device = "sysdefault:CARD=Generic_1";
         whisper = {
           mode = "remote";
           remote_endpoint = "http://wsl:8080";
