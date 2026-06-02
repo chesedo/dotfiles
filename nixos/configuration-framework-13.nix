@@ -48,6 +48,31 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
+  systemd.services.battery-cycle-guard = {
+    description = "Keep battery between 40% and 80% when plugged in";
+    after = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      RestartSec = "60s";
+    };
+    script = ''
+      while true; do
+        capacity=$(cat /sys/class/power_supply/BAT1/capacity)
+        threshold=$(cat /sys/class/power_supply/BAT1/charge_control_end_threshold)
+
+        if [ "$threshold" -ge 80 ] && [ "$capacity" -ge 80 ]; then
+          echo 40 > /sys/class/power_supply/BAT1/charge_control_end_threshold
+        elif [ "$threshold" -lt 80 ] && [ "$capacity" -le 40 ]; then
+          echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold
+        fi
+
+        sleep 60
+      done
+    '';
+  };
+
   system.userActivationScripts.linktosharedfolders.text = ''
     if [[ ! -h "$HOME/git" ]]; then
       ln -s "/media/extra/git" "$HOME/git"
