@@ -129,9 +129,9 @@ in
 
     icons = {
       enable = true;
-      package = pkgs.tela-icon-theme;
-      light = "Tela-blue";
-      dark = "Tela-blue";
+      package = pkgs.papirus-icon-theme;
+      light = "Papirus-Dark";
+      dark = "Papirus-Dark";
     };
 
     opacity.terminal = 0.95;
