@@ -67,7 +67,7 @@
         if [ "$threshold" -ge 80 ] && [ "$capacity" -ge 80 ]; then
           echo 40 > /sys/class/power_supply/BAT1/charge_control_end_threshold
           echo "Stopped charging at $capacity%"
-        elif [ "$threshold" -lt 80 ] && [ "$capacity" -le 40 ]; then
+        elif [ "$threshold" -lt 80 ] && [ "$capacity" -le 41 ]; then
           echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold
           echo "Started charging at $capacity%"
         fi
