@@ -14,8 +14,8 @@
     mousekey: "Mod4",
     workspaces: [
         (output: "", x: 0, y: 0, height: 1080, width: 1920, id: 0),    // left 24" (native)
-        (output: "", x: 1920, y: 0, height: 1260, width: 2240, id: 1), // middle 27" (scale 0.875)
-        (output: "", x: 4160, y: 0, height: 1080, width: 1920, id: 2), // right 24" (native)
+        (output: "", x: 1920, y: 0, height: 1224, width: 2176, id: 1), // middle 27" (scale 0.85)
+        (output: "", x: 4096, y: 0, height: 1080, width: 1920, id: 2), // right 24" (native)
     ],
     tags: [
         "1",

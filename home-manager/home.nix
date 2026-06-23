@@ -182,7 +182,7 @@ in
             small = {
               enable = true;
               primary = true;
-              position = "4160x1080";
+              position = "4096x1080";
               mode = "2256x1504";
               rate = "60.00";
               rotate = "normal";
@@ -204,15 +204,14 @@ in
               mode = "2560x1440";
               rate = "165.08";
               rotate = "normal";
-              filter = "nearest";
               scale = {
-                x = 0.875;
-                y = 0.875;
+                x = 0.85;
+                y = 0.85;
               };
             };
             right = {
               enable = true;
-              position = "4160x0";
+              position = "4096x0";
               mode = "1920x1080";
               rate = "74.97";
               rotate = "normal";
