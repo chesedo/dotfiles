@@ -454,7 +454,7 @@ in
         cw = "cargo watch -q -c";
         p = "podman";
         pc = "podman-compose";
-        jt = "jiratui ui -p MOD -u 712020:3cb3242f-6941-4a62-8d26-93ddb13e489f --search-on-startup";
+        jt = "jiratui ui -p MOD -u 712020:3cb3242f-6941-4a62-8d26-93ddb13e489f";
       };
     };
   };
