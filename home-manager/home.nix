@@ -73,6 +73,9 @@ in
           src/jiratui/widgets/work_item_details/details.py
       '';
     }))
+
+    # Because google meets is slow when there are many participants, we use chrome instead which has hardware acceleration for VP9 codec.
+    google-chrome
   ];
 
   # This value determines the Home Manager release that your
