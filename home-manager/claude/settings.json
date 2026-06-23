@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": true,
+    "mainmatter-content-review@mainmatter": true,
+    "mainmatter-rust-review@mainmatter": true
+  },
+  "extraKnownMarketplaces": {
+    "mainmatter": {
+      "source": {
+        "source": "github",
+        "repo": "mainmatter/claude-plugins"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
+}

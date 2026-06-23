@@ -240,7 +240,10 @@ in
       };
     };
 
-    claude-code.enable = true;
+    claude-code = {
+      enable = true;
+      context = ./claude/AGENTS.md;
+    };
 
     direnv = {
       enable = true;
@@ -524,6 +527,12 @@ in
     };
     ".cargo/config.toml" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.cargo/config.toml";
+    };
+    ".claude/settings.json" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/settings.json";
+    };
+    ".claude/statusline-command.sh" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/statusline.sh";
     };
   };
 
