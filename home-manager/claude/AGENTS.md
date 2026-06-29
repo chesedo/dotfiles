@@ -15,3 +15,5 @@ The following tools are available — use them instead of piping output through 
 ## Write full output to a temp file before inspecting
 
 When a command produces output that needs to be inspected or filtered, write the complete output to `$TMPDIR` first, then use the Read tool or the above utilities to extract the relevant parts. Do not re-run the original command with a tighter grep — run it once, capture everything, then query the result.
+
+**This applies to every command whose output you inspect — builds, test runs, configure steps, one-off probes, everything.** Never pipe a command into `head`, `tail`, `grep`, `awk`, `sed`, or `wc` to peek at part of the output. Always redirect the full output (stdout + stderr) to a file under `$TMPDIR` with `> "$TMPDIR/<name>.log" 2>&1`, then use `Read` (with `offset`/`limit` for large files) or `rg`/`jq` against that file. If you catch yourself typing `| tail`, `| head`, `| grep`, etc. in a Bash invocation, stop and rewrite it as a redirect-then-Read. The whole point is that the full output stays on disk so you (or the user) can re-inspect earlier sections later — `| tail -40` destroys that ability.
