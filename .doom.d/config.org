@@ -177,6 +177,24 @@ Testing config for the LLM integration
    gptel-response-prefix-alist '((org-mode . "**Qwen:**\n\n"))))
 #+end_src
 
+** Claude Code
+IDE-style integration: Claude Code runs over MCP and can see the active buffer, selection, and diagnostics automatically — no need to hand it text explicitly.
+
+=C-c c= opens the transient menu (start session, send prompt, etc.).
+#+begin_src emacs-lisp
+(use-package! claude-code-ide
+  :bind ("C-c c" . claude-code-ide-menu)
+  :init (setq claude-code-ide-terminal-backend 'eat)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+;; Bind C-y to eat-yank in every evil state so evil's default C-y
+;; (scroll-line-up) doesn't hijack paste inside the Claude terminal.
+(after! eat
+  (map! :map eat-semi-char-mode-map
+        :nvi "C-y" #'eat-yank))
+#+end_src
+
 * Project Notes
 A capture-buffer workflow for per-file notes in =NOTES.md= at the project root.
 Sections are kept sorted by file path. =C-c C-c= to commit, =C-c C-k= to abort.
