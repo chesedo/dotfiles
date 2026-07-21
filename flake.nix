@@ -72,11 +72,28 @@
       };
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          nixfmt
-          nil
-        ];
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nixfmt
+            nil
+          ];
+        };
+
+        rust = pkgs.mkShell {
+          packages = with pkgs; [
+            rustc
+            cargo
+            clippy
+            rustfmt
+            rust-analyzer
+
+            cargo-watch
+            pkg-config
+          ];
+
+          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+        };
       };
       nixosConfigurations = {
         nixos-framework-13 = lib.nixosSystem {

@@ -444,6 +444,15 @@ in
       initContent = ''
         # Prevent any direnv output
         export DIRENV_LOG_FORMAT=""
+
+        rust-init() {
+          if [[ -f .envrc ]]; then
+            echo "rust-init: .envrc already exists — refusing to overwrite" >&2
+            return 1
+          fi
+          echo 'use flake ~/dotfiles#rust' > .envrc
+          direnv allow
+        }
       '';
       plugins = [
         {
