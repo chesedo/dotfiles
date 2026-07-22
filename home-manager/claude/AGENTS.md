@@ -2,6 +2,16 @@ When instructions are vague or could be interpreted in multiple ways, ask specif
 
 When asked to commit, only stage and commit files that were changed during the current conversation. Do not include unrelated modified or untracked files that were already present before the conversation started.
 
+## Pre-commit review loop
+
+Before creating any git commit, review the staged change with a fresh sub-agent. This review must happen after staging and before running `git commit` — do not stage, draft a message, and commit in one go.
+
+1. Stage exactly the files that will be committed (see the rule above) so the sub-agent only sees that subset. If unrelated changes exist in the working tree, keep them unstaged — the sub-agent should review `git diff --cached`, not the full working-tree diff.
+2. Spawn a new sub-agent (do not reuse or continue a previous one) with no context about earlier reviews in this conversation. Give it only the staged diff and the goal of reviewing it in isolation. Each iteration must be a fresh spawn so the review is independent.
+3. Critically analyze the sub-agent's feedback yourself — do not blindly apply it. Decide which points are worth acting on and which to reject, and explain your reasoning briefly.
+4. If you make changes in response, re-stage and loop back to step 2 with another fresh sub-agent.
+5. Only create the commit once a review iteration returns no comments you judge worth acting on.
+
 ## Memory
 
 Be sparing with memory. Do not create or update memory files (including `MEMORY.md`) proactively — always ask my explicit permission first, and only write the memory once I approve. Prefer not suggesting a memory update unless the fact is genuinely valuable and non-obvious.
