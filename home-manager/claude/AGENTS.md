@@ -2,6 +2,10 @@ When instructions are vague or could be interpreted in multiple ways, ask specif
 
 When asked to commit, only stage and commit files that were changed during the current conversation. Do not include unrelated modified or untracked files that were already present before the conversation started.
 
+## Memory
+
+Be sparing with memory. Do not create or update memory files (including `MEMORY.md`) proactively — always ask my explicit permission first, and only write the memory once I approve. Prefer not suggesting a memory update unless the fact is genuinely valuable and non-obvious.
+
 ## PR / issue bodies: no hard line-wrapping
 
 Do not hard-wrap prose in PR descriptions, issue bodies, or PR review comments. Write each paragraph as one continuous line and let GitHub's renderer handle the wrapping — hard wraps ossify at whatever column you picked and look wrong on every other viewport width.
