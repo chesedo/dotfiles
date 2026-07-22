@@ -2,6 +2,10 @@ When instructions are vague or could be interpreted in multiple ways, ask specif
 
 When asked to commit, only stage and commit files that were changed during the current conversation. Do not include unrelated modified or untracked files that were already present before the conversation started.
 
+## PR / issue bodies: no hard line-wrapping
+
+Do not hard-wrap prose in PR descriptions, issue bodies, or PR review comments. Write each paragraph as one continuous line and let GitHub's renderer handle the wrapping — hard wraps ossify at whatever column you picked and look wrong on every other viewport width.
+
 ## Prefer installed tools over ad-hoc shell pipelines
 
 The following tools are available — use them instead of piping output through grep, awk, cut, or python:
