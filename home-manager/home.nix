@@ -88,11 +88,6 @@ in
   # changes in each release.
   home.stateVersion = "25.11";
 
-  gtk = {
-    enable = true;
-    gtk4.theme = null;
-  };
-
   stylix = {
     enable = true;
     base16Scheme = import ./theme/alpine-dusk.nix;
