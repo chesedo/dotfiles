@@ -262,7 +262,6 @@ in
           email = "pieter@chesedo.me";
           name = "chesedo";
         };
-        url."git@github.com:".insteadOf = "https://github.com/";
       };
       signing = {
         # key = "54D3C507CD48CF48!"; # *661
