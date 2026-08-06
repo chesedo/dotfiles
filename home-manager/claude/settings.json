@@ -34,7 +34,8 @@
         "~/.npm",
         "~/.cargo/registry",
         "~/.cargo/git",
-        "~/.cache"
+        "~/.cache",
+        "/tmp/rltest_portfile.lock"
       ]
     },
     "excludedCommands": [

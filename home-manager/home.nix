@@ -534,10 +534,14 @@ in
     };
     # settings.json must stay strict JSON, so the two sandbox keys are noted
     # here (the hooks key is covered further down):
-    #   filesystem.allowWrite — $HOME is read-only apart from an allowlist. npx
-    #     needs ~/.npm, cargo needs its registry and git caches for crates it
-    #     has not downloaded, and ~/.cache
-    #     covers the rest of the tooling.
+    #   filesystem.allowWrite — the sandbox filesystem is read-only apart from
+    #     an allowlist. npx needs ~/.npm, cargo needs its registry and git
+    #     caches for crates it has not downloaded, and ~/.cache covers the rest
+    #     of the tooling. /tmp/rltest_portfile.lock is RLTest's hardcoded
+    #     port-allocation lock, so RediSearch flow tests cannot start under the
+    #     sandbox without it. An entry whose path does not exist is dropped
+    #     silently, and systemd-tmpfiles sweeps /tmp, so `touch` it again if the
+    #     tests start failing with EROFS.
     #   excludedCommands — nix reaches nix-daemon over a unix socket, which the
     #     sandbox's seccomp filter blocks, so store operations die with "cannot
     #     create Unix domain socket". Matching needs nix as the head of a
