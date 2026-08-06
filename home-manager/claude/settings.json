@@ -27,5 +27,23 @@
     "mode": "hold"
   },
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "sandbox": {
+    "filesystem": {
+      "allowWrite": [
+        "~/.npm",
+        "~/.cargo/registry",
+        "~/.cargo/git",
+        "~/.cache"
+      ]
+    },
+    "excludedCommands": [
+      "nix *",
+      "nix-build *",
+      "nix-shell *",
+      "nix-instantiate *",
+      "nixos-rebuild *",
+      "home-manager *"
+    ]
+  }
 }

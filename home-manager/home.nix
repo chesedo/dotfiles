@@ -532,6 +532,28 @@ in
     ".cargo/config.toml" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.cargo/config.toml";
     };
+    # settings.json must stay strict JSON, so the two sandbox keys are noted
+    # here (the hooks key is covered further down):
+    #   filesystem.allowWrite — $HOME is read-only apart from an allowlist. npx
+    #     needs ~/.npm, cargo needs its registry and git caches for crates it
+    #     has not downloaded, and ~/.cache
+    #     covers the rest of the tooling.
+    #   excludedCommands — nix reaches nix-daemon over a unix socket, which the
+    #     sandbox's seccomp filter blocks, so store operations die with "cannot
+    #     create Unix domain socket". Matching needs nix as the head of a
+    #     sub-command: `cd x && nix build` matches, but nesting it inside a
+    #     brace group or another program can defeat the match — the symptom is
+    #     the socket error above. A match exempts the whole invocation, so
+    #     anything chained alongside it runs unsandboxed too. Do not reach
+    #     for network.allowAllUnixSockets instead: it is
+    #     all-or-nothing on Linux, exposing the session D-Bus (a systemd-run
+    #     escape), and it would let a sandboxed process have nix-daemon fetch
+    #     arbitrary URLs, making allowedDomains decorative. Deliberately given
+    #     no permissions.allow entries either: excluding these commands already
+    #     drops the sandbox, and `nix run` and friends execute arbitrary code,
+    #     so leave the approval step in place.
+    # mkOutOfStoreSymlink points at this working tree, so edits to any target
+    # in this block are live; only adding a declaration needs a switch.
     ".claude/settings.json" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/settings.json";
     };
