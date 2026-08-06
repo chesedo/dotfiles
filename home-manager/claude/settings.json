@@ -45,5 +45,31 @@
       "nixos-rebuild *",
       "home-manager *"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/worktree-submodules.sh",
+            "timeout": 120,
+            "statusMessage": "Populating submodules"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/scripts/worktree-submodules.sh",
+            "timeout": 120,
+            "statusMessage": "Populating submodules"
+          }
+        ]
+      }
+    ]
   }
 }

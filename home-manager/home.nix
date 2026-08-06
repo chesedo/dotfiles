@@ -560,6 +560,19 @@ in
     ".claude/statusline-command.sh" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/statusline.sh";
     };
+    # Populates submodules in agent worktrees; rationale in the script header.
+    # Wired to both events because only SubagentStart fires for a subagent,
+    # while SessionStart covers a session started directly in a worktree.
+    # Hooks run unsandboxed, so the script is deliberately offline-only: it
+    # populates from objects already on disk and reports anything missing rather
+    # than fetching with real credentials on every session.
+    #
+    # Not WorktreeCreate: that event is a provider, expected to create the
+    # worktree and echo its path, so a hook printing nothing breaks every
+    # worktree creation.
+    ".claude/scripts/worktree-submodules.sh" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/worktree-submodules.sh";
+    };
   };
 
   home.activation.generateEwwColors =
