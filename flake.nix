@@ -8,8 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -38,7 +38,7 @@
       nixpkgs,
       nixos-hardware,
       home-manager,
-      stylix,
+      dms,
       zen-browser,
       voxtype,
       piper-voice-ryan-onnx,
@@ -119,7 +119,7 @@
             voxtype = voxtype.packages.${system};
           };
           modules = [
-            stylix.homeModules.stylix
+            dms.homeModules.dank-material-shell
             ./home-manager/home.nix
             voxtype.homeManagerModules.default
           ];

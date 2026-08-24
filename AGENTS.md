@@ -7,8 +7,8 @@
 | `home-manager/` | Home Manager user config |
 | `home-manager/claude/` | Claude Code config files (`settings.json`, `statusline.sh`, `AGENTS.md`) |
 | `nixos/` | NixOS system config |
-| `scripts/` | Shell scripts referenced by Home Manager packages |
-| `eww/`, `leftwm/` | Desktop environment config (symlinked via `xdg.configFile`) |
+| `scripts/` | Dead on this branch -- nothing in the nix tree references them any more (see TODO.md) |
+| `eww/`, `leftwm/` | Dead on this branch. The desktop is niri + DankMaterialShell, configured in `home-manager/home.nix` and `nixos/configuration-framework-13.nix`; these two directories are leftovers awaiting deletion (see TODO.md) |
 | `.doom.d/` | Emacs/Doom config (symlinked via `home.file`) |
 
 ## Home Manager conventions

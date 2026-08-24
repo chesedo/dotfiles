@@ -7,9 +7,6 @@
   ...
 }:
 
-let
-  theme = import ../home-manager/theme/alpine-slate.nix;
-in
 {
   boot.loader.grub.enable = false;
 
@@ -25,12 +22,11 @@ in
       fd
       ripgrep
       gcc
-      xclip
+      wl-clipboard
       emacs
 
       alacritty
-      feh
-      picom
+      imv # Wayland image viewer, replaces feh
 
       libnotify
 
@@ -66,7 +62,6 @@ in
   };
 
   networking = {
-    hostName = "nixos";
     networkmanager.enable = true;
     hosts = {
       "192.168.10.70" = [ "wsl" ];
@@ -122,57 +117,9 @@ in
   services = {
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
-    clipcat.enable = true; # Clipboard manager
     devmon.enable = true; # Auto mount external drives
     openssh.enable = true;
     upower.enable = true; # See power information about devices
-    displayManager.defaultSession = "none+leftwm";
-    libinput.touchpad = {
-      accelSpeed = "0.5";
-      naturalScrolling = true;
-    };
-    xserver = {
-      enable = true;
-      displayManager.lightdm.greeters.mini = {
-        enable = true;
-        user = "chesedo";
-        extraConfig = ''
-          [greeter]
-          show-password-label = false
-          invalid-password-text = Invalid Password
-          show-input-cursor = true
-          password-alignment = center
-
-          [greeter-hotkeys]
-          mod-key = meta
-          shutdown-key = s
-          restart-key = r
-          hibernate-key = h
-          suspend-key = u
-
-          [greeter-theme]
-          font = "FiraCode Nerd Font"
-          font-size = 1em
-          font-weight = bold
-          font-style = normal
-          text-color = "#${theme.base05}"
-          error-color = "#${theme.base08}"
-          background-color = "#${theme.base00}"
-          background-image = ""
-          layout-space = 0
-          password-color = "#${theme.base05}"
-          password-background-color = "#${theme.base01}"
-          password-border-color = "#${theme.base0E}"
-          password-border-width = 1
-        '';
-      };
-      xkb = {
-        layout = "us";
-        options = "caps:escape";
-        variant = "colemak";
-      };
-      windowManager.leftwm.enable = true;
-    };
   };
 
   system.userActivationScripts.linkhomemanager.text = ''

@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   piperVoiceModels,
   voxtype,
@@ -17,8 +16,6 @@ in
   home.homeDirectory = "/home/chesedo";
 
   home.packages = with pkgs; [
-    blugon
-
     discord
     slack
 
@@ -45,22 +42,9 @@ in
 
     podman-compose
 
-    # To take screenshots
-    slop
-    shotgun
-    (writeShellScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.sh))
-
-    # To manage the clipboard
-    (writeShellScriptBin "clipboard" (builtins.readFile ../scripts/clipboard.sh))
-
-    # Used by the eww app launcher
-    (writeShellScriptBin "filter-executables" (builtins.readFile ../scripts/filter-executables.sh))
-
-    # Notification scripts
-    (pkgs.writeShellScriptBin "dunst-update-eww" (builtins.readFile ../scripts/dunst-update-eww.sh))
-    (writeShellScriptBin "clear-app-notifications" (
-      builtins.readFile ../scripts/clear-app-notifications.sh
-    ))
+    # Screenshots, clipboard history, the app launcher and notifications are
+    # all DMS built-ins now, so the scripts that backed them are no longer
+    # installed. The files themselves still sit in scripts/ -- see TODO.md.
 
     # For TTS
     piper-tts
@@ -87,59 +71,22 @@ in
   # changes in each release.
   home.stateVersion = "25.11";
 
-  stylix = {
-    enable = true;
-    base16Scheme = import ./theme/alpine-slate.nix;
-    image = ../leftwm/themes/current/background.jpg;
-    polarity = "dark";
-
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-      size = 20;
-    };
-
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "FiraCode Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "FiraCode Nerd Font Propo";
-      };
-      serif = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "FiraCode Nerd Font Propo";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-color-emoji;
-        name = "Noto Color Emoji";
-      };
-      sizes = {
-        applications = 12;
-        desktop = 10;
-        terminal = 12;
-        popups = 10;
-      };
-    };
-
-    icons = {
-      enable = true;
-      package = pkgs.papirus-icon-theme;
-      light = "Papirus-Dark";
-      dark = "Papirus-Dark";
-    };
-
-    opacity.terminal = 0.95;
-  };
-
   nixpkgs.config.allowUnfree = true;
 
   programs = {
     alacritty = {
       enable = true;
       settings = {
+        # Written by DMS matugen whenever the theme changes. Until DMS has
+        # generated it once, alacritty complains about the missing import on
+        # every launch.
+        general.import = [ "~/.config/alacritty/dank-theme.toml" ];
+
+        font = {
+          normal.family = "FiraCode Nerd Font Mono";
+          size = 12;
+        };
+
         window = {
           padding = {
             x = 10;
@@ -155,85 +102,6 @@ in
       };
     };
 
-    autorandr = {
-      enable = true;
-      hooks = {
-        postswitch = {
-          "log-profile" = ''
-            logger -t autorandr-hook "postswitch fired: profile=$AUTORANDR_CURRENT_PROFILE"
-          '';
-        };
-      };
-      profiles = {
-        "home" = {
-          fingerprint = {
-            small = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
-            left = "00ffffffffffff0010acf4414c3938392221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff004330424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020014f020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
-            middle = "00ffffffffffff0010ac394257323242221f0104a53c22783b2176a9534494231c4d5aa54b00d100d1c0b300a94081808100714f0101565e00a0a0a029503020350055502100001a000000ff00445738485a38330a2020202020000000fc0044454c4c20533237323244474d000000fd0030a5fafa41010a2020202020200150020325f14a3f101f0413121103020123090707830100006d1a0000020130a5000000000000f4fb0050a0a028500820680055502100001aa7e5007ea0a050500820680055502100001a6fc200a0a0a055503020350055502100001a000000000000000000000000000000000000000000000000000000000000000000000000f4";
-            right = "00ffffffffffff0010acf4414c5133412221010380351e78eaf995a755549c260f5054a54b00714f8180a9c0d1c00101010101010101023a801871382d40582c45000f282100001e000000ff003339424b3750330a2020202020000000fc0044454c4c20533234323148530a000000fd00304b1e5310000a202020202020013b020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075";
-          };
-          config = {
-            small = {
-              enable = true;
-              primary = true;
-              position = "4096x1080";
-              mode = "2256x1504";
-              rate = "60.00";
-              rotate = "normal";
-              scale = {
-                x = 0.5;
-                y = 0.5;
-              };
-            };
-            left = {
-              enable = true;
-              position = "0x0";
-              mode = "1920x1080";
-              rate = "74.97";
-              rotate = "normal";
-            };
-            middle = {
-              enable = true;
-              position = "1920x0";
-              mode = "2560x1440";
-              rate = "165.08";
-              rotate = "normal";
-              scale = {
-                x = 0.85;
-                y = 0.85;
-              };
-            };
-            right = {
-              enable = true;
-              position = "4096x0";
-              mode = "1920x1080";
-              rate = "74.97";
-              rotate = "normal";
-            };
-          };
-        };
-        "default" = {
-          fingerprint = {
-            eDP-1 = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
-          };
-          config = {
-            eDP-1 = {
-              enable = true;
-              primary = true;
-              position = "0x0";
-              mode = "2256x1504";
-              rate = "60.00";
-              rotate = "normal";
-              scale = {
-                x = 0.5;
-                y = 0.5;
-              };
-            };
-          };
-        };
-      };
-    };
-
     claude-code = {
       enable = true;
       context = ./claude/AGENTS.md;
@@ -244,7 +112,29 @@ in
       nix-direnv.enable = true;
     };
 
-    eww.enable = true;
+    dank-material-shell = {
+      enable = true;
+
+      # Runs `dms run --session` from a user unit bound to
+      # graphical-session.target, which niri-session activates.
+      systemd.enable = true;
+
+      # Pinned to the nixpkgs build rather than the flake's own. The greeter is
+      # configured at the NixOS layer, where the package defaults to
+      # pkgs.dms-shell -- without this the login screen and the session run two
+      # different builds of DMS against the same settings files. Comes from the
+      # binary cache as a bonus.
+      package = pkgs.dms-shell;
+
+      # enableSystemMonitoring / enableVPN / enableDynamicTheming /
+      # enableAudioWavelength / enableCalendarEvents all default to true, and
+      # enableClipboardPaste is a documented no-op, so none are restated here.
+
+      # Deliberately left unset: settings/clipboardSettings/session are written
+      # as read-only store symlinks when non-empty, which stops DMS's own
+      # Settings panel from saving. Configure through the GUI instead, and only
+      # move things here once they have settled.
+    };
 
     git = {
       enable = true;
@@ -464,48 +354,72 @@ in
     };
   };
 
-  services = {
-    dunst = {
-      enable = true;
-      settings = {
-        global = {
-          frame_width = 2;
-          # colors injected by Stylix
+  wayland.windowManager.niri = {
+    enable = true;
 
-          separator_height = 2;
+    # The system-level `programs.niri` already installs the units and the
+    # portal, so home-manager owns the config file. Two things this module also
+    # provides that the NixOS one does not: xwayland-satellite (the NixOS module
+    # passes enableXWayland = false, and niri auto-spawns the satellite from
+    # PATH for emacs, slack, zoom and chrome), and `checkConfig`, which runs
+    # `niri validate` on the generated file at build time. Setting
+    # `package = null` to drop the duplicate niri from PATH would silently turn
+    # checkConfig off with it.
+    systemd.enable = false;
+    portalPackage = null;
 
-          padding = 8;
-          horizontal_padding = 8;
-          text_icon_padding = 0;
+    # Deliberately minimal: keyboard layout, pointer behaviour, and just enough
+    # binds to reach a terminal and log out. Monitor layout, workspace binds and
+    # the rest of the leftwm bindings are TODO.md items -- start from DMS's own
+    # defaults and add back only what is actually missed.
+    extraConfig = ''
+      input {
+          keyboard {
+              xkb {
+                  layout "us"
+                  variant "colemak"
+                  options "caps:escape"
+              }
+          }
 
-          corner_radius = 10;
-        };
+          touchpad {
+              tap
+              natural-scroll
+              accel-speed 0.5
+          }
 
-        urgency_low.timeout = 10;
-        urgency_normal.timeout = 10;
-        urgency_critical.timeout = 0;
-      };
-    };
+          // leftwm ran focus_behaviour: Sloppy
+          focus-follows-mouse
+      }
+
+      // niri does NOT merge its built-in defaults into a config that parses --
+      // the bindings in its embedded default-config.kdl only apply when it is
+      // seeding a fresh config or falling back after a parse failure. So an
+      // absent binds block means literally no working keys, not sane defaults.
+      // These five are the floor: a terminal, a way to close a window, a way
+      // out, and DMS's launcher.
+      binds {
+          Mod+Shift+Slash { show-hotkey-overlay; }
+
+          Mod+T { spawn "alacritty"; }
+          Mod+Q { close-window; }
+          Mod+Shift+E { quit; }
+
+          Mod+Space { spawn "dms" "ipc" "spotlight" "toggle"; }
+      }
+    '';
+  };
+
+  home.sessionVariables = {
+    # DMS resolves the terminal as terminalOverride -> $TERMINAL -> "", and its
+    # callers then fall back to hardcoded "xterm" (spotlight launching a
+    # Terminal=true .desktop, and the session service) or "ghostty" (the
+    # tmux/zellij mux). Neither is installed, and DMS settings are deliberately
+    # left unmanaged here, so without this those paths fail silently.
+    TERMINAL = "alacritty";
   };
 
   xdg.configFile = {
-    # leftwm has built-in XDG autostart support (leftwm::utils::autostart in the
-    # binary) and runs .desktop Exec= commands directly at login, bypassing
-    # systemd. The system autorandr entry uses `-c --default default` which lacks
-    # --match-edid and loads the wrong profile. This override fixes the command.
-    # If leftwm ever drops this feature, verify with:
-    #   strings $(which leftwm) | grep autostart
-    "autostart/autorandr.desktop".text = ''
-      [Desktop Entry]
-      Name=Autorandr
-      Exec=${pkgs.autorandr}/bin/autorandr --change --match-edid --skip-options gamma
-      Type=Application
-    '';
-
-    "blugon/config".source = ./blugon/config;
-    "leftwm".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/leftwm";
-    "eww".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/eww";
     "speech-dispatcher/speechd.conf".text = ''
       AddModule "piper-tts-generic" "sd_generic" "piper-tts-generic.conf"
       DefaultModule   piper-tts-generic
@@ -576,23 +490,4 @@ in
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home-manager/claude/worktree-submodules.sh";
     };
   };
-
-  home.activation.generateEwwColors =
-    let
-      c = config.lib.stylix.colors;
-    in
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      cat > ${config.home.homeDirectory}/dotfiles/eww/colors.scss << 'EOF'
-      // Generated from home-manager/theme/alpine-slate.nix — do not edit manually
-      $theme-bg:        #${c.base00};
-      $theme-bg-alt:    #${c.base01};
-      $theme-fg:        #${c.base05};
-      $theme-accent:    #${c.base0E};
-      $theme-muted:     #${c.base04};
-      $theme-highlight: #${c.base0D};
-      $theme-border:    #${c.base02};
-      $theme-warn:      #${c.base0A};
-      $shadow:          #${c.base00};
-      EOF
-    '';
 }

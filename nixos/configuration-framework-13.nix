@@ -24,8 +24,53 @@
   };
 
   networking = {
-    hostName = lib.mkForce "nixos-framework-13";
+    hostName = "nixos-framework-13";
     useDHCP = lib.mkDefault true;
+  };
+
+  # Label this generation in the boot menu so it is obvious which desktop a
+  # given entry boots into.
+  system.nixos.tags = [ "dms" ];
+
+  programs.niri.enable = true;
+
+  # DMS normally gets these from its own NixOS module, which is not in use here
+  # because the shell itself is configured through home-manager. Without
+  # accounts-daemon the user tile in the shell and the greeter stays empty.
+  services.accounts-daemon.enable = true;
+
+  services.displayManager = {
+    # Redundant with the mkDefault programs.niri sets, and the DMS greeter
+    # remembers the last session itself rather than reading this. Kept as the
+    # explicit fallback for autologin and for any second session package later.
+    defaultSession = "niri";
+
+    # DankMaterialShell's own greeter, running on greetd inside a nested niri.
+    dms-greeter = {
+      enable = true;
+
+      # Pulls the wallpaper and theme out of ~/.config + ~/.local/state at
+      # greetd start, so the login screen matches the session.
+      configHome = "/home/chesedo";
+
+      compositor = {
+        name = "niri";
+        # The greeter's nested niri does not read the session's niri config,
+        # so the keyboard layout has to be repeated -- without it the password
+        # prompt is US QWERTY while the session is Colemak.
+        customConfig = ''
+          input {
+              keyboard {
+                  xkb {
+                      layout "us"
+                      variant "colemak"
+                      options "caps:escape"
+                  }
+              }
+          }
+        '';
+      };
+    };
   };
 
   # Enable sound with pipewire.
