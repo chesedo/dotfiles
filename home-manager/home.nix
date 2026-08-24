@@ -24,6 +24,7 @@ in
 
     jq
     jc
+    gh
 
     playerctl
 
@@ -262,11 +263,11 @@ in
           email = "pieter@chesedo.me";
           name = "chesedo";
         };
+        github.user = "chesedo";
       };
       signing = {
-        # key = "54D3C507CD48CF48!"; # *661
-        key = "E09D145B50F15F0A!"; # *663
-        signByDefault = false;
+        key = "C53FA3689310ED6A!"; # *663
+        signByDefault = true;
       };
     };
 
