@@ -33,11 +33,8 @@ notifications appear on a different screen.
 
 **Services started by `up`:** Picom, Blugon, feh (wallpaper), LeftWM theme, `eww open information`
 
-> ⚠️ `down` still runs `feh --bg-scale $SCRIPTPATH/down.jpg`, but no `down.jpg`
-> exists here. `up` runs the previous theme's `down` first (via
-> `/tmp/leftwm-theme-down`), and leftwm re-runs `up` on SoftReload
-> (`Mod+Shift+R`), so this fails on load and reload too — not just unload. It
-> also `pkill`s trayer, which `up` never starts.
+**Stopped by `down`:** `UnloadTheme`, then Picom, Blugon and EWW. It sets no
+wallpaper — the next theme's `up` paints its own.
 
 ## 📁 Files
 
