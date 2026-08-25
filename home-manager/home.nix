@@ -28,8 +28,6 @@ in
 
     playerctl
 
-    trayer
-
     upwork
 
     thunar
