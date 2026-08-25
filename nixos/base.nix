@@ -8,7 +8,7 @@
 }:
 
 let
-  theme = import ../home-manager/theme/alpine-dusk.nix;
+  theme = import ../home-manager/theme/alpine-slate.nix;
 in
 {
   boot.loader.grub.enable = false;

@@ -91,7 +91,7 @@ in
 
   stylix = {
     enable = true;
-    base16Scheme = import ./theme/alpine-dusk.nix;
+    base16Scheme = import ./theme/alpine-slate.nix;
     image = ../leftwm/themes/current/background.jpg;
     polarity = "dark";
 
@@ -585,7 +585,7 @@ in
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       cat > ${config.home.homeDirectory}/dotfiles/eww/colors.scss << 'EOF'
-      // Generated from home-manager/theme/alpine-dusk.yaml — do not edit manually
+      // Generated from home-manager/theme/alpine-slate.nix — do not edit manually
       $theme-bg:        #${c.base00};
       $theme-bg-alt:    #${c.base01};
       $theme-fg:        #${c.base05};

@@ -1,14 +1,13 @@
-# 🌅 Dotfiles - Sunset Cave Theme
+# 🏔️ Dotfiles - Alpine Slate Theme
 
-> Modern, declarative NixOS configuration with a cohesive sunset-inspired aesthetic
+> Modern, declarative NixOS configuration with a cohesive alpine-granite aesthetic
 
 ## ✨ Features
 
 - **NixOS** with flakes for reproducible system configuration
 - **LeftWM** tiling window manager with custom theming
 - **EWW** widgets for system monitoring and app launching
-- **Doom Emacs** with custom alpine-dusk theme and LSP setup
-- **Unified theming** across all applications
+- **Unified theming** across all applications from a single base16 file
 - **Framework 13 AMD** optimized configuration
 
 ## 🚀 Quick Start
@@ -27,11 +26,17 @@ home-manager switch --flake .
 
 ## 🎨 Theme
 
-The **Alpine Dusk** color palette creates a deep, focused environment inspired by an alpine sunset:
-- **Background**: `#1A1830` (deep night-sky indigo)
-- **Foreground**: `#DDE2EC` (cool silver-white snow)
-- **Accent**: `#8858C8` (vivid purple)
-- **Highlight**: `#4A70AA` (steel blue cliff shadows)
+The **Alpine Slate** color palette creates a deep, focused environment, keyed to
+the wallpaper (alpine granite at dawn) and tuned cooler than the raw samples:
+- **Background**: `#16181C` (deep neutral slate)
+- **Foreground**: `#D6DAE0` (cool silver)
+- **Accent**: `#9C7FA6` (muted mauve, cloud light)
+- **Highlight**: `#5F87AE` (steel blue cliff shadows)
+
+Defined once in `home-manager/theme/alpine-slate.nix`; most consumers get it
+via Stylix, though a couple import it directly or need a hand-synced copy.
+See [`leftwm/themes/current/README.md`](leftwm/themes/current/README.md) for how
+to change it and which files are generated rather than edited.
 
 ## 🔧 Key Components
 
