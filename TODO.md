@@ -195,13 +195,12 @@ and notepad contents.
       next change, so expect either a silent resurrection or, if DMS restarts
       first, a reset to defaults. Recoverable from git, but it happens without
       warning.
-- [ ] Script the wallpaper span so it is reproducible rather than a one-off:
-      crop the source to each output's logical rect within the desktop bounding
-      box, resize to physical pixels, then `dms ipc call wallpaper setFor
-      <output> <path>`. Needs redoing whenever the monitor layout changes or
-      DMS's wallpaper browser (`Mod+Y`) sets a single image across all screens.
-      Note the per-monitor paths live in `session.json`, i.e. in the unmanaged
-      state directory, so they are not tracked.
+- [x] The wallpaper span is scripted, as `wallpaper-span`. Reads geometry live
+      from `niri msg outputs`, so it survives connector renumbering and profile
+      changes. Re-run after docking, after switching profile, or after picking a
+      wallpaper in DMS (Mod+Y), since that sets one image across all screens.
+- [ ] The source image is still `leftwm/themes/current/background.jpg`, so
+      moving it somewhere neutral is now a prerequisite for deleting `leftwm/`.
 
 ## Verify on real hardware
 
