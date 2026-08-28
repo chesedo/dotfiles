@@ -109,7 +109,13 @@ input {
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
+    //
+    // LOCAL DEVIATION: enabled, the counterpart to focus-follows-mouse below.
+    // leftwm ran sloppy_mouse_follows_focus: true, so both directions were in
+    // effect there too. No feedback loop with focus-follows-mouse: the warp
+    // lands the pointer on the window that just took focus, so the follow
+    // re-focuses the same window.
+    warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
