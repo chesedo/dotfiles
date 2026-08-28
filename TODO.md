@@ -26,26 +26,6 @@ port of the old desktop. Add things back only once you actually miss them.
 
 ## Left out of the minimal start — add back if missed
 
-- [ ] **Monitor layout.** The old `autorandr` "home" profile (laptop + three
-      Dells) is gone; niri will auto-place outputs left to right in whatever
-      order it finds them. When you write `output` blocks, mind the arithmetic:
-      niri quantises scale to 1/120 steps, and no representable step divides
-      the 27"'s 2560 into the 2176 logical pixels xrandr's `scale 0.85` gave —
-      1.175 is nearest, yielding about 2178. niri does **not** error on
-      overlapping outputs; it logs `overlaps an existing output … falling back
-      to automatic placement` and silently rearranges the desktop. Get the real
-      numbers from `niri msg outputs` first, and leave a few logical pixels of
-      slack. The two DELL S2421HS panels differ only by serial (`C0BK7P3` and
-      `39BK7P3`).
-- [ ] **The rest of the keybinds.** Only five are bound: hotkey overlay,
-      terminal, close, quit, spotlight. The leftwm set that has no equivalent
-      yet: workspaces 1-9 and move-to-workspace (`focus-workspace` /
-      `move-column-to-workspace`), `Mod+j/k` focus and `Mod+Shift+j/k` move,
-      column width on `Mod+minus`/`Mod+equal`, fullscreen on `Mod+f`, and the
-      DMS ones — `dms ipc notifications|clipboard|processlist|settings|
-      powermenu|night|lock`, `dms screenshot` on Print, plus the media and
-      brightness keys (`dms ipc audio increment|decrement|mute|micmute`,
-      `dms ipc brightness increment|decrement 5 ""`).
 - [ ] **GTK theming.** DMS's matugen writes `~/.config/gtk-3.0/dank-colors.css`
       and the gtk-4.0 equivalent, but nothing imports them, so GTK apps ignore
       the shell theme. Either add `gtk3/gtk4.extraCss` with an `@import`, or let
@@ -68,28 +48,51 @@ port of the old desktop. Add things back only once you actually miss them.
       if the greeter ever fails; without it a failure is just a black screen.
       Note it defaults to a world-readable `/tmp/dms-greeter.log`.
 
-## Let DMS own more of the niri config
+## niri config still to wire up
 
-niri supports `include optional=true "path"`, verified against niri 26.04: a
-missing target is a warning and the config still validates, where a plain
-`include` is a hard error. So these can be added without breaking
-home-manager's build-time `checkConfig`, even though the files never exist in
-the build sandbox. Includes resolve relative to the symlink's directory, so
-they work despite `config.kdl` being a store symlink.
+`niri/config.kdl` is now DMS's shipped config and pulls in DMS's runtime
+fragments from `~/.config/niri/dms/`. Deployed and live: `binds.kdl`,
+`colors.kdl`, `layout.kdl`, `alttab.kdl`, `outputs.kdl`, `cursor.kdl`. That
+closed the old monitor-layout item (DMS's display GUI owns `outputs.kdl`, and
+it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
+(`colors.kdl`).
 
-- [ ] `include optional=true "dms/colors.kdl"` — DMS's matugen already writes
-      this file (`matugen/configs/niri.toml`) and nothing reads it, so niri's
-      own borders and focus ring ignore the wallpaper theme.
-- [ ] `include optional=true "dms/binds.kdl"` to let DMS's keybind editor own
-      binds. Put the local `binds` block *after* the include so it wins. DMS
-      only writes that file once you edit a bind in its GUI.
-- [ ] `include optional=true "dms/outputs.kdl"` would hand the monitor layout to
-      DMS's display GUI, sidestepping the scale arithmetic above entirely.
-- [ ] Do not import `dms.homeModules.niri`. It is a separate opt-in flake output
-      written against niri-flake's `programs.niri.settings`, and it `mkForce`s
-      `xdg.configFile.niri-config`, which collides with the `niri/config.kdl`
-      entry `wayland.windowManager.niri` already owns. Read it for its include
-      list and bind set, don't import it.
+- [ ] `windowrules.kdl` and `wpblur.kdl` are written by DMS but are not in the
+      include list upstream ships, so they sit inert. Decide whether to add
+      `include optional=true` lines for them. `Mod+Shift+W` (create window
+      rule) is a no-op until `windowrules.kdl` is included.
+- [ ] Two DMS bindings collide with things used here, both inherited from
+      upstream rather than chosen: `Ctrl+Shift+R` (rename workspace) is a
+      modifier-less global grab that eats hard-reload in Chrome and zen, and
+      `Alt+Space` (spotlight bar) shadows Doom's alternate leader
+      (`doom-leader-alt-key`, default `M-SPC`). Override either by adding a
+      local `binds` block after the includes -- later definitions win across an
+      include boundary, verified against niri 26.04.
+- [ ] Colemak scatters DMS's vim cluster, since niri resolves latin binds
+      against the first configured layout: `Mod+H/J/K/L` land on physical
+      H/Y/N/U, `Mod+O` on `;`, `Mod+U`/`Mod+I` on I/L. Nothing is unreachable
+      (arrows and `Mod+Tab` duplicate the important ones) but it may be worth
+      remapping.
+
+## Bring the DMS config under management
+
+DMS writes `settings.json` and `session.json` with `atomicWrites: true`, i.e.
+write-temp-then-rename, which **replaces a file symlink with a regular file**.
+So the per-file `mkOutOfStoreSymlink` pattern used for niri does not work here
+-- it would survive exactly until DMS's first save. Symlinking the *directory*
+does work, because the rename happens inside it.
+
+- [ ] Link `~/.config/DankMaterialShell` -> `dotfiles/dank/`, gitignoring
+      `zen.css` (matugen-generated) and `plugins/` (vendored).
+- [ ] Leave `~/.local/state/DankMaterialShell` unmanaged: it holds `pam/` at
+      mode 700, app-usage stats and notepad contents, none of which belong in
+      a dotfiles repo. Note this means the per-monitor wallpaper paths, which
+      live in `session.json`, stay untracked.
+- [ ] Script the wallpaper span so it is reproducible rather than a one-off:
+      crop the source to each output's logical rect within the desktop bounding
+      box, resize to physical pixels, then `dms ipc call wallpaper setFor
+      <output> <path>`. Needs redoing whenever the monitor layout changes or
+      DMS's wallpaper browser (`Mod+Y`) sets a single image across all screens.
 
 ## Verify on real hardware
 
