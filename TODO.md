@@ -106,12 +106,36 @@ descriptions. The stable identities are:
 
       A `displayProfileManager` plugin is now installed to handle switching, so
       this is no longer on the critical path.
-- [ ] `dank/plugins/` is gitignored, so record what is installed and where it
-      came from: `materialWeather` and `dankDesktopWeather` from
-      https://github.com/AvengeMedia/dms-plugins, plus `displayProfileManager`.
-      Worth pinning these declaratively via the Nix module's
-      `programs.dank-material-shell.plugins.<name>.src` so a restore does not
-      depend on re-installing by hand.
+- [ ] **Pin the installed plugins declaratively.** `dank/plugins/` is
+      gitignored -- each plugin is its own git clone, so it cannot be nested in
+      this repo -- which means nothing currently records them and a restore
+      depends on reinstalling by hand through DMS's plugin browser. The Nix
+      module takes a source per plugin:
+
+          programs.dank-material-shell.plugins = {
+            displayProfileManager.src = pkgs.fetchFromGitHub {
+              owner = "jankelemen";
+              repo = "dank-display-profile-manager";
+              rev = "497ea32";                 # verify, then add hash
+              hash = "";
+            };
+            # ... and likewise for the other two
+          };
+
+      Installed today, with the revision each clone is currently at:
+
+          displayProfileManager  jankelemen/dank-display-profile-manager  497ea32
+          materialWeather        notsopreety/materialWeather              06d047c
+          dankDesktopWeather     AvengeMedia/dms-plugins                  cb66135
+                                 (subdirectory DankDesktopWeather)
+
+      Note dankDesktopWeather lives in a subdirectory of a multi-plugin repo,
+      so it needs the path as well as the rev -- DMS records that in
+      plugins/dankDesktopWeather.meta, which is itself ignored.
+
+      Pinning them also settles whether `plugins/` should stay ignored at all:
+      once the sources are declared, the checked-out trees are derived and
+      there is nothing to track.
 - [ ] **DMS and niri quantise scale differently, and it can overlap outputs.**
       monitors.json stores the 27" at 1.175, but DMS emits `scale 1.171875`
       (= 150/128) into outputs.kdl, while niri quantises to 1/120. At 1.175 the
