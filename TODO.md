@@ -90,10 +90,10 @@ descriptions. The stable identities are:
 
 - [ ] **Auto switching does not work in DMS 1.5.3 -- profiles must be applied
       by hand.** Observed across a real unplug:
-      - `auto` is not persisted anywhere. It is absent from settings.json and
-        from monitors.json, so it is runtime-only and resets on every DMS
-        restart. It was found `off` after the unplug despite having been turned
-        on beforehand.
+      - `auto` is persisted, as `displayProfileAutoSelect` in settings.json,
+        and is currently false because it was unchecked in the GUI. An earlier
+        note here claimed it was not persisted at all; that was wrong, from a
+        truncated grep of settings.json.
       - `matchedProfile` is only recomputed inside `validateProfiles()`, which
         runs at startup rather than on hotplug, so after unplugging it still
         reported `matched: Docked` with only the laptop connected.
@@ -106,8 +106,12 @@ descriptions. The stable identities are:
           dms ipc call outputs toggleAuto        # if auto is on
           dms ipc call outputs setProfile "Docked"      # or "Laptop only"
 
+      The remaining two points stand regardless of the auto setting, and are
+      what make auto unusable: a match is not recomputed on hotplug, and even
+      a correct match is never applied.
+
       Worth binding `dms ipc call outputs cycleProfile` to a key as a
-      one-keypress fix after docking, and reporting the auto behaviour
+      one-keypress fix after docking, and reporting the apply behaviour
       upstream.
 - [ ] Editing monitors.json by hand does not take effect while DMS is running:
       it applies profiles from an in-memory copy and will write the stale
