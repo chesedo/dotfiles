@@ -559,7 +559,7 @@
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {
-    "niri": "profile_1787918473513_b1y62o5"
+    "niri": "profile_docked"
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
@@ -586,6 +586,10 @@
         "weather"
       ],
       "rightWidgets": [
+        {
+          "id": "displayProfileManager",
+          "enabled": true
+        },
         "systemTray",
         "clipboard",
         "cpuUsage",
@@ -759,8 +763,8 @@
         "0x0BCA": {
           "width": 100,
           "height": 160,
-          "x": 514,
-          "y": 296
+          "x": 257.9375,
+          "y": 188.88671875
         }
       }
     },
@@ -824,8 +828,8 @@
         "0x0BCA": {
           "width": 320,
           "height": 480,
-          "x": 404,
-          "y": 136
+          "x": 746.20703125,
+          "y": 137.8125
         }
       }
     },
@@ -880,8 +884,8 @@
         "0x0BCA": {
           "width": 280,
           "height": 320,
-          "x": 424,
-          "y": 216
+          "x": 186.62890625,
+          "y": 370.1875
         }
       }
     }

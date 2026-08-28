@@ -16,7 +16,8 @@
 
 # For the record, since they are not tracked:
 #   plugins/    installed plugins, each its own git clone -- currently
-#               materialWeather and dankDesktopWeather, both from
-#               https://github.com/AvengeMedia/dms-plugins
+#               materialWeather and dankDesktopWeather from
+#               https://github.com/AvengeMedia/dms-plugins, plus
+#               displayProfileManager
 #   zen.css     matugen output, regenerated on every theme change
 #   .firstlaunch, .changelog-*   DMS state markers

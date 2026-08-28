@@ -88,22 +88,30 @@ descriptions. The stable identities are:
     Dell Inc. DELL S2421HS 39BK7P3    right 24"
     BOE 0x0BCA Unknown                laptop
 
-- [ ] **Auto switching matches but never applies.** Narrowed down over two
-      unplug/replug cycles with `displayProfileAutoSelect` genuinely on:
-      - Matching on hotplug DOES work. With only the laptop connected it
-        correctly reports `matched: Laptop only`. An earlier note here claimed
-        matching was not recomputed on hotplug; that was wrong, and came from a
-        test contaminated by toggling auto around a manual setProfile.
-      - Applying does not happen: `active: none`, outputs.kdl keeps whatever
-        the previous profile wrote, and the display stays on the old geometry.
+- [x] **What `displayProfileAutoSelect` actually does.** Read from
+      DisplayConfigState.applyAutoConfig(); two earlier notes here got this
+      wrong and are replaced.
 
-      So the only workable path is applying explicitly, which needs auto off
-      since setProfile refuses while it is on:
+      It is wired to hotplug through a 400ms debounce timer, and when a profile
+      matches the connected set it applies it. When nothing matches it instead
+      captures the current layout and saves it as a profile with an empty name
+      -- which is where the unnamed duplicate in monitors.json came from. It was
+      not the save flow, and deleting it by hand was always going to lose that
+      race.
 
-          dms ipc call outputs setProfile "Docked"      # or "Laptop only"
+      It bails early on `manualActivation`, set for 2 seconds after any manual
+      setProfile, and on `hasPendingChanges`. Repeated setProfile calls while
+      debugging kept that guard set, which is the likeliest reason it appeared
+      never to apply.
 
-      Worth binding `dms ipc call outputs cycleProfile` to a key, and reporting
-      the apply behaviour upstream.
+      A `displayProfileManager` plugin is now installed to handle switching, so
+      this is no longer on the critical path.
+- [ ] `dank/plugins/` is gitignored, so record what is installed and where it
+      came from: `materialWeather` and `dankDesktopWeather` from
+      https://github.com/AvengeMedia/dms-plugins, plus `displayProfileManager`.
+      Worth pinning these declaratively via the Nix module's
+      `programs.dank-material-shell.plugins.<name>.src` so a restore does not
+      depend on re-installing by hand.
 - [ ] **DMS and niri quantise scale differently, and it can overlap outputs.**
       monitors.json stores the 27" at 1.175, but DMS emits `scale 1.171875`
       (= 150/128) into outputs.kdl, while niri quantises to 1/120. At 1.175 the
