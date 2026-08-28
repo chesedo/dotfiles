@@ -113,7 +113,14 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    //
+    // LOCAL DEVIATION: enabled, replacing leftwm's focus_behaviour: Sloppy.
+    // max-scroll-amount="0%" is deliberate -- without it, moving the pointer
+    // toward a partially-visible column makes niri scroll the viewport to
+    // focus it, which is jarring in a scrolling layout. With it, focus only
+    // follows onto windows already fully on screen. Drop the attribute if you
+    // do want the pointer to pull the view along.
+    focus-follows-mouse max-scroll-amount="0%"
 }
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.

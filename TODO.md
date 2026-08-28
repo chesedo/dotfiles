@@ -140,9 +140,3 @@ and notepad contents.
 - [ ] `services.geoclue2.enable = true` if you want DMS night mode to pick its
       schedule from your location rather than a manual latitude/longitude. Off
       deliberately — it means location lookups leave the machine.
-
-## On `main`, before switching away
-
-- [ ] Add `system.nixos.tags = [ "leftwm" ];` and rebuild, so the leftwm
-      generation is labelled in the boot menu. This branch already tags itself
-      `dms`.
