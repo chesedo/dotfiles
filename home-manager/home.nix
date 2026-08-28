@@ -358,57 +358,24 @@ in
     enable = true;
 
     # The system-level `programs.niri` already installs the units and the
-    # portal, so home-manager owns the config file. Two things this module also
-    # provides that the NixOS one does not: xwayland-satellite (the NixOS module
-    # passes enableXWayland = false, and niri auto-spawns the satellite from
-    # PATH for emacs, slack, zoom and chrome), and `checkConfig`, which runs
-    # `niri validate` on the generated file at build time. Setting
-    # `package = null` to drop the duplicate niri from PATH would silently turn
-    # checkConfig off with it.
+    # portal, so home-manager only provides the package here -- along with
+    # xwayland-satellite, which the NixOS module deliberately omits
+    # (enableXWayland = false) and which niri auto-spawns from PATH for emacs,
+    # slack, zoom and chrome.
     systemd.enable = false;
     portalPackage = null;
 
-    # Deliberately minimal: keyboard layout, pointer behaviour, and just enough
-    # binds to reach a terminal and log out. Monitor layout, workspace binds and
-    # the rest of the leftwm bindings are TODO.md items -- start from DMS's own
-    # defaults and add back only what is actually missed.
-    extraConfig = ''
-      input {
-          keyboard {
-              xkb {
-                  layout "us"
-                  variant "colemak"
-                  options "caps:escape"
-              }
-          }
-
-          touchpad {
-              tap
-              natural-scroll
-              accel-speed 0.5
-          }
-
-          // leftwm ran focus_behaviour: Sloppy
-          focus-follows-mouse
-      }
-
-      // niri does NOT merge its built-in defaults into a config that parses --
-      // the bindings in its embedded default-config.kdl only apply when it is
-      // seeding a fresh config or falling back after a parse failure. So an
-      // absent binds block means literally no working keys, not sane defaults.
-      // These five are the floor: a terminal, a way to close a window, a way
-      // out, and DMS's launcher.
-      binds {
-          Mod+Shift+Slash { show-hotkey-overlay; }
-
-          Mod+T { spawn "alacritty"; }
-          Mod+Q { close-window; }
-          Mod+Shift+E { quit; }
-
-          Mod+Space { spawn "dms" "ipc" "spotlight" "toggle"; }
-      }
-    '';
+    # settings/extraConfig are left empty on purpose. The module only claims
+    # ~/.config/niri/config.kdl when they produce content, so leaving them
+    # empty frees the path for the out-of-store symlink below and keeps niri's
+    # config editable live. It also means `checkConfig` no longer validates
+    # anything, since there is nothing generated to validate.
   };
+
+  # Out-of-store symlink so niri config edits apply on save -- niri watches
+  # this file and reloads itself. Same pattern the eww and leftwm configs used.
+  xdg.configFile."niri/config.kdl".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/config.kdl";
 
   home.sessionVariables = {
     # DMS resolves the terminal as terminalOverride -> $TERMINAL -> "", and its
