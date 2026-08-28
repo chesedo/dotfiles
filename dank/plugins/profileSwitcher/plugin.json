@@ -1,0 +1,20 @@
+{
+    "$schema": "https://raw.githubusercontent.com/AvengeMedia/DankMaterialShell/master/quickshell/PLUGINS/plugin-schema.json",
+    "id": "profileSwitcher",
+    "name": "Profile Switcher",
+    "description": "Switch DMS display profiles and run per-profile actions: swapping which DankBar is enabled and turning desktop widgets on or off.",
+    "version": "0.1.0",
+    "author": "chesedo",
+    "icon": "display_settings",
+    "type": "widget",
+    "capabilities": [
+        "dankbar-widget"
+    ],
+    "component": "./ProfileSwitcher.qml",
+    "settings": "./ProfileSwitcherSettings.qml",
+    "requires_dms": ">=1.5.0",
+    "permissions": [
+        "settings_read",
+        "settings_write"
+    ]
+}

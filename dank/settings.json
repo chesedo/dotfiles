@@ -167,7 +167,7 @@
   "groupWorkspaceApps": true,
   "groupActiveWorkspaceApps": false,
   "workspaceFollowFocus": false,
-  "showOccupiedWorkspacesOnly": false,
+  "showOccupiedWorkspacesOnly": true,
   "reverseScrolling": false,
   "dwlShowAllTags": false,
   "workspaceActiveAppHighlightEnabled": false,
@@ -559,7 +559,7 @@
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {
-    "niri": "profile_docked"
+    "niri": "profile_undocked"
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
@@ -568,33 +568,170 @@
   "barConfigs": [
     {
       "id": "default",
-      "name": "Main Bar",
+      "name": "Externals",
       "enabled": true,
       "position": 0,
       "screenPreferences": [
-        "all"
+        "DELL S2421HS-0",
+        "DELL S2722DGM",
+        "DELL S2421HS-1"
+      ],
+      "showOnLastDisplay": false,
+      "leftWidgets": [],
+      "centerWidgets": [
+        "workspaceSwitcher",
+        {
+          "id": "focusedWindow",
+          "enabled": true,
+          "focusedWindowCompactMode": false
+        }
+      ],
+      "rightWidgets": [],
+      "spacing": 4,
+      "innerPadding": 4,
+      "barInsetPadding": -1,
+      "bottomGap": 0,
+      "transparency": 1,
+      "widgetTransparency": 1,
+      "squareCorners": false,
+      "noBackground": false,
+      "maximizeWidgetIcons": false,
+      "maximizeWidgetText": false,
+      "removeWidgetPadding": false,
+      "widgetPadding": 8,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "widgetOutlineEnabled": false,
+      "widgetOutlineColor": "primary",
+      "widgetOutlineOpacity": 1,
+      "widgetOutlineThickness": 1,
+      "fontScale": 1,
+      "iconScale": 1,
+      "autoHide": false,
+      "autoHideStrict": false,
+      "autoHideDelay": 250,
+      "showOnWindowsOpen": false,
+      "openOnOverview": false,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4,
+      "maximizeDetection": true,
+      "useOverlayLayer": false,
+      "scrollEnabled": true,
+      "scrollXBehavior": "column",
+      "scrollYBehavior": "workspace",
+      "shadowIntensity": 0,
+      "shadowOpacity": 60,
+      "shadowColorMode": "default",
+      "shadowCustomColor": "#000000",
+      "clickThrough": false,
+      "hoverPopouts": false,
+      "hoverPopoutDelay": 150
+    },
+    {
+      "id": "laptopDocked",
+      "name": "Laptop (docked)",
+      "enabled": false,
+      "position": 0,
+      "screenPreferences": [
+        "0x0BCA"
+      ],
+      "showOnLastDisplay": true,
+      "leftWidgets": [],
+      "centerWidgets": [],
+      "rightWidgets": [
+        {
+          "id": "profileSwitcher",
+          "enabled": true
+        },
+        "systemTray",
+        "controlCenterButton"
+      ],
+      "spacing": 4,
+      "innerPadding": 4,
+      "barInsetPadding": -1,
+      "bottomGap": 0,
+      "transparency": 1,
+      "widgetTransparency": 1,
+      "squareCorners": false,
+      "noBackground": false,
+      "maximizeWidgetIcons": false,
+      "maximizeWidgetText": false,
+      "removeWidgetPadding": false,
+      "widgetPadding": 8,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "widgetOutlineEnabled": false,
+      "widgetOutlineColor": "primary",
+      "widgetOutlineOpacity": 1,
+      "widgetOutlineThickness": 1,
+      "fontScale": 1,
+      "iconScale": 1,
+      "autoHide": false,
+      "autoHideStrict": false,
+      "autoHideDelay": 250,
+      "showOnWindowsOpen": false,
+      "openOnOverview": false,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4,
+      "maximizeDetection": true,
+      "useOverlayLayer": false,
+      "scrollEnabled": true,
+      "scrollXBehavior": "column",
+      "scrollYBehavior": "workspace",
+      "shadowIntensity": 0,
+      "shadowOpacity": 60,
+      "shadowColorMode": "default",
+      "shadowCustomColor": "#000000",
+      "clickThrough": false,
+      "hoverPopouts": false,
+      "hoverPopoutDelay": 150
+    },
+    {
+      "id": "laptopFull",
+      "name": "Laptop (undocked)",
+      "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        "0x0BCA"
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
-        "launcherButton",
         "workspaceSwitcher",
-        "focusedWindow"
+        {
+          "id": "focusedWindow",
+          "enabled": true,
+          "focusedWindowSize": 1,
+          "focusedWindowCompactMode": false,
+          "focusedWindowShowIcon": true
+        }
       ],
       "centerWidgets": [
         "music",
-        "clock",
+        {
+          "id": "clock",
+          "enabled": true,
+          "clockCompactMode": false
+        },
         "weather"
       ],
       "rightWidgets": [
         {
-          "id": "displayProfileManager",
+          "id": "profileSwitcher",
           "enabled": true
         },
         "systemTray",
-        "clipboard",
-        "cpuUsage",
-        "memUsage",
-        "notificationButton",
         "battery",
         "controlCenterButton"
       ],
@@ -719,7 +856,7 @@
       "id": "dw_1787911577806_u819460ps",
       "widgetType": "desktopClock",
       "name": "Desktop Clock",
-      "enabled": true,
+      "enabled": false,
       "config": {
         "style": "stacked",
         "transparency": 0.8,
@@ -772,7 +909,7 @@
       "id": "dw_1787911681517_1ysacttto",
       "widgetType": "systemMonitor",
       "name": "System Monitor",
-      "enabled": true,
+      "enabled": false,
       "config": {
         "showHeader": false,
         "transparency": 0.8,
@@ -837,7 +974,7 @@
       "id": "dw_1787912112920_59oa3gf7t",
       "widgetType": "dankDesktopWeather",
       "name": "Dank Desktop Weather",
-      "enabled": true,
+      "enabled": false,
       "config": {
         "displayPreferences": [
           {

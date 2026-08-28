@@ -14,10 +14,17 @@
 # make/model/serial, which is per-machine but not sensitive.
 !monitors.json
 
+# Our own plugin is source, not vendored: track it while keeping the installed
+# third-party clones (each its own git repo) ignored.
+!plugins/
+plugins/*
+!plugins/profileSwitcher/
+!plugins/profileSwitcher/**
+
 # For the record, since they are not tracked:
-#   plugins/    installed plugins, each its own git clone -- currently
+#   plugins/    third-party plugins, each its own git clone -- currently
 #               materialWeather and dankDesktopWeather from
-#               https://github.com/AvengeMedia/dms-plugins, plus
-#               displayProfileManager
+#               https://github.com/AvengeMedia/dms-plugins. Our own
+#               profileSwitcher is exempted above and IS tracked.
 #   zen.css     matugen output, regenerated on every theme change
 #   .firstlaunch, .changelog-*   DMS state markers
