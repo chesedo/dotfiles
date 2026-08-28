@@ -50,7 +50,7 @@
         "BOE 0x0BCA Unknown": {
           "mode": "2256x1504@59.999",
           "position": {
-            "x": 4100,
+            "x": 4110,
             "y": 1080
           },
           "scale": 2,
@@ -62,7 +62,7 @@
         "Dell Inc. DELL S2421HS 39BK7P3": {
           "mode": "1920x1080@74.973",
           "position": {
-            "x": 4100,
+            "x": 4110,
             "y": 0
           },
           "scale": 1,

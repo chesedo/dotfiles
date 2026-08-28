@@ -88,31 +88,32 @@ descriptions. The stable identities are:
     Dell Inc. DELL S2421HS 39BK7P3    right 24"
     BOE 0x0BCA Unknown                laptop
 
-- [ ] **Auto switching does not work in DMS 1.5.3 -- profiles must be applied
-      by hand.** Observed across a real unplug:
-      - `auto` is persisted, as `displayProfileAutoSelect` in settings.json,
-        and is currently false because it was unchecked in the GUI. An earlier
-        note here claimed it was not persisted at all; that was wrong, from a
-        truncated grep of settings.json.
-      - `matchedProfile` is only recomputed inside `validateProfiles()`, which
-        runs at startup rather than on hotplug, so after unplugging it still
-        reported `matched: Docked` with only the laptop connected.
-      - Even after a restart, which does re-match correctly
-        (`matched: Laptop only`), it never applied: `active: none` and the
-        geometry stayed on the docked values.
+- [ ] **Auto switching matches but never applies.** Narrowed down over two
+      unplug/replug cycles with `displayProfileAutoSelect` genuinely on:
+      - Matching on hotplug DOES work. With only the laptop connected it
+        correctly reports `matched: Laptop only`. An earlier note here claimed
+        matching was not recomputed on hotplug; that was wrong, and came from a
+        test contaminated by toggling auto around a manual setProfile.
+      - Applying does not happen: `active: none`, outputs.kdl keeps whatever
+        the previous profile wrote, and the display stays on the old geometry.
 
-      What works reliably is applying explicitly, which requires auto off:
+      So the only workable path is applying explicitly, which needs auto off
+      since setProfile refuses while it is on:
 
-          dms ipc call outputs toggleAuto        # if auto is on
           dms ipc call outputs setProfile "Docked"      # or "Laptop only"
 
-      The remaining two points stand regardless of the auto setting, and are
-      what make auto unusable: a match is not recomputed on hotplug, and even
-      a correct match is never applied.
-
-      Worth binding `dms ipc call outputs cycleProfile` to a key as a
-      one-keypress fix after docking, and reporting the apply behaviour
-      upstream.
+      Worth binding `dms ipc call outputs cycleProfile` to a key, and reporting
+      the apply behaviour upstream.
+- [ ] **DMS and niri quantise scale differently, and it can overlap outputs.**
+      monitors.json stores the 27" at 1.175, but DMS emits `scale 1.171875`
+      (= 150/128) into outputs.kdl, while niri quantises to 1/120. At 1.175 the
+      27" is 2179 logical wide and ends at 4099; at 1.171875 it is 2185 and
+      ends at 4105. The docked profile therefore places the right-hand monitor
+      and the laptop at x=4110 rather than 4100, so there is slack under either
+      interpretation -- 11px or 5px. Without it, a dock would overlap by 5px,
+      and niri answers overlap by silently relocating an output rather than
+      erroring. Worth confirming which scale niri actually ends up using next
+      time the machine is docked.
 - [ ] Editing monitors.json by hand does not take effect while DMS is running:
       it applies profiles from an in-memory copy and will write the stale
       values back out. `systemctl --user restart dms.service` makes it re-read.
