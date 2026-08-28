@@ -45,8 +45,7 @@ in
     podman-compose
 
     # Screenshots, clipboard history, the app launcher and notifications are
-    # all DMS built-ins now, so the scripts that backed them are no longer
-    # installed. The files themselves still sit in scripts/ -- see TODO.md.
+    # all DMS built-ins now, so the scripts that backed them are gone.
 
     # For TTS
     piper-tts
@@ -375,7 +374,7 @@ in
   };
 
   # Out-of-store symlink so niri config edits apply on save -- niri watches
-  # this file and reloads itself. Same pattern the eww and leftwm configs used.
+  # this file and reloads itself.
   xdg.configFile."niri/config.kdl".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/config.kdl";
 

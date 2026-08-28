@@ -1,13 +1,13 @@
-# 🏔️ Dotfiles - Alpine Slate Theme
+# 🏔️ Dotfiles
 
-> Modern, declarative NixOS configuration with a cohesive alpine-granite aesthetic
+> Modern, declarative NixOS configuration for a Framework 13 AMD
 
 ## ✨ Features
 
 - **NixOS** with flakes for reproducible system configuration
-- **LeftWM** tiling window manager with custom theming
-- **EWW** widgets for system monitoring and app launching
-- **Unified theming** across all applications from a single base16 file
+- **niri** scrollable-tiling Wayland compositor
+- **DankMaterialShell** for the bar, launcher, notifications, control centre and
+  lock screen, themed from the wallpaper
 - **Framework 13 AMD** optimized configuration
 
 ## 🚀 Quick Start
@@ -20,47 +20,44 @@ cd ~/dotfiles
 # Setup system (run as root)
 sudo nixos-rebuild switch --flake .
 
-# Setup user environment
-home-manager switch --flake .
+# Setup user environment. --impure is required: home.nix reads secrets.nix
+# through builtins.getEnv "HOME"
+home-manager switch --flake .#chesedo --impure
 ```
 
 ## 🎨 Theme
 
-The **Alpine Slate** color palette creates a deep, focused environment, keyed to
-the wallpaper (alpine granite at dawn) and tuned cooler than the raw samples:
-- **Background**: `#16181C` (deep neutral slate)
-- **Foreground**: `#D6DAE0` (cool silver)
-- **Accent**: `#9C7FA6` (muted mauve, cloud light)
-- **Highlight**: `#5F87AE` (steel blue cliff shadows)
+Colours are generated from the wallpaper by DMS's matugen run, which writes
+themes for GTK, Qt, alacritty, Emacs, Zen and niri itself. There is no central
+palette file: set the wallpaper and everything follows. Wallpapers themselves
+live outside the repo, in `~/.local/share/wallpapers`, since they are large and
+DMS manages them per monitor.
 
-Defined once in `home-manager/theme/alpine-slate.nix`; most consumers get it
-via Stylix, though a couple import it directly or need a hand-synced copy.
-See [`leftwm/themes/current/README.md`](leftwm/themes/current/README.md) for how
-to change it and which files are generated rather than edited.
+The niri fragments DMS generates live in `niri/dms/` and are tracked, so a theme
+change shows up as a diff.
 
 ## 🔧 Key Components
 
-- **Window Manager**: LeftWM with custom theme and keybindings
-- **Compositor**: Picom with blur effects and rounded corners
+- **Compositor**: niri, configured in `niri/config.kdl` — DMS's shipped config
+  with local deviations marked inline
+- **Shell**: DankMaterialShell (bar, launcher, notifications, control centre,
+  clipboard, screenshots, lock screen)
 - **Terminal**: Alacritty with FiraCode Nerd Font
-- **Widgets**: Custom EWW panels for productivity
 - **Editor**: Doom Emacs with Rust/Nix/Python LSP support
-- **Launcher**: Custom executable finder with caching
+- **Files**: Nautilus, which also backs the desktop portal's file chooser
 
-## 📱 Widgets
+## 🖥️ Displays
 
-- System resources (CPU, RAM, Network)
-- Battery status for all devices
-- Music player integration
-- Clipboard history manager
-- Screenshot tool with preview
-- Notification center
+Monitor layouts are DMS display profiles, stored in `dank/monitors.json` and
+keyed by monitor identity rather than connector name, since connectors renumber
+across a replug. A custom plugin in `dank/plugins/profileSwitcher/` switches
+between them and swaps which bar is enabled and whether desktop widgets show,
+so the laptop screen behaves differently docked and undocked.
 
 ## ⚡ Productivity
 
-- **Per-project environments** with nix-shell
+- **Per-project environments** with nix-shell and direnv
 - **Vim-style navigation** everywhere
-- **Multi-monitor support** with autorandr
 - **GPG/YubiKey integration** for security
 - **Org-roam** for knowledge management
 
@@ -68,13 +65,15 @@ to change it and which files are generated rather than edited.
 
 ```
 ├── nixos/           # System configuration
-├── home-manager/    # User environment  
-├── leftwm/          # Window manager setup
-├── eww/             # Widget configuration
-├── .doom.d/         # Emacs configuration
-└── scripts/         # Utility scripts
+├── home-manager/    # User environment
+├── niri/            # Compositor config, symlinked live into ~/.config/niri
+├── dank/            # DankMaterialShell config, symlinked live
+└── .doom.d/         # Emacs configuration
 ```
+
+Both `niri/` and `dank/` are out-of-store symlinks, so edits there take effect
+without a rebuild.
 
 ---
 
-*Optimized for Framework 13 AMD • Built with NixOS flakes • Themed for productivity*
+*Optimized for Framework 13 AMD • Built with NixOS flakes*

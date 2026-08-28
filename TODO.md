@@ -10,19 +10,13 @@ port of the old desktop. Add things back only once you actually miss them.
 
 ## Delete dead configuration
 
-- [ ] `eww/` — every widget it defined is a DMS built-in now. Nothing in the
-      nix tree references it.
-- [ ] `leftwm/` — including `leftwm/themes/`. Move
-      `leftwm/themes/current/background.jpg` somewhere neutral (e.g.
-      `wallpapers/`) first if you still want that image; nothing references it
-      any more since stylix was removed, and DMS owns the wallpaper now.
-- [ ] `scripts/` — all six are dead: `screenshot.sh`, `clipboard.sh`,
-      `filter-executables.sh`, `update-executables-cache.sh`,
-      `dunst-update-eww.sh`, `clear-app-notifications.sh`. DMS replaces each
-      one (`dms screenshot`, clipboard history, spotlight, notification centre).
-- [ ] `home-manager/theme/alpine-slate.nix` and `home-manager/blugon/` — only
-      stylix and blugon read these.
-- [ ] `README.md` still advertises LeftWM, EWW, Picom and autorandr.
+- [x] `eww/`, `leftwm/`, `scripts/`, `home-manager/blugon/` and
+      `home-manager/theme/` are gone, along with the generated `eww/colors.scss`
+      and its .gitignore rule. README.md and AGENTS.md now describe the niri +
+      DMS layout rather than the leftwm one.
+- [x] Wallpapers moved out of the repo entirely, to
+      `~/.local/share/wallpapers`. DMS manages them per monitor, keyed by
+      monitor identity, and the files are large and derived.
 
 ## Left out of the minimal start — add back if missed
 
