@@ -165,9 +165,11 @@ trayer, autorandr, picom, xclip, feh, slop and shotgun.
 Must stay, despite looking like leftovers -- each was checked, and none is
 declared by DMS's own Nix modules:
 
-    libnotify   DMS shells out to notify-send for low-battery warnings
-                (BatteryService.qml) and profile image errors (PortalService.qml).
-                Nothing else in the profile provides notify-send.
+    (libnotify was removed: BatteryService.sendAlert only shells out to
+     notify-send when the alert's notificationType is 1, and all three battery
+     types are now 0, i.e. DMS's own ToastService. The only remaining caller is
+     profile image errors in PortalService.qml. Note the difference: notify-send
+     reaches the notification centre and persists, a toast does not.)
     upower      Quickshell.Services.UPower backs the whole battery UI across
                 eight files.
     imv         DMS has no image viewer; it delegates via defaultApp imageViewer.

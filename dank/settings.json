@@ -373,7 +373,7 @@
   "batteryNotifyLow": false,
   "batteryChargeLimitNotificationType": 0,
   "batteryLowNotificationType": 0,
-  "batteryCriticalNotificationType": 1,
+  "batteryCriticalNotificationType": 0,
   "batteryAutoPowerSaver": false,
   "lockBeforeSuspend": false,
   "loginctlLockIntegration": true,
