@@ -146,10 +146,14 @@ descriptions. The stable identities are:
       and niri answers overlap by silently relocating an output rather than
       erroring. Worth confirming which scale niri actually ends up using next
       time the machine is docked.
-- [ ] Editing monitors.json by hand does not take effect while DMS is running:
-      it applies profiles from an in-memory copy and will write the stale
-      values back out. `systemctl --user restart dms.service` makes it re-read.
-      Prefer the GUI.
+- [x] ~~Editing monitors.json by hand needs a DMS restart.~~ Wrong. Both
+      settings.json and monitors.json are FileViews with `watchChanges: true`,
+      and a direct test confirmed it: editing settings.json while DMS ran was
+      picked up immediately, and a subsequent DMS-side save preserved the edit
+      rather than overwriting it. The edits that appeared to be clobbered were
+      a two-writer race with the settings GUI being used at the same time, not
+      DMS ignoring the file. Editing by hand is fine; just do not do it while
+      the corresponding settings panel is open.
 
 ## Trimming packages
 
