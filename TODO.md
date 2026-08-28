@@ -73,28 +73,34 @@ it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
 
 ## Display profiles
 
-"Laptop only" exists (eDP-1, scale 1.5, at 0,0). Applying a profile makes DMS
-regenerate niri/dms/outputs.kdl from scratch, so that file now contains only
-eDP-1 -- the externals' entries are gone until a docked profile exists.
+Two profiles exist, keyed by make/model/serial rather than connector name:
+"Laptop only" (eDP-1 at scale 1.5) and "Docked" (the four-output DPI-matched
+layout). `displayNameMode` is set to "model" for that keying, and auto
+switching is on.
 
-- [ ] **Capture the docked profile** while the monitors are plugged in; DMS
-      validates a profile against connected outputs, so it cannot be made from
-      the laptop alone. The DPI-matched values, which no longer live anywhere
-      on disk:
+Connector names are NOT stable: unplugging and replugging the externals
+renumbered them DP-9/DP-12/DP-10 -> DP-11/DP-15/DP-13. Anything keyed on the
+connector name breaks across a replug, which is why the profiles use
+descriptions. The stable identities are:
 
-        DP-9   S2421HS  C0BK7P3   1920x1080@74.973  scale 1      at 0,0
-        DP-12  S2722DGM DW8HZ83   2560x1440@59.951  scale 1.175  at 1920,0
-        DP-10  S2421HS  39BK7P3   1920x1080@74.973  scale 1      at 4100,0
-        eDP-1  Framework          2256x1504@59.999  scale 2      at 4100,1080
+    Dell Inc. DELL S2421HS C0BK7P3    left 24"
+    Dell Inc. DELL S2722DGM DW8HZ83   middle 27"
+    Dell Inc. DELL S2421HS 39BK7P3    right 24"
+    BOE 0x0BCA Unknown                laptop
 
-      The two 24" panels are ~92 PPI at scale 1; 1.175 brings the 27" to ~92.6
-      and scale 2 puts the laptop at ~100, so text matches across all four.
-      1.175 rather than 1.176 because niri quantises scale to 1/120 steps, and
-      x=4100 is deliberate slack -- niri ceils logical size, so the 27" ends at
-      4099, and an exact abutment overlaps by a pixel, which niri answers by
-      silently relocating an output.
-- [ ] Once both profiles exist, `dms ipc call outputs toggleAuto` to switch on
-      plug/unplug automatically. Currently `auto: off`.
+- [ ] **Verify auto switching actually fires on the next unplug.** With both
+      profiles saved and auto on, `outputs status` still reports
+      `matched: none` even though the connected set and the Docked profile's
+      keys look identical. findMatchingProfile compares
+      `currentOutputSet.join("+")` against the profile's sorted keys, so the
+      suspicion is that currentOutputSet is unpopulated after a bare restart --
+      it may need the Displays panel opened once. If auto does not fire, open
+      Settings -> Displays and re-save the profile through the GUI so DMS's
+      internal state is built the way it expects.
+- [ ] Editing monitors.json by hand does not take effect while DMS is running:
+      it applies profiles from an in-memory copy and will write the stale
+      values back out. `systemctl --user restart dms.service` makes it re-read.
+      Prefer the GUI.
 
 ## DMS config
 

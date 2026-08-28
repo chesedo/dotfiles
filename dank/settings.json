@@ -543,7 +543,7 @@
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
   "updaterIgnoredPackages": [],
-  "displayNameMode": "system",
+  "displayNameMode": "model",
   "screenPreferences": {
     "wallpaper": [
       "all"
@@ -559,9 +559,9 @@
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {
-    "niri": "profile_1787918473513_b1y62o5"
+    "niri": "auto_c4dabc8a"
   },
-  "displayProfileAutoSelect": false,
+  "displayProfileAutoSelect": true,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,
   "connectedFrameBarStyleBackups": {},
@@ -755,6 +755,12 @@
           "height": 200,
           "x": 1180,
           "y": 620
+        },
+        "0x0BCA": {
+          "width": 100,
+          "height": 160,
+          "x": 514,
+          "y": 296
         }
       }
     },
@@ -814,6 +820,12 @@
           "height": 480,
           "x": 1120,
           "y": 480
+        },
+        "0x0BCA": {
+          "width": 320,
+          "height": 480,
+          "x": 404,
+          "y": 136
         }
       }
     },
@@ -864,6 +876,12 @@
           "height": 200,
           "x": 1180,
           "y": 620
+        },
+        "0x0BCA": {
+          "width": 280,
+          "height": 320,
+          "x": 424,
+          "y": 216
         }
       }
     }

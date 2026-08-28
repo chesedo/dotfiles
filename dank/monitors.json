@@ -18,6 +18,114 @@
           "niri": {}
         }
       }
+    },
+    {
+      "id": "profile_1787919194916_mpenkq4",
+      "name": "Docked",
+      "outputs": {
+        "Dell Inc. DELL S2421HS C0BK7P3": {
+          "mode": "1920x1080@74.973",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "Dell Inc. DELL S2722DGM DW8HZ83": {
+          "mode": "2560x1440@59.951",
+          "position": {
+            "x": 1920,
+            "y": 0
+          },
+          "scale": 1.175,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "BOE 0x0BCA Unknown": {
+          "mode": "2256x1504@59.999",
+          "position": {
+            "x": 4100,
+            "y": 1080
+          },
+          "scale": 2,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "Dell Inc. DELL S2421HS 39BK7P3": {
+          "mode": "1920x1080@74.973",
+          "position": {
+            "x": 4100,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
+    },
+    {
+      "id": "auto_c4dabc8a",
+      "name": "",
+      "outputs": {
+        "Dell Inc. DELL S2421HS 39BK7P3": {
+          "mode": "1920x1080@74.973",
+          "position": {
+            "x": 4100,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "BOE 0x0BCA Unknown": {
+          "mode": "2256x1504@59.999",
+          "position": {
+            "x": 4100,
+            "y": 1080
+          },
+          "scale": 2,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "Dell Inc. DELL S2421HS C0BK7P3": {
+          "mode": "1920x1080@74.973",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        },
+        "Dell Inc. DELL S2722DGM DW8HZ83": {
+          "mode": "2560x1440@59.951",
+          "position": {
+            "x": 1920,
+            "y": 0
+          },
+          "scale": 1.171875,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
     }
   ]
 }
