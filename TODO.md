@@ -88,13 +88,27 @@ descriptions. The stable identities are:
     Dell Inc. DELL S2421HS 39BK7P3    right 24"
     BOE 0x0BCA Unknown                laptop
 
-- [ ] **Verify auto switching actually fires on the next unplug.** Both
-      profiles are keyed by description and `matched: Docked` is reported, but
-      the switch itself has not been observed yet.
-- [ ] DMS keeps re-adding an unnamed duplicate of the Docked profile to
-      monitors.json. findMatchingProfile skips profiles with an empty name so
-      it is inert, but it comes back after a restart even once removed, so
-      something in the save path writes it. Worth reporting upstream.
+- [ ] **Auto switching does not work in DMS 1.5.3 -- profiles must be applied
+      by hand.** Observed across a real unplug:
+      - `auto` is not persisted anywhere. It is absent from settings.json and
+        from monitors.json, so it is runtime-only and resets on every DMS
+        restart. It was found `off` after the unplug despite having been turned
+        on beforehand.
+      - `matchedProfile` is only recomputed inside `validateProfiles()`, which
+        runs at startup rather than on hotplug, so after unplugging it still
+        reported `matched: Docked` with only the laptop connected.
+      - Even after a restart, which does re-match correctly
+        (`matched: Laptop only`), it never applied: `active: none` and the
+        geometry stayed on the docked values.
+
+      What works reliably is applying explicitly, which requires auto off:
+
+          dms ipc call outputs toggleAuto        # if auto is on
+          dms ipc call outputs setProfile "Docked"      # or "Laptop only"
+
+      Worth binding `dms ipc call outputs cycleProfile` to a key as a
+      one-keypress fix after docking, and reporting the auto behaviour
+      upstream.
 - [ ] Editing monitors.json by hand does not take effect while DMS is running:
       it applies profiles from an in-memory copy and will write the stale
       values back out. `systemctl --user restart dms.service` makes it re-read.

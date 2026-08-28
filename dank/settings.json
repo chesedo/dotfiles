@@ -559,9 +559,9 @@
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {
-    "niri": "auto_c4dabc8a"
+    "niri": "profile_1787918473513_b1y62o5"
   },
-  "displayProfileAutoSelect": true,
+  "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,
   "connectedFrameBarStyleBackups": {},

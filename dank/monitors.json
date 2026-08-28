@@ -126,6 +126,24 @@
           "niri": {}
         }
       }
+    },
+    {
+      "id": "auto_78087fca",
+      "name": "",
+      "outputs": {
+        "BOE 0x0BCA Unknown": {
+          "mode": "2256x1504@59.999",
+          "position": {
+            "x": 4100,
+            "y": 1080
+          },
+          "scale": 2,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
     }
   ]
 }
