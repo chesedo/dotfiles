@@ -395,6 +395,23 @@ in
   xdg.configFile."DankMaterialShell".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dank";
 
+  # Cursor theme and size. Two layers are needed and both were missing after
+  # stylix went: niri draws the cursor itself and scales it per output (that
+  # block lives in niri/dms/cursor.kdl), while clients that draw their own read
+  # XCURSOR_THEME/XCURSOR_SIZE, which this sets. Without a theme installed at
+  # all, toolkits fall back independently and the cursor ends up a different
+  # physical size on each differently-scaled monitor.
+  #
+  # stylix used size 20; 24 is the more widely shipped bitmap size, so themes
+  # have exact art for it at 1x and 2x rather than scaling.
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+    gtk.enable = true;
+  };
+
   home.sessionVariables = {
     # DMS resolves the terminal as terminalOverride -> $TERMINAL -> "", and its
     # callers then fall back to hardcoded "xterm" (spotlight launching a
