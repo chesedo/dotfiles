@@ -42,13 +42,6 @@ in
 
     podman-compose
 
-    # DMS has no wallpaper spanning mode -- every output draws the whole image
-    # independently -- so this cuts one image into per-monitor crops and hands
-    # them over. Reads geometry live from `niri msg outputs`, since neither the
-    # layout nor the connector names are stable across a replug.
-    imagemagick
-    (writeShellScriptBin "wallpaper-span" (builtins.readFile ../scripts/wallpaper-span.sh))
-
     # Screenshots, clipboard history, the app launcher and notifications are
     # all DMS built-ins now, so the scripts that backed them are no longer
     # installed. The files themselves still sit in scripts/ -- see TODO.md.

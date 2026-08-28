@@ -195,12 +195,13 @@ and notepad contents.
       next change, so expect either a silent resurrection or, if DMS restarts
       first, a reset to defaults. Recoverable from git, but it happens without
       warning.
-- [x] The wallpaper span is scripted, as `wallpaper-span`. Reads geometry live
-      from `niri msg outputs`, so it survives connector renumbering and profile
-      changes. Re-run after docking, after switching profile, or after picking a
-      wallpaper in DMS (Mod+Y), since that sets one image across all screens.
+- [ ] Put four per-monitor wallpapers in `wallpapers/` and set them through
+      DMS (Settings -> Wallpaper, per-monitor). Sizes and the logical rects for
+      a continuous picture are in `wallpapers/README.md`. The generating script
+      was removed -- four static images need no tooling, and DMS keys them by
+      model and position, so they survive replugs on their own.
 - [ ] The source image is still `leftwm/themes/current/background.jpg`, so
-      moving it somewhere neutral is now a prerequisite for deleting `leftwm/`.
+      moving it into `wallpapers/` is a prerequisite for deleting `leftwm/`.
 
 ## Verify on real hardware
 
