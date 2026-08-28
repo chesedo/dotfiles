@@ -124,7 +124,10 @@
     tumbler.enable = true; # Thumbnail support for images
     devmon.enable = true; # Auto mount external drives
     openssh.enable = true;
-    upower.enable = true; # See power information about devices
+    # Required by DMS, and not enabled by its Nix modules: the battery widget,
+    # popout, control centre detail, power profile modal and OSD all drive
+    # Quickshell.Services.UPower. Without it there is no battery UI at all.
+    upower.enable = true;
   };
 
   system.userActivationScripts.linkhomemanager.text = ''

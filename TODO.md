@@ -151,6 +151,32 @@ descriptions. The stable identities are:
       values back out. `systemctl --user restart dms.service` makes it re-read.
       Prefer the GUI.
 
+## Trimming packages
+
+DMS is a Quickshell frontend, not a self-contained package. Its derivation
+wraps nothing but Qt paths, and it reaches system services over D-Bus and CLI
+tools over PATH. So "DMS replaces X" holds where X was a *GUI* and not where X
+is a service or a command.
+
+Already dropped, safely: blueman and pwvucontrol (DMS reimplements both against
+BlueZ and PipeWire in its control centre), plus the earlier sweep of dunst,
+trayer, autorandr, picom, xclip, feh, slop and shotgun.
+
+Must stay, despite looking like leftovers -- each was checked, and none is
+declared by DMS's own Nix modules:
+
+    libnotify   DMS shells out to notify-send for low-battery warnings
+                (BatteryService.qml) and profile image errors (PortalService.qml).
+                Nothing else in the profile provides notify-send.
+    upower      Quickshell.Services.UPower backs the whole battery UI across
+                eight files.
+    imv         DMS has no image viewer; it delegates via defaultApp imageViewer.
+    pinentry-qt GPG, and commits here are signed.
+
+- [ ] Before removing anything else, check two things: whether DMS shells out
+      to it (`rg 'execDetached'` over the QML), and whether it is a D-Bus
+      service DMS consumes. `dms doctor` lists the optional ones it knows about.
+
 ## DMS config
 
 `~/.config/DankMaterialShell` is symlinked to `dank/`, so `settings.json` is
