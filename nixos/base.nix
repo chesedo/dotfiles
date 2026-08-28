@@ -57,11 +57,29 @@
     };
   };
 
-  fonts.packages = with pkgs; [
-    powerline
-    nerd-fonts.fira-code
-    symbola # To fix emacs ligatures
-  ];
+  fonts = {
+    packages = with pkgs; [
+      powerline
+      nerd-fonts.fira-code
+      symbola # To fix emacs ligatures
+    ];
+
+    # Without this, generic families still resolve to DejaVu, so anything
+    # asking for plain sans-serif looks nothing like the shell. Inter and Fira
+    # Code are already present -- the dms-greeter module contributes both, and
+    # the Noto families come from enableDefaultPackages -- so this only sets
+    # the preference.
+    #
+    # Inter matches what DMS uses for its own UI (fontFamily "Inter Variable",
+    # monoFontFamily "Fira Code"). Serif is a real serif rather than another
+    # copy of the sans, which is what stylix used to do here.
+    fontconfig.defaultFonts = {
+      sansSerif = [ "Inter" ];
+      serif = [ "Noto Serif" ];
+      monospace = [ "FiraCode Nerd Font Mono" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
 
   hardware = {
     bluetooth.enable = true;

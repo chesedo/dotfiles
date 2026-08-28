@@ -18,29 +18,27 @@ port of the old desktop. Add things back only once you actually miss them.
       `~/.local/share/wallpapers`. DMS manages them per monitor, keyed by
       monitor identity, and the files are large and derived.
 
-## Left out of the minimal start — add back if missed
+## Left out of the minimal start
 
-- [ ] **GTK theming.** DMS's matugen writes `~/.config/gtk-3.0/dank-colors.css`
-      and the gtk-4.0 equivalent, but nothing imports them, so GTK apps ignore
-      the shell theme. Either add `gtk3/gtk4.extraCss` with an `@import`, or let
-      DMS's own "apply GTK colors" action own `gtk.css` — pick one owner, since
-      home-manager writes that file as a read-only store symlink and DMS
-      inspects the symlink target to decide whether its theming is live.
-- [ ] **Qt theming.** `QT_QPA_PLATFORMTHEME = "qt6ct"` plus the
-      `qt6Packages.qt6ct` package; DMS's matugen already targets
-      `qt6ct/colors/matugen.conf`. Relevant to `pinentry-qt` and
-      `yubioath-flutter`.
-- [ ] **Icon and cursor themes.** stylix used to set Papirus-Dark and
-      Bibata-Modern-Ice at size 20 (`gtk.iconTheme`, `home.pointerCursor`).
-- [ ] **Font defaults.** stylix set FiraCode Nerd Font everywhere; without it
-      fontconfig falls back to DejaVu for sans/serif. `fonts.fontconfig.
-      defaultFonts` in `nixos/base.nix` is where that would go, along with
-      `inter` and `fira-code` if `dms doctor` keeps complaining (the greeter
-      module already contributes both, plus `material-symbols`).
-- [ ] **Alacritty opacity** was 0.95 under stylix.
-- [ ] **`services.displayManager.dms-greeter.logs.save`** — turn on temporarily
-      if the greeter ever fails; without it a failure is just a black screen.
-      Note it defaults to a world-readable `/tmp/dms-greeter.log`.
+Most of this resolved itself rather than needing doing:
+
+- [x] **GTK theming** is handled by DMS. `~/.config/gtk-3.0/gtk.css` is now a
+      symlink to the `dank-colors.css` its matugen run writes -- removing
+      home-manager's `gtk3.extraCss` is exactly what let DMS's "apply GTK
+      colors" action take ownership, so the two-owner problem resolved in DMS's
+      favour.
+- [x] **Cursor theme** restored with `home.pointerCursor` (Bibata-Modern-Ice,
+      24) when the cursor turned out to be a different size on every monitor.
+- [x] **Qt theming** dropped rather than done. It was justified by pinentry-qt
+      and yubioath-flutter; both are gone, and nothing Qt-facing is left.
+- [x] **Font defaults** set in `nixos/base.nix`. Inter and Fira Code were
+      already installed via the dms-greeter module, and the Noto families via
+      enableDefaultPackages, so only the fontconfig preference was missing --
+      generic sans-serif was still resolving to DejaVu.
+- [x] **Alacritty opacity** back to 0.95.
+- [ ] **`services.displayManager.dms-greeter.logs.save`** -- still off. Turn it
+      on temporarily if the greeter ever fails, since without it a failure is
+      just a black screen. Note it writes a world-readable /tmp/dms-greeter.log.
 
 ## niri config still to wire up
 

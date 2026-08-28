@@ -94,6 +94,7 @@ in
             y = 10;
           };
           dynamic_padding = true;
+          opacity = 0.95; # what stylix set before it was removed
         };
         bell = {
           animation = "EaseOutExpo";
