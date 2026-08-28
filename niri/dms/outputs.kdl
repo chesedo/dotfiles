@@ -20,6 +20,6 @@ output "DP-10" {
 
 output "eDP-1" {
     mode "2256x1504@59.999"
-    scale 2
+    scale 1.5
     position x=4100 y=1080
 }

@@ -305,11 +305,11 @@
   "iconThemePerMode": false,
   "lastAppliedIconTheme": "",
   "cursorSettings": {
-    "theme": "System Default",
+    "theme": "Bibata-Modern-Ice",
     "size": 24,
     "niri": {
       "hideWhenTyping": false,
-      "hideAfterInactiveMs": 0
+      "hideAfterInactiveMs": 1555
     },
     "hyprland": {
       "hideOnKeyPress": false,
@@ -470,7 +470,7 @@
   "lockScreenShowMediaPlayer": true,
   "lockScreenPowerOffMonitorsOnLock": false,
   "lockAtStartup": false,
-  "enableFprint": false,
+  "enableFprint": true,
   "maxFprintTries": 15,
   "enableU2f": false,
   "u2fMode": "or",
@@ -558,7 +558,9 @@
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
-  "activeDisplayProfile": {},
+  "activeDisplayProfile": {
+    "niri": "profile_1787918473513_b1y62o5"
+  },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,
@@ -731,10 +733,10 @@
       },
       "positions": {
         "eDP-1": {
-          "width": 241.29296875,
-          "height": 241.29296875,
-          "x": 393.8515625,
-          "y": 301.46484375
+          "width": 111.7578125,
+          "height": 172.8203125,
+          "x": 244.859375,
+          "y": 116.95703125
         },
         "DP-10": {
           "width": 200,
@@ -790,10 +792,10 @@
       },
       "positions": {
         "eDP-1": {
-          "width": 485.4609375,
-          "height": 374.4609375,
-          "x": 711.59765625,
-          "y": 204.765625
+          "width": 355.015625,
+          "height": 307.8515625,
+          "x": 600.9140625,
+          "y": 207.0703125
         },
         "DP-10": {
           "width": 320,
@@ -840,10 +842,10 @@
       },
       "positions": {
         "eDP-1": {
-          "width": 405.953125,
-          "height": 390.6171875,
-          "x": 104.78125,
-          "y": 567.84375
+          "width": 326.1484375,
+          "height": 320,
+          "x": 132.19921875,
+          "y": 319.90625
         },
         "DP-10": {
           "width": 200,

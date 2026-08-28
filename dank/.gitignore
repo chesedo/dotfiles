@@ -8,6 +8,11 @@
 *
 !.gitignore
 !settings.json
+# Display profiles: which outputs, at what scale and position, and how to match
+# them. DMS regenerates niri/dms/outputs.kdl from whichever profile matches, so
+# this is the source of that geometry and worth tracking. It does carry output
+# make/model/serial, which is per-machine but not sensitive.
+!monitors.json
 
 # For the record, since they are not tracked:
 #   plugins/    installed plugins, each its own git clone -- currently

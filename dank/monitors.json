@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "configurations": [
+    {
+      "id": "profile_1787918473513_b1y62o5",
+      "name": "Laptop only",
+      "outputs": {
+        "eDP-1": {
+          "mode": "2256x1504@59.999",
+          "position": {
+            "x": 4100,
+            "y": 1080
+          },
+          "scale": 1.5,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
+    }
+  ]
+}
