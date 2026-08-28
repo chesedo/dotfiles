@@ -362,8 +362,9 @@ in
     # The system-level `programs.niri` already installs the units and the
     # portal, so home-manager only provides the package here -- along with
     # xwayland-satellite, which the NixOS module deliberately omits
-    # (enableXWayland = false) and which niri auto-spawns from PATH for emacs,
-    # slack, zoom and chrome.
+    # (enableXWayland = false) and which niri auto-spawns from PATH for slack,
+    # zoom and chrome. Emacs used to be on that list and no longer is: it runs
+    # the pgtk build now, for the scaling reasons noted in nixos/base.nix.
     systemd.enable = false;
     portalPackage = null;
 
@@ -444,7 +445,7 @@ in
   home.file = {
     ".doom.d" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.doom.d";
-      onChange = "EMACS=${pkgs.emacs}/bin/emacs ~/.config/emacs/bin/doom sync";
+      onChange = "EMACS=${pkgs.emacs-pgtk}/bin/emacs ~/.config/emacs/bin/doom sync";
     };
     ".cargo/config.toml" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.cargo/config.toml";

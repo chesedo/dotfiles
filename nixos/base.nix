@@ -23,7 +23,16 @@
       ripgrep
       gcc
       wl-clipboard
-      emacs
+      # emacs-pgtk rather than emacs: the default build is X11 only, so under
+      # niri it runs through xwayland-satellite, which gives every X11 client
+      # one global scale (the smallest, on mixed outputs) by way of Xft/DPI and
+      # Gdk XSETTINGS. doom-font sidesteps all of that -- an integer :size is a
+      # pixel size -- so 12 stayed 12 physical pixels and Emacs came out tiny on
+      # the 201 PPI laptop panel while looking right on the 92 PPI externals.
+      # The pure-GTK build is a native Wayland client and takes the per-output
+      # scale instead. GTK3 has no fractional scaling, so at eDP-1's 1.5 it
+      # renders at scale 2 and lets niri downscale: right size, marginally soft.
+      emacs-pgtk
 
       alacritty
       imv # Wayland image viewer, replaces feh
