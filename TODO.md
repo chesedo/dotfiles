@@ -88,15 +88,13 @@ descriptions. The stable identities are:
     Dell Inc. DELL S2421HS 39BK7P3    right 24"
     BOE 0x0BCA Unknown                laptop
 
-- [ ] **Verify auto switching actually fires on the next unplug.** With both
-      profiles saved and auto on, `outputs status` still reports
-      `matched: none` even though the connected set and the Docked profile's
-      keys look identical. findMatchingProfile compares
-      `currentOutputSet.join("+")` against the profile's sorted keys, so the
-      suspicion is that currentOutputSet is unpopulated after a bare restart --
-      it may need the Displays panel opened once. If auto does not fire, open
-      Settings -> Displays and re-save the profile through the GUI so DMS's
-      internal state is built the way it expects.
+- [ ] **Verify auto switching actually fires on the next unplug.** Both
+      profiles are keyed by description and `matched: Docked` is reported, but
+      the switch itself has not been observed yet.
+- [ ] DMS keeps re-adding an unnamed duplicate of the Docked profile to
+      monitors.json. findMatchingProfile skips profiles with an empty name so
+      it is inert, but it comes back after a restart even once removed, so
+      something in the save path writes it. Worth reporting upstream.
 - [ ] Editing monitors.json by hand does not take effect while DMS is running:
       it applies profiles from an in-memory copy and will write the stale
       values back out. `systemctl --user restart dms.service` makes it re-read.
