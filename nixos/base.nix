@@ -28,12 +28,17 @@
       alacritty
       imv # Wayland image viewer, replaces feh
 
+      # Required, not vestigial: DMS shells out to notify-send for low-battery
+      # warnings (BatteryService.qml) and profile image errors (PortalService.qml).
       libnotify
 
-      blueman
+      # No blueman or pwvucontrol: DMS's control centre manages Bluetooth
+      # (BluetoothService.qml) and audio devices (AudioService.qml) natively,
+      # and nothing in DMS shells out to either. Add one back if a device ever
+      # needs manual profile switching or per-application routing, which the
+      # control centre does not cover.
       htop
       home-manager
-      pwvucontrol
 
       zen-browser
 
