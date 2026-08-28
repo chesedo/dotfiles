@@ -27,10 +27,12 @@ in
 
     upwork
 
-    thunar
-    # Optionals
-    xfconf # Needed to save the preferences
-    xfce4-exo # Used by default for `open terminal here`, but can be changed
+    # Nautilus rather than Thunar: programs.niri already registers it on D-Bus
+    # for xdg-desktop-portal-gnome's file chooser, so this makes the chooser and
+    # the file manager the same program. Drops xfconf and xfce4-exo with it,
+    # which were only there to persist Thunar's preferences and give it an
+    # "open terminal here".
+    nautilus
 
     zoom-us
 

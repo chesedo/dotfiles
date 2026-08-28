@@ -179,8 +179,12 @@ layout {
     //
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
+    // LOCAL DEVIATION: border enabled (upstream ships it `off`). Width comes
+    // from dms/layout.kdl, which DMS generates from niriLayoutBorderSize, and
+    // the colours below are overridden by dms/colors.kdl since that include
+    // comes later -- so the border tracks the wallpaper palette rather than
+    // these neutral greys.
     border {
-        off
         width 4
         active-color   "#707070"      // Neutral gray
         inactive-color "#d0d0d0"      // Light gray

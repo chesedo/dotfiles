@@ -16,7 +16,7 @@
   "controlCenterTileColorMode": "primary",
   "buttonColorMode": "primary",
   "cornerRadius": 12,
-  "niriLayoutGapsOverride": -1,
+  "niriLayoutGapsOverride": 16,
   "niriLayoutRadiusOverride": -1,
   "niriLayoutBorderSize": -1,
   "hyprlandLayoutGapsOverride": -1,
@@ -29,7 +29,7 @@
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
   "mangoTrackpadNaturalScrolling": true,
-  "firstDayOfWeek": -1,
+  "firstDayOfWeek": 0,
   "showWeekNumber": false,
   "calendarBackend": "auto",
   "clockFormat": "24h",
@@ -48,7 +48,7 @@
   "enableRippleEffects": true,
   "animationVariant": 0,
   "motionEffect": 0,
-  "m3ElevationEnabled": true,
+  "m3ElevationEnabled": false,
   "m3ElevationIntensity": 12,
   "m3ElevationOpacity": 30,
   "m3ElevationColorMode": "default",
@@ -235,7 +235,7 @@
   "greeterRememberLastSession": true,
   "greeterRememberLastUser": true,
   "greeterAutoLogin": false,
-  "greeterEnableFprint": false,
+  "greeterEnableFprint": true,
   "greeterEnableU2f": false,
   "greeterWallpaperPath": "",
   "greeterLockDateFormat": "",
@@ -268,7 +268,7 @@
   "dankLauncherV2BorderThickness": 2,
   "dankLauncherV2BorderColor": "primary",
   "dankLauncherV2ShowFooter": true,
-  "dankLauncherV2UnloadOnClose": false,
+  "dankLauncherV2UnloadOnClose": true,
   "dankLauncherV2IncludeFilesInAll": false,
   "dankLauncherV2IncludeFoldersInAll": false,
   "launcherUseOverlayLayer": false,
@@ -288,7 +288,7 @@
     },
     {
       "id": "wallpaper",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "weather",
@@ -296,20 +296,20 @@
     },
     {
       "id": "settings",
-      "enabled": true
+      "enabled": false
     }
   ],
   "networkPreference": "auto",
   "iconThemeDark": "System Default",
   "iconThemeLight": "System Default",
   "iconThemePerMode": false,
-  "lastAppliedIconTheme": "",
+  "lastAppliedIconTheme": "Bibata-Modern-Ice",
   "cursorSettings": {
     "theme": "Bibata-Modern-Ice",
     "size": 24,
     "niri": {
       "hideWhenTyping": false,
-      "hideAfterInactiveMs": 1555
+      "hideAfterInactiveMs": 1501
     },
     "hyprland": {
       "hideOnKeyPress": false,
@@ -353,7 +353,7 @@
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
   "muteSoundsWhenMediaPlaying": true,
-  "acMonitorTimeout": 0,
+  "acMonitorTimeout": 600,
   "acLockTimeout": 0,
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
@@ -365,12 +365,12 @@
   "batterySuspendBehavior": 0,
   "batteryProfileName": "",
   "batteryPostLockMonitorTimeout": 0,
-  "batteryChargeLimit": 100,
-  "batteryNotifyChargeLimit": false,
+  "batteryChargeLimit": 95,
+  "batteryNotifyChargeLimit": true,
   "batteryCriticalThreshold": 10,
   "batteryNotifyCritical": true,
   "batteryLowThreshold": 20,
-  "batteryNotifyLow": false,
+  "batteryNotifyLow": true,
   "batteryChargeLimitNotificationType": 0,
   "batteryLowNotificationType": 0,
   "batteryCriticalNotificationType": 0,
@@ -385,7 +385,7 @@
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
-  "terminalsAlwaysDark": false,
+  "terminalsAlwaysDark": true,
   "muxType": "tmux",
   "muxUseCustomCommand": false,
   "muxCustomCommand": "",
@@ -466,7 +466,7 @@
   "lockScreenShowTime": true,
   "lockScreenShowDate": true,
   "lockScreenShowProfileImage": true,
-  "lockScreenShowPasswordField": true,
+  "lockScreenShowPasswordField": false,
   "lockScreenShowMediaPlayer": true,
   "lockScreenPowerOffMonitorsOnLock": false,
   "lockAtStartup": false,
@@ -492,7 +492,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationCompactMode": false,
-  "notificationShowTimeoutBar": false,
+  "notificationShowTimeoutBar": true,
   "notificationDedupeEnabled": true,
   "notificationPopupPosition": 0,
   "notificationAnimationSpeed": 1,
@@ -504,7 +504,7 @@
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
-  "notificationFocusedMonitor": false,
+  "notificationFocusedMonitor": true,
   "osdAlwaysShowValue": false,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
@@ -539,7 +539,7 @@
   "updaterUseCustomCommand": false,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
-  "updaterIntervalSeconds": 1800,
+  "updaterIntervalSeconds": 86400,
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
   "updaterIgnoredPackages": [],
@@ -550,10 +550,12 @@
     ],
     "notifications": [
       "all"
-    ]
+    ],
+    "dock": []
   },
   "showOnLastDisplay": {
-    "notifications": true
+    "notifications": true,
+    "dock": false
   },
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {},
@@ -591,9 +593,9 @@
       "innerPadding": 4,
       "barInsetPadding": -1,
       "bottomGap": 0,
-      "transparency": 1,
+      "transparency": 0,
       "widgetTransparency": 1,
-      "squareCorners": false,
+      "squareCorners": true,
       "noBackground": false,
       "maximizeWidgetIcons": false,
       "maximizeWidgetText": false,
@@ -656,9 +658,9 @@
       "innerPadding": 4,
       "barInsetPadding": -1,
       "bottomGap": 0,
-      "transparency": 1,
+      "transparency": 0,
       "widgetTransparency": 1,
-      "squareCorners": false,
+      "squareCorners": true,
       "noBackground": false,
       "maximizeWidgetIcons": false,
       "maximizeWidgetText": false,
@@ -735,10 +737,10 @@
         "battery",
         "controlCenterButton"
       ],
-      "spacing": 4,
-      "innerPadding": 4,
-      "barInsetPadding": -1,
-      "bottomGap": 0,
+      "spacing": 16,
+      "innerPadding": 0,
+      "barInsetPadding": 4,
+      "bottomGap": -5,
       "transparency": 1,
       "widgetTransparency": 1,
       "squareCorners": false,
@@ -1028,7 +1030,14 @@
     }
   ],
   "desktopWidgetGroups": [],
-  "builtInPluginSettings": {},
+  "builtInPluginSettings": {
+    "dms_settings_search": {
+      "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    }
+  },
   "clipboardClickToPaste": false,
   "clipboardEnterToPaste": false,
   "clipboardRememberTypeFilter": false,
@@ -1041,7 +1050,7 @@
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "frameEnabled": false,
-  "frameThickness": 16,
+  "frameThickness": 8,
   "frameRounding": 23,
   "frameColor": "",
   "frameOpacity": 1,
@@ -1052,7 +1061,7 @@
   "frameShowOnOverview": false,
   "frameBlurEnabled": true,
   "frameCloseGaps": true,
-  "frameLauncherEmergeSide": "bottom",
+  "frameLauncherEmergeSide": "top",
   "frameLauncherArcExtender": false,
   "frameLauncherEdgeHover": false,
   "frameMode": "connected",
