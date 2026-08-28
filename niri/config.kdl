@@ -301,6 +301,18 @@ window-rule {
     match app-id="zoom"
     open-floating true
 }
+// LOCAL DEVIATION: float DMS's own windows.
+//
+// DMS's shipped config floats a range of third-party dialogs -- calculator,
+// blueman, nautilus, the portal, PiP -- but nothing of its own, and niri tiles
+// by default. So Settings, its plugin/theme/widget browsers and the notepad
+// popout each take a tiling column instead of behaving like the dialogs they
+// are. They all share one app-id, so one rule covers them.
+window-rule {
+    match app-id=r#"^com\.danklinux\.dms$"#
+    open-floating true
+}
+
 debug {
     honor-xdg-activation-with-invalid-serial
 }
