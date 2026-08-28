@@ -173,11 +173,23 @@ declared by DMS's own Nix modules:
     upower      Quickshell.Services.UPower backs the whole battery UI across
                 eight files.
     imv         DMS has no image viewer; it delegates via defaultApp imageViewer.
-    pinentry-qt GPG, and commits here are signed.
+    (pinentry switched to gnome3; see below. yubioath-flutter dropped, since
+     the YubiKey is used for GPG and SSH, which gpg-agent covers with
+     hardware.gpgSmartcards.)
 
 - [ ] Before removing anything else, check two things: whether DMS shells out
       to it (`rg 'execDetached'` over the QML), and whether it is a D-Bus
       service DMS consumes. `dms doctor` lists the optional ones it knows about.
+
+- [ ] **Verify GPG signing after the next `nixos-rebuild switch`.** pinentry
+      moved from Qt to gnome3 because pinentry-qt fell back to the xcb platform
+      plugin and put its dialog on XWayland, where it never took focus and gpg
+      timed out mid-commit. The gnome3 one is GTK, so wayland-native, and
+      prompts through GCR; gnome-keyring is already enabled by programs.niri.
+      If it does not prompt, the fallbacks are setting QT_QPA_PLATFORM=wayland
+      and going back to pinentry-qt, or pinentry-curses, which always works in
+      a terminal. Prime the agent with `echo test | gpg --clearsign` to test
+      without needing a commit to sign.
 
 ## DMS config
 

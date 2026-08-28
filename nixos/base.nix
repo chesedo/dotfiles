@@ -38,12 +38,18 @@
 
       zen-browser
 
-      pinentry-qt
+      # pinentry-gnome3 rather than -qt: Qt has no reason to pick the wayland
+      # platform plugin here, so pinentry-qt fell back to xcb and put its
+      # dialog on XWayland, where it never got focus and gpg timed out mid
+      # commit. The GTK one is wayland-native and prompts through GCR, and
+      # programs.niri already enables gnome-keyring and routes the Secret
+      # portal to it.
+      pinentry-gnome3
+      gcr # the prompter pinentry-gnome3 talks to
 
       proselint # For emacs linting
       (python3.withPackages (p: with p; [ grip ])) # To preview markdown and org files
 
-      yubioath-flutter
     ];
 
     variables = {
@@ -96,7 +102,7 @@
     dconf.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
+      pinentryPackage = pkgs.pinentry-gnome3;
       enableSSHSupport = true;
     };
     udevil.enable = true; # Mount drives without sudo
