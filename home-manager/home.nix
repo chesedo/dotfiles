@@ -377,6 +377,13 @@ in
   xdg.configFile."niri/config.kdl".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/config.kdl";
 
+  # DMS's niri fragments, which its keybind editor, display panel and matugen
+  # run all write into. Owned by DMS, tracked by us -- linked as a directory
+  # rather than per-file for the same reason as the DankMaterialShell config:
+  # DMS writes atomically, and a rename would replace a file-level symlink.
+  xdg.configFile."niri/dms".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/dms";
+
   # DMS's config directory, symlinked whole rather than per-file: it writes
   # settings.json with atomicWrites, so a file-level symlink would be replaced
   # by a regular file the first time its settings panel saved. Linking the
