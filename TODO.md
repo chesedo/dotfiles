@@ -74,25 +74,57 @@ it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
       (arrows and `Mod+Tab` duplicate the important ones) but it may be worth
       remapping.
 
-## Bring the DMS config under management
+## DMS config
 
-DMS writes `settings.json` and `session.json` with `atomicWrites: true`, i.e.
-write-temp-then-rename, which **replaces a file symlink with a regular file**.
-So the per-file `mkOutOfStoreSymlink` pattern used for niri does not work here
--- it would survive exactly until DMS's first save. Symlinking the *directory*
-does work, because the rename happens inside it.
+`~/.config/DankMaterialShell` is symlinked to `dank/`, so `settings.json` is
+tracked while DMS's settings GUI stays the owner of the contents. The
+*directory* is linked rather than individual files because DMS writes with
+`atomicWrites` (write-temp-then-rename), which would replace a file-level
+symlink with a regular file on the first save. `~/.local/state/DankMaterialShell`
+is deliberately left unmanaged -- it holds `pam/` at mode 700, app-usage stats
+and notepad contents.
 
-- [ ] Link `~/.config/DankMaterialShell` -> `dotfiles/dank/`, gitignoring
-      `zen.css` (matugen-generated) and `plugins/` (vendored).
-- [ ] Leave `~/.local/state/DankMaterialShell` unmanaged: it holds `pam/` at
-      mode 700, app-usage stats and notepad contents, none of which belong in
-      a dotfiles repo. Note this means the per-monitor wallpaper paths, which
-      live in `session.json`, stay untracked.
+- [ ] **Revisit why `zen.css` and `plugins/` are gitignored** (`dank/.gitignore`).
+      Both were excluded on first pass without much thought; decide properly.
+      - `zen.css` looks purely derived -- its header says "DMS Matugen Zen
+        Browser Theme" and it is regenerated on every theme change, so tracking
+        it would be churn with no recovery value. Confirm nothing hand-edited
+        ever lands in it.
+      - `plugins/` is 3.7M and currently holds `materialWeather` and
+        `dankDesktopWeather`, **each containing its own `.git`**. Committing
+        them as-is would mean nested repos, which git will not track properly.
+        The right answer is probably the Nix module's
+        `programs.dank-material-shell.plugins.<name>.src`, which takes a
+        `fetchFromGitHub` or path and installs declaratively -- that would make
+        plugins reproducible without vendoring their trees. DMS's docs also
+        mention a `plugins.lock.json` for reproducibility; no such file exists
+        here, so work out what produces it and whether it belongs in git
+        instead.
+      - The `.gitignore` is now an allowlist (`*` + `!settings.json`) rather
+        than a denylist, so files DMS creates later -- `plugin_settings.json`,
+        which can hold plugin API keys, `monitors.json`, which carries output
+        serials, and `themes/<id>/theme.json` -- cannot silently start being
+        tracked. Revisit whether any of those *should* be.
+
+- [ ] `settings.json` pins all three desktop widgets to output `eDP-1` by name
+      (`desktopWidgetInstances[*].displayPreferences`), and DMS matches outputs
+      strictly by name, so on a machine whose panel is not `eDP-1` the clock,
+      system monitor and weather widgets silently do not render. Only affects
+      restoring onto different hardware; the global `screenPreferences` keys are
+      all `["all"]` and fine.
+- [ ] Until this branch reaches `main`, `git checkout main` deletes
+      `dank/settings.json` -- which *is* the live `~/.config/DankMaterialShell/
+      settings.json`. DMS holds settings in memory and rewrites the file on the
+      next change, so expect either a silent resurrection or, if DMS restarts
+      first, a reset to defaults. Recoverable from git, but it happens without
+      warning.
 - [ ] Script the wallpaper span so it is reproducible rather than a one-off:
       crop the source to each output's logical rect within the desktop bounding
       box, resize to physical pixels, then `dms ipc call wallpaper setFor
       <output> <path>`. Needs redoing whenever the monitor layout changes or
       DMS's wallpaper browser (`Mod+Y`) sets a single image across all screens.
+      Note the per-monitor paths live in `session.json`, i.e. in the unmanaged
+      state directory, so they are not tracked.
 
 ## Verify on real hardware
 

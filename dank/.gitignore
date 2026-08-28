@@ -1,0 +1,17 @@
+# ~/.config/DankMaterialShell is a symlink pointing HERE, so everything DMS
+# writes lands in this directory. DMS owns the contents; git tracks one file.
+#
+# Allowlist, not denylist, on purpose: DMS creates files on demand as you use
+# features -- plugin_settings.json (can hold plugin API keys), monitors.json
+# (per-machine output make/model/serial), themes/<id>/theme.json (vendored
+# registry themes). A denylist would silently start tracking each new one.
+*
+!.gitignore
+!settings.json
+
+# For the record, since they are not tracked:
+#   plugins/    installed plugins, each its own git clone -- currently
+#               materialWeather and dankDesktopWeather, both from
+#               https://github.com/AvengeMedia/dms-plugins
+#   zen.css     matugen output, regenerated on every theme change
+#   .firstlaunch, .changelog-*   DMS state markers

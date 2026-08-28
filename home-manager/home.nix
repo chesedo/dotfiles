@@ -377,12 +377,24 @@ in
   xdg.configFile."niri/config.kdl".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/config.kdl";
 
+  # DMS's config directory, symlinked whole rather than per-file: it writes
+  # settings.json with atomicWrites, so a file-level symlink would be replaced
+  # by a regular file the first time its settings panel saved. Linking the
+  # directory keeps the rename inside it, so DMS's GUI stays the owner of the
+  # contents while the file itself is tracked.
+  #
+  # ~/.local/state/DankMaterialShell is deliberately NOT managed: it holds
+  # pam/ at mode 700, app-usage stats and notepad contents.
+  xdg.configFile."DankMaterialShell".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dank";
+
   home.sessionVariables = {
     # DMS resolves the terminal as terminalOverride -> $TERMINAL -> "", and its
     # callers then fall back to hardcoded "xterm" (spotlight launching a
     # Terminal=true .desktop, and the session service) or "ghostty" (the
-    # tmux/zellij mux). Neither is installed, and DMS settings are deliberately
-    # left unmanaged here, so without this those paths fail silently.
+    # tmux/zellij mux). Neither is installed, and settings.json is GUI-owned
+    # rather than declaratively generated -- it has no terminalOverride key at
+    # all -- so without this those paths fail silently.
     TERMINAL = "alacritty";
   };
 
