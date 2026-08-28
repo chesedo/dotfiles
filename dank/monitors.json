@@ -8,8 +8,8 @@
         "eDP-1": {
           "mode": "2256x1504@59.999",
           "position": {
-            "x": 4100,
-            "y": 1080
+            "x": 0,
+            "y": 0
           },
           "scale": 1.5,
           "transform": "Normal",

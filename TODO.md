@@ -71,6 +71,31 @@ it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
       (arrows and `Mod+Tab` duplicate the important ones) but it may be worth
       remapping.
 
+## Display profiles
+
+"Laptop only" exists (eDP-1, scale 1.5, at 0,0). Applying a profile makes DMS
+regenerate niri/dms/outputs.kdl from scratch, so that file now contains only
+eDP-1 -- the externals' entries are gone until a docked profile exists.
+
+- [ ] **Capture the docked profile** while the monitors are plugged in; DMS
+      validates a profile against connected outputs, so it cannot be made from
+      the laptop alone. The DPI-matched values, which no longer live anywhere
+      on disk:
+
+        DP-9   S2421HS  C0BK7P3   1920x1080@74.973  scale 1      at 0,0
+        DP-12  S2722DGM DW8HZ83   2560x1440@59.951  scale 1.175  at 1920,0
+        DP-10  S2421HS  39BK7P3   1920x1080@74.973  scale 1      at 4100,0
+        eDP-1  Framework          2256x1504@59.999  scale 2      at 4100,1080
+
+      The two 24" panels are ~92 PPI at scale 1; 1.175 brings the 27" to ~92.6
+      and scale 2 puts the laptop at ~100, so text matches across all four.
+      1.175 rather than 1.176 because niri quantises scale to 1/120 steps, and
+      x=4100 is deliberate slack -- niri ceils logical size, so the 27" ends at
+      4099, and an exact abutment overlaps by a pixel, which niri answers by
+      silently relocating an output.
+- [ ] Once both profiles exist, `dms ipc call outputs toggleAuto` to switch on
+      plug/unplug automatically. Currently `auto: off`.
+
 ## DMS config
 
 `~/.config/DankMaterialShell` is symlinked to `dank/`, so `settings.json` is
