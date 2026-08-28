@@ -320,7 +320,6 @@ include optional=true "dms/colors.kdl"
 include optional=true "dms/layout.kdl"
 include optional=true "dms/alttab.kdl"
 include optional=true "dms/binds.kdl"
-include optional=true "dms/outputs.kdl"
 include optional=true "dms/cursor.kdl"
 
 // LOCAL DEVIATION: not in DMS's shipped include list, but DMS writes both.
@@ -330,3 +329,53 @@ include optional=true "dms/cursor.kdl"
 // "^quickshell$" rule above, so it is additive rather than conflicting.
 include optional=true "dms/windowrules.kdl"
 include optional=true "dms/wpblur.kdl"
+
+// LOCAL DEVIATION: monitor geometry, owned here rather than by DMS.
+//
+// The `include optional=true "dms/outputs.kdl"` line that upstream ships is
+// removed on purpose. Unlike binds -- where a later block overrides an
+// included one -- an `output` from an include WINS over a later local block,
+// verified by observation: with both present, the included values stayed in
+// effect. So the only way to own geometry here is to drop the include. DMS's
+// display GUI still writes dms/outputs.kdl; it is now simply not read.
+//
+// Deliberate, because the wallpaper span is cut to this exact geometry and
+// must not drift silently underneath it.
+//
+// Scales restore what autorandr did under X11, and they are DPI matching
+// rather than arbitrary. The two 24" panels are ~92 PPI at scale 1. The 27" is
+// 109 PPI, so scale 1.175 brings it to ~92.6 -- niri quantises scale to 1/120
+// steps, and 1.175 is the representable value nearest the 1.176 that would be
+// exact. The laptop is 201 PPI, so scale 2.0 gives ~100. Without these, niri's
+// auto-detected scale 1 / 1.5 leave text visibly smaller on the 27" and the
+// laptop than on the monitors either side.
+//
+// The x=4100 is not arithmetic, it is slack. niri CEILS logical size, so the
+// 27" is 2179x1226 (2560/1.175 = 2178.7), ending at x=4099 -- not the 4098 a
+// floor would give. Butting the next output up against a computed edge cost a
+// one-pixel overlap once already, and niri does not error on overlap: it logs
+// "falling back to automatic placement" and silently moves the output to the
+// far end. Leave the gap.
+output "DP-9" {
+    mode "1920x1080@74.973"
+    scale 1.0
+    position x=0 y=0
+}
+
+output "DP-12" {
+    mode "2560x1440@59.951"
+    scale 1.175
+    position x=1920 y=0
+}
+
+output "DP-10" {
+    mode "1920x1080@74.973"
+    scale 1.0
+    position x=4100 y=0
+}
+
+output "eDP-1" {
+    mode "2256x1504@59.999"
+    scale 2.0
+    position x=4100 y=1080
+}
