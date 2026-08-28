@@ -52,15 +52,12 @@ port of the old desktop. Add things back only once you actually miss them.
 
 `niri/config.kdl` is now DMS's shipped config and pulls in DMS's runtime
 fragments from `~/.config/niri/dms/`. Deployed and live: `binds.kdl`,
-`colors.kdl`, `layout.kdl`, `alttab.kdl`, `outputs.kdl`, `cursor.kdl`. That
+`colors.kdl`, `layout.kdl`, `alttab.kdl`, `outputs.kdl`, `cursor.kdl`, plus
+`windowrules.kdl` and `wpblur.kdl`, which upstream's include list omits. That
 closed the old monitor-layout item (DMS's display GUI owns `outputs.kdl`, and
 it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
 (`colors.kdl`).
 
-- [ ] `windowrules.kdl` and `wpblur.kdl` are written by DMS but are not in the
-      include list upstream ships, so they sit inert. Decide whether to add
-      `include optional=true` lines for them. `Mod+Shift+W` (create window
-      rule) is a no-op until `windowrules.kdl` is included.
 - [ ] Two DMS bindings collide with things used here, both inherited from
       upstream rather than chosen: `Ctrl+Shift+R` (rename workspace) is a
       modifier-less global grab that eats hard-reload in Chrome and zen, and

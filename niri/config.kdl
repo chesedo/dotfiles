@@ -309,3 +309,11 @@ include optional=true "dms/alttab.kdl"
 include optional=true "dms/binds.kdl"
 include optional=true "dms/outputs.kdl"
 include optional=true "dms/cursor.kdl"
+
+// LOCAL DEVIATION: not in DMS's shipped include list, but DMS writes both.
+// windowrules.kdl is what Mod+Shift+W ("create window rule") writes into --
+// without the include that bind has nowhere to put anything. wpblur.kdl adds a
+// layer-rule for the "dms:blurwallpaper" namespace, distinct from the
+// "^quickshell$" rule above, so it is additive rather than conflicting.
+include optional=true "dms/windowrules.kdl"
+include optional=true "dms/wpblur.kdl"
