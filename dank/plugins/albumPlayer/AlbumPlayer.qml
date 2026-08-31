@@ -164,12 +164,40 @@ DesktopPluginComponent {
             visible: root.hasArt && status === Image.Ready
         }
 
+        // Settles the artwork while the controls are up, so they are not read
+        // against whatever the cover happens to be underneath them -- pale busy
+        // art was exactly the problem the bottom scrim had to solve too. 0.45
+        // is enough to carry the buttons without losing the picture.
+        //
+        // Declared straight after the cover and left at the default z, so it
+        // paints over the art but under the controls and the metadata.
+        Rectangle {
+            anchors.fill: parent
+            color: Theme.withAlpha(Theme.surface, 0.45)
+            visible: root.hasPlayer
+            opacity: coverHover.hovered ? 1 : 0
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Theme.longDuration
+                    easing.type: Theme.emphasizedEasing
+                }
+            }
+        }
+
         MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.NoButton
             hoverEnabled: true
             z: 1
             onWheel: wheel => root.handleVolumeWheel(wheel)
+        }
+
+        // A passive handler, not the MouseArea above: that one sits under the
+        // buttons, so reaching for a button would hand the hover to it and fade
+        // the controls out from under the pointer.
+        HoverHandler {
+            id: coverHover
         }
 
         // Gated on the player too, not just on missing art: the controls now sit
@@ -242,6 +270,30 @@ DesktopPluginComponent {
             spacing: root.controlSpacing
             visible: root.hasPlayer
             z: 2
+
+            // Opacity rather than visible: it animates, and it keeps the row
+            // hit-testable throughout, so a click during the fade still lands.
+            // Only a touch tap could reach an invisible button, since it
+            // arrives without the hover that would have revealed it.
+            // longDuration, not the shortDuration DMS uses for hover chrome:
+            // that is 75ms at this animation speed, which reads as a pop rather
+            // than a reveal. The cost is 1s for anyone on the Long setting.
+            opacity: coverHover.hovered ? 1 : 0
+            scale: coverHover.hovered ? 1 : 0.86
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Theme.longDuration
+                    easing.type: Theme.emphasizedEasing
+                }
+            }
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Theme.longDuration
+                    easing.type: Theme.emphasizedEasing
+                }
+            }
 
             DankActionButton {
                 buttonSize: root.skipSize
