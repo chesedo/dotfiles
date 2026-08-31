@@ -47,10 +47,22 @@ PluginComponent {
     // update -- the hardest possible cycling on the cell.
     readonly property int lowerLimit: Math.min(pluginData.lowerLimit ?? 40, root.upperLimit - 5)
 
-    // "charging" -- threshold sits at upperLimit, battery is filling.
-    // "holding"  -- threshold sits at lowerLimit, battery coasts down on use.
+    // Charging resumes a point ABOVE the lower limit, not at it. With the
+    // threshold set to 40 the EC parks the reported capacity at 41 and leaves
+    // it there: on AC the battery neither charges (it is capped) nor drains
+    // (the adapter carries the load), so a condition waiting for the level to
+    // actually reach 40 never fires and the guard sits stuck forever.
+    //
+    // The shell version this replaces learned that the hard way and hardcoded
+    // 41 (93ecd12, "Trigger recharge at 41% to account for capacity reporting
+    // floor"). That reasoning lived only in the commit message, so porting the
+    // condition faithfully lost it -- hence the comment here rather than there.
+    readonly property int resumeLevel: root.lowerLimit + 1
+
     readonly property string phasePath: Paths.strip(Paths.state) + "/plugins/batteryGuard_phase.json"
 
+    // "charging" -- threshold sits at upperLimit, battery is filling.
+    // "holding"  -- threshold sits at lowerLimit, battery coasts down on use.
     property string phase: ""
     property int appliedThreshold: -1
     property int observedThreshold: -1
@@ -78,6 +90,7 @@ PluginComponent {
 
         onLoaded: root._onPhaseRead(text())
         onLoadFailed: root._onPhaseRead("")
+        onSaveFailed: error => root._report(I18n.tr("Cannot save the charge phase: %1").arg(FileViewError.toString(error)))
     }
 
     FileView {
@@ -171,9 +184,15 @@ PluginComponent {
             root.phase = BatteryService.batteryLevel >= root.upperLimit ? "holding" : "charging";
         }
 
+        // Evaluate BEFORE writing. Writing the restored phase's threshold and
+        // then letting _evaluate flip it puts a transient wrong limit into
+        // sysfs, and the read-back that triggers lands against an
+        // appliedThreshold that has already moved on, burning a re-assert.
+        // Evaluating first makes the trailing writes byte-identical to
+        // whatever _evaluate already wrote, which FileView collapses.
+        root._evaluate();
         root._persistPhase();
         root._writeThreshold(root.targetThreshold, true);
-        root._evaluate();
     }
 
     function _persistPhase() {
@@ -206,7 +225,7 @@ PluginComponent {
 
         if (root.phase === "charging" && level >= root.upperLimit) {
             root._enterPhase("holding");
-        } else if (root.phase === "holding" && level <= root.lowerLimit) {
+        } else if (root.phase === "holding" && level <= root.resumeLevel) {
             root._enterPhase("charging");
         }
     }
