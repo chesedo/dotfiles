@@ -24,6 +24,8 @@ plugins/*
 !plugins/albumPlayer/**
 !plugins/batteryGuard/
 !plugins/batteryGuard/**
+!plugins/calendarMonth/
+!plugins/calendarMonth/**
 
 # For the record, since they are not tracked:
 #   plugins/    third-party plugins fetched by `dms plugins install`.
@@ -31,7 +33,8 @@ plugins/*
 #               dankAlbumWidget (kmf/dank-album-widget) are standalone clones;
 #               dankDesktopWeather is a symlink into plugins/.repos/, a shared
 #               clone of the AvengeMedia/dms-plugins monorepo. albumPlayer is
-#               our copy of dankAlbumWidget. albumPlayer, profileSwitcher and
-#               batteryGuard are exempted above and ARE tracked.
+#               our copy of dankAlbumWidget. albumPlayer, profileSwitcher,
+#               batteryGuard and calendarMonth are exempted above and ARE
+#               tracked.
 #   zen.css     matugen output, regenerated on every theme change
 #   .firstlaunch, .changelog-*   DMS state markers

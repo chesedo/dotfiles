@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/AvengeMedia/DankMaterialShell/master/quickshell/PLUGINS/plugin-schema.json",
+    "id": "calendarMonth",
+    "name": "Month Calendar",
+    "description": "Desktop month grid with month navigation and the next few calendar events listed beneath it",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "chesedo",
+    "icon": "calendar_month",
+    "type": "desktop",
+    "capabilities": [
+        "desktop-widget"
+    ],
+    "component": "./CalendarMonth.qml",
+    "settings": "./CalendarMonthSettings.qml",
+    "requires_dms": ">=1.5.0",
+    "permissions": [
+        "settings_read",
+        "settings_write"
+    ]
+}

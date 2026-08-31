@@ -921,8 +921,8 @@
         "0x0BCA": {
           "width": 117.5390625,
           "height": 153.1015625,
-          "x": 149.8828125,
-          "y": 117.01953125
+          "x": 177.7890625,
+          "y": 137.42578125
         }
       }
     },
@@ -984,8 +984,8 @@
           "y": 480
         },
         "0x0BCA": {
-          "width": 320.47265625,
-          "height": 373.25,
+          "width": 389.35546875,
+          "height": 236.0546875,
           "x": 716.32421875,
           "y": 90.7890625
         }
@@ -1012,7 +1012,8 @@
         "showPressure": true,
         "showPrecipitation": true,
         "forecastDays": 2,
-        "showHourlyForecast": true
+        "showHourlyForecast": true,
+        "hourlyCount": 5
       },
       "positions": {
         "eDP-1": {
@@ -1042,8 +1043,26 @@
         "0x0BCA": {
           "width": 280,
           "height": 320,
-          "x": 71.77734375,
-          "y": 329.2734375
+          "x": 162.98046875,
+          "y": 375.54296875
+        },
+        "DELL S2421HS-1": {
+          "width": 280,
+          "height": 320,
+          "x": 820,
+          "y": 380
+        },
+        "DELL S2421HS-0": {
+          "width": 280,
+          "height": 320,
+          "x": 820,
+          "y": 380
+        },
+        "DELL S2722DGM": {
+          "width": 280,
+          "height": 320,
+          "x": 949.5,
+          "y": 453
         }
       }
     },
@@ -1060,14 +1079,15 @@
           }
         ],
         "showProgress": true,
-        "showTrackInfo": true
+        "showTrackInfo": true,
+        "hideWhenIdle": true
       },
       "positions": {
         "0x0BCA": {
           "width": 223.515625,
           "height": 223.515625,
-          "x": 757.7265625,
-          "y": 504.24609375
+          "x": 811.25390625,
+          "y": 502.21484375
         },
         "DELL S2421HS-1": {
           "width": 260,
@@ -1107,8 +1127,8 @@
         "0x0BCA": {
           "width": 220,
           "height": 110,
-          "x": 412.9375,
-          "y": 136.890625
+          "x": 811.125,
+          "y": 366.625
         },
         "DELL S2421HS-1": {
           "width": 340,
@@ -1127,6 +1147,47 @@
           "height": 170,
           "x": 919.5,
           "y": 528
+        }
+      }
+    },
+    {
+      "id": "dw_1788183542252_xscypyyry",
+      "widgetType": "calendarMonth",
+      "name": "Month Calendar",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "eDP-1",
+            "model": "0x0BCA"
+          }
+        ],
+        "upcomingCount": 3
+      },
+      "positions": {
+        "0x0BCA": {
+          "width": 250.2578125,
+          "height": 293.72265625,
+          "x": 347.02734375,
+          "y": 65.88671875
+        },
+        "DELL S2421HS-1": {
+          "width": 320,
+          "height": 320,
+          "x": 800,
+          "y": 380
+        },
+        "DELL S2421HS-0": {
+          "width": 320,
+          "height": 320,
+          "x": 800,
+          "y": 380
+        },
+        "DELL S2722DGM": {
+          "width": 320,
+          "height": 320,
+          "x": 929.5,
+          "y": 453
         }
       }
     }

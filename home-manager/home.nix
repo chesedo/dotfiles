@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   piperVoiceModels,
   voxtype,
@@ -8,6 +9,7 @@
 
 let
   secrets = import (builtins.toPath (builtins.getEnv "HOME" + "/dotfiles/home-manager/secrets.nix"));
+  googleCalendars = secrets.googleCalendars or { };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -413,6 +415,81 @@ in
     name = "Bibata-Modern-Ice";
     size = 24;
     gtk.enable = true;
+  };
+
+  # Google calendars, one entry per account. Nothing here knows about Google
+  # specifically -- each is just an .ics feed over https, which is what
+  # Google's "secret address in iCal format" (Calendar settings, per calendar)
+  # hands you. That avoids OAuth and a Cloud project entirely, at the cost of
+  # being read only, which is all the widget needs.
+  #
+  # The chain is: vdirsyncer pulls each feed into ~/.calendars/<name>/, khal
+  # reads that directory, and DMS's CalendarService shells out to khal. DMS
+  # never learns a calendar protocol.
+  #
+  # Add an account by adding a url to googleCalendars in secrets.nix; the
+  # `or { }` keeps this evaluating before any exist.
+  #
+  # The url does land in the nix store, which is world readable -- and a secret
+  # ics address is a bearer token for that calendar. Same trade already made
+  # for jiraApiToken further down. To avoid it, swap `url` for
+  # `vdirsyncer.urlCommand = [ "cat" "/home/chesedo/.secrets/cal-<name>" ]`,
+  # which reads it at sync time instead.
+  accounts.calendar = {
+    basePath = ".calendars";
+    accounts = lib.mapAttrs (name: url: {
+      # No primary on purpose. A primary makes khal write default_calendar,
+      # and khal refuses to start when that names a read-only calendar -- which
+      # all of these are. Nothing here creates events, and a default calendar
+      # is only for deciding where a new one would go.
+      remote = {
+        type = "http";
+        inherit url;
+      };
+      local = {
+        type = "filesystem";
+        fileExt = ".ics";
+      };
+      vdirsyncer = {
+        enable = true;
+        # An ics feed is a single collection, so there is nothing to discover.
+        collections = null;
+        # vdirsyncer never pushes to an http remote -- HttpStorage is read only
+        # by class -- so nothing needs to forbid it. This only decides who wins
+        # if both sides somehow changed, and for a mirror that is the feed.
+        # partialSync is left at its default of revert, which restores a stray
+        # local edit from the remote rather than re-detecting it every sync.
+        conflictResolution = "remote wins";
+      };
+      khal = {
+        enable = true;
+        type = "calendar";
+        readOnly = true;
+      };
+    }) googleCalendars;
+  };
+
+  # First run on a new machine needs two manual steps the timer cannot do:
+  # `mkdir -p ~/.calendars/<name>` for each account, because vdirsyncer's
+  # filesystem storage opens the directory with create=False, then
+  # `vdirsyncer discover` to write the status cache -- the unit only runs
+  # metasync and sync, and both refuse until discovery has happened once.
+  #
+  # programs.khal is what turns the accounts above into ~/.config/khal/config;
+  # declaring calendars without it leaves khal as unconfigured as it was.
+  # programs.vdirsyncer is mandatory, not a convenience: it writes
+  # ~/.config/vdirsyncer/config AND puts the binary on PATH. services.vdirsyncer
+  # only references the package by store path inside the unit, so on its own it
+  # would run against a config that does not exist.
+  programs.khal.enable = true;
+  programs.vdirsyncer.enable = true;
+
+  # Pulls every account above on a timer. Fifteen minutes rather than the
+  # module's five: these are read only feeds and Google rate limits the ics
+  # endpoint fairly aggressively.
+  services.vdirsyncer = {
+    enable = true;
+    frequency = "*:0/15";
   };
 
   home.sessionVariables = {
