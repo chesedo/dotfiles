@@ -871,7 +871,12 @@
   ],
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
-  "desktopWidgetGridSettings": {},
+  "desktopWidgetGridSettings": {
+    "0x0BCA": {
+      "enabled": true,
+      "size": 20
+    }
+  },
   "desktopWidgetInstances": [
     {
       "id": "dw_1787911577806_u819460ps",
@@ -919,10 +924,10 @@
           "y": 620
         },
         "0x0BCA": {
-          "width": 117.5390625,
-          "height": 153.1015625,
-          "x": 177.7890625,
-          "y": 137.42578125
+          "width": 120,
+          "height": 160,
+          "x": 200,
+          "y": 120
         }
       }
     },
@@ -984,10 +989,10 @@
           "y": 480
         },
         "0x0BCA": {
-          "width": 389.35546875,
-          "height": 236.0546875,
-          "x": 716.32421875,
-          "y": 90.7890625
+          "width": 400,
+          "height": 240,
+          "x": 700,
+          "y": 100
         }
       }
     },
@@ -1043,8 +1048,8 @@
         "0x0BCA": {
           "width": 280,
           "height": 320,
-          "x": 162.98046875,
-          "y": 375.54296875
+          "x": 160,
+          "y": 380
         },
         "DELL S2421HS-1": {
           "width": 280,
@@ -1084,10 +1089,10 @@
       },
       "positions": {
         "0x0BCA": {
-          "width": 223.515625,
-          "height": 223.515625,
-          "x": 811.25390625,
-          "y": 502.21484375
+          "width": 220,
+          "height": 220,
+          "x": 800,
+          "y": 500
         },
         "DELL S2421HS-1": {
           "width": 260,
@@ -1126,9 +1131,9 @@
       "positions": {
         "0x0BCA": {
           "width": 220,
-          "height": 110,
-          "x": 811.125,
-          "y": 366.625
+          "height": 120,
+          "x": 800,
+          "y": 360
         },
         "DELL S2421HS-1": {
           "width": 340,
@@ -1166,10 +1171,10 @@
       },
       "positions": {
         "0x0BCA": {
-          "width": 250.2578125,
-          "height": 293.72265625,
-          "x": 347.02734375,
-          "y": 65.88671875
+          "width": 260,
+          "height": 300,
+          "x": 360,
+          "y": 60
         },
         "DELL S2421HS-1": {
           "width": 320,

@@ -383,7 +383,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/niri/config.kdl";
 
   # DMS's niri fragments, which its keybind editor, display panel and matugen
-  # run all write into. Owned by DMS, tracked by us -- linked as a directory
+  # run all write into. Owned by DMS, and most of them tracked by us -- see
+  # niri/dms/.gitignore for which two are not, and why. Linked as a directory
   # rather than per-file for the same reason as the DankMaterialShell config:
   # DMS writes atomically, and a rename would replace a file-level symlink.
   xdg.configFile."niri/dms".source =
