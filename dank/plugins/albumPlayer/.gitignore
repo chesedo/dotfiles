@@ -1,0 +1,9 @@
+# The repo-level dank/.gitignore un-ignores this whole directory so the plugin
+# can be tracked, which also means anything dropped in here shows up. Keep the
+# Qt build leftovers and stray tooling state out.
+*.qmlc
+*.jsc
+*~
+.DS_Store
+.claude/
+.mcp.json

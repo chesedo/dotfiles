@@ -1,0 +1,18 @@
+{
+    "id": "albumPlayer",
+    "name": "Album Player",
+    "description": "Album-cover desktop widget with track title, artist, seekable progress and Material transport controls over MPRIS",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "chesedo",
+    "icon": "album",
+    "type": "desktop",
+    "capabilities": ["desktop-widget", "mpris", "media"],
+    "component": "./AlbumPlayer.qml",
+    "settings": "./AlbumPlayerSettings.qml",
+    "requires_dms": ">=1.5.0",
+    "permissions": [
+        "settings_read",
+        "settings_write"
+    ]
+}
