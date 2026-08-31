@@ -1,0 +1,8 @@
+# dank/.gitignore un-ignores this whole directory so the plugin can be
+# tracked, which means anything dropped in here shows up too.
+*.qmlc
+*.jsc
+*~
+.DS_Store
+.claude/
+.mcp.json

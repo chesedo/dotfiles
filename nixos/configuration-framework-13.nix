@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   nixos-hardware,
   ...
 }:
@@ -95,32 +96,26 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  systemd.services.battery-cycle-guard = {
-    description = "Keep battery between 40% and 80% when plugged in";
-    after = [ "multi-user.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      Restart = "always";
-      RestartSec = "60s";
-    };
-    script = ''
-      while true; do
-        capacity=$(cat /sys/class/power_supply/BAT1/capacity)
-        threshold=$(cat /sys/class/power_supply/BAT1/charge_control_end_threshold)
-
-        if [ "$threshold" -ge 80 ] && [ "$capacity" -ge 80 ]; then
-          echo 40 > /sys/class/power_supply/BAT1/charge_control_end_threshold
-          echo "Stopped charging at $capacity%"
-        elif [ "$threshold" -lt 80 ] && [ "$capacity" -le 41 ]; then
-          echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold
-          echo "Started charging at $capacity%"
-        fi
-
-        sleep 60
-      done
-    '';
-  };
+  # The battery charge band lives in the batteryGuard DMS plugin now, not in a
+  # shell loop here. The plugin tracks explicitly whether it is filling toward
+  # the upper limit or coasting down to the lower one, rather than inferring
+  # that from whatever the threshold currently reads -- which broke as soon as
+  # anything else wrote the file.
+  #
+  # It writes the threshold directly, so the attribute has to be group
+  # writable. udev rather than tmpfiles because this has to survive the battery
+  # re-enumerating, not just apply once at boot.
+  #
+  # Matching change as well as add costs a couple of coreutils invocations on
+  # battery and AC transitions, and buys the permission being re-applied if the
+  # attribute ever shows up after the add event. To apply without rebooting:
+  # `udevadm trigger --subsystem-match=power_supply --action=change`.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="power_supply", KERNEL=="BAT?", ACTION=="add|change", \
+      TEST=="charge_control_end_threshold", \
+      RUN+="${pkgs.coreutils}/bin/chgrp wheel /sys/%p/charge_control_end_threshold", \
+      RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/%p/charge_control_end_threshold"
+  '';
 
   system.userActivationScripts.linktosharedfolders.text = ''
     if [[ ! -h "$HOME/git" ]]; then

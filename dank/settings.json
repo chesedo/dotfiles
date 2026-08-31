@@ -653,10 +653,6 @@
       ],
       "rightWidgets": [
         {
-          "id": "dmsFrameworkBattery",
-          "enabled": true
-        },
-        {
           "id": "profileSwitcher",
           "enabled": true
         },
@@ -753,6 +749,10 @@
           "enabled": true
         },
         "systemTray",
+        {
+          "id": "batteryGuard",
+          "enabled": true
+        },
         "battery",
         "controlCenterButton"
       ],
@@ -919,10 +919,10 @@
           "y": 620
         },
         "0x0BCA": {
-          "width": 100,
-          "height": 160,
-          "x": 266.8671875,
-          "y": 125.6484375
+          "width": 117.5390625,
+          "height": 153.1015625,
+          "x": 149.8828125,
+          "y": 117.01953125
         }
       }
     },
@@ -1042,8 +1042,8 @@
         "0x0BCA": {
           "width": 280,
           "height": 320,
-          "x": 175.46484375,
-          "y": 368.46484375
+          "x": 71.77734375,
+          "y": 329.2734375
         }
       }
     },
@@ -1086,6 +1086,47 @@
           "height": 260,
           "x": 959.5,
           "y": 483
+        }
+      }
+    },
+    {
+      "id": "dw_1788167455316_tiv4yna97",
+      "widgetType": "batteryGuard",
+      "name": "Battery Guard",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "eDP-1",
+            "model": "0x0BCA"
+          }
+        ],
+        "transparency": 80
+      },
+      "positions": {
+        "0x0BCA": {
+          "width": 220,
+          "height": 110,
+          "x": 412.9375,
+          "y": 136.890625
+        },
+        "DELL S2421HS-1": {
+          "width": 340,
+          "height": 170,
+          "x": 790,
+          "y": 455
+        },
+        "DELL S2421HS-0": {
+          "width": 340,
+          "height": 170,
+          "x": 790,
+          "y": 455
+        },
+        "DELL S2722DGM": {
+          "width": 340,
+          "height": 170,
+          "x": 919.5,
+          "y": 528
         }
       }
     }

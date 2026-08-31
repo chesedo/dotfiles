@@ -1,0 +1,27 @@
+{
+    "$schema": "https://raw.githubusercontent.com/AvengeMedia/DankMaterialShell/master/quickshell/PLUGINS/plugin-schema.json",
+    "id": "batteryGuard",
+    "name": "Battery Guard",
+    "description": "Keeps the battery cycling between a lower and upper charge limit, with the current phase and limit shown in the bar",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "chesedo",
+    "icon": "battery_saver",
+    "type": "composite",
+    "capabilities": [
+        "daemon",
+        "dankbar-widget",
+        "desktop-widget"
+    ],
+    "components": {
+        "daemon": "./BatteryGuardDaemon.qml",
+        "widget": "./BatteryGuardWidget.qml",
+        "desktop": "./BatteryGuardDesktop.qml"
+    },
+    "settings": "./BatteryGuardSettings.qml",
+    "requires_dms": ">=1.5.0",
+    "permissions": [
+        "settings_read",
+        "settings_write"
+    ]
+}
