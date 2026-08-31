@@ -160,7 +160,7 @@
   "showWorkspaceName": false,
   "showWorkspacePadding": false,
   "workspaceScrolling": false,
-  "showWorkspaceApps": false,
+  "showWorkspaceApps": true,
   "workspaceDragReorder": true,
   "maxWorkspaceIcons": 3,
   "workspaceAppIconSizeOffset": 0,
@@ -561,7 +561,7 @@
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {
-    "niri": "profile_undocked"
+    "niri": "profile_docked"
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
@@ -589,16 +589,16 @@
         }
       ],
       "rightWidgets": [],
-      "spacing": 4,
+      "spacing": 0,
       "innerPadding": 4,
-      "barInsetPadding": -1,
-      "bottomGap": 0,
+      "barInsetPadding": 4,
+      "bottomGap": -16,
       "transparency": 0,
       "widgetTransparency": 1,
       "squareCorners": true,
-      "noBackground": false,
+      "noBackground": true,
       "maximizeWidgetIcons": false,
-      "maximizeWidgetText": false,
+      "maximizeWidgetText": true,
       "removeWidgetPadding": false,
       "widgetPadding": 8,
       "gothCornersEnabled": false,
@@ -632,24 +632,43 @@
       "shadowColorMode": "default",
       "shadowCustomColor": "#000000",
       "clickThrough": false,
-      "hoverPopouts": false,
+      "hoverPopouts": true,
       "hoverPopoutDelay": 150
     },
     {
       "id": "laptopDocked",
       "name": "Laptop (docked)",
-      "enabled": false,
+      "enabled": true,
       "position": 0,
       "screenPreferences": [
         "0x0BCA"
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [],
-      "centerWidgets": [],
+      "centerWidgets": [
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true
+        }
+      ],
       "rightWidgets": [
+        {
+          "id": "dmsFrameworkBattery",
+          "enabled": true
+        },
         {
           "id": "profileSwitcher",
           "enabled": true
+        },
+        {
+          "id": "battery",
+          "enabled": true,
+          "showBatteryPercent": true,
+          "showBatteryPercentOnlyOnBattery": false,
+          "showBatteryTime": false,
+          "showBatteryTimeOnlyOnBattery": false,
+          "batteryPillStyle": false,
+          "batteryPillPercentSign": false
         },
         "systemTray",
         "controlCenterButton"
@@ -703,7 +722,7 @@
     {
       "id": "laptopFull",
       "name": "Laptop (undocked)",
-      "enabled": true,
+      "enabled": false,
       "position": 0,
       "screenPreferences": [
         "0x0BCA"
@@ -858,7 +877,7 @@
       "id": "dw_1787911577806_u819460ps",
       "widgetType": "desktopClock",
       "name": "Desktop Clock",
-      "enabled": false,
+      "enabled": true,
       "config": {
         "style": "stacked",
         "transparency": 0.8,
@@ -902,8 +921,8 @@
         "0x0BCA": {
           "width": 100,
           "height": 160,
-          "x": 257.9375,
-          "y": 188.88671875
+          "x": 266.8671875,
+          "y": 125.6484375
         }
       }
     },
@@ -911,7 +930,7 @@
       "id": "dw_1787911681517_1ysacttto",
       "widgetType": "systemMonitor",
       "name": "System Monitor",
-      "enabled": false,
+      "enabled": true,
       "config": {
         "showHeader": false,
         "transparency": 0.8,
@@ -965,10 +984,10 @@
           "y": 480
         },
         "0x0BCA": {
-          "width": 320,
-          "height": 480,
-          "x": 746.20703125,
-          "y": 137.8125
+          "width": 320.47265625,
+          "height": 373.25,
+          "x": 716.32421875,
+          "y": 90.7890625
         }
       }
     },
@@ -976,7 +995,7 @@
       "id": "dw_1787912112920_59oa3gf7t",
       "widgetType": "dankDesktopWeather",
       "name": "Dank Desktop Weather",
-      "enabled": false,
+      "enabled": true,
       "config": {
         "displayPreferences": [
           {
@@ -1023,8 +1042,50 @@
         "0x0BCA": {
           "width": 280,
           "height": 320,
-          "x": 186.62890625,
-          "y": 370.1875
+          "x": 175.46484375,
+          "y": 368.46484375
+        }
+      }
+    },
+    {
+      "id": "dw_1788160686791_irbznuiu4",
+      "widgetType": "albumPlayer",
+      "name": "Album Player",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "eDP-1",
+            "model": "0x0BCA"
+          }
+        ],
+        "showProgress": true,
+        "showTrackInfo": true
+      },
+      "positions": {
+        "0x0BCA": {
+          "width": 223.515625,
+          "height": 223.515625,
+          "x": 757.7265625,
+          "y": 504.24609375
+        },
+        "DELL S2421HS-1": {
+          "width": 260,
+          "height": 260,
+          "x": 830,
+          "y": 410
+        },
+        "DELL S2421HS-0": {
+          "width": 260,
+          "height": 260,
+          "x": 830,
+          "y": 410
+        },
+        "DELL S2722DGM": {
+          "width": 260,
+          "height": 260,
+          "x": 959.5,
+          "y": 483
         }
       }
     }
@@ -1055,7 +1116,10 @@
   "frameColor": "",
   "frameOpacity": 1,
   "frameScreenPreferences": [
-    "all"
+    {
+      "name": "eDP-1",
+      "model": "0x0BCA"
+    }
   ],
   "frameBarSize": 40,
   "frameShowOnOverview": false,
