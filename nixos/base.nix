@@ -50,9 +50,10 @@
       # pinentry-gnome3 rather than -qt: Qt has no reason to pick the wayland
       # platform plugin here, so pinentry-qt fell back to xcb and put its
       # dialog on XWayland, where it never got focus and gpg timed out mid
-      # commit. The GTK one is wayland-native and prompts through GCR, and
-      # programs.niri already enables gnome-keyring and routes the Secret
-      # portal to it.
+      # commit. The GTK one is wayland-native and prompts through GCR, which
+      # programs.gnupg puts on the bus by itself because this pinentry carries
+      # the gnome3 flavour -- so the prompt does not depend on gnome-keyring,
+      # which the framework host switches off.
       pinentry-gnome3
       gcr # the prompter pinentry-gnome3 talks to
 

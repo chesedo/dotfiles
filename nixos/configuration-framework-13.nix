@@ -40,6 +40,25 @@
   # accounts-daemon the user tile in the shell and the greeter stays empty.
   services.accounts-daemon.enable = true;
 
+  # No Secret Service, which is how it was before niri.
+  #
+  # programs.niri turns on gnome-keyring, and that is the whole of what changed:
+  # suddenly org.freedesktop.secrets exists, so Electron apps prefer libsecret
+  # over their own plaintext store and start asking for a keyring to be
+  # unlocked. Nothing here asked for that, and the keyring cannot be unlocked
+  # by a fingerprint -- it is encrypted with a password, and pam_fprintd is
+  # `sufficient`, so a successful finger ends the auth stack before
+  # pam_gnome_keyring ever runs.
+  #
+  # Fingerprint login is worth more here than encrypted-at-rest secrets that
+  # were sitting in plaintext before the switch anyway, so: no keyring. Apps
+  # fall back to where they were storing things all along.
+  #
+  # Plain false rather than mkForce: niri sets this with mkDefault, so a normal
+  # assignment already wins, and mkForce would silently swallow a deliberate
+  # `= true` somewhere else later.
+  services.gnome.gnome-keyring.enable = false;
+
   services.displayManager = {
     # Redundant with the mkDefault programs.niri sets, and the DMS greeter
     # remembers the last session itself rather than reading this. Kept as the

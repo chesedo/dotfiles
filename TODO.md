@@ -181,7 +181,7 @@ declared by DMS's own Nix modules:
       moved from Qt to gnome3 because pinentry-qt fell back to the xcb platform
       plugin and put its dialog on XWayland, where it never took focus and gpg
       timed out mid-commit. The gnome3 one is GTK, so wayland-native, and
-      prompts through GCR; gnome-keyring is already enabled by programs.niri.
+      prompts through GCR, which programs.gnupg registers on the bus itself.
       If it does not prompt, the fallbacks are setting QT_QPA_PLATFORM=wayland
       and going back to pinentry-qt, or pinentry-curses, which always works in
       a terminal. Prime the agent with `echo test | gpg --clearsign` to test
