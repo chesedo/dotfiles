@@ -22,11 +22,13 @@ port of the old desktop. Add things back only once you actually miss them.
 
 Most of this resolved itself rather than needing doing:
 
-- [x] **GTK theming** is handled by DMS. `~/.config/gtk-3.0/gtk.css` is now a
-      symlink to the `dank-colors.css` its matugen run writes -- removing
-      home-manager's `gtk3.extraCss` is exactly what let DMS's "apply GTK
-      colors" action take ownership, so the two-owner problem resolved in DMS's
-      favour.
+- [x] **GTK theming** is split. DMS owns the colours: `gtk.css` in both
+      `gtk-3.0` and `gtk-4.0` imports the `dank-colors.css` its matugen run
+      writes. home-manager owns the selection -- `settings.ini`, `.gtkrc-2.0`
+      and the dconf interface keys -- because DMS never writes
+      `gtk-theme-name`, and its palette uses libadwaita colour names that only
+      adw-gtk3 reads. `gtk4.theme` stays null so home-manager does not take
+      `gtk-4.0/gtk.css` away from DMS.
 - [x] **Cursor theme** restored with `home.pointerCursor` (Bibata-Modern-Ice,
       24) when the cursor turned out to be a different size on every monitor.
 - [x] **Qt theming** dropped rather than done. It was justified by pinentry-qt
@@ -246,7 +248,7 @@ and notepad contents.
       only ever run under X11 here.
 - [ ] **Doom Emacs.** DMS matugen writes
       `~/.config/emacs/themes/dank-emacs-theme.el`; `.doom.d/config.el` needs a
-      `(load-theme 'dank-emacs t)` to pick it up, replacing whatever stylix set.
+      `(load-theme 'dank-emacs t)` to pick it up.
 - [ ] **Wallpaper.** Set it once in DMS's settings — that is what drives every
       generated palette, and `dms-greeter.configHome` copies the result to the
       login screen.

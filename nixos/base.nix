@@ -82,7 +82,7 @@
     #
     # Inter matches what DMS uses for its own UI (fontFamily "Inter Variable",
     # monoFontFamily "Fira Code"). Serif is a real serif rather than another
-    # copy of the sans, which is what stylix used to do here.
+    # copy of the sans.
     fontconfig.defaultFonts = {
       sansSerif = [ "Inter" ];
       serif = [ "Noto Serif" ];

@@ -96,7 +96,7 @@ in
             y = 10;
           };
           dynamic_padding = true;
-          opacity = 0.95; # what stylix set before it was removed
+          opacity = 0.95; # a touch of the wallpaper through, still readable
         };
         bell = {
           animation = "EaseOutExpo";
@@ -401,14 +401,41 @@ in
   xdg.configFile."DankMaterialShell".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dank";
 
-  # Cursor theme and size. Two layers are needed and both were missing after
-  # stylix went: niri draws the cursor itself and scales it per output (that
-  # block lives in niri/dms/cursor.kdl), while clients that draw their own read
-  # XCURSOR_THEME/XCURSOR_SIZE, which this sets. Without a theme installed at
-  # all, toolkits fall back independently and the cursor ends up a different
-  # physical size on each differently-scaled monitor.
+  # DMS's palette uses libadwaita colour names, which GTK3's built-in Adwaita
+  # ignores and adw-gtk3 reads. DMS asks for adw-gtk3 but never selects it.
   #
-  # stylix used size 20; 24 is the more widely shipped bitmap size, so themes
+  # This also takes gtk-4.0/settings.ini, .gtkrc-2.0 and the dconf interface
+  # keys. An icon theme picked in DMS still applies at runtime -- it sets dconf
+  # directly, not just the file -- but activation restores this one, so keep
+  # the two in step.
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.adw-gtk3;
+      name = "adw-gtk3-dark";
+    };
+
+    iconTheme = {
+      package = pkgs.kdePackages.breeze-icons;
+      name = "breeze-dark";
+    };
+
+    # Left null so gtk-4.0/gtk.css stays DMS's. Setting it drops DMS's colour
+    # import for adw-gtk3's GTK4 sheet, costing libadwaita apps the palette --
+    # and DMS seds that file with no writability check, so it would replace the
+    # symlink and collide at the next activation.
+    gtk4.theme = null;
+  };
+
+  # Cursor theme and size, which take two layers: niri draws the cursor itself
+  # and scales it per output (that block lives in niri/dms/cursor.kdl), while
+  # clients that draw their own read XCURSOR_THEME/XCURSOR_SIZE, which this
+  # sets. With no theme installed at all, toolkits fall back independently and
+  # the cursor ends up a different physical size on each differently-scaled
+  # monitor.
+  #
+  # 24 rather than 20: it is the more widely shipped bitmap size, so themes
   # have exact art for it at 1x and 2x rather than scaling.
   home.pointerCursor = {
     enable = true;
