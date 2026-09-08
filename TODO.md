@@ -38,9 +38,10 @@ Most of this resolved itself rather than needing doing:
       enableDefaultPackages, so only the fontconfig preference was missing --
       generic sans-serif was still resolving to DejaVu.
 - [x] **Alacritty opacity** back to 0.95.
-- [ ] **`services.displayManager.dms-greeter.logs.save`** -- still off. Turn it
-      on temporarily if the greeter ever fails, since without it a failure is
-      just a black screen. Note it writes a world-readable /tmp/dms-greeter.log.
+Note, not a task: `services.displayManager.dms-greeter.logs.save` is off, and
+deliberately so -- it writes a world-readable /tmp/dms-greeter.log. Turn it on
+temporarily if the greeter ever fails, since without it a failure is just a
+black screen.
 
 ## niri config still to wire up
 
@@ -52,25 +53,52 @@ closed the old monitor-layout item (DMS's display GUI owns `outputs.kdl`, and
 it matches what niri auto-detected) and the niri-borders-ignore-the-theme item
 (`colors.kdl`).
 
-- [ ] Two DMS bindings collide with things used here, both inherited from
-      upstream rather than chosen: `Ctrl+Shift+R` (rename workspace) is a
-      modifier-less global grab that eats hard-reload in Chrome and zen, and
-      `Alt+Space` (spotlight bar) shadows Doom's alternate leader
-      (`doom-leader-alt-key`, default `M-SPC`). Override either by adding a
-      local `binds` block after the includes -- later definitions win across an
-      include boundary, verified against niri 26.04.
-- [ ] Colemak scatters DMS's vim cluster, since niri resolves latin binds
-      against the first configured layout: `Mod+H/J/K/L` land on physical
-      H/Y/N/U, `Mod+O` on `;`, `Mod+U`/`Mod+I` on I/L. Nothing is unreachable
-      (arrows and `Mod+Tab` duplicate the important ones) but it may be worth
-      remapping.
+- [x] ~~Two DMS bindings collide with things used here.~~ Accepted as they
+      are, 2026-09-08. `Ctrl+Shift+R` (rename workspace, binds.kdl:147) takes
+      hard-reload from Chrome and zen, and `Alt+Space` (spotlight bar,
+      binds.kdl:12) shadows Doom's alternate leader `M-SPC`. Both are
+      upstream's choices rather than ours; neither is worth moving.
+
+      Correcting the fix this item proposed, in case it is ever wanted: a local
+      `binds` block after the includes does NOT work. niri has no unbind --
+      every bind needs an action, and an empty block, a bare key and a `none`
+      action are all rejected. Overriding only changes what the key does; niri
+      still grabs it, so the app never sees it either way.
+
+      What does work is editing `niri/dms/binds.kdl`. It is DMS-generated but
+      authoritative -- there are no keybinds in dank/settings.json, and
+      `Mod+T { spawn "alacritty"; }` is already a hand-tuned entry surviving
+      there. Free keys as of now: `Mod+Ctrl+N`, and for the spotlight bar
+      `Mod+Slash`, `Mod+Ctrl+Space`, `Mod+Shift+Space`, `Mod+Semicolon`,
+      `Mod+Apostrophe`. Prefer punctuation or space over letters, since letter
+      binds resolve against the layout and land somewhere else under Colemak.
+- [x] ~~Move the Colemak layout into DMS's Keyboard tab.~~ Done 2026-09-08.
+      Settings -> Keyboard now holds layout `us`, variant `colemak`, options
+      `caps:escape`; NiriService writes them as an xkb block into
+      dms/input.kdl, and `niri msg keyboard-layouts` reports
+      "English (Colemak)". The duplicate in niri/config.kdl is removed, which
+      also puts that file's input block back to upstream apart from the two
+      pointer settings.
+
+      The hazard this item existed for is gone with it: xkb is a
+      replace-wholesale field and the include lands last, so the copy in
+      config.kdl was already being overridden rather than merged -- one visit
+      to that tab would have taken layout, variant and caps:escape together.
+      DMS owns the whole input node now, which is the arrangement that cannot
+      silently diverge.
+- [x] ~~Colemak scatters DMS's vim cluster.~~ Accepted as is, 2026-09-08.
+      niri resolves latin binds against the configured layout, so `Mod+H/J/K/L`
+      land on physical H/Y/N/U, `Mod+O` on `;`, and `Mod+U`/`Mod+I` on I/L.
+      Nothing is unreachable -- arrows and `Mod+Tab` cover the important ones
+      -- and remapping 134 binds to chase the labels is not worth it.
 
 ## Display profiles
 
 Two profiles exist, keyed by make/model/serial rather than connector name:
 "Laptop only" (eDP-1 at scale 1.5) and "Docked" (the four-output DPI-matched
-layout). `displayNameMode` is set to "model" for that keying, and auto
-switching is on.
+layout). `displayNameMode` is set to "model" for that keying. Auto switching
+is off -- `displayProfileAutoSelect` defaults false and is not overridden, and
+`dms ipc call outputs status` reports `auto: off`.
 
 Connector names are NOT stable: unplugging and replugging the externals
 renumbered them DP-9/DP-12/DP-10 -> DP-11/DP-15/DP-13. Anything keyed on the
@@ -100,46 +128,60 @@ descriptions. The stable identities are:
 
       A `displayProfileManager` plugin is now installed to handle switching, so
       this is no longer on the critical path.
-- [ ] **Pin the installed plugins declaratively.** `dank/plugins/` is
-      gitignored -- each plugin is its own git clone, so it cannot be nested in
-      this repo -- which means nothing currently records them and a restore
-      depends on reinstalling by hand through DMS's plugin browser. The Nix
-      module takes a source per plugin:
+- [x] ~~Pin the installed plugins declaratively.~~ The module option exists
+      (`programs.dank-material-shell.plugins.<name>.src`, new in 1.6) but
+      cannot be used here, and the inventory this item listed was already
+      stale. Both established 2026-09-08.
 
-          programs.dank-material-shell.plugins = {
-            displayProfileManager.src = pkgs.fetchFromGitHub {
-              owner = "jankelemen";
-              repo = "dank-display-profile-manager";
-              rev = "497ea32";                 # verify, then add hash
-              hash = "";
-            };
-            # ... and likewise for the other two
-          };
+      It cannot be used because the option writes
+      `xdg.configFile."DankMaterialShell/plugins/<name>"`, and this config
+      links the whole DMS config directory as one out-of-store symlink to
+      `dank/`. home-manager follows that symlink and refuses to write through
+      it -- building home-files with a plugin declared fails with
+      `Error installing file '.config/DankMaterialShell/plugins/<name>' outside
+      $HOME`. The directory symlink is not negotiable for the reason recorded
+      in home.nix: DMS writes settings.json atomically, so a file-level symlink
+      is replaced by a regular file on the first save.
 
-      Installed today, with the revision each clone is currently at:
+      The inventory was wrong too. displayProfileManager and materialWeather
+      are both gone. What is actually installed and used is one third-party
+      plugin, dankDesktopWeather -- AvengeMedia/dms-plugins @ cb66135,
+      subdirectory DankDesktopWeather, four files, 48K, MIT. There is also a
+      dankAlbumWidget clone that nothing references, superseded by our
+      albumPlayer fork.
 
-          displayProfileManager  jankelemen/dank-display-profile-manager  497ea32
-          materialWeather        notsopreety/materialWeather              06d047c
-          dankDesktopWeather     AvengeMedia/dms-plugins                  cb66135
-                                 (subdirectory DankDesktopWeather)
+      That plugin also carries an unrecorded local patch, in the untracked
+      clone under `plugins/.repos/`, which `dms plugins update` would revert:
+      hourlyForecast[0] is midnight rather than the current hour, so the
+      forecast strip always started at 00:00. The patch slices from
+      `(new Date()).getHours()` instead.
 
-      Note dankDesktopWeather lives in a subdirectory of a multi-plugin repo,
-      so it needs the path as well as the rev -- DMS records that in
-      plugins/dankDesktopWeather.meta, which is itself ignored.
+      Left for later, with three ways out: vendor it into `dank/plugins/` the
+      way albumPlayer was vendored, so the patch becomes tracked; keep the
+      clone and commit the diff as a .patch to reapply by hand; or upstream the
+      fix and drop the patch once it lands.
+- [x] ~~DMS and niri quantise scale differently, and it can overlap outputs.~~
+      Checked while docked on 2026-09-08. There is no mismatch, and there was
+      never going to be one.
 
-      Pinning them also settles whether `plugins/` should stay ignored at all:
-      once the sources are declared, the checked-out trees are derived and
-      there is nothing to track.
-- [ ] **DMS and niri quantise scale differently, and it can overlap outputs.**
-      monitors.json stores the 27" at 1.175, but DMS emits `scale 1.171875`
-      (= 150/128) into outputs.kdl, while niri quantises to 1/120. At 1.175 the
-      27" is 2179 logical wide and ends at 4099; at 1.171875 it is 2185 and
-      ends at 4105. The docked profile therefore places the right-hand monitor
-      and the laptop at x=4110 rather than 4100, so there is slack under either
-      interpretation -- 11px or 5px. Without it, a dock would overlap by 5px,
-      and niri answers overlap by silently relocating an output rather than
-      erroring. Worth confirming which scale niri actually ends up using next
-      time the machine is docked.
+      DMS 1.6 writes `scale 1.175` into outputs.kdl -- the monitors.json value
+      verbatim, not the 1.171875 this item expected -- and `niri msg outputs`
+      reports 1.175 applied. The two candidate scales could not have differed
+      anyway: niri quantises to 1/120, 1.175 x 120 = 141 exactly, and
+      1.171875 x 120 = 140.625 rounds to the same 141. Both land on 1.175.
+
+      The slack bc0eae4 added is no longer needed, and closing it proved the
+      old note's arithmetic right where mine was wrong. 2560 / 1.175 is
+      2178.72, so the 27" at x=1920 really does end at 4098.72 -- the 2179 in
+      the old note, not the 2178 that `niri msg outputs` prints, which is
+      truncated for display. Setting the next output to x=4098 overlapped by a
+      fraction of a pixel and niri silently relocated the 27" to x=6018,
+      exactly the failure this item predicted. x=4099 is the first position
+      that does not overlap.
+
+      Applied layout now: DP-9 at 0, DP-12 the 27" at 1920, DP-10 at 4099, and
+      eDP-1 below it at 4099,1080 on scale 2. The 12px guard band is gone and
+      the remaining gap is 0.28px.
 - [x] ~~Editing monitors.json by hand needs a DMS restart.~~ Wrong. Both
       settings.json and monitors.json are FileViews with `watchChanges: true`,
       and a direct test confirmed it: editing settings.json while DMS ran was
@@ -175,19 +217,24 @@ declared by DMS's own Nix modules:
      the YubiKey is used for GPG and SSH, which gpg-agent covers with
      hardware.gpgSmartcards.)
 
-- [ ] Before removing anything else, check two things: whether DMS shells out
-      to it (`rg 'execDetached'` over the QML), and whether it is a D-Bus
-      service DMS consumes. `dms doctor` lists the optional ones it knows about.
+Procedure, not a task: before dropping anything else, check whether DMS shells
+out to it (`rg 'execDetached'` over the QML) and whether it is a D-Bus service
+DMS consumes. `dms doctor` lists the optional ones it knows about.
 
-- [ ] **Verify GPG signing after the next `nixos-rebuild switch`.** pinentry
-      moved from Qt to gnome3 because pinentry-qt fell back to the xcb platform
-      plugin and put its dialog on XWayland, where it never took focus and gpg
-      timed out mid-commit. The gnome3 one is GTK, so wayland-native, and
-      prompts through GCR, which programs.gnupg registers on the bus itself.
-      If it does not prompt, the fallbacks are setting QT_QPA_PLATFORM=wayland
-      and going back to pinentry-qt, or pinentry-curses, which always works in
-      a terminal. Prime the agent with `echo test | gpg --clearsign` to test
-      without needing a commit to sign.
+- [x] ~~Verify GPG signing.~~ Works. Six commits signed on 2026-09-08 through
+      pinentry-gnome3, after priming the agent once.
+
+      Two things learned in the process. The prompter is activatable on the
+      session bus as org.gnome.keyring.SystemPrompter and PrivatePrompter,
+      served from gcr-3.41.2's own servicedir -- so it survives
+      gnome-keyring.enable = false, which is now recorded in base.nix. And the
+      binary itself is not GTK: it links gcr-base and ncurses and only speaks
+      D-Bus. gcr-prompter draws the dialog, and that is the GTK, wayland-native
+      half.
+
+      The failure mode to recognise: `gpg: signing failed: Timeout` after
+      `PINENTRY_LAUNCHED` means the dialog went up and nobody typed into it,
+      not that the prompter is missing.
 
 ## DMS config
 
@@ -221,40 +268,63 @@ and notepad contents.
         serials, and `themes/<id>/theme.json` -- cannot silently start being
         tracked. Revisit whether any of those *should* be.
 
-- [ ] `settings.json` pins all three desktop widgets to output `eDP-1` by name
-      (`desktopWidgetInstances[*].displayPreferences`), and DMS matches outputs
-      strictly by name, so on a machine whose panel is not `eDP-1` the clock,
-      system monitor and weather widgets silently do not render. Only affects
-      restoring onto different hardware; the global `screenPreferences` keys are
-      all `["all"]` and fine.
-- [ ] Until this branch reaches `main`, `git checkout main` deletes
-      `dank/settings.json` -- which *is* the live `~/.config/DankMaterialShell/
-      settings.json`. DMS holds settings in memory and rewrites the file on the
-      next change, so expect either a silent resurrection or, if DMS restarts
-      first, a reset to defaults. Recoverable from git, but it happens without
-      warning.
-- [ ] Put four per-monitor wallpapers in `wallpapers/` and set them through
-      DMS (Settings -> Wallpaper, per-monitor). Sizes and the logical rects for
-      a continuous picture are in `wallpapers/README.md`. The generating script
-      was removed -- four static images need no tooling, and DMS keys them by
-      model and position, so they survive replugs on their own.
-- [ ] The source image is still `leftwm/themes/current/background.jpg`, so
-      moving it into `wallpapers/` is a prerequisite for deleting `leftwm/`.
+- [x] ~~settings.json pins the desktop widgets to `eDP-1` by name.~~ True, and
+      accepted -- README now states outright that this repo is one machine's
+      config, not a template, so restoring onto different hardware is not a
+      goal. There are six widgets now, not three, and all six are pinned.
+
+      Worth recording the mechanism, since the stored data is misleading. Each
+      pref is an object carrying both a name and a model,
+      `{name: "eDP-1", model: "0x0BCA"}`, but DesktopWidgetLayer's
+      shouldShowOnScreen only ever reads the name from an object pref:
+
+          return prefs.some(p => {
+              if (typeof p === "string")
+                  return p === screenKey || p === modelData.name;
+              return p?.name === modelData.name || p === screenKey;
+          });
+
+      `p === screenKey` compares an object against a string, so it is always
+      false. The model is stored and never consulted. A *string* pref is the
+      only form that matches on the display name, and so the only form that
+      respects displayNameMode.
 
 ## Verify on real hardware
 
-- [ ] **voxtype.** It grabs `RIGHTCTRL` through evdev and pastes via the
-      clipboard, both of which should be display-server agnostic, but this has
-      only ever run under X11 here.
-- [ ] **Doom Emacs.** DMS matugen writes
-      `~/.config/emacs/themes/dank-emacs-theme.el`; `.doom.d/config.el` needs a
-      `(load-theme 'dank-emacs t)` to pick it up.
-- [ ] **Wallpaper.** Set it once in DMS's settings — that is what drives every
-      generated palette, and `dms-greeter.configHome` copies the result to the
-      login screen.
+- [x] ~~voxtype under Wayland.~~ The part this doubted works. The daemon has
+      been up for hours under niri, and the evdev grab is fine:
+      `Opened keyboard: "/dev/input/event18"`, `Devices updated: 5 keyboard(s)
+      active`. Nothing about the hotkey or the clipboard path is
+      display-server specific, as expected.
+
+- [ ] **voxtype has no OSD, and it is a packaging gap rather than a Wayland
+      one.** The daemon logs `preferred frontend 'voxtype-osd-gtk4' not
+      installed; using 'voxtype-osd-quickshell' instead`, then
+      `could not find 'shell.qml'`, then gives up: `OSD child exited 3 times
+      within 5s`. So dictation runs with no visual feedback.
+
+      Both frontends are unavailable for different reasons. The package ships
+      `voxtype-osd` and `voxtype-osd-quickshell` but no `voxtype-osd-gtk4`,
+      which is the configured default (`osd.frontend = "gtk4"`). And the
+      quickshell frontend needs QML assets that are not in the package either
+      -- `share/voxtype/` holds only `default-config.toml`.
+
+      Three ways out: set `osd.enabled = false` and rely on the
+      `output.notification.*` options, which DMS already renders; point
+      `osd.style` at a Quickshell package that provides the QML; or get the
+      gtk4 frontend built in the voxtype flake. The first just stops the
+      crash-loop; the daemon keeps working either way.
+- [x] ~~Doom Emacs.~~ Done in `doom: load the theme DMS has been generating
+      all along`. Note the one-liner suggested here would not have worked:
+      matugen writes into `~/.config/emacs/themes/`, which Doom does not
+      search, so the directory has to go on `custom-theme-load-path` first.
+      `user-emacs-directory` is the wrong way to name it -- Doom reassigns that
+      to the profile cache. Run `doom sync` to tangle it.
+- [x] ~~Wallpaper.~~ Set. Confirmed by matugen regenerating
+      `dank-emacs-theme.el` on 2026-09-08.
 
 ## Optional
 
-- [ ] `services.geoclue2.enable = true` if you want DMS night mode to pick its
-      schedule from your location rather than a manual latitude/longitude. Off
-      deliberately — it means location lookups leave the machine.
+Note, not a task: `services.geoclue2.enable = true` would let DMS night mode
+take its schedule from your location rather than a manual latitude/longitude.
+Left off deliberately -- it means location lookups leave the machine.
