@@ -76,9 +76,24 @@ Some set of default configs from Doom emacs to help me remember how to set thing
 #+end_src
 
 * Visual
-Small visual edits like adding a small border so that picom does not have to.
+Small visual edits, like an internal border so buffer text is not flush against the frame edge.
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(internal-border-width . 10))
+#+end_src
+
+** Theme
+DMS regenerates =dank-emacs-theme.el= from the wallpaper on every theme change, so Emacs follows the rest of the desktop rather than carrying a palette of its own. Only across restarts, though: nothing reloads the theme in a running session, so a new wallpaper lands at the next start.
+
+Two things are needed to pick it up. Matugen writes the file under =~/.config/emacs/themes/=, which Doom does not search — it points ~custom-theme-directory~ at =~/.config/doom/themes/= instead. Reach for ~doom-emacs-dir~ to name the matugen directory, not ~user-emacs-directory~: Doom reassigns that one to the profile cache, where it lands on =~/.config/emacs/.local/cache/themes/= and finds nothing. And ~doom-theme~ is otherwise unset, leaving Doom on the ~doom-one~ its =:ui doom= module sets.
+
+Appended rather than prepended, so everything Doom already searches — =~/.config/doom/themes/= first, then ~load-path~ — keeps priority over it.
+
+The existence check is not paranoia: ~doom-init-theme-h~ calls ~load-theme~ unguarded, so pointing ~doom-theme~ at a theme matugen has not written yet fails startup and leaves Emacs with no theme at all, rather than falling back.
+
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path (doom-emacs-dir "themes/") t)
+(when (file-exists-p (doom-emacs-dir "themes/dank-emacs-theme.el"))
+  (setq doom-theme 'dank-emacs))
 #+end_src
 
 * Code Config
