@@ -2,11 +2,16 @@
 //
 // This is DankMaterialShell's shipped niri config
 // (core/internal/config/embedded/niri.kdl) copied verbatim, with every
-// changed setting marked "LOCAL DEVIATION" inline: the xkb layout, pointer
-// warping and focus-follows-mouse, the window border, a float rule for DMS's
-// own windows, and two includes upstream leaves out. Comments are added more
-// freely than that. Keeping the settings otherwise untouched means `diff`
-// against upstream stays readable when DMS updates.
+// changed setting marked "LOCAL DEVIATION" inline: pointer warping and
+// focus-follows-mouse, the window border, a float rule for DMS's own windows,
+// and two includes upstream leaves out. Comments are added more freely than
+// that. Keeping the settings otherwise untouched means `diff` against upstream
+// stays readable when DMS updates.
+
+// The keyboard layout is not among them any more: it is set in DMS's Keyboard
+// tab, which writes an xkb block into dms/input.kdl. That include lands after
+// the input block below and xkb is replaced wholesale, so a copy here would be
+// silently overridden rather than merged.
 //
 // Symlinked to ~/.config/niri/config.kdl by home-manager via
 // mkOutOfStoreSymlink, so edits here apply on save -- niri watches the file
@@ -63,11 +68,6 @@ input {
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
-
-            // LOCAL DEVIATION from DMS's shipped niri.kdl:
-            layout "us"
-            variant "colemak"
-            options "caps:escape"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -321,9 +321,10 @@ include optional=true "dms/cursor.kdl"
 // niri merges the `input` node child by child, but pointing-device sections
 // are replaced wholesale rather than merged, so anything those two declared
 // here would be overwritten by this include and only look like it applied.
-// keyboard does merge, which is how the Colemak layout survives -- though
-// only until a layout is set in DMS's Keyboard tab, since that writes an xkb
-// block into that file, and xkb is replaced wholesale too.
+// keyboard merges child by child, but xkb inside it is replaced wholesale --
+// which is why the layout is set in DMS's Keyboard tab rather than here. The
+// greeter keeps its own copy in nixos/configuration-framework-13.nix, since
+// its nested niri never reads this config; that one the tab will not update.
 include optional=true "dms/input.kdl"
 
 // LOCAL DEVIATION: not in DMS's shipped include list, but DMS writes both.

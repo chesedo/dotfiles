@@ -13,5 +13,12 @@ input {
         natural-scroll
         dwt
     }
+    keyboard {
+        xkb {
+            layout "us"
+            variant "colemak"
+            options "caps:escape"
+        }
+    }
 }
 
