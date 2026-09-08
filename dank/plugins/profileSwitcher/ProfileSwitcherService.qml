@@ -18,6 +18,12 @@
 // It does NOT cover auto-select: applyConfigEntry only emits profileActivated
 // when isManual, and the auto path passes false. Auto-select is off here, but
 // turning it on would leave bars and widgets unmanaged.
+//
+// Editing this file needs DMS restarted, not `dms ipc call plugins reload`.
+// That reload rebuilds the widget component, but a QML singleton is
+// instantiated once per engine and keeps the code it was built with -- so the
+// reload reports success and changes nothing here. The other plugins in this
+// repo have no qmldir and do reload cleanly.
 pragma Singleton
 pragma ComponentBehavior: Bound
 
@@ -48,7 +54,7 @@ Singleton {
     }
 
     readonly property string activeProfileName: {
-        const id = SettingsData.activeDisplayProfile?.[CompositorService.compositor] ?? "";
+        const id = SessionData.activeDisplayProfile?.[CompositorService.compositor] ?? "";
         return root.validated[id]?.name ?? "";
     }
 
