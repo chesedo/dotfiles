@@ -12,7 +12,7 @@
 #                                `Mod+T { spawn "alacritty"; }`. Losing it
 #                                loses the bindings for good.
 #   alttab, layout, wpblur,      tracked, but cheaply reconstructable: DMS
-#   cursor                       rewrites them from dank/settings.json, which
+#   cursor, input                rewrites them from dank/settings.json, which
 #                                is tracked, so they are convenience not
 #                                insurance.
 #   colors.kdl, outputs.kdl      ignored, below. colors is matugen's output

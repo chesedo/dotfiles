@@ -100,7 +100,7 @@
           inherit system;
 
           specialArgs = {
-            inherit nixos-hardware;
+            inherit nixos-hardware dms;
 
             zen-browser = zen-browser.packages.${system}.default;
           };

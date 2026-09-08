@@ -123,13 +123,6 @@ in
       # graphical-session.target, which niri-session activates.
       systemd.enable = true;
 
-      # Pinned to the nixpkgs build rather than the flake's own. The greeter is
-      # configured at the NixOS layer, where the package defaults to
-      # pkgs.dms-shell -- without this the login screen and the session run two
-      # different builds of DMS against the same settings files. Comes from the
-      # binary cache as a bonus.
-      package = pkgs.dms-shell;
-
       # enableSystemMonitoring / enableVPN / enableDynamicTheming /
       # enableAudioWavelength / enableCalendarEvents all default to true, and
       # enableClipboardPaste is a documented no-op, so none are restated here.

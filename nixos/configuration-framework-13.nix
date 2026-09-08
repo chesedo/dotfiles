@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  dms,
   nixos-hardware,
   ...
 }:
@@ -68,6 +69,15 @@
     # DankMaterialShell's own greeter, running on greetd inside a nested niri.
     dms-greeter = {
       enable = true;
+
+      # This module comes from nixpkgs, and its package defaults to
+      # pkgs.dms-shell whenever programs.dms-shell is off -- which it is here,
+      # since the session is configured through home-manager instead. Left
+      # alone, the login screen would run an older DMS than the session against
+      # the same settings files. buildDmsPkgs is what the home module calls
+      # too, so both layers build from this flake's source; the cost is that
+      # every DMS bump is a local Go build rather than a cache hit.
+      package = (dms.lib.buildDmsPkgs pkgs).dms-shell;
 
       # Pulls the wallpaper and theme out of ~/.config + ~/.local/state at
       # greetd start, so the login screen matches the session.

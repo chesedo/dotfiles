@@ -55,7 +55,6 @@
       # the gnome3 flavour -- so the prompt does not depend on gnome-keyring,
       # which the framework host switches off.
       pinentry-gnome3
-      gcr # the prompter pinentry-gnome3 talks to
 
       proselint # For emacs linting
       (python3.withPackages (p: with p; [ grip ])) # To preview markdown and org files
