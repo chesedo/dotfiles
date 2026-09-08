@@ -1,10 +1,12 @@
 // niri configuration.
 //
 // This is DankMaterialShell's shipped niri config
-// (core/internal/config/embedded/niri.kdl) copied verbatim, with a single local
-// deviation marked "LOCAL DEVIATION" inline: the xkb layout. Keeping it
-// otherwise untouched means `diff` against upstream stays readable when DMS
-// updates.
+// (core/internal/config/embedded/niri.kdl) copied verbatim, with every
+// changed setting marked "LOCAL DEVIATION" inline: the xkb layout, pointer
+// warping and focus-follows-mouse, the window border, a float rule for DMS's
+// own windows, and two includes upstream leaves out. Comments are added more
+// freely than that. Keeping the settings otherwise untouched means `diff`
+// against upstream stays readable when DMS updates.
 //
 // Symlinked to ~/.config/niri/config.kdl by home-manager via
 // mkOutOfStoreSymlink, so edits here apply on save -- niri watches the file
@@ -310,8 +312,8 @@ recent-windows {
 include optional=true "dms/colors.kdl"
 include optional=true "dms/layout.kdl"
 include optional=true "dms/alttab.kdl"
-include optional=true "dms/outputs.kdl"
 include optional=true "dms/binds.kdl"
+include optional=true "dms/outputs.kdl"
 include optional=true "dms/cursor.kdl"
 
 // New in DMS 1.6, which is also why the `input` block above no longer carries
