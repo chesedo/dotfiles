@@ -85,17 +85,16 @@ input {
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     //
-    // LOCAL DEVIATION: enabled, the counterpart to focus-follows-mouse below.
-    // leftwm ran sloppy_mouse_follows_focus: true, so both directions were in
-    // effect there too. No feedback loop with focus-follows-mouse: the warp
-    // lands the pointer on the window that just took focus, so the follow
-    // re-focuses the same window.
+    // LOCAL DEVIATION: enabled, the counterpart to focus-follows-mouse below,
+    // so the pointer and the focus track each other in both directions. No
+    // feedback loop between the two: the warp lands the pointer on the window
+    // that just took focus, so the follow re-focuses the same window.
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     //
-    // LOCAL DEVIATION: enabled, replacing leftwm's focus_behaviour: Sloppy.
+    // LOCAL DEVIATION: enabled, for sloppy focus.
     // max-scroll-amount="0%" is deliberate -- without it, moving the pointer
     // toward a partially-visible column makes niri scroll the viewport to
     // focus it, which is jarring in a scrolling layout. With it, focus only
