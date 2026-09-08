@@ -156,13 +156,6 @@
     upower.enable = true;
   };
 
-  system.userActivationScripts.linkhomemanager.text = ''
-    if [[ ! -d "$HOME/.config/nixpkgs" ]]; then
-      mkdir -p "$HOME/.config/nixpkgs"
-      ln -s "$HOME/dotfiles/home-manager/home.nix" "$HOME/.config/nixpkgs"
-    fi
-  '';
-
   # Set your time zone.
   time.timeZone = "Africa/Johannesburg";
 

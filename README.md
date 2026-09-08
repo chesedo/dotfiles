@@ -12,16 +12,40 @@
 
 ## 🚀 Quick Start
 
+This is one machine's config rather than a template, and it assumes three things
+that will not hold elsewhere. `nixos/base.nix` declares `chesedo` as the only
+user under `mutableUsers = false`, and `home.nix` hardcodes that home directory.
+`hardware-configuration-framework-13.nix` is tracked here and imported directly,
+so the installer's own scan is never read -- it mounts by the labels `nixos`,
+`BOOT`, `Extra` and `swap`. Nothing checks those while evaluating or building, so
+on other disks the breakage surfaces at boot. And the clone has to sit at `~/dotfiles`, which
+`home.nix` reaches by absolute path for secrets and for its out-of-store
+symlinks.
+
 ```bash
-# Clone dotfiles
-git clone <repo> ~/dotfiles
+# A fresh install has no git yet, hence the nix-shell.
+nix-shell -p git --run 'git clone <repo> ~/dotfiles'
 cd ~/dotfiles
+./setup.sh
+```
 
-# Setup system (run as root)
-sudo nixos-rebuild switch --flake .
+`setup.sh` runs both layers in order. Unless `home-manager/secrets.nix` is
+already in place, the first run stops after the system layer to have you fill it
+in -- it is gitignored, and holds `jiraApiToken` and `googleCalendars`. Run the
+script again once that is done.
 
-# Setup user environment. --impure is required: home.nix reads secrets.nix
-# through builtins.getEnv "HOME"
+Log out and back in at the end -- niri and the DMS greeter only take over from
+the next session.
+
+The two layers by hand, if you would rather. `home-manager/secrets.nix` has to
+exist first, or the user layer fails on a missing path:
+
+```bash
+# The configuration is named rather than derived from the hostname, which on a
+# fresh install is still the installer default.
+sudo nixos-rebuild switch --flake .#nixos-framework-13
+
+# --impure is required: home.nix reads secrets.nix through builtins.getEnv "HOME"
 home-manager switch --flake .#chesedo --impure
 ```
 

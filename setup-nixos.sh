@@ -1,7 +1,9 @@
 #!/bin/sh
+# System layer. Flakes address a configuration by path, so nothing gets
+# symlinked into /etc/nixos. The flake sees git-tracked files only, though: a
+# newly created .nix file has to be `git add`ed before a rebuild will find it.
+set -eu
 
-mkdir -p ~/.config/nixpks
-ln -sf $PWD/home-manager/home.nix ~/.config/nixpkgs
+cd "$(dirname "$0")"
 
-sudo mkdir -p /etc/nixos
-sudo ln -sf $PWD/nixos/configuration.nix /etc/nixos
+sudo nixos-rebuild switch --flake ".#nixos-framework-13"
