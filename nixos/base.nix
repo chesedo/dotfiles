@@ -47,13 +47,10 @@
 
       zen-browser
 
-      # pinentry-gnome3 rather than -qt: Qt has no reason to pick the wayland
-      # platform plugin here, so pinentry-qt fell back to xcb and put its
-      # dialog on XWayland, where it never got focus and gpg timed out mid
-      # commit. The GTK one is wayland-native and prompts through GCR, which
-      # programs.gnupg puts on the bus by itself because this pinentry carries
-      # the gnome3 flavour -- so the prompt does not depend on gnome-keyring,
-      # which the framework host switches off.
+      # The dialog is drawn by gcr's prompter, which is GTK and so
+      # wayland-native; this binary is only a D-Bus client for it.
+      # programs.gnupg puts gcr on the session bus for gnome3-flavoured
+      # pinentries, so the prompt works with gnome-keyring off.
       pinentry-gnome3
 
       proselint # For emacs linting
