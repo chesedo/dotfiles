@@ -298,7 +298,13 @@ in
       package = voxtype.default;
       service.enable = true;
       settings = {
-        output.mode = "clipboard";
+        # Types at the cursor through wtype, which the package wraps in and
+        # niri backs with zwp_virtual_keyboard_manager_v1. wtype uploads its
+        # own keymap, so Colemak survives it -- dotool, the next driver down,
+        # sends raw keycodes and would not. dotool needs /dev/uinput, which
+        # this machine has not got, so a wtype failure falls straight through
+        # to the clipboard. Enabling hardware.uinput would change that.
+        output.mode = "type";
         hotkey = {
           enabled = true;
           key = "RIGHTCTRL";
